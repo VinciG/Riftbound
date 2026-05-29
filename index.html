@@ -1099,7 +1099,7 @@ function openModal(leg, set) {
   }
 
   document.getElementById('modal').classList.add('active');
-  fetchCardmarketPrice(leg.name, set, leg.n ? leg.n.replace('#','') : '');
+  fetchCardmarketPrice(leg.name, set, leg.n ? leg.n.replace('#','') : '', { legend:true });
 }
 
 function openPremiumModal(card, set) {
@@ -1118,8 +1118,12 @@ function openPremiumModal(card, set) {
   imgDiv.appendChild(img);
 
   document.getElementById('modal').classList.add('active');
-  const cn = card.number ? String(card.number).padStart(3,'0') : '';
-  fetchCardmarketPrice(card.name, set, cn);
+  const idParts = card.id.match(/-(\d+)([a-z]?)/);
+  const cn = idParts ? idParts[1] + idParts[2] : (card.number ? String(card.number).padStart(3,'0') : '');
+  const setCode = set.abbr;
+  const sameCards = window.EPIC_CARD_DATA?.[setCode] || [];
+  const hasAlt = sameCards.some(c => c.number === card.number && c !== card && c.id !== card.id);
+  fetchCardmarketPrice(card.name, set, cn, { rarity:card.rarity, variant:(idParts?.[2]||''), hasAlt });
 }
 
 function closeModal() {
@@ -1127,11 +1131,56 @@ function closeModal() {
 }
 
 // ===== CARDMARKET SEARCH =====
-function fetchCardmarketPrice(name, set, cardNo) {
+const CM_TITLES = {
+  'Kai\'Sa':'Daughter-of-the-Void','Volibear':'Relentless-Storm',
+  'Jinx':'Loose-Cannon','Darius':'Hand-of-Noxus',
+  'Ahri':'Nine-Tailed-Fox','Lee Sin':'Blind-Monk',
+  'Yasuo':'Unforgiven','Leona':'Radiant-Dawn',
+  'Teemo':'Swift-Scout','Viktor':'Herald-of-the-Arcane',
+  'Miss Fortune':'Bounty-Hunter','Sett':'The-Boss',
+  'Rumble':'The-Mechanized','Lucian':'The-Purifier',
+  'Draven':'The-Glorious-Executioner','Rek\'Sai':'The-Void-Burrower',
+  'Ornn':'The-Fire-Below-the-Mountain','Jax':'Grandmaster-at-Arms',
+  'Irelia':'The-Blade-Dancer','Azir':'Emperor-of-the-Sands',
+  'Ezreal':'The-Prodigal-Explorer','Renata Glasc':'The-Chem-Baroness',
+  'Sivir':'The-Battle-Mistress','Fiora':'The-Grand-Duelist',
+  'Jhin':'The-Virtuoso','Rengar':'The-Pridestalker',
+  'Pyke':'The-Bloodharbor-Ripper','Vi':'The-Piltover-Enforcer',
+  'Lillia':'The-Bashful-Bloom','Master Yi':'The-Wuju-Bladesman',
+  'Vex':'The-Gloomist','Ivern':'The-Green-Father',
+  'Diana':'Scorn-of-the-Moon','LeBlanc':'The-Deceiver',
+  'Kha\'Zix':'The-Voidreaver','Poppy':'Keeper-of-the-Hammer',
+  'Nasus':'Curator-of-Sands','Renekton':'Butcher-of-the-Sands',
+  'Akali':'Shadow-Fist','Zed':'Master-of-Shadows',
+  'Shen':'Eye-of-Twilight','Ambessa':'General-Medarda',
+  'Mel':'Counselor-Medarda'
+};
+
+function cmSlug(name) {
+  return name.replace(/'/g, '').replace(/, /g, '-').replace(/ - /g, '-').replace(/ \(Alternate Art\)/g, '').replace(/ /g, '-');
+}
+
+function fetchCardmarketPrice(name, set, cardNo, opts) {
   const setExp = { origins:'Origins', spiritforged:'Spiritforged', unleashed:'Unleashed', vendetta:'Vendetta' };
   const exp = setExp[set.id] || set.name;
-  const id = cardNo || name;
-  const link = `https://www.cardmarket.com/en/Riftbound/Products/Singles/${exp}?searchString=${encodeURIComponent(id)}`;
+  let link;
+
+  if (CM_TITLES[name] && cardNo) {
+    const champSlug = name.replace(/'/g, '').replace(/ /g, '-');
+    link = `https://www.cardmarket.com/en/Riftbound/Products/Singles/${exp}/${champSlug}-${CM_TITLES[name]}-V1-Rare`;
+  } else if (opts) {
+    if (opts.variant === 'a') {
+      link = `https://www.cardmarket.com/en/Riftbound/Products/Singles/${exp}/${cmSlug(name)}-V2-Showcase`;
+    } else if (opts.hasAlt) {
+      link = `https://www.cardmarket.com/en/Riftbound/Products/Singles/${exp}/${cmSlug(name)}-V1-${opts.rarity}`;
+    } else {
+      link = `https://www.cardmarket.com/en/Riftbound/Products/Singles/${exp}/${cmSlug(name)}`;
+    }
+  } else {
+    const id = cardNo || name;
+    link = `https://www.cardmarket.com/en/Riftbound/Products/Singles/${exp}?searchString=${encodeURIComponent(id)}`;
+  }
+
   document.getElementById('price-value').innerHTML = `<a class="pl-a" href="${link}" target="_blank" rel="noopener">${name} — Cardmarket ↗</a>`;
 }
 document.getElementById('modal').onclick = function(e) {
