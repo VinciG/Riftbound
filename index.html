@@ -1171,8 +1171,7 @@ function fetchCardmarketPrice(name, set, cardNo) {
       const champSlug = champName.replace(/'/g, '').replace(/ /g, '-');
       const epicTitle = cleanName.substring(dashIdx + 3).replace(/ /g, '-');
       if (name.includes('(Alternate Art)')) {
-        const id = cardNo || name;
-        link = `https://www.cardmarket.com/en/Riftbound/Products/Singles/${exp}?searchString=${encodeURIComponent(id)}`;
+        link = `https://www.cardmarket.com/en/Riftbound/Products/Singles/${exp}/${champSlug}-${epicTitle}-V2-Showcase`;
       } else if (name.includes('(Overnumbered)') || name.includes('(Signature)')) {
         link = `https://www.cardmarket.com/en/Riftbound/Products/Singles/${exp}/${champSlug}-${epicTitle}-V3-Overnumbered`;
       } else {
@@ -1181,8 +1180,7 @@ function fetchCardmarketPrice(name, set, cardNo) {
     } else {
       const slug = cleanName.replace(/ - /g, '-').replace(/ /g, '-').replace(/'/g, '');
       if (name.includes('(Alternate Art)')) {
-        const id = cardNo || name;
-        link = `https://www.cardmarket.com/en/Riftbound/Products/Singles/${exp}?searchString=${encodeURIComponent(id)}`;
+        link = `https://www.cardmarket.com/en/Riftbound/Products/Singles/${exp}/${slug}-V2-Showcase`;
       } else if (name.includes('(Overnumbered)')) {
         link = `https://www.cardmarket.com/en/Riftbound/Products/Singles/${exp}/${slug}-V2-Overnumbered`;
       } else if (name.includes('(Signature)')) {
