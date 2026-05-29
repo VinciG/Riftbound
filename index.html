@@ -1126,51 +1126,29 @@ function closeModal() {
 }
 
 // ===== CARDMARKET PRICE =====
-const CM_PROXIES = [
-  u => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
-  u => `https://corsproxy.io/?${encodeURIComponent(u)}`
-];
-const CM_SEARCH = 'https://www.cardmarket.com/en/Riftbound/Products/Search?searchString=';
-const CM_FALLBACK = 'https://www.cardmarket.com/en/Search?searchString=';
-
 async function fetchCardmarketPrice(name, setAbbr) {
   const pv = document.getElementById('price-value');
-  pv.innerHTML = '<span class="pl-l">Buscando precio…</span>';
+  const q = encodeURIComponent(`${name} ${setAbbr}`);
+  const link = `https://www.cardmarket.com/en/Search?searchString=${q}`;
 
-  const term = `${name} ${setAbbr}`;
-  const url = CM_SEARCH + encodeURIComponent(term);
-  const fallbackUrl = CM_FALLBACK + encodeURIComponent('Riftbound '+term);
+  pv.innerHTML = `<a class="pl-a" href="${link}" target="_blank" rel="noopener">Abrir en Cardmarket ↗</a> <span class="pl-l">buscando precio…</span>`;
 
-  for (const proxy of CM_PROXIES) {
-    try {
-      const resp = await fetch(proxy(url), { signal: AbortSignal.timeout(5000) });
-      if (!resp.ok) continue;
-      const html = await resp.text();
-      const doc = new DOMParser().parseFromString(html, 'text/html');
-
-      // Try price element selectors (Cardmarket may vary)
-      const sel = doc.querySelector(
-        '.product-price, [data-testid="product-price"], .price, .price-container .fw-bold, '+
-        '.table-body .row .col-price .price, .price-wrapper .price'
-      );
-      if (sel) {
-        const price = sel.textContent.trim().replace(/\s+/g,' ');
-        const link = doc.querySelector('a.product-link, a[href*="/Products/"], a.row-link');
-        const href = link ? link.getAttribute('href') : '';
-        const fullUrl = href ? 'https://www.cardmarket.com'+href : url;
-        pv.innerHTML = `<span class="pl-f">${price}</span> · <a class="pl-a" href="${fullUrl}" target="_blank" rel="noopener">Cardmarket</a>`;
+  try {
+    const c = new AbortController();
+    const t = setTimeout(() => c.abort(), 7000);
+    const r = await fetch(`https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(link)}`, { signal: c.signal });
+    clearTimeout(t);
+    if (r.ok) {
+      const html = await r.text();
+      const m = html.match(/[€£$]\s*[\d.,]+/);
+      if (m) {
+        pv.innerHTML = `<span class="pl-f">${m[0]}</span> · <a class="pl-a" href="${link}" target="_blank" rel="noopener">Cardmarket ↗</a>`;
         return;
       }
+    }
+  } catch (_) {}
 
-      // Check for "no results"
-      if (doc.body.textContent.includes('no results') || doc.body.textContent.includes('0 products')) {
-        continue;
-      }
-    } catch (_) { continue; }
-  }
-
-  // Fallback: show link
-  pv.innerHTML = `<a class="pl-a" href="${url}" target="_blank" rel="noopener">Buscar en Cardmarket</a>`;
+  pv.innerHTML = `<a class="pl-a" href="${link}" target="_blank" rel="noopener">Abrir en Cardmarket ↗</a>`;
 }
 document.getElementById('modal').onclick = function(e) {
   if(e.target===this) closeModal();
