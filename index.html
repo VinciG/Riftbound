@@ -1126,9 +1126,19 @@ function closeModal() {
 }
 
 function setCardmarketLink(name, set, card) {
-  const slug = name
+  let cardName = name;
+  if (!name.includes(' - ') && window.EPIC_CARD_DATA && window.EPIC_CARD_DATA[set.id]) {
+    const variant = window.EPIC_CARD_DATA[set.id].find(c =>
+      c.name.replace(/ \(Alternate Art\)| \(Overnumbered\)| \(Signature\)/g, '').trim().startsWith(name + ' - ')
+    );
+    if (variant) {
+      cardName = variant.name.replace(/ \(Alternate Art\)| \(Overnumbered\)| \(Signature\)/g, '').trim();
+    }
+  }
+  const slug = cardName
     .replace(/ \(Alternate Art\)| \(Overnumbered\)| \(Signature\)/g, '')
-    .replace(/'/g, '').replace(/,/g, '').replace(/ - /g, '-').replace(/ /g, '-');
+    .replace(/'([a-z])/g, (_, c) => c.toUpperCase()).replace(/,/g, '')
+    .replace(/ - /g, '-').replace(/ /g, '-');
   document.getElementById('price-value').innerHTML =
     `<a class="pl-a" href="https://www.cardmarket.com/en/Riftbound/Cards/${slug}" target="_blank" rel="noopener">${name} — Cardmarket ↗</a>`;
 }
