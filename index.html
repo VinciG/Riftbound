@@ -1163,8 +1163,22 @@ function fetchCardmarketPrice(name, set, cardNo) {
     const suffix = (name === 'Viktor') ? '' : '-V1-Rare';
     link = `https://www.cardmarket.com/en/Riftbound/Products/Singles/${exp}/${champSlug}-${CM_TITLES[name]}${suffix}`;
   } else {
-    const id = cardNo || name;
-    link = `https://www.cardmarket.com/en/Riftbound/Products/Singles/${exp}?searchString=${encodeURIComponent(id)}`;
+    const cleanName = name.replace(/\s*\([^)]*\)\s*/g, '').trim();
+    const dashIdx = cleanName.indexOf(' - ');
+    const champName = dashIdx > 0 ? cleanName.substring(0, dashIdx) : null;
+
+    if (champName && CM_TITLES[champName] && !name.includes('(Alternate Art)') && !name.includes('(Signature)')) {
+      const champSlug = champName.replace(/'/g, '').replace(/ /g, '-');
+      const epicTitle = cleanName.substring(dashIdx + 3).replace(/ /g, '-');
+      const epicSuffix = name.includes('(Overnumbered)') ? '-V2-Overnumbered' : '-V1-Epic';
+      link = `https://www.cardmarket.com/en/Riftbound/Products/Singles/${exp}/${champSlug}-${epicTitle}${epicSuffix}`;
+    } else if (!name.includes('(')) {
+      const slug = cleanName.replace(/ - /g, '-').replace(/ /g, '-').replace(/'/g, '');
+      link = `https://www.cardmarket.com/en/Riftbound/Products/Singles/${exp}/${slug}-V1-Epic`;
+    } else {
+      const id = cardNo || name;
+      link = `https://www.cardmarket.com/en/Riftbound/Products/Singles/${exp}?searchString=${encodeURIComponent(id)}`;
+    }
   }
 
   document.getElementById('price-value').innerHTML = `<a class="pl-a" href="${link}" target="_blank" rel="noopener">${name} — Cardmarket ↗</a>`;
