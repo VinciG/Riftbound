@@ -1099,7 +1099,7 @@ function openModal(leg, set) {
   }
 
   document.getElementById('modal').classList.add('active');
-  fetchCardmarketPrice(leg.name, set.abbr, leg.title, leg.n ? leg.n.replace('#','') : '');
+  fetchCardmarketPrice(leg.name, set, leg.n ? leg.n.replace('#','') : '', imgKey);
 }
 
 function openPremiumModal(card, set) {
@@ -1119,7 +1119,7 @@ function openPremiumModal(card, set) {
 
   document.getElementById('modal').classList.add('active');
   const cn = card.number ? String(card.number).padStart(3,'0') : '';
-  fetchCardmarketPrice(card.name, set.abbr, '', cn);
+  fetchCardmarketPrice(card.name, set, cn);
 }
 
 function closeModal() {
@@ -1127,9 +1127,30 @@ function closeModal() {
 }
 
 // ===== CARDMARKET SEARCH =====
-function fetchCardmarketPrice(name, setAbbr, extra, cardNo) {
-  const q = cardNo ? encodeURIComponent(`${setAbbr} ${cardNo}`) : encodeURIComponent(name);
-  const link = `https://www.cardmarket.com/en/Riftbound/Products/Search?searchString=${q}&searchMode=v2&idCategory=1655`;
+function fetchCardmarketPrice(name, set, cardNo, imgKey) {
+  const setExp = { origins:'Origins', spiritforged:'Spiritforged', unleashed:'Unleashed' };
+  const exp = setExp[set.id] || set.name;
+
+  // Try direct card URL (Origins legends with descriptive filenames)
+  let link;
+  if (imgKey && set.id === 'origins') {
+    const parts = imgKey.split('-');
+    parts.shift();              // remove number
+    parts.pop();                // remove size+ext
+    if (/^\d+$/.test(parts[parts.length-1])) parts.pop(); // remove version
+    parts.pop();                // remove rarity
+    const enTitle = parts.join('-');
+    const slug = name.replace(/[' ](.)/g, (_,c) => c.toUpperCase()) + '-' + enTitle + '-V1-Rare';
+    link = `https://www.cardmarket.com/en/Riftbound/Products/Singles/${exp}/${slug}`;
+  } else if (cardNo) {
+    // Search by set + number for other sets
+    const q = encodeURIComponent(`${set.abbr} ${cardNo}`);
+    link = `https://www.cardmarket.com/en/Riftbound/Products/Search?searchString=${q}&idCategory=1655`;
+  } else {
+    const q = encodeURIComponent(name);
+    link = `https://www.cardmarket.com/en/Riftbound/Products/Search?searchString=${q}&idCategory=1655`;
+  }
+
   document.getElementById('price-value').innerHTML = `<a class="pl-a" href="${link}" target="_blank" rel="noopener">${name} — Cardmarket ↗</a>`;
 }
 document.getElementById('modal').onclick = function(e) {
