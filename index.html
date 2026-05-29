@@ -1252,7 +1252,7 @@ makeProbChart('probChartRates',true);
 makePacksChart('packsChartRates',true);
 
 // ===== INIT =====
-Object.keys(SETS).forEach(renderSet);
+Object.keys(SETS).filter(k => k !== 'vendetta').forEach(renderSet);
 ['OGN','SFD','UNL'].forEach(renderPremiumSet);
 
 // Render Vendetta as text cards
