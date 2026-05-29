@@ -1125,16 +1125,52 @@ function closeModal() {
   document.getElementById('modal').classList.remove('active');
 }
 
+// ===== CARDMARKET SEARCH =====
+const CM_TITLES = {
+  'Kai\'Sa':'Daughter-of-the-Void','Volibear':'Relentless-Storm',
+  'Jinx':'Loose-Cannon','Darius':'Hand-of-Noxus',
+  'Ahri':'Nine-Tailed-Fox','Lee Sin':'Blind-Monk',
+  'Yasuo':'Unforgiven','Leona':'Radiant-Dawn',
+  'Teemo':'Swift-Scout','Viktor':'Herald-of-the-Arcane',
+  'Miss Fortune':'Bounty-Hunter','Sett':'The-Boss',
+  'Rumble':'Mechanized','Lucian':'Purifier',
+  'Draven':'Glorious-Executioner','Rek\'Sai':'Void-Burrower',
+  'Ornn':'Fire-Below-the-Mountain','Jax':'Grandmaster-at-Arms',
+  'Irelia':'Blade-Dancer','Azir':'Emperor-of-the-Sands',
+  'Ezreal':'Prodigal-Explorer','Renata Glasc':'Chem-Baroness',
+  'Sivir':'Battle-Mistress','Fiora':'Grand-Duelist',
+  'Jhin':'Virtuoso','Rengar':'Pridestalker',
+  'Pyke':'Bloodharbor-Ripper','Vi':'Piltover-Enforcer',
+  'Lillia':'Bashful-Bloom','Master Yi':'Wuju-Bladesman',
+  'Vex':'Gloomist','Ivern':'Green-Father',
+  'Diana':'Scorn-of-the-Moon','LeBlanc':'Deceiver',
+  'Kha\'Zix':'Voidreaver','Poppy':'Keeper-of-the-Hammer',
+  'Nasus':'Curator-of-Sands','Renekton':'Butcher-of-the-Sands',
+  'Akali':'Shadow-Fist','Zed':'Master-of-Shadows',
+  'Shen':'Eye-of-Twilight','Ambessa':'General-Medarda',
+  'Mel':'Counselor-Medarda'
+};
+
 function setCardmarketLink(name, set, card) {
   const setExp = { origins:'Origins', spiritforged:'Spiritforged', unleashed:'Unleashed', vendetta:'Vendetta' };
   const exp = setExp[set.id] || set.name;
-  const slug = name
-    .replace(/ \(Alternate Art\)| \(Overnumbered\)| \(Signature\)/g, '')
-    .replace(/'/g, '').replace(/,/g, '').replace(/ - /g, '-').replace(/ /g, '-');
-  const url = `https://www.cardmarket.com/en/Riftbound/Products/Singles/${exp}/${slug}`;
-  console.log('🔗 Cardmarket URL:', url, '| card:', JSON.stringify({name,exp,slug}));
-  document.getElementById('price-value').innerHTML =
-    `<a class="pl-a" href="${url}" target="_blank" rel="noopener">${name} — Cardmarket ↗</a>`;
+  let link;
+
+  if (CM_TITLES[name] && card?.n) {
+    const champSlug = name.replace(/'/g, '').replace(/ /g, '-');
+    link = `https://www.cardmarket.com/en/Riftbound/Products/Singles/${exp}/${champSlug}-${CM_TITLES[name]}-V1-Rare`;
+  } else {
+    const cleanName = name.replace(/ \(Overnumbered\)$/, '').replace(/ \(Signature\)$/, '').replace(/ \(Alternate Art\)$/, '').trim();
+    const version = card?.signature ? 'V3' : (card?.ovr || card?.alt || card?.rarity === 'Showcase' ? 'V2' : 'V1');
+    const urlRarity = (card?.ovr || card?.signature) ? 'Overnumbered' : (card?.rarity || 'Showcase');
+    const sep = cleanName.indexOf(' - ');
+    const slug = sep > 0
+      ? cleanName.slice(0, sep).replace(/'/g, '').replace(/ /g, '-') + '-' + cleanName.slice(sep + 3).replace(/ /g, '-')
+      : cleanName.replace(/'/g, '').replace(/ /g, '-');
+    link = `https://www.cardmarket.com/en/Riftbound/Products/Singles/${exp}/${slug}-${version}-${urlRarity}`;
+  }
+
+  document.getElementById('price-value').innerHTML = `<a class="pl-a" href="${link}" target="_blank" rel="noopener">${name} — Cardmarket ↗</a>`;
 }
 document.getElementById('modal').onclick = function(e) {
   if(e.target===this) closeModal();
