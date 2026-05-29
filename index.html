@@ -1099,7 +1099,7 @@ function openModal(leg, set) {
   }
 
   document.getElementById('modal').classList.add('active');
-  fetchCardmarketPrice(leg.name, set, leg.n ? leg.n.replace('#','') : '');
+  setCardmarketLink(leg.name, set, leg);
 }
 
 function openPremiumModal(card, set) {
@@ -1118,9 +1118,7 @@ function openPremiumModal(card, set) {
   imgDiv.appendChild(img);
 
   document.getElementById('modal').classList.add('active');
-  const idParts = card.id.match(/-(\d+)([a-z]?)/);
-  const cn = idParts ? idParts[1] + idParts[2] : (card.number ? String(card.number).padStart(3,'0') : '');
-  fetchCardmarketPrice(card.name, set, cn);
+  setCardmarketLink(card.name, set, card);
 }
 
 function closeModal() {
@@ -1153,17 +1151,23 @@ const CM_TITLES = {
   'Mel':'Counselor-Medarda'
 };
 
-function fetchCardmarketPrice(name, set, cardNo) {
+function setCardmarketLink(name, set, card) {
   const setExp = { origins:'Origins', spiritforged:'Spiritforged', unleashed:'Unleashed', vendetta:'Vendetta' };
   const exp = setExp[set.id] || set.name;
   let link;
 
-  if (CM_TITLES[name] && cardNo) {
+  if (CM_TITLES[name] && card?.n) {
     const champSlug = name.replace(/'/g, '').replace(/ /g, '-');
     link = `https://www.cardmarket.com/en/Riftbound/Products/Singles/${exp}/${champSlug}-${CM_TITLES[name]}-V1-Rare`;
   } else {
-    const id = cardNo || name;
-    link = `https://www.cardmarket.com/en/Riftbound/Products/Singles/${exp}?searchString=${encodeURIComponent(id)}`;
+    const cleanName = name.replace(/ \(Overnumbered\)$/, '').replace(/ \(Signature\)$/, '').replace(/ \(Alternate Art\)$/, '').trim();
+    const version = card?.signature ? 'V3' : (card?.ovr || card?.alt || card?.rarity === 'Showcase' ? 'V2' : 'V1');
+    const urlRarity = (card?.ovr || card?.signature) ? 'Overnumbered' : (card?.rarity || 'Showcase');
+    const sep = cleanName.indexOf(' - ');
+    const slug = sep > 0
+      ? cleanName.slice(0, sep).replace(/'/g, '').replace(/ /g, '-') + '-' + cleanName.slice(sep + 3).replace(/ /g, '-')
+      : cleanName.replace(/'/g, '').replace(/ /g, '-');
+    link = `https://www.cardmarket.com/en/Riftbound/Products/Singles/${exp}/${slug}-${version}-${urlRarity}`;
   }
 
   document.getElementById('price-value').innerHTML = `<a class="pl-a" href="${link}" target="_blank" rel="noopener">${name} — Cardmarket ↗</a>`;
