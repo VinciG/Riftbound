@@ -1134,7 +1134,7 @@ async function fetchCardmarketPrice(name, setAbbr, extra) {
 
   const fullName = extra ? `${name} ${extra}` : name;
   const q = encodeURIComponent(`${fullName} ${setAbbr}`);
-  const link = `https://www.cardmarket.com/en/Search?searchString=${q}`;
+  const link = `https://www.cardmarket.com/en/Riftbound/Products/Singles?searchMode=v2&idCategory=1655&idExpansion=0&idRarity=0&perSite=30&searchString=${q}`;
 
   const proxies = [
     u => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(u)}`,
