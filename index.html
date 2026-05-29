@@ -1099,7 +1099,7 @@ function openModal(leg, set) {
   }
 
   document.getElementById('modal').classList.add('active');
-  fetchCardmarketPrice(leg.name, set.abbr);
+  fetchCardmarketPrice(leg.name, set.abbr, leg.title);
 }
 
 function openPremiumModal(card, set) {
@@ -1125,12 +1125,46 @@ function closeModal() {
   document.getElementById('modal').classList.remove('active');
 }
 
-// ===== CARDMARKET SEARCH =====
-function fetchCardmarketPrice(name, setAbbr) {
+// ===== CARDMARKET PRICE =====
+let _cmLast = [null, null, null];
+async function fetchCardmarketPrice(name, setAbbr, extra) {
+  _cmLast = [name, setAbbr, extra];
   const pv = document.getElementById('price-value');
-  const q = encodeURIComponent(`${name} ${setAbbr}`);
+  pv.innerHTML = '<span class="pl-l">Buscando precio…</span>';
+
+  const fullName = extra ? `${name} ${extra}` : name;
+  const q = encodeURIComponent(`${fullName} ${setAbbr}`);
   const link = `https://www.cardmarket.com/en/Search?searchString=${q}`;
-  pv.innerHTML = `<a class="pl-a" href="${link}" target="_blank" rel="noopener">${name} en Cardmarket ↗</a>`;
+
+  const proxies = [
+    u => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(u)}`,
+    u => `https://corsproxy.io/?url=${encodeURIComponent(u)}`,
+    u => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`
+  ];
+
+  for (const proxy of proxies) {
+    try {
+      const c = new AbortController();
+      const t = setTimeout(()=>c.abort(), 7000);
+      const r = await fetch(proxy(link), { signal:c.signal });
+      clearTimeout(t);
+      if (!r.ok) continue;
+      const html = await r.text();
+      if (!html || html.length<200) continue;
+
+      const m = html.match(/[€£$]\s*[\d.,]+/);
+      if (m) {
+        const price = m[0].replace(/&euro;/g,'€');
+        const lm = html.match(/href=["'](\/en\/[^"']+?Riftbound[^"']+?)["']/i);
+        const pl = lm ? 'https://www.cardmarket.com'+lm[1] : link;
+        pv.innerHTML = `<span class="pl-f">${price}</span> · <a class="pl-a" href="${pl}" target="_blank" rel="noopener">Cardmarket</a>`;
+        return;
+      }
+    } catch (_) {}
+  }
+
+  pv.innerHTML = `<a class="pl-a" href="${link}" target="_blank" rel="noopener">${fullName} — Cardmarket ↗</a>` +
+    ` <span class="pl-e" style="cursor:pointer" onclick="fetchCardmarketPrice(_cmLast[0],_cmLast[1],_cmLast[2])">↻</span>`;
 }
 document.getElementById('modal').onclick = function(e) {
   if(e.target===this) closeModal();
