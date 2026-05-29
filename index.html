@@ -503,13 +503,14 @@ tbody tr:hover td { background:var(--surface2); }
       </div>
 
       <div class="sub-tab-content" id="tab-ovr-o">
-        <p style="font-size:.8rem;color:var(--muted);margin-bottom:.75rem;">Cartas Overnumbered (numeración extendida) disponibles en Origins.</p>
+        <p style="font-size:.8rem;color:var(--muted);margin-bottom:.75rem;">Cartas Overnumbered (numeración extendida) y Alt-Art disponibles en Origins.</p>
         <div class="table-wrap">
           <table>
             <thead><tr><th>Tipo</th><th>Cantidad</th><th>Numeración</th><th>Notas</th></tr></thead>
             <tbody>
-              <tr><td class="row-label">OVR base</td><td>12</td><td>299–310</td><td>Versión alternativa con arte diferente</td></tr>
-              <tr><td class="row-label">OVR con firma</td><td>12</td><td>311–322</td><td>Arte alternativo + firma del artista</td></tr>
+              <tr><td class="row-label">Alt-Art</td><td>12</td><td>—</td><td>Unidad Campeón con skin alternativo · ~2 por caja</td></tr>
+              <tr><td class="row-label">OVR base</td><td>12</td><td>299–310</td><td>Leyenda con arte de artista de Riot</td></tr>
+              <tr><td class="row-label">OVR con firma</td><td>12</td><td>311–322</td><td>OVR + firma foil del artista</td></tr>
             </tbody>
           </table>
         </div>
@@ -566,6 +567,7 @@ tbody tr:hover td { background:var(--surface2); }
           <table>
             <thead><tr><th>Tipo</th><th>Cantidad</th><th>Numeración</th><th>Notas</th></tr></thead>
             <tbody>
+              <tr><td class="row-label">Alt-Art</td><td>11</td><td>—</td><td>Cartas con arte alternativo</td></tr>
               <tr><td class="row-label">OVR base</td><td>18</td><td>222–239</td><td>Arte alternativo</td></tr>
               <tr><td class="row-label">OVR con firma</td><td>12</td><td>240–251</td><td>Arte + firma del artista</td></tr>
             </tbody>
@@ -1169,7 +1171,7 @@ if(ovrCtx) {
       datasets:[
         {label:'OVR base',data:[12,18,5,12],backgroundColor:'#4a9eff'},
         {label:'OVR firma',data:[12,12,2,0],backgroundColor:'#85b7eb'},
-        {label:'Showcase/Alt-Art',data:[0,0,21,4],backgroundColor:'#3ecf8e'},
+        {label:'Showcase/Alt-Art',data:[12,11,21,4],backgroundColor:'#3ecf8e'},
         {label:'Ultimate Rare',data:[0,0,1,1],backgroundColor:'#f05252'}
       ]
     },
