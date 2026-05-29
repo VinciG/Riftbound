@@ -1131,8 +1131,10 @@ function setCardmarketLink(name, set, card) {
   const slug = name
     .replace(/ \(Alternate Art\)| \(Overnumbered\)| \(Signature\)/g, '')
     .replace(/'/g, '').replace(/,/g, '').replace(/ - /g, '-').replace(/ /g, '-');
+  const url = `https://www.cardmarket.com/en/Riftbound/Products/Singles/${exp}/${slug}`;
+  console.log('🔗 Cardmarket URL:', url, '| card:', JSON.stringify({name,exp,slug}));
   document.getElementById('price-value').innerHTML =
-    `<a class="pl-a" href="https://www.cardmarket.com/en/Riftbound/Products/Singles/${exp}/${slug}" target="_blank" rel="noopener">${name} — Cardmarket ↗</a>`;
+    `<a class="pl-a" href="${url}" target="_blank" rel="noopener">${name} — Cardmarket ↗</a>`;
 }
 document.getElementById('modal').onclick = function(e) {
   if(e.target===this) closeModal();
