@@ -567,8 +567,7 @@ tbody tr:hover td { background:var(--surface2); }
           <table>
             <thead><tr><th>Tipo</th><th>Cantidad</th><th>Numeración</th><th>Notas</th></tr></thead>
             <tbody>
-              <tr><td class="row-label">Alt-Art</td><td>11</td><td>—</td><td>Cartas con arte alternativo</td></tr>
-              <tr><td class="row-label">OVR base</td><td>18</td><td>222–239</td><td>Arte alternativo</td></tr>
+              <tr><td class="row-label">OVR base</td><td>18</td><td>222–239</td><td>Numeración extendida</td></tr>
               <tr><td class="row-label">OVR con firma</td><td>12</td><td>240–251</td><td>Arte + firma del artista</td></tr>
             </tbody>
           </table>
@@ -598,7 +597,7 @@ tbody tr:hover td { background:var(--surface2); }
         <h2>Unleashed</h2>
         <span class="set-badge" style="color:var(--s3);border-color:var(--s3);">Set 3</span>
         <span class="set-date">Mayo 2026</span>
-        <span class="set-total"><strong>219</strong> base + <strong>29</strong> premium</span>
+        <span class="set-total"><strong>219</strong> base + <strong>30+</strong> premium</span>
       </div>
 
       <div class="sub-tabs">
@@ -629,14 +628,13 @@ tbody tr:hover td { background:var(--surface2); }
       </div>
 
       <div class="sub-tab-content" id="tab-showcase-u">
-        <p style="font-size:.8rem;color:var(--muted);margin-bottom:.75rem;">Unleashed introduce la rareza <strong style="color:var(--red)">Ultimate</strong> y múltiples variantes Showcase.</p>
+        <p style="font-size:.8rem;color:var(--muted);margin-bottom:.75rem;">Unleashed introduce la rareza <strong style="color:var(--red)">Ultimate</strong> y múltiples variantes Showcase. Según <strong>Riot Games</strong>: «30+ alt-arts» y «over 30 Showcase cards, including exciting Overnumbered and Signature cards».</p>
         <div class="table-wrap">
           <table>
             <thead><tr><th>Tipo</th><th>Cantidad</th><th>Numeración</th><th>Notas</th></tr></thead>
             <tbody>
-              <tr><td class="row-label">Showcase / Alt-Art</td><td>21</td><td>220–240</td><td>Arte alternativo de cartas selectas</td></tr>
-              <tr><td class="row-label">OVR base</td><td>5</td><td>241–245</td><td>Arte alternativo extendido</td></tr>
-              <tr><td class="row-label">OVR con firma</td><td>2</td><td>246–247</td><td>Arte + firma</td></tr>
+              <tr><td class="row-label">Cartas base</td><td>219</td><td>001–219</td><td>Set principal</td></tr>
+              <tr><td class="row-label">Premium</td><td>30+</td><td>220–247</td><td>Showcase · Overnumbered · Signature</td></tr>
               <tr><td class="row-label" style="color:var(--red)">Ultimate Rare</td><td>1</td><td>248</td><td><strong>Baron Nashor</strong> · &lt;0.1% de packs</td></tr>
             </tbody>
           </table>
@@ -645,7 +643,7 @@ tbody tr:hover td { background:var(--surface2); }
 
       <div class="sub-tab-content" id="tab-info-u">
         <div class="metrics-grid">
-          <div class="mcard" style="--accent:var(--s3)"><div class="mcard-label">Total cartas</div><div class="mcard-num">248</div><div class="mcard-sub">219 base + 21 showcase + 7 OVR + 1 Ultimate</div></div>
+          <div class="mcard" style="--accent:var(--s3)"><div class="mcard-label">Total cartas</div><div class="mcard-num">248</div><div class="mcard-sub">219 base + 30+ premium · 1 Ultimate</div></div>
           <div class="mcard" style="--accent:var(--s3)"><div class="mcard-label">Leyendas</div><div class="mcard-num">12</div></div>
           <div class="mcard" style="--accent:var(--s3)"><div class="mcard-label">Champion Decks</div><div class="mcard-num">2</div><div class="mcard-sub">Vi · Vex</div></div>
         </div>
@@ -684,7 +682,7 @@ tbody tr:hover td { background:var(--surface2); }
 
       <div class="sub-tab-content" id="tab-info-v">
         <div class="metrics-grid">
-          <div class="mcard" style="--accent:var(--s4)"><div class="mcard-label">Total cartas</div><div class="mcard-num">~166</div><div class="mcard-sub">+50 Showcase (incluye OVR) · 4 OVR conectadas confirmadas</div></div>
+          <div class="mcard" style="--accent:var(--s4)"><div class="mcard-label">Total cartas</div><div class="mcard-num">~166</div><div class="mcard-sub">~50 Showcase (incluye OVR) · 4 OVR conectadas confirmadas</div></div>
           <div class="mcard" style="--accent:var(--s4)"><div class="mcard-label">Leyendas</div><div class="mcard-num">9</div><div class="mcard-sub">Menos leyendas, más rejugabilidad</div></div>
           <div class="mcard" style="--accent:var(--s4)"><div class="mcard-label">Showdown Decks</div><div class="mcard-num">2</div><div class="mcard-sub">Shen vs Zed</div></div>
         </div>
@@ -1169,9 +1167,9 @@ if(ovrCtx) {
     data:{
       labels:['Origins','Spiritforged','Unleashed','Vendetta'],
       datasets:[
-        {label:'OVR base',data:[12,18,5,4],backgroundColor:'#4a9eff'},
-        {label:'OVR firma',data:[12,12,2,0],backgroundColor:'#85b7eb'},
-        {label:'Showcase/Alt-Art',data:[12,11,21,46],backgroundColor:'#3ecf8e'},
+        {label:'OVR base',data:[12,18,0,4],backgroundColor:'#4a9eff'},
+        {label:'OVR firma',data:[12,12,0,0],backgroundColor:'#85b7eb'},
+        {label:'Showcase/Alt-Art',data:[12,0,30,50],backgroundColor:'#3ecf8e'},
         {label:'Ultimate Rare',data:[0,0,1,0],backgroundColor:'#f05252'}
       ]
     },
