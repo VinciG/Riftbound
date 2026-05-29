@@ -136,6 +136,16 @@ body {
   display:inline-block; font-size:.55rem; font-family:'DM Mono',monospace;
   padding:.12rem .4rem; border-radius:10px; margin-top:4px; font-weight:500;
 }
+.legend-card .lc-tags { display:flex; flex-wrap:wrap; gap:4px; margin-top:4px; }
+.legend-card .lc-tags .lc-set { margin-top:0; }
+.empty-state {
+  background:var(--surface); border:1px solid var(--border); border-radius:8px;
+  padding:1rem; color:var(--muted); font-size:.78rem; line-height:1.45;
+}
+.count-note {
+  font-family:'DM Mono',monospace; font-size:.68rem; color:var(--muted);
+  margin-bottom:.75rem;
+}
 
 /* MODAL */
 .modal-overlay {
@@ -421,6 +431,7 @@ tbody tr:hover td { background:var(--surface2); }
 
       <div class="sub-tabs">
         <div class="sub-tab active" data-tab="legends-o">Leyendas (12)</div>
+        <div class="sub-tab" data-tab="epic-o">&Eacute;picas+</div>
         <div class="sub-tab" data-tab="ovr-o">Overnumbered</div>
         <div class="sub-tab" data-tab="info-o">Información</div>
       </div>
@@ -430,6 +441,19 @@ tbody tr:hover td { background:var(--surface2); }
           <input type="text" id="search-o" placeholder="Buscar leyenda…" oninput="filterLegends('o',this.value)">
         </div>
         <div class="legend-grid" id="grid-o"></div>
+      </div>
+
+      <div class="sub-tab-content" id="tab-epic-o">
+        <div class="search-bar">
+          <input type="text" placeholder="Buscar carta..." oninput="filterPremium('o')">
+          <select onchange="filterPremium('o')">
+            <option value="">Todas</option>
+            <option value="Epic">Epicas</option>
+            <option value="Showcase">Showcase / OVR</option>
+          </select>
+        </div>
+        <div class="count-note" id="epic-count-o"></div>
+        <div class="legend-grid" id="grid-epic-o"></div>
       </div>
 
       <div class="sub-tab-content" id="tab-ovr-o">
@@ -466,6 +490,7 @@ tbody tr:hover td { background:var(--surface2); }
 
       <div class="sub-tabs">
         <div class="sub-tab active" data-tab="legends-s">Leyendas (12)</div>
+        <div class="sub-tab" data-tab="epic-s">&Eacute;picas+</div>
         <div class="sub-tab" data-tab="ovr-s">Overnumbered</div>
         <div class="sub-tab" data-tab="info-s">Información</div>
       </div>
@@ -475,6 +500,19 @@ tbody tr:hover td { background:var(--surface2); }
           <input type="text" id="search-s" placeholder="Buscar leyenda…" oninput="filterLegends('s',this.value)">
         </div>
         <div class="legend-grid" id="grid-s"></div>
+      </div>
+
+      <div class="sub-tab-content" id="tab-epic-s">
+        <div class="search-bar">
+          <input type="text" placeholder="Buscar carta..." oninput="filterPremium('s')">
+          <select onchange="filterPremium('s')">
+            <option value="">Todas</option>
+            <option value="Epic">Epicas</option>
+            <option value="Showcase">Showcase / OVR</option>
+          </select>
+        </div>
+        <div class="count-note" id="epic-count-s"></div>
+        <div class="legend-grid" id="grid-epic-s"></div>
       </div>
 
       <div class="sub-tab-content" id="tab-ovr-s">
@@ -517,6 +555,7 @@ tbody tr:hover td { background:var(--surface2); }
 
       <div class="sub-tabs">
         <div class="sub-tab active" data-tab="legends-u">Leyendas (12)</div>
+        <div class="sub-tab" data-tab="epic-u">&Eacute;picas+</div>
         <div class="sub-tab" data-tab="showcase-u">Showcase &amp; Ultimate</div>
         <div class="sub-tab" data-tab="info-u">Información</div>
       </div>
@@ -526,6 +565,19 @@ tbody tr:hover td { background:var(--surface2); }
           <input type="text" id="search-u" placeholder="Buscar leyenda…" oninput="filterLegends('u',this.value)">
         </div>
         <div class="legend-grid" id="grid-u"></div>
+      </div>
+
+      <div class="sub-tab-content" id="tab-epic-u">
+        <div class="search-bar">
+          <input type="text" placeholder="Buscar carta..." oninput="filterPremium('u')">
+          <select onchange="filterPremium('u')">
+            <option value="">Todas</option>
+            <option value="Epic">Epicas</option>
+            <option value="Showcase">Showcase / OVR</option>
+          </select>
+        </div>
+        <div class="count-note" id="epic-count-u"></div>
+        <div class="legend-grid" id="grid-epic-u"></div>
       </div>
 
       <div class="sub-tab-content" id="tab-showcase-u">
@@ -570,11 +622,16 @@ tbody tr:hover td { background:var(--surface2); }
 
       <div class="sub-tabs">
         <div class="sub-tab active" data-tab="legends-v">Leyendas (9)</div>
+        <div class="sub-tab" data-tab="epic-v">&Eacute;picas+</div>
         <div class="sub-tab" data-tab="info-v">Información</div>
       </div>
 
       <div class="sub-tab-content active" id="tab-legends-v">
         <div class="legend-grid" id="grid-v" style="grid-template-columns:repeat(auto-fill,minmax(180px,1fr));"></div>
+      </div>
+
+      <div class="sub-tab-content" id="tab-epic-v">
+        <div class="empty-state">La lista de cartas de Vendetta todavia no esta disponible en la fuente de datos. La pesta&ntilde;a queda preparada para a&ntilde;adirlas cuando se publiquen.</div>
       </div>
 
       <div class="sub-tab-content" id="tab-info-v">
@@ -680,6 +737,7 @@ tbody tr:hover td { background:var(--surface2); }
   </div>
 </div>
 
+<script src="epic-cards.js"></script>
 <script>
 // ===== DATA =====
 const SETS = {
@@ -884,6 +942,76 @@ function filterLegends(setId, query) {
   });
 }
 
+// ===== PREMIUM CARDS =====
+const PREMIUM_SET_PREFIX = { OGN:'o', SFD:'s', UNL:'u', VEN:'v' };
+
+function premiumLabel(card) {
+  if(card.signature) return 'Signature';
+  if(card.ovr) return 'OVR';
+  if(card.alt) return 'Alt-Art';
+  return card.rarity;
+}
+
+function renderPremiumSet(setCode) {
+  const prefix = PREMIUM_SET_PREFIX[setCode];
+  const grid = document.getElementById('grid-epic-'+prefix);
+  if(!grid) return;
+
+  const cards = (window.EPIC_CARD_DATA && window.EPIC_CARD_DATA[setCode]) || [];
+  const count = document.getElementById('epic-count-'+prefix);
+  grid.innerHTML = '';
+
+  if(count) count.textContent = cards.length ? `${cards.length} cartas Epic / Showcase / OVR` : '';
+  if(!cards.length) {
+    grid.innerHTML = '<div class="empty-state">No hay cartas disponibles todavia para esta coleccion.</div>';
+    return;
+  }
+
+  const set = Object.values(SETS).find(s => s.abbr===setCode);
+  cards.forEach(card=>{
+    const el = document.createElement('div');
+    el.className = 'legend-card';
+    el.setAttribute('data-name', `${card.name} ${card.type} ${card.domain}`.toLowerCase());
+    el.setAttribute('data-rarity', card.rarity);
+
+    const imgDiv = document.createElement('div');
+    imgDiv.className = 'lc-img';
+    const img = document.createElement('img');
+    img.src = card.image;
+    img.alt = card.name;
+    img.loading = 'lazy';
+    img.onerror = function(){ this.style.display='none'; this.parentElement.innerHTML='<div class="placeholder">?</div>'; };
+    imgDiv.appendChild(img);
+
+    const info = document.createElement('div');
+    info.className = 'lc-info';
+    info.innerHTML = `<div class="lc-name">${card.name}</div>
+      <div class="lc-sub">#${card.number} · ${card.type}${card.domain ? ' · '+card.domain : ''}</div>
+      <div class="lc-tags">
+        <span class="lc-set" style="background:color-mix(in srgb,${set.color},transparent 80%);color:var(--text)">${set.abbr}</span>
+        <span class="lc-set" style="background:var(--surface2);color:var(--muted)">${premiumLabel(card)}</span>
+      </div>`;
+
+    el.appendChild(imgDiv);
+    el.appendChild(info);
+    el.onclick = ()=>openPremiumModal(card,set);
+    grid.appendChild(el);
+  });
+}
+
+function filterPremium(prefix) {
+  const tab = document.getElementById('tab-epic-'+prefix);
+  const grid = document.getElementById('grid-epic-'+prefix);
+  if(!tab || !grid) return;
+  const query = (tab.querySelector('input')?.value || '').toLowerCase().trim();
+  const rarity = tab.querySelector('select')?.value || '';
+  grid.querySelectorAll('.legend-card').forEach(card=>{
+    const matchesQuery = !query || (card.getAttribute('data-name') || '').includes(query);
+    const matchesRarity = !rarity || card.getAttribute('data-rarity') === rarity;
+    card.style.display = matchesQuery && matchesRarity ? '' : 'none';
+  });
+}
+
 // ===== MODAL =====
 function openModal(leg, set) {
   document.getElementById('modal-name').textContent = leg.name;
@@ -904,6 +1032,24 @@ function openModal(leg, set) {
   } else {
     imgDiv.innerHTML = '<div class="placeholder">?</div>';
   }
+
+  document.getElementById('modal').classList.add('active');
+}
+
+function openPremiumModal(card, set) {
+  document.getElementById('modal-name').textContent = card.name;
+  document.getElementById('modal-set').textContent = `${set.name} (${set.abbr}) · ${card.id.toUpperCase()}`;
+  document.getElementById('modal-desc').textContent = `${premiumLabel(card)} · ${card.type}${card.domain ? ' · '+card.domain : ''}`;
+  const tags = document.getElementById('modal-tags');
+  tags.innerHTML = `<span>${set.abbr}</span><span>${card.rarity}</span><span>${card.type}</span>${card.domain ? `<span>${card.domain}</span>` : ''}`;
+
+  const imgDiv = document.getElementById('modal-img');
+  imgDiv.innerHTML = '';
+  const img = document.createElement('img');
+  img.src = card.image;
+  img.alt = card.name;
+  img.onerror = function(){ this.style.display='none'; this.parentElement.innerHTML='<div class="placeholder">?</div>'; };
+  imgDiv.appendChild(img);
 
   document.getElementById('modal').classList.add('active');
 }
@@ -1061,6 +1207,7 @@ makePacksChart('packsChartRates',true);
 
 // ===== INIT =====
 Object.keys(SETS).forEach(renderSet);
+['OGN','SFD','UNL'].forEach(renderPremiumSet);
 
 // Render Vendetta as text cards
 const gridV = document.getElementById('grid-v');
