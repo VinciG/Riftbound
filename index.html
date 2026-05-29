@@ -1128,11 +1128,18 @@ function closeModal() {
 function setCardmarketLink(name, set, card) {
   const setExp = { origins:'Origins', spiritforged:'Spiritforged', unleashed:'Unleashed', vendetta:'Vendetta' };
   const exp = setExp[set.id] || set.name;
-  const slug = name
-    .replace(/ \(Alternate Art\)| \(Overnumbered\)| \(Signature\)/g, '')
-    .replace(/'/g, '').replace(/,/g, '').replace(/ - /g, '-').replace(/ /g, '-');
-  document.getElementById('price-value').innerHTML =
-    `<a class="pl-a" href="https://www.cardmarket.com/en/Riftbound/Products/Singles/${exp}/${slug}" target="_blank" rel="noopener">${name} — Cardmarket ↗</a>`;
+  const isLegend = !!card?.n;
+  const cleanName = name.replace(/ \(Alternate Art\)| \(Overnumbered\)| \(Signature\)/g, '').trim();
+  const slug = cleanName.replace(/'/g, '').replace(/,/g, '').replace(/ - /g, '-').replace(/ /g, '-');
+  if (isLegend) {
+    const url = `https://www.cardmarket.com/en/Riftbound/Products/Singles/${exp}/${slug}-V1-Rare`;
+    document.getElementById('price-value').innerHTML = `<a class="pl-a" href="${url}" target="_blank" rel="noopener">${name} — Cardmarket ↗</a>`;
+  } else {
+    const ver = card?.signature ? 'V3' : (card?.ovr || card?.alt ? 'V2' : 'V1');
+    const rarity = (card?.ovr || card?.signature) ? 'Overnumbered' : (card?.alt ? 'Showcase' : card?.rarity);
+    const url = `https://www.cardmarket.com/en/Riftbound/Products/Singles/${exp}/${slug}-${ver}-${rarity}`;
+    document.getElementById('price-value').innerHTML = `<a class="pl-a" href="${url}" target="_blank" rel="noopener">${name} — Cardmarket ↗</a>`;
+  }
 }
 document.getElementById('modal').onclick = function(e) {
   if(e.target===this) closeModal();
