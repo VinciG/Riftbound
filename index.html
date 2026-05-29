@@ -1181,10 +1181,6 @@ function fetchCardmarketPrice(name, set, cardNo) {
       const slug = cleanName.replace(/ - /g, '-').replace(/ /g, '-').replace(/'/g, '');
       if (name.includes('(Alternate Art)')) {
         link = `https://www.cardmarket.com/en/Riftbound/Products/Singles/${exp}/${slug}-V2-Showcase`;
-      } else if (name.includes('(Overnumbered)')) {
-        link = `https://www.cardmarket.com/en/Riftbound/Products/Singles/${exp}/${slug}-V2-Overnumbered`;
-      } else if (name.includes('(Signature)')) {
-        link = `https://www.cardmarket.com/en/Riftbound/Products/Singles/${exp}/${slug}-V3-Overnumbered`;
       } else {
         link = `https://www.cardmarket.com/en/Riftbound/Products/Singles/${exp}/${slug}`;
       }
