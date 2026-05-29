@@ -1099,7 +1099,7 @@ function openModal(leg, set) {
   }
 
   document.getElementById('modal').classList.add('active');
-  fetchCardmarketPrice(leg.name, set, leg.n ? leg.n.replace('#','') : '', { legend:true });
+  fetchCardmarketPrice(leg.name, set, leg.n ? leg.n.replace('#','') : '');
 }
 
 function openPremiumModal(card, set) {
@@ -1120,10 +1120,7 @@ function openPremiumModal(card, set) {
   document.getElementById('modal').classList.add('active');
   const idParts = card.id.match(/-(\d+)([a-z]?)/);
   const cn = idParts ? idParts[1] + idParts[2] : (card.number ? String(card.number).padStart(3,'0') : '');
-  const setCode = set.abbr;
-  const sameCards = window.EPIC_CARD_DATA?.[setCode] || [];
-  const hasAlt = sameCards.some(c => c.number === card.number && c !== card && c.id !== card.id);
-  fetchCardmarketPrice(card.name, set, cn, { rarity:card.rarity, variant:(idParts?.[2]||''), hasAlt });
+  fetchCardmarketPrice(card.name, set, cn);
 }
 
 function closeModal() {
@@ -1156,11 +1153,7 @@ const CM_TITLES = {
   'Mel':'Counselor-Medarda'
 };
 
-function cmSlug(name) {
-  return name.replace(/'/g, '').replace(/, /g, '-').replace(/ - /g, '-').replace(/ \(Alternate Art\)/g, '').replace(/ /g, '-');
-}
-
-function fetchCardmarketPrice(name, set, cardNo, opts) {
+function fetchCardmarketPrice(name, set, cardNo) {
   const setExp = { origins:'Origins', spiritforged:'Spiritforged', unleashed:'Unleashed', vendetta:'Vendetta' };
   const exp = setExp[set.id] || set.name;
   let link;
@@ -1168,14 +1161,6 @@ function fetchCardmarketPrice(name, set, cardNo, opts) {
   if (CM_TITLES[name] && cardNo) {
     const champSlug = name.replace(/'/g, '').replace(/ /g, '-');
     link = `https://www.cardmarket.com/en/Riftbound/Products/Singles/${exp}/${champSlug}-${CM_TITLES[name]}-V1-Rare`;
-  } else if (opts) {
-    if (opts.variant === 'a') {
-      link = `https://www.cardmarket.com/en/Riftbound/Products/Singles/${exp}/${cmSlug(name)}-V2-Showcase`;
-    } else if (opts.hasAlt) {
-      link = `https://www.cardmarket.com/en/Riftbound/Products/Singles/${exp}/${cmSlug(name)}-V1-${opts.rarity}`;
-    } else {
-      link = `https://www.cardmarket.com/en/Riftbound/Products/Singles/${exp}/${cmSlug(name)}`;
-    }
   } else {
     const id = cardNo || name;
     link = `https://www.cardmarket.com/en/Riftbound/Products/Singles/${exp}?searchString=${encodeURIComponent(id)}`;
