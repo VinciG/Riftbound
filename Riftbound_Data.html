@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Riftbound — Base de Datos Interactiva</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+:root {
+  --bg:#0b0c0f; --surface:#111318; --surface2:#181b22;
+  --border:rgba(255,255,255,0.07); --border2:rgba(255,255,255,0.12);
+  --text:#e8e6e0; --muted:#6b6a65; --dim:#3a3935;
+  --blue:#4a9eff; --blue-bg:rgba(74,158,255,0.10);
+  --green:#3ecf8e; --green-bg:rgba(62,207,142,0.10);
+  --amber:#f4a535; --amber-bg:rgba(244,165,53,0.10);
+  --pink:#e879a0; --pink-bg:rgba(232,121,160,0.10);
+  --red:#f05252; --red-bg:rgba(240,82,82,0.10);
+  --s1:#4a9eff; --s2:#3ecf8e; --s3:#f4a535; --s4:#e879a0; --s5:#a78bfa;
+}
+* { box-sizing:border-box; margin:0; padding:0; }
+body {
+  font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text);
+  min-height:100vh; padding:0;
+}
+::-webkit-scrollbar { width:6px; }
+::-webkit-scrollbar-track { background:var(--bg); }
+::-webkit-scrollbar-thumb { background:var(--dim); border-radius:3px; }
+
+/* LAYOUT */
+.app { display:flex; min-height:100vh; }
+.sidebar {
+  width:220px; flex-shrink:0; background:var(--surface);
+  border-right:1px solid var(--border); padding:1.5rem 0;
+  position:sticky; top:0; height:100vh; overflow-y:auto;
+}
+.sidebar-logo {
+  font-family:'Syne',sans-serif; font-size:1.3rem; font-weight:800;
+  padding:0 1.25rem 1.25rem; border-bottom:1px solid var(--border);
+  margin-bottom:1rem;
+}
+.sidebar-logo span { color:var(--blue); }
+.sidebar-logo small { display:block; font-size:.6rem; font-weight:400; color:var(--muted); font-family:'DM Mono',monospace; letter-spacing:.03em; margin-top:2px; }
+.nav-item {
+  display:flex; align-items:center; gap:10px;
+  padding:.6rem 1.25rem; cursor:pointer; font-size:.8rem;
+  color:var(--muted); transition:.15s; border-left:3px solid transparent;
+}
+.nav-item:hover { color:var(--text); background:var(--surface2); }
+.nav-item.active { color:var(--text); border-left-color:var(--nav-c,var(--blue)); background:var(--surface2); }
+.nav-item .nav-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+.main {
+  flex:1; padding:1.5rem 2rem 4rem; max-width:1200px; overflow-x:hidden;
+}
+
+/* SECTIONS */
+.section { display:none; }
+.section.active { display:block; }
+
+.sec-label {
+  font-family:'DM Mono',monospace; font-size:.68rem; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--muted);
+  margin:2rem 0 .75rem; display:flex; align-items:center; gap:.6rem;
+}
+.sec-label::after {
+  content:''; flex:1; height:1px; background:var(--border);
+}
+
+/* HEADER */
+.set-header {
+  display:flex; align-items:center; gap:1rem; flex-wrap:wrap;
+  margin-bottom:1.5rem; padding-bottom:1rem;
+  border-bottom:1px solid var(--border);
+}
+.set-header h2 { font-family:'Syne',sans-serif; font-size:1.5rem; font-weight:700; }
+.set-header .set-badge {
+  font-family:'DM Mono',monospace; font-size:.7rem; font-weight:500;
+  padding:.25rem .7rem; border-radius:20px; border:1px solid; letter-spacing:.04em;
+}
+.set-header .set-date { font-size:.8rem; color:var(--muted); }
+.set-header .set-total { margin-left:auto; font-size:.9rem; color:var(--muted); }
+.set-header .set-total strong { color:var(--text); font-family:'Syne',sans-serif; }
+
+/* METRIC CARDS */
+.metrics-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:8px; margin-bottom:1.5rem; }
+.mcard {
+  background:var(--surface); border:1px solid var(--border); border-radius:10px;
+  padding:.8rem 1rem; position:relative; overflow:hidden;
+}
+.mcard::before {
+  content:''; position:absolute; top:0; left:0; right:0;
+  height:2px; background:var(--accent,var(--blue));
+}
+.mcard-label { font-family:'DM Mono',monospace; font-size:.68rem; color:var(--muted); letter-spacing:.05em; margin-bottom:.3rem; }
+.mcard-num { font-family:'Syne',sans-serif; font-size:1.6rem; font-weight:800; line-height:1; }
+.mcard-sub { font-size:.7rem; color:var(--muted); margin-top:.25rem; line-height:1.4; }
+.mechanics-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:8px; margin-top:1rem; }
+.mechanic-card {
+  background:var(--surface); border:1px solid var(--border); border-radius:8px;
+  padding:.8rem 1rem; position:relative; overflow:hidden;
+}
+.mechanic-card::before {
+  content:''; position:absolute; top:0; left:0; right:0;
+  height:2px; background:var(--accent,var(--blue));
+}
+.mechanic-kicker {
+  font-family:'DM Mono',monospace; font-size:.62rem; color:var(--muted);
+  letter-spacing:.06em; text-transform:uppercase; margin-bottom:.25rem;
+}
+.mechanic-name { font-family:'Syne',sans-serif; font-size:1rem; font-weight:700; line-height:1.1; }
+.mechanic-desc { font-size:.72rem; color:var(--muted); margin-top:.35rem; line-height:1.45; }
+
+/* LEGEND CARDS GRID */
+.legend-grid {
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:10px;
+}
+.legend-card {
+  background:var(--surface); border:1px solid var(--border); border-radius:10px;
+  overflow:hidden; cursor:pointer; transition:transform .15s, box-shadow .15s;
+}
+.legend-card:hover { transform:translateY(-2px); box-shadow:0 4px 20px rgba(0,0,0,0.3); }
+.legend-card .lc-img {
+  width:100%; aspect-ratio:5/7; background:var(--surface2);
+  display:flex; align-items:center; justify-content:center;
+  overflow:hidden;
+}
+.legend-card .lc-img img { width:100%; height:100%; object-fit:cover; }
+.legend-card .lc-img .placeholder {
+  font-size:2rem; opacity:.3; font-family:'Syne',sans-serif;
+}
+.legend-card .lc-info { padding:.5rem .65rem .6rem; }
+.legend-card .lc-name { font-size:.75rem; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.legend-card .lc-sub { font-size:.62rem; color:var(--muted); margin-top:2px; }
+.legend-card .lc-set {
+  display:inline-block; font-size:.55rem; font-family:'DM Mono',monospace;
+  padding:.12rem .4rem; border-radius:10px; margin-top:4px; font-weight:500;
+}
+
+/* MODAL */
+.modal-overlay {
+  display:none; position:fixed; inset:0; z-index:1000;
+  background:rgba(0,0,0,.7); backdrop-filter:blur(4px);
+  align-items:center; justify-content:center;
+}
+.modal-overlay.active { display:flex; }
+.modal {
+  background:var(--surface2); border:1px solid var(--border2); border-radius:14px;
+  max-width:520px; width:90%; max-height:85vh; overflow-y:auto;
+  padding:1.5rem; position:relative;
+}
+.modal-close {
+  position:absolute; top:.75rem; right:.75rem; background:none; border:none;
+  color:var(--muted); font-size:1.2rem; cursor:pointer; padding:.25rem; line-height:1;
+}
+.modal-close:hover { color:var(--text); }
+.modal-body { display:flex; gap:1.25rem; align-items:flex-start; }
+.modal-img { width:180px; flex-shrink:0; border-radius:8px; overflow:hidden; background:var(--surface); }
+.modal-img img { width:100%; display:block; }
+.modal-img .placeholder { padding:2rem 0; text-align:center; font-size:3rem; opacity:.3; }
+.modal-info { flex:1; min-width:0; }
+.modal-info h3 { font-family:'Syne',sans-serif; font-size:1.1rem; font-weight:700; }
+.modal-info .mod-set { font-size:.75rem; color:var(--muted); margin:.2rem 0 .5rem; font-family:'DM Mono',monospace; }
+.modal-info .mod-desc { font-size:.82rem; line-height:1.5; color:var(--text); opacity:.85; }
+.modal-tags { display:flex; flex-wrap:wrap; gap:5px; margin-top:.6rem; }
+.modal-tags span {
+  font-size:.65rem; font-family:'DM Mono',monospace; padding:.15rem .5rem;
+  border-radius:12px; background:var(--surface); color:var(--muted);
+}
+
+/* PACK ANATOMY */
+.pack-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:8px; }
+.pack-slot {
+  background:var(--surface); border:1px solid var(--border); border-radius:10px;
+  padding:.75rem .6rem; text-align:center; position:relative; overflow:hidden;
+}
+.pack-slot::after {
+  content:''; position:absolute; bottom:0; left:0; right:0;
+  height:2px; background:var(--accent,#888780);
+}
+.pack-slot .slot-count { font-family:'Syne',sans-serif; font-size:1.5rem; font-weight:800; line-height:1; color:var(--accent,#888780); }
+.pack-slot .slot-name { font-size:.65rem; color:var(--muted); margin-top:.2rem; line-height:1.3; }
+
+/* TABLES */
+.table-wrap { overflow-x:auto; }
+table { width:100%; border-collapse:collapse; font-size:.8rem; }
+th {
+  text-align:left; padding:.5rem .75rem; font-family:'DM Mono',monospace; font-size:.65rem;
+  letter-spacing:.06em; color:var(--muted); border-bottom:1px solid var(--border2);
+  background:var(--surface); position:sticky; top:0;
+}
+td { padding:.6rem .75rem; border-bottom:1px solid var(--border); color:var(--text); }
+tbody tr:hover td { background:var(--surface2); }
+.row-label { font-weight:500; white-space:nowrap; }
+
+/* PILLS */
+.pill {
+  display:inline-block; font-family:'DM Mono',monospace; font-size:.65rem;
+  padding:.2rem .55rem; border-radius:20px; font-weight:500; white-space:nowrap;
+}
+.pill-blue  { background:var(--blue-bg);  color:var(--blue); }
+.pill-green { background:var(--green-bg); color:var(--green); }
+.pill-amber { background:var(--amber-bg); color:var(--amber); }
+.pill-pink  { background:var(--pink-bg);  color:var(--pink); }
+.pill-red   { background:var(--red-bg);   color:var(--red); }
+.pill-dim   { background:var(--surface2); color:var(--muted); }
+.pill-sub   { font-size:.6rem; color:var(--muted); margin-top:3px; display:block; }
+.tbd        { color:var(--dim); font-style:italic; font-size:.72rem; }
+
+/* CHARTS */
+.chart-box {
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:1rem; margin-bottom:1rem;
+}
+.chart-title {
+  font-family:'Syne',sans-serif; font-size:.85rem; font-weight:600;
+  margin-bottom:.75rem;
+}
+.two-col { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+
+/* FOOTER */
+.footnote {
+  margin-top:2.5rem; padding-top:1rem; border-top:1px solid var(--border);
+  font-size:.7rem; color:var(--muted); font-family:'DM Mono',monospace;
+  letter-spacing:.03em; line-height:1.7;
+}
+.footnote strong { color:var(--dim); }
+
+/* TABS */
+.sub-tabs { display:flex; gap:4px; margin-bottom:1rem; flex-wrap:wrap; }
+.sub-tab {
+  padding:.4rem 1rem; font-size:.72rem; font-family:'DM Mono',monospace;
+  border:1px solid var(--border); border-radius:20px; cursor:pointer;
+  background:var(--surface); color:var(--muted); transition:.12s;
+}
+.sub-tab:hover { color:var(--text); border-color:var(--border2); }
+.sub-tab.active { background:var(--surface2); color:var(--text); border-color:var(--dim); }
+.sub-tab-content { display:none; }
+.sub-tab-content.active { display:block; }
+
+/* SEARCH */
+.search-bar {
+  display:flex; gap:8px; margin-bottom:1rem; flex-wrap:wrap;
+}
+.search-bar input {
+  flex:1; min-width:180px; padding:.5rem .75rem; font-size:.78rem;
+  background:var(--surface); border:1px solid var(--border); border-radius:8px;
+  color:var(--text); font-family:'DM Sans',sans-serif;
+}
+.search-bar input:focus { outline:none; border-color:var(--dim); }
+.search-bar select {
+  padding:.5rem .75rem; font-size:.72rem; background:var(--surface);
+  border:1px solid var(--border); border-radius:8px; color:var(--text);
+  font-family:'DM Mono',monospace; cursor:pointer;
+}
+
+/* PROVING GROUNDS NOTE */
+.pg-note {
+  background:var(--blue-bg); border:1px solid rgba(74,158,255,.2); border-radius:10px;
+  padding:.75rem 1rem; font-size:.75rem; margin-bottom:1rem; line-height:1.5;
+}
+.pg-note strong { color:var(--blue); }
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .sidebar { width:60px; padding:.75rem 0; }
+  .sidebar .sidebar-logo span { font-size:1rem; }
+  .sidebar .sidebar-logo small, .sidebar .nav-item span:not(.nav-dot) { display:none; }
+  .sidebar .nav-item { justify-content:center; padding:.6rem .5rem; }
+  .main { padding:1rem; }
+  .two-col { grid-template-columns:1fr; }
+  .pack-grid { grid-template-columns:repeat(3,1fr); }
+  .legend-grid { grid-template-columns:repeat(auto-fill,minmax(120px,1fr)); }
+  .modal-body { flex-direction:column; align-items:center; }
+  .modal-img { width:140px; }
+}
+@media(max-width:480px){
+  .pack-grid { grid-template-columns:1fr 1fr; }
+  .metrics-grid { grid-template-columns:1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="app">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      Rift<span>bound</span>
+      <small>Vinci - Base de datos TCG</small>
+    </div>
+    <div class="nav-item active" data-set="all" style="--nav-c:var(--text)">
+      <span class="nav-dot" style="background:var(--text)"></span>
+      <span>Visión general</span>
+    </div>
+    <div class="nav-item" data-set="origins" style="--nav-c:var(--s1)">
+      <span class="nav-dot" style="background:var(--s1)"></span>
+      <span>Origins</span>
+    </div>
+    <div class="nav-item" data-set="spiritforged" style="--nav-c:var(--s2)">
+      <span class="nav-dot" style="background:var(--s2)"></span>
+      <span>Spiritforged</span>
+    </div>
+    <div class="nav-item" data-set="unleashed" style="--nav-c:var(--s3)">
+      <span class="nav-dot" style="background:var(--s3)"></span>
+      <span>Unleashed</span>
+    </div>
+    <div class="nav-item" data-set="vendetta" style="--nav-c:var(--s4)">
+      <span class="nav-dot" style="background:var(--s4)"></span>
+      <span>Vendetta</span>
+    </div>
+    <div class="nav-item" data-set="rates" style="--nav-c:var(--pink)">
+      <span class="nav-dot" style="background:var(--pink)"></span>
+      <span>Pull Rates</span>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- ===== OVERVIEW ===== -->
+    <div class="section active" id="sec-all">
+      <div class="set-header">
+        <h2>Visión General</h2>
+        <span class="set-badge" style="color:var(--muted);border-color:var(--border);">Todos los sets</span>
+      </div>
+
+      <div class="sec-label">Cartas totales por set</div>
+      <div class="metrics-grid">
+        <div class="mcard" style="--accent:var(--s1)">
+          <div class="mcard-label">Origins · Oct 2025</div>
+          <div class="mcard-num">298</div>
+        </div>
+        <div class="mcard" style="--accent:var(--s2)">
+          <div class="mcard-label">Spiritforged · Feb 2026</div>
+          <div class="mcard-num">221</div>
+        </div>
+        <div class="mcard" style="--accent:var(--s3)">
+          <div class="mcard-label">Unleashed · May 2026</div>
+          <div class="mcard-num">219</div>
+        </div>
+        <div class="mcard" style="--accent:var(--s4)">
+          <div class="mcard-label">Vendetta · Jul 2026</div>
+          <div class="mcard-num">166</div>
+        </div>
+      </div>
+
+      <div class="sec-label">Leyendas por set</div>
+      <div class="metrics-grid">
+        <div class="mcard" style="--accent:var(--s1)">
+          <div class="mcard-label">Origins</div>
+          <div class="mcard-num">12</div>
+          <div class="mcard-names" style="font-size:.65rem;color:var(--dim);margin-top:.3rem;line-height:1.5;">
+            Kai'Sa · Volibear · Jinx · Darius · Ahri · Lee Sin · Yasuo · Leona · Teemo · Viktor · Miss Fortune · Sett
+          </div>
+        </div>
+        <div class="mcard" style="--accent:var(--s2)">
+          <div class="mcard-label">Spiritforged</div>
+          <div class="mcard-num">12</div>
+          <div class="mcard-names" style="font-size:.65rem;color:var(--dim);margin-top:.3rem;line-height:1.5;">
+            Rumble · Lucian · Draven · Rek'Sai · Ornn · Jax · Irelia · Azir · Ezreal · Renata Glasc · Sivir · Fiora
+          </div>
+        </div>
+        <div class="mcard" style="--accent:var(--s3)">
+          <div class="mcard-label">Unleashed</div>
+          <div class="mcard-num">12</div>
+          <div class="mcard-names" style="font-size:.65rem;color:var(--dim);margin-top:.3rem;line-height:1.5;">
+            Vi · Rengar · Kha'Zix · Poppy · Ivern · Vex · Lillia · Diana · LeBlanc · Pyke · Master Yi · Jhin
+          </div>
+        </div>
+        <div class="mcard" style="--accent:var(--s4)">
+          <div class="mcard-label">Vendetta</div>
+          <div class="mcard-num">9</div>
+          <div class="mcard-names" style="font-size:.65rem;color:var(--dim);margin-top:.3rem;line-height:1.5;">
+            Nasus · Renekton · Akali · Zed · Shen · Ambessa · Mel · +2 por confirmar
+          </div>
+        </div>
+      </div>
+
+      <div class="sec-label">Anatomía del booster (14 cartas)</div>
+      <div class="pack-grid">
+        <div class="pack-slot" style="--accent:#888780"><div class="slot-count">7</div><div class="slot-name">Comunes</div></div>
+        <div class="pack-slot" style="--accent:var(--green)"><div class="slot-count">3</div><div class="slot-name">Infrecuentes</div></div>
+        <div class="pack-slot" style="--accent:var(--blue)"><div class="slot-count">2</div><div class="slot-name">Rara o mejor<br><span style="font-size:.58rem;color:var(--muted)">foil garantizado</span></div></div>
+        <div class="pack-slot" style="--accent:var(--amber)"><div class="slot-count">1</div><div class="slot-name">Slot foil libre<br><span style="font-size:.58rem;color:var(--muted)">C → Épica/OVR</span></div></div>
+        <div class="pack-slot" style="--accent:var(--pink)"><div class="slot-count">1</div><div class="slot-name">Token / Runa<br><span style="font-size:.58rem;color:var(--muted)">o Alt Runa</span></div></div>
+      </div>
+
+      <div class="sec-label">Overnumbered y Showcase por set</div>
+      <div class="chart-box"><div style="position:relative;height:220px;"><canvas id="ovrChartOverview"></canvas></div></div>
+
+      <div class="sec-label">Probabilidad acumulada por caja (24 packs)</div>
+      <div class="two-col">
+        <div class="chart-box">
+          <div class="chart-title">% de conseguir 1+ pull por caja</div>
+          <div style="position:relative;height:180px;"><canvas id="probChartOverview"></canvas></div>
+        </div>
+        <div class="chart-box">
+          <div class="chart-title">Packs necesarios (media) para 1 pull</div>
+          <div style="position:relative;height:180px;"><canvas id="packsChartOverview"></canvas></div>
+        </div>
+      </div>
+
+      <div class="footnote">
+        <strong>Fuentes oficiales:</strong> Riot Games — "Collectability in Riftbound" · GAMA Expo 2026 · riftbound.leagueoflegends.com<br>
+        <strong>Nota:</strong> Datos de Vendetta preliminares. Pull rates de Spiritforged inferidos de Origins salvo donde se indique.
+      </div>
+    </div>
+
+    <!-- ===== ORIGINS ===== -->
+    <div class="section" id="sec-origins">
+      <div class="set-header">
+        <h2>Origins</h2>
+        <span class="set-badge" style="color:var(--s1);border-color:var(--s1);">Set 1</span>
+        <span class="set-date">Octubre 2025</span>
+        <span class="set-total"><strong>298</strong> base + <strong>24</strong> OVR</span>
+      </div>
+      <div class="pg-note">
+        <strong>ⓘ Origins: Proving Grounds</strong> — Lanzado junto a Origins, incluye 4 leyendas adicionales (Garen, Lux, Annie, Master Yi) en un producto de inicio para 2-4 jugadores. No forman parte del set principal.
+      </div>
+
+      <div class="sub-tabs">
+        <div class="sub-tab active" data-tab="legends-o">Leyendas (12)</div>
+        <div class="sub-tab" data-tab="ovr-o">Overnumbered</div>
+        <div class="sub-tab" data-tab="info-o">Información</div>
+      </div>
+
+      <div class="sub-tab-content active" id="tab-legends-o">
+        <div class="search-bar">
+          <input type="text" id="search-o" placeholder="Buscar leyenda…" oninput="filterLegends('o',this.value)">
+        </div>
+        <div class="legend-grid" id="grid-o"></div>
+      </div>
+
+      <div class="sub-tab-content" id="tab-ovr-o">
+        <p style="font-size:.8rem;color:var(--muted);margin-bottom:.75rem;">Cartas Overnumbered (numeración extendida) disponibles en Origins.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Tipo</th><th>Cantidad</th><th>Numeración</th><th>Notas</th></tr></thead>
+            <tbody>
+              <tr><td class="row-label">OVR base</td><td>12</td><td>299–310</td><td>Versión alternativa con arte diferente</td></tr>
+              <tr><td class="row-label">OVR con firma</td><td>12</td><td>311–322</td><td>Arte alternativo + firma del artista</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="sub-tab-content" id="tab-info-o">
+        <div class="metrics-grid">
+          <div class="mcard" style="--accent:var(--s1)"><div class="mcard-label">Total cartas</div><div class="mcard-num">322</div><div class="mcard-sub">298 base + 24 OVR</div></div>
+          <div class="mcard" style="--accent:var(--s1)"><div class="mcard-label">Leyendas</div><div class="mcard-num">12</div><div class="mcard-sub">Champions principales</div></div>
+          <div class="mcard" style="--accent:var(--s1)"><div class="mcard-label">Champion Decks</div><div class="mcard-num">3</div><div class="mcard-sub">Jinx · Viktor · Lee Sin</div></div>
+          <div class="mcard" style="--accent:var(--s1)"><div class="mcard-label">Proving Grounds</div><div class="mcard-num">+4</div><div class="mcard-sub">Garen · Lux · Annie · Master Yi</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== SPIRITFORGED ===== -->
+    <div class="section" id="sec-spiritforged">
+      <div class="set-header">
+        <h2>Spiritforged</h2>
+        <span class="set-badge" style="color:var(--s2);border-color:var(--s2);">Set 2</span>
+        <span class="set-date">Febrero 2026</span>
+        <span class="set-total"><strong>221</strong> base + <strong>30</strong> OVR</span>
+      </div>
+
+      <div class="sub-tabs">
+        <div class="sub-tab active" data-tab="legends-s">Leyendas (12)</div>
+        <div class="sub-tab" data-tab="ovr-s">Overnumbered</div>
+        <div class="sub-tab" data-tab="info-s">Información</div>
+      </div>
+
+      <div class="sub-tab-content active" id="tab-legends-s">
+        <div class="search-bar">
+          <input type="text" id="search-s" placeholder="Buscar leyenda…" oninput="filterLegends('s',this.value)">
+        </div>
+        <div class="legend-grid" id="grid-s"></div>
+      </div>
+
+      <div class="sub-tab-content" id="tab-ovr-s">
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Tipo</th><th>Cantidad</th><th>Numeración</th><th>Notas</th></tr></thead>
+            <tbody>
+              <tr><td class="row-label">OVR base</td><td>18</td><td>222–239</td><td>Arte alternativo</td></tr>
+              <tr><td class="row-label">OVR con firma</td><td>12</td><td>240–251</td><td>Arte + firma del artista</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="sub-tab-content" id="tab-info-s">
+        <div class="metrics-grid">
+          <div class="mcard" style="--accent:var(--s2)"><div class="mcard-label">Total cartas</div><div class="mcard-num">251</div><div class="mcard-sub">221 base + 30 OVR</div></div>
+          <div class="mcard" style="--accent:var(--s2)"><div class="mcard-label">Leyendas</div><div class="mcard-num">12</div></div>
+          <div class="mcard" style="--accent:var(--s2)"><div class="mcard-label">Champion Decks</div><div class="mcard-num">2</div><div class="mcard-sub">Rumble · Fiora</div></div>
+        </div>
+        <div class="sec-label">Mec&aacute;nicas nuevas</div>
+        <div class="mechanics-grid">
+          <div class="mechanic-card" style="--accent:var(--s2)"><div class="mechanic-kicker">Recurso</div><div class="mechanic-name">Gold</div><div class="mechanic-desc">Ficha Gear de un solo uso: se agota y se sacrifica para pagar 1 Power.</div></div>
+          <div class="mechanic-card" style="--accent:var(--s2)"><div class="mechanic-kicker">Gear</div><div class="mechanic-name">Equipment</div><div class="mechanic-desc">Equipo que se adjunta a unidades para darles mejoras, efectos o bonus de Might.</div></div>
+          <div class="mechanic-card" style="--accent:var(--s2)"><div class="mechanic-kicker">Reaction</div><div class="mechanic-name">Quick-Draw</div><div class="mechanic-desc">Permite jugar Equipment como Reaction y adjuntarlo al instante a una unidad.</div></div>
+          <div class="mechanic-card" style="--accent:var(--s2)"><div class="mechanic-kicker">Unidad</div><div class="mechanic-name">Weaponmaster</div><div class="mechanic-desc">Al jugar la unidad, puede equiparse pagando menos Power, incluso moviendo Equipment ya adjunto.</div></div>
+          <div class="mechanic-card" style="--accent:var(--s2)"><div class="mechanic-kicker">Hechizo</div><div class="mechanic-name">Repeat</div><div class="mechanic-desc">Coste adicional opcional: si lo pagas, resuelves el efecto del hechizo una vez m&aacute;s.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== UNLEASHED ===== -->
+    <div class="section" id="sec-unleashed">
+      <div class="set-header">
+        <h2>Unleashed</h2>
+        <span class="set-badge" style="color:var(--s3);border-color:var(--s3);">Set 3</span>
+        <span class="set-date">Mayo 2026</span>
+        <span class="set-total"><strong>219</strong> base + <strong>29</strong> premium</span>
+      </div>
+
+      <div class="sub-tabs">
+        <div class="sub-tab active" data-tab="legends-u">Leyendas (12)</div>
+        <div class="sub-tab" data-tab="showcase-u">Showcase &amp; Ultimate</div>
+        <div class="sub-tab" data-tab="info-u">Información</div>
+      </div>
+
+      <div class="sub-tab-content active" id="tab-legends-u">
+        <div class="search-bar">
+          <input type="text" id="search-u" placeholder="Buscar leyenda…" oninput="filterLegends('u',this.value)">
+        </div>
+        <div class="legend-grid" id="grid-u"></div>
+      </div>
+
+      <div class="sub-tab-content" id="tab-showcase-u">
+        <p style="font-size:.8rem;color:var(--muted);margin-bottom:.75rem;">Unleashed introduce la rareza <strong style="color:var(--red)">Ultimate</strong> y múltiples variantes Showcase.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Tipo</th><th>Cantidad</th><th>Numeración</th><th>Notas</th></tr></thead>
+            <tbody>
+              <tr><td class="row-label">Showcase / Alt-Art</td><td>21</td><td>220–240</td><td>Arte alternativo de cartas selectas</td></tr>
+              <tr><td class="row-label">OVR base</td><td>5</td><td>241–245</td><td>Arte alternativo extendido</td></tr>
+              <tr><td class="row-label">OVR con firma</td><td>2</td><td>246–247</td><td>Arte + firma</td></tr>
+              <tr><td class="row-label" style="color:var(--red)">Ultimate Rare</td><td>1</td><td>248</td><td><strong>Baron Nashor</strong> · &lt;0.1% de packs</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="sub-tab-content" id="tab-info-u">
+        <div class="metrics-grid">
+          <div class="mcard" style="--accent:var(--s3)"><div class="mcard-label">Total cartas</div><div class="mcard-num">248</div><div class="mcard-sub">219 base + 21 showcase + 7 OVR + 1 Ultimate</div></div>
+          <div class="mcard" style="--accent:var(--s3)"><div class="mcard-label">Leyendas</div><div class="mcard-num">12</div></div>
+          <div class="mcard" style="--accent:var(--s3)"><div class="mcard-label">Champion Decks</div><div class="mcard-num">2</div><div class="mcard-sub">Vi · Vex</div></div>
+        </div>
+        <div class="sec-label">Mec&aacute;nicas nuevas</div>
+        <div class="mechanics-grid">
+          <div class="mechanic-card" style="--accent:var(--s3)"><div class="mechanic-kicker">Recurso</div><div class="mechanic-name">XP</div><div class="mechanic-desc">Recurso que acumulas y puedes gastar para activar ventajas y efectos especiales.</div></div>
+          <div class="mechanic-card" style="--accent:var(--s3)"><div class="mechanic-kicker">Escalado</div><div class="mechanic-name">Level</div><div class="mechanic-desc">Las cartas con Level ganan beneficios cuando alcanzas cierta cantidad de XP.</div></div>
+          <div class="mechanic-card" style="--accent:var(--s3)"><div class="mechanic-kicker">XP</div><div class="mechanic-name">Hunt</div><div class="mechanic-desc">Cuando una unidad con Hunt conquista o mantiene un campo de batalla, ganas el XP indicado.</div></div>
+          <div class="mechanic-card" style="--accent:var(--s3)"><div class="mechanic-kicker">Reaction</div><div class="mechanic-name">Ambush</div><div class="mechanic-desc">Permite jugar una unidad como Reaction en un campo de batalla donde ya tienes unidades.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== VENDETTA ===== -->
+    <div class="section" id="sec-vendetta">
+      <div class="set-header">
+        <h2>Vendetta</h2>
+        <span class="set-badge" style="color:var(--s4);border-color:var(--s4);">Set 4</span>
+        <span class="set-date">Julio 2026</span>
+        <span class="set-total"><strong>166</strong> base + premium</span>
+      </div>
+
+      <div class="sub-tabs">
+        <div class="sub-tab active" data-tab="legends-v">Leyendas (9)</div>
+        <div class="sub-tab" data-tab="info-v">Información</div>
+      </div>
+
+      <div class="sub-tab-content active" id="tab-legends-v">
+        <div class="legend-grid" id="grid-v" style="grid-template-columns:repeat(auto-fill,minmax(180px,1fr));"></div>
+      </div>
+
+      <div class="sub-tab-content" id="tab-info-v">
+        <div class="metrics-grid">
+          <div class="mcard" style="--accent:var(--s4)"><div class="mcard-label">Total cartas</div><div class="mcard-num">~220</div><div class="mcard-sub">166 base + 12 OVR + 4 Showcase Duo + 1 Ultimate</div></div>
+          <div class="mcard" style="--accent:var(--s4)"><div class="mcard-label">Leyendas</div><div class="mcard-num">9</div><div class="mcard-sub">Menos leyendas, más rejugabilidad</div></div>
+          <div class="mcard" style="--accent:var(--s4)"><div class="mcard-label">Showdown Decks</div><div class="mcard-num">2</div><div class="mcard-sub">Shen vs Zed</div></div>
+        </div>
+        <div class="sec-label">Novedades</div>
+        <div class="mechanics-grid">
+          <div class="mechanic-card" style="--accent:var(--s4)"><div class="mechanic-kicker">Producto</div><div class="mechanic-name">Showdown Decks</div><div class="mechanic-desc">Dos mazos enfrentados listos para jugar, centrados en el duelo Shen contra Zed.</div></div>
+          <div class="mechanic-card" style="--accent:var(--s4)"><div class="mechanic-kicker">Coleccionismo</div><div class="mechanic-name">Duo Art</div><div class="mechanic-desc">Variantes Showcase con composiciones de dos personajes, pensadas como piezas destacadas del set.</div></div>
+        </div>
+        <p style="font-size:.8rem;color:var(--muted);margin-top:1rem;">Los datos de Vendetta son preliminares. La información completa se publicará tras el lanzamiento global el 31 de julio de 2026.</p>
+      </div>
+    </div>
+
+    <!-- ===== PULL RATES ===== -->
+    <div class="section" id="sec-rates">
+      <div class="set-header">
+        <h2>Pull Rates</h2>
+        <span class="set-badge" style="color:var(--pink);border-color:var(--pink);">Comparativa</span>
+      </div>
+
+      <div class="sec-label">Por caja (24 packs)</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th style="min-width:130px">Tipo de carta</th><th>Origins</th><th>Spiritforged</th><th>Unleashed</th><th>Vendetta</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="row-label">Épica</td>
+              <td><span class="pill pill-blue">~6 por caja</span><span class="pill-sub">~1 cada 4 packs</span></td>
+              <td><span class="pill pill-blue">~6 por caja</span><span class="pill-sub">~1 cada 4 packs</span></td>
+              <td><span class="pill pill-blue">~5–6 por caja</span><span class="pill-sub">~1 cada 4 packs</span></td>
+              <td><span class="tbd">Sin publicar</span></td>
+            </tr>
+            <tr>
+              <td class="row-label">Showcase / Alt-Art</td>
+              <td><span class="pill pill-green">~2 por caja</span><span class="pill-sub">~1 cada 12 packs</span></td>
+              <td><span class="pill pill-green">~2 por caja</span><span class="pill-sub">~1 cada 12 packs</span></td>
+              <td><span class="pill pill-green">~2 por caja</span><span class="pill-sub">~1 cada 12 packs</span></td>
+              <td><span class="tbd">Sin publicar</span></td>
+            </tr>
+            <tr>
+              <td class="row-label">Overnumbered</td>
+              <td><span class="pill pill-amber">1 cada 3 cajas</span><span class="pill-sub">~1 cada 72 packs</span></td>
+              <td><span class="pill pill-amber">1 cada 3 cajas</span><span class="pill-sub">~1 cada 72 packs</span></td>
+              <td><span class="pill pill-amber">1 cada 3 cajas</span><span class="pill-sub">~1 cada 72 packs</span></td>
+              <td><span class="tbd">Sin publicar</span></td>
+            </tr>
+            <tr>
+              <td class="row-label">OVR con firma</td>
+              <td><span class="pill pill-pink">1 cada 10 OVR</span><span class="pill-sub">~1 cada 720 packs</span></td>
+              <td><span class="pill pill-pink">1 cada 10 OVR</span><span class="pill-sub">~1 cada 720 packs</span></td>
+              <td><span class="pill pill-pink">1 cada 10 OVR</span><span class="pill-sub">~1 cada 720 packs</span></td>
+              <td><span class="tbd">Sin publicar</span></td>
+            </tr>
+            <tr>
+              <td class="row-label">Ultimate Rare</td>
+              <td><span class="pill pill-dim">No existe</span></td>
+              <td><span class="pill pill-dim">No existe</span></td>
+              <td><span class="pill pill-red">&lt;0.1% de packs</span><span class="pill-sub">Baron Nashor</span></td>
+              <td><span class="tbd">Sin confirmar</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="sec-label">Gráficas de probabilidad</div>
+      <div class="two-col">
+        <div class="chart-box">
+          <div class="chart-title">% de conseguir 1+ pull por caja (24 packs)</div>
+          <div style="position:relative;height:200px;"><canvas id="probChartRates"></canvas></div>
+        </div>
+        <div class="chart-box">
+          <div class="chart-title">Packs necesarios (media) para 1 pull</div>
+          <div style="position:relative;height:200px;"><canvas id="packsChartRates"></canvas></div>
+        </div>
+      </div>
+
+      <div class="footnote">
+        <strong>Nota:</strong> Las tasas de Spiritforged no fueron publicadas oficialmente por Riot; se infieren de Origins y de datos comunitarios. Los datos de Vendetta son preliminares (lanzamiento 31 Jul 2026).<br>
+        <strong>Fuente:</strong> Riot Games — Collectability Guide · GAMA Expo 2026
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-body">
+      <div class="modal-img" id="modal-img"><div class="placeholder">🃏</div></div>
+      <div class="modal-info">
+        <h3 id="modal-name"></h3>
+        <div class="mod-set" id="modal-set"></div>
+        <div class="mod-desc" id="modal-desc"></div>
+        <div class="modal-tags" id="modal-tags"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===== DATA =====
+const SETS = {
+  origins: {
+    id:'origins', name:'Origins', abbr:'OGN', color:'var(--s1)',
+    legends: [
+      {name:'Kai\'Sa', title:'Hija del Vacío', n:'#247'},
+      {name:'Volibear', title:'Tormenta Implacable', n:'#249'},
+      {name:'Jinx', title:'Cañón Suelto', n:'#251'},
+      {name:'Darius', title:'Mano de Noxus', n:'#253'},
+      {name:'Ahri', title:'Zorro de Nueve Colas', n:'#255'},
+      {name:'Lee Sin', title:'Monje Ciego', n:'#257'},
+      {name:'Yasuo', title:'El Imperdonable', n:'#259'},
+      {name:'Leona', title:'Alba Radiante', n:'#261'},
+      {name:'Teemo', title:'Explorador Veloz', n:'#263'},
+      {name:'Viktor', title:'Heraldo del Arcano', n:'#265'},
+      {name:'Miss Fortune', title:'Cazarrecompensas', n:'#267'},
+      {name:'Sett', title:'El Jefe', n:'#269'}
+    ],
+    imgBase:'https://cardgamer.com/wp-content/uploads/2025/06/'
+  },
+  spiritforged: {
+    id:'spiritforged', name:'Spiritforged', abbr:'SFD', color:'var(--s2)',
+    legends: [
+      {name:'Rumble', title:'', n:'SFD-181'},
+      {name:'Lucian', title:'', n:'SFD-183'},
+      {name:'Draven', title:'', n:'SFD-185'},
+      {name:'Rek\'Sai', title:'', n:'SFD-187'},
+      {name:'Ornn', title:'', n:'SFD-189'},
+      {name:'Jax', title:'', n:'SFD-193'},
+      {name:'Irelia', title:'', n:'SFD-195'},
+      {name:'Azir', title:'', n:'SFD-197'},
+      {name:'Ezreal', title:'', n:'SFD-199'},
+      {name:'Renata Glasc', title:'', n:'SFD-201'},
+      {name:'Sivir', title:'', n:'SFD-203'},
+      {name:'Fiora', title:'', n:'SFD-205'}
+    ],
+    imgBase:'https://cardgamer.com/wp-content/uploads/2026/01/'
+  },
+  unleashed: {
+    id:'unleashed', name:'Unleashed', abbr:'UNL', color:'var(--s3)',
+    legends: [
+      {name:'Vi', title:'Intocable de Piltover', n:'UNL-181'},
+      {name:'Rengar', title:'Acechador de Presas', n:'UNL-183'},
+      {name:'Kha\'Zix', title:'Devorador del Vacío', n:'UNL-185'},
+      {name:'Poppy', title:'Guardiana del Martillo', n:'UNL-187'},
+      {name:'Ivern', title:'Padre Verde', n:'UNL-189'},
+      {name:'Vex', title:'Gloomista', n:'UNL-191'},
+      {name:'Lillia', title:'Brote Tímido', n:'UNL-193'},
+      {name:'Diana', title:'Burla de la Luna', n:'UNL-195'},
+      {name:'LeBlanc', title:'La Engañadora', n:'UNL-197'},
+      {name:'Pyke', title:'Destripador de Puertohierro', n:'UNL-199'},
+      {name:'Master Yi', title:'Espadachín Wuju', n:'UNL-201'},
+      {name:'Jhin', title:'Artista Metódico', n:'UNL-203'}
+    ],
+    imgBase:'https://cardgamer.com/wp-content/uploads/2026/03/'
+  },
+  vendetta: {
+    id:'vendetta', name:'Vendetta', abbr:'VEN', color:'var(--s4)',
+    legends: [
+      {name:'Nasus', title:'Curador de Arenas'},
+      {name:'Renekton', title:'Carnicero de las Arenas'},
+      {name:'Akali', title:'Puño Sombra'},
+      {name:'Zed', title:'Maestro de las Sombras'},
+      {name:'Shen', title:'Ojo del Crepúsculo'},
+      {name:'Ambessa', title:'General Medarda'},
+      {name:'Mel', title:'Consejera Medarda'},
+      {name:'+2 TBC', title:'Por confirmar'},
+      {name:'+2 TBC', title:'Por confirmar'}
+    ],
+    imgBase:null
+  }
+};
+
+// Card image URLs
+const CARD_IMGS = {
+  '247-Daughter-of-the-Void-R-2-733x1024.png': ['Kai\'Sa','origins'],
+  '249-Relentless-Storm-R-733x1024.png': ['Volibear','origins'],
+  '251-Loose-Cannon-R-2-733x1024.png': ['Jinx','origins'],
+  '253-Hand-of-Noxus-R-2-733x1024.png': ['Darius','origins'],
+  '255-Nine-Tailed-Fox-R-2-733x1024.png': ['Ahri','origins'],
+  '257-Blind-Monk-R-2-733x1024.png': ['Lee Sin','origins'],
+  '259-Unforgiven-R-2-733x1024.png': ['Yasuo','origins'],
+  '261-Radiant-Dawn-R-2-733x1024.png': ['Leona','origins'],
+  '263-Swift-Scout-R-2-733x1024.png': ['Teemo','origins'],
+  '265-Herald-of-the-Arcane-R-2-733x1024.png': ['Viktor','origins'],
+  '267-Bounty-Hunter-R-2-733x1024.png': ['Miss Fortune','origins'],
+  '269-The-Boss-R-2-733x1024.png': ['Sett','origins'],
+  'sfd-181-733x1024.webp': ['Rumble','spiritforged'],
+  'sfd-183-733x1024.webp': ['Lucian','spiritforged'],
+  'sfd-185-733x1024.webp': ['Draven','spiritforged'],
+  'sfd-187-733x1024.webp': ['Rek\'Sai','spiritforged'],
+  'sfd-189-733x1024.webp': ['Ornn','spiritforged'],
+  'sfd-193-733x1024.webp': ['Jax','spiritforged'],
+  'sfd-195-733x1024.webp': ['Irelia','spiritforged'],
+  'sfd-197-733x1024.webp': ['Azir','spiritforged'],
+  'sfd-199-733x1024.webp': ['Ezreal','spiritforged'],
+  'sfd-201-733x1024.webp': ['Renata Glasc','spiritforged'],
+  'sfd-203-733x1024.webp': ['Sivir','spiritforged'],
+  'sfd-205-733x1024.webp': ['Fiora','spiritforged'],
+  'Riftbound-UNL-181.avif': ['Vi','unleashed'],
+  'Riftbound-UNL-183.avif': ['Rengar','unleashed'],
+  'Riftbound-UNL-185.avif': ['Kha\'Zix','unleashed'],
+  'Riftbound-UNL-187.avif': ['Poppy','unleashed'],
+  'Riftbound-UNL-189.avif': ['Ivern','unleashed'],
+  'Riftbound-UNL-191.avif': ['Vex','unleashed'],
+  'Riftbound-UNL-193.avif': ['Lillia','unleashed'],
+  'Riftbound-UNL-195.avif': ['Diana','unleashed'],
+  'Riftbound-UNL-197.avif': ['LeBlanc','unleashed'],
+  'Riftbound-UNL-199.avif': ['Pyke','unleashed'],
+  'Riftbound-UNL-201.avif': ['Master Yi','unleashed'],
+  'Riftbound-UNL-203.avif': ['Jhin','unleashed']
+};
+
+const LEGEND_DESC = {
+  'Kai\'Sa':'Kai\'Sa evoluciona durante la partida, adaptándose al Vacío y presionando constantemente al oponente.',
+  'Volibear':'Volibear personifica la tormenta, castigando a los enemigos que osan desafiar su poder.',
+  'Jinx':'Jinx desata el caos con cohetes y explosiones, recompensando el juego agresivo.',
+  'Darius':'Darius ejecuta a los débiles, volviéndose imparable tras acumular poder en combate.',
+  'Ahri':'Ahri teje engaños y movilidad, encantando a sus enemigos para crear oportunidades.',
+  'Lee Sin':'Lee Sin fluye como el monje guerrero, combinando combos y presión constante.',
+  'Yasuo':'Yasuo corta el viento mismo, respondiendo a cada movimiento enemigo con precisión.',
+  'Leona':'Leona protege y lidera la carga, blindando aliados mientras inmoviliza amenazas.',
+  'Teemo':'Teemo siembra trampas y desgasta al rival con veneno y sigilo.',
+  'Viktor':'Viktor mejora su equipamiento, escalando hacia un poder imparable.',
+  'Miss Fortune':'Miss Fortune acribilla a los enemigos con lluvia de balas desde la distancia.',
+  'Sett':'Sett recibe golpes para devolverlos con creces, un verdadero jefe del ringside.',
+  'Rumble':'Rumble sobrecalienta sus mecanismos para arrasar en el campo de batalla.',
+  'Lucian':'Lucian baila entre disparos, castigando con velocidad y furia.',
+  'Draven':'Draven exige protagonismo, recompensando el riesgo con hachas letales.',
+  'Rek\'Sai':'Rek\'Sai acecha bajo la superficie, emergiendo para devorar a sus presas.',
+  'Ornn':'Ornn forja equipamiento legendario para potenciar a sus aliados.',
+  'Jax':'Jax empuña su lámpara, un guerrero imparable en duelo directo.',
+  'Irelia':'Irelia baila con cuchillas, controlando el ritmo del combate.',
+  'Azir':'Azir comanda legados de arena, construyendo un imperio imparable.',
+  'Ezreal':'Ezreal golpea desde lejos con magia arcana, siempre escurridizo.',
+  'Renata Glasc':'Renata manipula el campo de batalla con química y contratos.',
+  'Sivir':'Sivir lidera cargas imparables, devolviendo cada ataque recibido.',
+  'Fiora':'Fiora busca el duelo perfecto, explotando cada punto débil.',
+  'Vi':'Vi golpea primero y con fuerza, rompiendo defensas sin piedad.',
+  'Rengar':'Rengar acecha desde la maleza, saltando sobre su presa en el momento perfecto.',
+  'Kha\'Zix':'Kha\'Zix evoluciona al aislar y cazar a sus víctimas.',
+  'Poppy':'Poppy protege el martillo y empodera a sus aliados con determinación.',
+  'Ivern':'Ivern transforma el campo de batalla en un bosque viviente.',
+  'Vex':'Vex se alimenta de la desesperación, castigando la sobreextensión enemiga.',
+  'Lillia':'Lillia teje sueños y velocidad, golpeando y retirándose con gracia.',
+  'Diana':'Diana invoca la ira lunar para destrozar concentraciones enemigas.',
+  'LeBlanc':'LeBlanc crea copias y confunde, eliminando objetivos clave en un abrir y cerrar de ojos.',
+  'Pyke':'Pyke acecha desde las sombras, ejecutando a los heridos.',
+  'Master Yi':'Master Yi acumula experiencia para desatar un poder imparable.',
+  'Jhin':'Jhin coreografía cada asesinato, disparando con precisión letal.'
+};
+
+// ===== RENDER LEGENDS =====
+function renderSet(setId) {
+  const set = SETS[setId];
+  const grid = document.getElementById('grid-'+setId[0]);
+  if(!grid) return;
+  grid.innerHTML = '';
+  set.legends.forEach((leg,i)=>{
+    const card = document.createElement('div');
+    card.className = 'legend-card';
+    card.setAttribute('data-name',leg.name.toLowerCase());
+
+    // Build img
+    const imgDiv = document.createElement('div');
+    imgDiv.className = 'lc-img';
+    const imgKey = Object.keys(CARD_IMGS).find(k => CARD_IMGS[k][0]===leg.name && CARD_IMGS[k][1]===setId);
+    if(imgKey && set.imgBase) {
+      const ext = imgKey.endsWith('.avif')?'avif':imgKey.endsWith('.webp')?'webp':'png';
+      const img = document.createElement('img');
+      img.src = set.imgBase + imgKey;
+      img.alt = leg.name;
+      img.loading = 'lazy';
+      img.onerror = function(){ this.style.display='none'; this.parentElement.innerHTML='<div class=\"placeholder\">?</div>'; };
+      imgDiv.appendChild(img);
+    } else {
+      imgDiv.innerHTML = '<div class="placeholder">?</div>';
+    }
+
+    const info = document.createElement('div');
+    info.className = 'lc-info';
+    info.innerHTML = `<div class="lc-name">${leg.name}</div>
+      <div class="lc-sub">${leg.title||leg.n}</div>
+      <span class="lc-set" style="background:color-mix(in srgb,${set.color},transparent 80%);color:var(--text)">${set.abbr}</span>`;
+
+    card.appendChild(imgDiv);
+    card.appendChild(info);
+    card.onclick = ()=>openModal(leg,set);
+    grid.appendChild(card);
+  });
+}
+
+// ===== FILTER =====
+function filterLegends(setId, query) {
+  const grid = document.getElementById('grid-'+setId);
+  if(!grid) return;
+  const q = query.toLowerCase().trim();
+  grid.querySelectorAll('.legend-card').forEach(c=>{
+    const name = c.getAttribute('data-name')||'';
+    c.style.display = (!q || name.includes(q)) ? '' : 'none';
+  });
+}
+
+// ===== MODAL =====
+function openModal(leg, set) {
+  document.getElementById('modal-name').textContent = leg.name;
+  document.getElementById('modal-set').textContent = `${set.name} (${set.abbr}) · ${leg.n||leg.title||''}`;
+  document.getElementById('modal-desc').textContent = LEGEND_DESC[leg.name]||'Leyenda de Riftbound.';
+  const tags = document.getElementById('modal-tags');
+  tags.innerHTML = `<span>${set.abbr}</span><span>Leyenda</span>`;
+
+  const imgDiv = document.getElementById('modal-img');
+  imgDiv.innerHTML = '';
+  const imgKey = Object.keys(CARD_IMGS).find(k => CARD_IMGS[k][0]===leg.name && CARD_IMGS[k][1]===set.id);
+  if(imgKey && set.imgBase) {
+    const img = document.createElement('img');
+    img.src = set.imgBase + imgKey;
+    img.alt = leg.name;
+    img.onerror = function(){ this.style.display='none'; this.parentElement.innerHTML='<div class="placeholder">?</div>'; };
+    imgDiv.appendChild(img);
+  } else {
+    imgDiv.innerHTML = '<div class="placeholder">?</div>';
+  }
+
+  document.getElementById('modal').classList.add('active');
+}
+function closeModal() {
+  document.getElementById('modal').classList.remove('active');
+}
+document.getElementById('modal').onclick = function(e) {
+  if(e.target===this) closeModal();
+};
+
+// ===== NAV =====
+document.querySelectorAll('.nav-item').forEach(item=>{
+  item.onclick = function(){
+    document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+    document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+    this.classList.add('active');
+    document.getElementById('sec-'+this.dataset.set).classList.add('active');
+    // Delay chart resize for visibility
+    setTimeout(()=>{ window.dispatchEvent(new Event('resize')); },100);
+  };
+});
+
+// ===== SUB TABS =====
+document.querySelectorAll('.sub-tab').forEach(tab=>{
+  tab.onclick = function(){
+    const parent = this.closest('.section')||this.closest('.main');
+    const container = this.parentElement;
+    container.querySelectorAll('.sub-tab').forEach(t=>t.classList.remove('active'));
+    this.classList.add('active');
+    const target = this.dataset.tab;
+    container.parentElement.querySelectorAll('.sub-tab-content').forEach(c=>c.classList.remove('active'));
+    const el = document.getElementById('tab-'+target);
+    if(el) el.classList.add('active');
+  };
+});
+
+// ===== CHARTS =====
+const gridColor = 'rgba(255,255,255,0.05)';
+const tickColor = '#6b6a65';
+Chart.defaults.color = tickColor;
+Chart.defaults.font.family = "'DM Mono', monospace";
+Chart.defaults.font.size = 11;
+
+function buildChart(id, type, labels, datasets, opts={}) {
+  const ctx = document.getElementById(id);
+  if(!ctx) return null;
+  return new Chart(ctx, {
+    type, data:{labels,datasets},
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{legend:{display:false},
+        tooltip:{callbacks:opts.tooltipLabel?{label:opts.tooltipLabel}:undefined}
+      },
+      scales:{
+        x:{ticks:{color:tickColor},grid:{color:gridColor}},
+        y:{ticks:{color:tickColor,...(opts.yTicks||{})},grid:{color:gridColor},
+           title:opts.yTitle?{display:true,text:opts.yTitle,color:tickColor}:undefined}
+      },
+      ...opts.extra
+    }
+  });
+}
+
+// OVR chart
+const ovrCtx = document.getElementById('ovrChartOverview');
+if(ovrCtx) {
+  new Chart(ovrCtx, {
+    type:'bar',
+    data:{
+      labels:['Origins','Spiritforged','Unleashed','Vendetta'],
+      datasets:[
+        {label:'OVR base',data:[12,18,5,12],backgroundColor:'#4a9eff'},
+        {label:'OVR firma',data:[12,12,2,0],backgroundColor:'#85b7eb'},
+        {label:'Showcase/Alt-Art',data:[0,0,21,4],backgroundColor:'#3ecf8e'},
+        {label:'Ultimate Rare',data:[0,0,1,1],backgroundColor:'#f05252'}
+      ]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{legend:{display:false}},
+      scales:{
+        x:{ticks:{color:tickColor},grid:{color:gridColor}},
+        y:{ticks:{color:tickColor,stepSize:5},grid:{color:gridColor},
+           title:{display:true,text:'cartas',color:tickColor}}
+      }
+    }
+  });
+}
+
+// Probability charts
+function makeProbChart(id, horiz) {
+  const ctx = document.getElementById(id);
+  if(!ctx) return;
+  const valueAxis = horiz ? 'x' : 'y';
+  const labelAxis = horiz ? 'y' : 'x';
+  new Chart(ctx, {
+    type:'bar',
+    data:{
+      labels:['Épica','Alt-Art','OVR','OVR firma','Ultimate'],
+      datasets:[{
+        label:'% por caja',
+        data:[100,99,33,3.3,2.4],
+        backgroundColor:['#4a9eff','#3ecf8e','#f4a535','#e879a0','#f05252'],
+        borderRadius:4
+      }]
+    },
+    options:{
+      indexAxis:horiz?'y':undefined,
+      responsive:true, maintainAspectRatio:false,
+      plugins:{legend:{display:false},
+        tooltip:{callbacks:{label:c=>' '+c.parsed[valueAxis].toFixed(1)+'%'}}},
+      scales:{
+        [valueAxis]:{max:110,ticks:{color:tickColor,callback:v=>v+'%'},grid:{color:gridColor}},
+        [labelAxis]:{ticks:{color:tickColor},grid:{display:false}}
+      }
+    }
+  });
+}
+
+function makePacksChart(id, horiz) {
+  const ctx = document.getElementById(id);
+  if(!ctx) return;
+  const valueAxis = horiz ? 'x' : 'y';
+  const labelAxis = horiz ? 'y' : 'x';
+  new Chart(ctx, {
+    type:'bar',
+    data:{
+      labels:['Épica','Alt-Art','OVR','OVR firma','Ultimate'],
+      datasets:[{
+        label:'packs necesarios',
+        data:[4,12,72,720,1000],
+        backgroundColor:['#4a9eff','#3ecf8e','#f4a535','#e879a0','#f05252'],
+        borderRadius:4
+      }]
+    },
+    options:{
+      indexAxis:horiz?'y':undefined,
+      responsive:true, maintainAspectRatio:false,
+      plugins:{legend:{display:false},
+        tooltip:{callbacks:{label:c=>' ~'+c.parsed[valueAxis].toLocaleString()+' packs'}}},
+      scales:{
+        [valueAxis]:{type:'logarithmic',
+           ticks:{color:tickColor,callback:v=>v>=1000?'1k+':v},
+           grid:{color:gridColor}},
+        [labelAxis]:{ticks:{color:tickColor},grid:{display:false}}
+      }
+    }
+  });
+}
+
+makeProbChart('probChartOverview');
+makePacksChart('packsChartOverview');
+makeProbChart('probChartRates',true);
+makePacksChart('packsChartRates',true);
+
+// ===== INIT =====
+Object.keys(SETS).forEach(renderSet);
+
+// Render Vendetta as text cards
+const gridV = document.getElementById('grid-v');
+if(gridV) {
+  SETS.vendetta.legends.forEach(leg=>{
+    const card = document.createElement('div');
+    card.className = 'legend-card';
+    const isTbc = leg.name.includes('TBC');
+    const info = document.createElement('div');
+    info.className = 'lc-img';
+    info.style.cssText = 'aspect-ratio:auto;padding:1.5rem;background:var(--surface);';
+    info.innerHTML = `<div style="font-size:1.8rem;opacity:.3;text-align:center;">${isTbc?'?':'🎴'}</div>`;
+    const info2 = document.createElement('div');
+    info2.className = 'lc-info';
+    info2.innerHTML = `<div class="lc-name" style="${isTbc?'color:var(--dim);':''}">${leg.name}</div>
+      <div class="lc-sub">${leg.title}</div>
+      <span class="lc-set" style="background:color-mix(in srgb,var(--s4),transparent 80%);color:var(--text)">VEN</span>`;
+    card.appendChild(info);
+    card.appendChild(info2);
+    if(!isTbc) card.onclick = ()=>openModal(leg,SETS.vendetta);
+    gridV.appendChild(card);
+  });
+}
+</script>
+</body>
+</html>
