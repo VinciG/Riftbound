@@ -1183,6 +1183,10 @@ function fetchCardmarketPrice(name, set, cardNo) {
       if (name.includes('(Alternate Art)')) {
         const id = cardNo || name;
         link = `https://www.cardmarket.com/en/Riftbound/Products/Singles/${exp}?searchString=${encodeURIComponent(id)}`;
+      } else if (name.includes('(Overnumbered)')) {
+        link = `https://www.cardmarket.com/en/Riftbound/Products/Singles/${exp}/${slug}-V2-Overnumbered`;
+      } else if (name.includes('(Signature)')) {
+        link = `https://www.cardmarket.com/en/Riftbound/Products/Singles/${exp}/${slug}-V3-Overnumbered`;
       } else {
         link = `https://www.cardmarket.com/en/Riftbound/Products/Singles/${exp}/${slug}`;
       }
