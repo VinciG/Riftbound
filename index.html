@@ -1125,30 +1125,12 @@ function closeModal() {
   document.getElementById('modal').classList.remove('active');
 }
 
-// ===== CARDMARKET PRICE =====
-async function fetchCardmarketPrice(name, setAbbr) {
+// ===== CARDMARKET SEARCH =====
+function fetchCardmarketPrice(name, setAbbr) {
   const pv = document.getElementById('price-value');
   const q = encodeURIComponent(`${name} ${setAbbr}`);
   const link = `https://www.cardmarket.com/en/Search?searchString=${q}`;
-
-  pv.innerHTML = `<a class="pl-a" href="${link}" target="_blank" rel="noopener">Abrir en Cardmarket ↗</a> <span class="pl-l">buscando precio…</span>`;
-
-  try {
-    const c = new AbortController();
-    const t = setTimeout(() => c.abort(), 7000);
-    const r = await fetch(`https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(link)}`, { signal: c.signal });
-    clearTimeout(t);
-    if (r.ok) {
-      const html = await r.text();
-      const m = html.match(/[€£$]\s*[\d.,]+/);
-      if (m) {
-        pv.innerHTML = `<span class="pl-f">${m[0]}</span> · <a class="pl-a" href="${link}" target="_blank" rel="noopener">Cardmarket ↗</a>`;
-        return;
-      }
-    }
-  } catch (_) {}
-
-  pv.innerHTML = `<a class="pl-a" href="${link}" target="_blank" rel="noopener">Abrir en Cardmarket ↗</a>`;
+  pv.innerHTML = `<a class="pl-a" href="${link}" target="_blank" rel="noopener">${name} en Cardmarket ↗</a>`;
 }
 document.getElementById('modal').onclick = function(e) {
   if(e.target===this) closeModal();
