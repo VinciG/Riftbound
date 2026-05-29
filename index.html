@@ -1099,7 +1099,7 @@ function openModal(leg, set) {
   }
 
   document.getElementById('modal').classList.add('active');
-  fetchCardmarketPrice(leg.name, set, leg.n ? leg.n.replace('#','') : '', imgKey);
+  fetchCardmarketPrice(leg.name, set, leg.n ? leg.n.replace('#','') : '');
 }
 
 function openPremiumModal(card, set) {
@@ -1127,28 +1127,45 @@ function closeModal() {
 }
 
 // ===== CARDMARKET SEARCH =====
-function fetchCardmarketPrice(name, set, cardNo, imgKey) {
-  const setExp = { origins:'Origins', spiritforged:'Spiritforged', unleashed:'Unleashed' };
-  const exp = setExp[set.id] || set.name;
+const CM_EN_TITLES = {
+  'Kai\'Sa':'Daughter-of-the-Void', 'Volibear':'Relentless-Storm',
+  'Jinx':'Loose-Cannon', 'Darius':'Hand-of-Noxus',
+  'Ahri':'Nine-Tailed-Fox', 'Lee Sin':'Blind-Monk',
+  'Yasuo':'Unforgiven', 'Leona':'Radiant-Dawn',
+  'Teemo':'Swift-Scout', 'Viktor':'Herald-of-the-Arcane',
+  'Miss Fortune':'Bounty-Hunter', 'Sett':'The-Boss',
+  'Rumble':'The-Mechanized', 'Lucian':'The-Purifier',
+  'Draven':'The-Glorious-Executioner', 'Rek\'Sai':'The-Void-Burrower',
+  'Ornn':'The-Fire-Below-the-Mountain', 'Jax':'Grandmaster-at-Arms',
+  'Irelia':'The-Blade-Dancer', 'Azir':'Emperor-of-the-Sands',
+  'Ezreal':'The-Prodigal-Explorer', 'Renata Glasc':'The-Chem-Baroness',
+  'Sivir':'The-Battle-Mistress', 'Fiora':'The-Grand-Duelist',
+  'Jhin':'The-Virtuoso', 'Rengar':'The-Pridestalker',
+  'Pyke':'The-Bloodharbor-Ripper', 'Vi':'The-Piltover-Enforcer',
+  'Lillia':'The-Bashful-Bloom', 'Master Yi':'The-Wuju-Bladesman',
+  'Vex':'The-Gloomist', 'Ivern':'The-Green-Father',
+  'Diana':'Scorn-of-the-Moon', 'LeBlanc':'The-Deceiver',
+  'Kha\'Zix':'The-Voidreaver', 'Poppy':'Keeper-of-the-Hammer',
+  'Nasus':'Curator-of-the-Sands', 'Renekton':'Butcher-of-the-Sands',
+  'Akali':'Fist-of-Shadow', 'Zed':'Master-of-Shadows',
+  'Shen':'Eye-of-Twilight', 'Ambessa':'General-Medarda',
+  'Mel':'Counselor-Medarda'
+};
 
-  // Try direct card URL (Origins legends with descriptive filenames)
+function fetchCardmarketPrice(name, set, cardNo) {
+  const setExp = { origins:'Origins', spiritforged:'Spiritforged', unleashed:'Unleashed', vendetta:'Vendetta' };
+  const exp = setExp[set.id] || set.name;
   let link;
-  if (imgKey && set.id === 'origins') {
-    const parts = imgKey.split('-');
-    parts.shift();              // remove number
-    parts.pop();                // remove size+ext
-    if (/^\d+$/.test(parts[parts.length-1])) parts.pop(); // remove version
-    parts.pop();                // remove rarity
-    const enTitle = parts.join('-');
-    const slug = name.replace(/[' ](.)/g, (_,c) => c.toUpperCase()) + '-' + enTitle + '-V1-Rare';
+
+  if (CM_EN_TITLES[name] && cardNo) {
+    const slug = name.replace(/[' ](.)/g, (_,c) => c.toUpperCase()) + '-' + CM_EN_TITLES[name] + '-V1-Rare';
     link = `https://www.cardmarket.com/en/Riftbound/Products/Singles/${exp}/${slug}`;
   } else if (cardNo) {
-    // Search by set + number for other sets
     const q = encodeURIComponent(`${set.abbr} ${cardNo}`);
-    link = `https://www.cardmarket.com/en/Riftbound/Products/Search?searchString=${q}&idCategory=1655`;
+    link = `https://www.cardmarket.com/en/Riftbound/Products/Singles?searchString=${q}&searchMode=v2&idCategory=1655&idExpansion=0&idRarity=0&perSite=30`;
   } else {
     const q = encodeURIComponent(name);
-    link = `https://www.cardmarket.com/en/Riftbound/Products/Search?searchString=${q}&idCategory=1655`;
+    link = `https://www.cardmarket.com/en/Riftbound/Products/Singles?searchString=${q}&searchMode=v2&idCategory=1655&idExpansion=0&idRarity=0&perSite=30`;
   }
 
   document.getElementById('price-value').innerHTML = `<a class="pl-a" href="${link}" target="_blank" rel="noopener">${name} — Cardmarket ↗</a>`;
