@@ -13,18 +13,54 @@
             "imgBase": "https://cardgamer.com/wp-content/uploads/2025/06/",
             "legend_count": 12,
             "leyendas": [
-                "Kai'Sa",
-                "Volibear",
-                "Jinx",
-                "Darius",
-                "Ahri",
-                "Lee Sin",
-                "Yasuo",
-                "Leona",
-                "Teemo",
-                "Viktor",
-                "Miss Fortune",
-                "Sett"
+                {
+                    "name": "Kai'Sa",
+                    "img": null
+                },
+                {
+                    "name": "Volibear",
+                    "img": null
+                },
+                {
+                    "name": "Jinx",
+                    "img": null
+                },
+                {
+                    "name": "Darius",
+                    "img": null
+                },
+                {
+                    "name": "Ahri",
+                    "img": null
+                },
+                {
+                    "name": "Lee Sin",
+                    "img": null
+                },
+                {
+                    "name": "Yasuo",
+                    "img": null
+                },
+                {
+                    "name": "Leona",
+                    "img": null
+                },
+                {
+                    "name": "Teemo",
+                    "img": null
+                },
+                {
+                    "name": "Viktor",
+                    "img": null
+                },
+                {
+                    "name": "Miss Fortune",
+                    "img": null
+                },
+                {
+                    "name": "Sett",
+                    "img": null
+                }
             ],
             "productos": [
                 "Booster Packs",
@@ -77,18 +113,54 @@
             "imgBase": "https://cardgamer.com/wp-content/uploads/2026/01/",
             "legend_count": 12,
             "leyendas": [
-                "Rumble",
-                "Lucian",
-                "Draven",
-                "Rek'Sai",
-                "Ornn",
-                "Jax",
-                "Irelia",
-                "Azir",
-                "Ezreal",
-                "Renata Glasc",
-                "Sivir",
-                "Fiora"
+                {
+                    "name": "Rumble",
+                    "img": null
+                },
+                {
+                    "name": "Lucian",
+                    "img": null
+                },
+                {
+                    "name": "Draven",
+                    "img": null
+                },
+                {
+                    "name": "Rek'Sai",
+                    "img": null
+                },
+                {
+                    "name": "Ornn",
+                    "img": null
+                },
+                {
+                    "name": "Jax",
+                    "img": null
+                },
+                {
+                    "name": "Irelia",
+                    "img": null
+                },
+                {
+                    "name": "Azir",
+                    "img": null
+                },
+                {
+                    "name": "Ezreal",
+                    "img": null
+                },
+                {
+                    "name": "Renata Glasc",
+                    "img": null
+                },
+                {
+                    "name": "Sivir",
+                    "img": null
+                },
+                {
+                    "name": "Fiora",
+                    "img": null
+                }
             ],
             "productos": [
                 "Booster Packs",
@@ -164,18 +236,54 @@
             "imgBase": "https://cardgamer.com/wp-content/uploads/2026/03/",
             "legend_count": 12,
             "leyendas": [
-                "Vi",
-                "Rengar",
-                "Kha'Zix",
-                "Poppy",
-                "Ivern",
-                "Vex",
-                "Lillia",
-                "Diana",
-                "LeBlanc",
-                "Pyke",
-                "Master Yi",
-                "Jhin"
+                {
+                    "name": "Vi",
+                    "img": null
+                },
+                {
+                    "name": "Rengar",
+                    "img": null
+                },
+                {
+                    "name": "Kha'Zix",
+                    "img": null
+                },
+                {
+                    "name": "Poppy",
+                    "img": null
+                },
+                {
+                    "name": "Ivern",
+                    "img": null
+                },
+                {
+                    "name": "Vex",
+                    "img": null
+                },
+                {
+                    "name": "Lillia",
+                    "img": null
+                },
+                {
+                    "name": "Diana",
+                    "img": null
+                },
+                {
+                    "name": "LeBlanc",
+                    "img": null
+                },
+                {
+                    "name": "Pyke",
+                    "img": null
+                },
+                {
+                    "name": "Master Yi",
+                    "img": null
+                },
+                {
+                    "name": "Jhin",
+                    "img": null
+                }
             ],
             "productos": [
                 "Booster Packs",
@@ -252,13 +360,34 @@
             "imgBase": null,
             "legend_count": 9,
             "leyendas": [
-                "Nasus",
-                "Renekton",
-                "Akali",
-                "Mel",
-                "Ambessa",
-                "Zed",
-                "Shen"
+                {
+                    "name": "Nasus",
+                    "img": null
+                },
+                {
+                    "name": "Renekton",
+                    "img": null
+                },
+                {
+                    "name": "Akali",
+                    "img": null
+                },
+                {
+                    "name": "Mel",
+                    "img": null
+                },
+                {
+                    "name": "Ambessa",
+                    "img": null
+                },
+                {
+                    "name": "Zed",
+                    "img": null
+                },
+                {
+                    "name": "Shen",
+                    "img": null
+                }
             ],
             "productos": [
                 "Booster Box (24 packs)",
@@ -275,7 +404,7 @@
             "ovr_breakdown": [
                 {
                     "tipo": "Showcase / Alt-Art / Duo Art",
-                    "cantidad": "50+",
+                    "cantidad": 50,
                     "numeracion": "—",
                     "notas": "Más de 50 cartas Showcase, incluyendo variantes Overnumbered y dúos rivales como Vi y Jinx, Jayce y Viktor."
                 }
@@ -311,11 +440,30 @@
             "imgBase": null,
             "legend_count": 9,
             "leyendas": [
-                "Evelynn",
-                "Ekko",
-                "Seraphine",
-                "Jarvan IV",
-                "Ziggs"
+                {
+                    "name": "Evelynn",
+                    "img": null
+                },
+                {
+                    "name": "Ekko",
+                    "img": null
+                },
+                {
+                    "name": "Seraphine",
+                    "img": null
+                },
+                {
+                    "name": "Jarvan IV",
+                    "img": null
+                },
+                {
+                    "name": "Ziggs",
+                    "img": null
+                },
+                {
+                    "name": "Fizz",
+                    "img": null
+                }
             ],
             "productos": [
                 "Booster Packs",
@@ -331,7 +479,7 @@
             "ovr_breakdown": [
                 {
                     "tipo": "Showcase",
-                    "cantidad": "60+",
+                    "cantidad": 60,
                     "numeracion": "—",
                     "notas": "Más de 60 cartas Showcase."
                 }
