@@ -6,9 +6,9 @@
             "set_number": 1,
             "color": "#4a9eff",
             "date": "Octubre 2025",
-            "cartas_reveladas": 365,
-            "total": 365,
-            "total_base": 286,
+            "cartas_reveladas": 377,
+            "total": 377,
+            "total_base": 298,
             "total_ovr": 79,
             "imgBase": "https://cardgamer.com/wp-content/uploads/2025/06/",
             "legend_count": 12,
@@ -70,10 +70,10 @@
             "set_number": 2,
             "color": "#3ecf8e",
             "date": "Febrero 2026",
-            "cartas_reveladas": 322,
-            "total": 322,
-            "total_base": 292,
-            "total_ovr": 30,
+            "cartas_reveladas": 221,
+            "total": 221,
+            "total_base": 180,
+            "total_ovr": 41,
             "imgBase": "https://cardgamer.com/wp-content/uploads/2026/01/",
             "legend_count": 12,
             "leyendas": [
@@ -157,9 +157,9 @@
             "set_number": 3,
             "color": "#f4a535",
             "date": "Mayo 2026",
-            "cartas_reveladas": 311,
-            "total": 311,
-            "total_base": 282,
+            "cartas_reveladas": 219,
+            "total": 219,
+            "total_base": 190,
             "total_ovr": 29,
             "imgBase": "https://cardgamer.com/wp-content/uploads/2026/03/",
             "legend_count": 12,
@@ -342,7 +342,8 @@
                     "name": "Brilliance and Creativity",
                     "desc": "Explora la brillantez y la creatividad a través de Runeterra, con un enfoque en el rendimiento, grandes jugadas o grandes turnos."
                 }
-            ]
+            ],
+            "_source_url": "https://techraptor.net/tabletop/riot-games-previews-new-cards-for-upcoming-riftbound-radiance-set"
         }
     },
     "pull_rates": {
