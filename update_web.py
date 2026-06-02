@@ -65,8 +65,7 @@ for intento in range(intentos_maximos):
             contents=mensaje,
             config=types.GenerateContentConfig(
                 temperature=0.1,
-                # Forzamos a la IA a responder estrictamente en formato JSON válido
-                response_mime_type="application/json", 
+                # 💡 Corregido: Se quitó response_mime_type porque la API no permite usarlo junto a Google Search
                 tools=[{"google_search": {}}]
             )
         )
@@ -77,26 +76,38 @@ for intento in range(intentos_maximos):
             time.sleep(espera_inicial)
             espera_inicial *= 2
         else:
-            print(f"❌ Error: {e}")
+            print(f"❌ Error de API: {e}")
             exit(1)
+    except Exception as e:
+        print(f"❌ Error inesperado: {e}")
+        exit(1)
 
 if not response:
     print("❌ No se pudo conectar con la API.")
     exit(1)
 
 # ==========================================
-# Validación del JSON generado
+# Validación y extracción del JSON generado
 # ==========================================
+texto_respuesta = response.text.strip()
+
+# 💡 Corregido: Limpieza inteligente por si Gemini devuelve bloques de markdown como ```json ... ```
+if "```json" in texto_respuesta:
+    texto_respuesta = texto_respuesta.split("```json")[1].split("```")[0].strip()
+elif "```" in texto_respuesta:
+    texto_respuesta = texto_respuesta.split("```")[1].split("```")[0].strip()
+
 try:
-    datos_nuevos = json.loads(response.text.strip())
+    datos_nuevos = json.loads(texto_respuesta)
     
-    # Verificación de que no eliminó las expansiones clave
+    # Verificación de que no eliminó las expansiones clave dentro del JSON
     for exp in ["Origins", "Spiritforged", "Unleashed", "Vendetta"]:
-        if exp not in datos_nuevos.get("sets", {}):
-            raise ValueError(f"Falta la expansión obligatoria: {exp}")
+        if "sets" not in datos_nuevos or exp not in datos_nuevos["sets"]:
+            raise ValueError(f"Falta la expansión obligatoria dentro del JSON: {exp}")
             
 except (json.JSONDecodeError, ValueError) as e:
-    print(f"❌ Validación fallida (JSON inválido o incompleto): {e}")
+    print(f"❌ Validación fallida (La IA no devolvió un JSON limpio o compatible): {e}")
+    print("Respuesta cruda de la IA para revisar errores:", texto_respuesta)
     exit(0)
 
 # ==========================================
