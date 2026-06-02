@@ -1,35 +1,46 @@
-name: AI Daily Update
+name: Daily Riftbound Update
 
 on:
   schedule:
-    - cron: '0 9 * * *'
+    - cron: "0 6 * * *"
+
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   update:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Clonar repositorio
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Instalar Python
+      - name: Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: "3.11"
 
-      - name: Instalar dependencias
-        run: pip install google-genai
+      - name: Install dependencies
+        run: |
+          pip install google-genai
 
-      - name: Ejecutar script
+      - name: Run updater
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: python update_web.py
-
-      - name: Commit y push
         run: |
-          git config user.name "Riftbound AI Bot"
-          git config user.email "bot@riftbound.com"
+          python update_web.py
+
+      - name: Commit changes
+        run: |
+          git config user.name "Riftbound Bot"
+          git config user.email "actions@github.com"
+
           git add index.html
-          git diff --staged --quiet || git commit -m "🤖 AI update $(date +'%Y-%m-%d')"
+
+          git diff --cached --quiet || git commit -m "Auto update Riftbound database"
+
+      - name: Push
+        run: |
           git push
