@@ -7,7 +7,7 @@ with open("index.html", "r", encoding="utf-8") as f:
 genai.configure(api_key=os.environ["GEMINI_API_KEY"])
 
 model = genai.GenerativeModel(
-    model_name="gemini-1.5-flash",
+    model_name="gemini-3.5-flash",
     generation_config={"max_output_tokens": 16000}
     tools=[{"google_search": {}}]
 )
