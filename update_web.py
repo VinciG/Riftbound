@@ -211,12 +211,11 @@ except (json.JSONDecodeError, ValueError) as e:
 # ==========================================
 # Guardar únicamente si hay cambios reales
 # ==========================================
-# Limpiar campo interno _source_url antes de guardar
+# Limpiar campo interno _source_url de todos los sets antes de guardar
 source_urls_used = []
-for exp in EXPANSIONES:
-    new = datos_nuevos["sets"][exp]
-    if "_source_url" in new:
-        source_urls_used.append(f"  {exp}: {new.pop('_source_url')}")
+for nombre_set, data_set in datos_nuevos["sets"].items():
+    if "_source_url" in data_set:
+        source_urls_used.append(f"  {nombre_set}: {data_set.pop('_source_url')}")
 if source_urls_used:
     print("URLs fuente reportadas por el AI:")
     for line in source_urls_used:
