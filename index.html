@@ -338,7 +338,7 @@ tbody tr:hover td { background:var(--surface2); }
   .modal-info h3 { font-size:1rem; padding-right:1.5rem; }
 }
 @media(max-width:480px){
-  .pack-grid { grid-template-columns:repeat(3,1fr); }
+  .pack-grid { grid-template-columns:1fr 1fr; }
   .metrics-grid { grid-template-columns:1fr 1fr; }
   .main { padding:.75rem .55rem 2.5rem; }
   .nav-item { padding:.45rem .55rem; }
@@ -378,10 +378,6 @@ tbody tr:hover td { background:var(--surface2); }
       <span class="nav-dot" style="background:var(--s4)"></span>
       <span>Vendetta</span>
     </div>
-    <div class="nav-item" data-set="radiance" style="--nav-c:var(--s5)">
-      <span class="nav-dot" style="background:var(--s5)"></span>
-      <span>Radiance</span>
-    </div>
     <div class="nav-item" data-set="rates" style="--nav-c:var(--pink)">
       <span class="nav-dot" style="background:var(--pink)"></span>
       <span>Pull Rates</span>
@@ -413,12 +409,8 @@ tbody tr:hover td { background:var(--surface2); }
           <div class="mcard-num">219</div>
         </div>
         <div class="mcard" style="--accent:var(--s4)">
-          <div class="mcard-label">Vendetta · Julio 31, 2026</div>
+          <div class="mcard-label">Vendetta · Jul 2026</div>
           <div class="mcard-num">166</div>
-        </div>
-        <div class="mcard" style="--accent:var(--s5)">
-          <div class="mcard-label">Radiance · Octubre 23, 2026</div>
-          <div class="mcard-num">TBD</div>
         </div>
       </div>
 
@@ -452,13 +444,6 @@ tbody tr:hover td { background:var(--surface2); }
             Nasus · Renekton · Akali · Zed · Shen · Ambessa · Mel · +2 por confirmar
           </div>
         </div>
-        <div class="mcard" style="--accent:var(--s5)">
-          <div class="mcard-label">Radiance</div>
-          <div class="mcard-num">9</div>
-          <div class="mcard-names" style="font-size:.65rem;color:var(--dim);margin-top:.3rem;line-height:1.5;">
-            Ekko · Seraphine · Evelynn · Ziggs · Jarvan IV · +4 por confirmar
-          </div>
-        </div>
       </div>
 
       <div class="sec-label">Anatomía del booster (14 cartas)</div>
@@ -487,7 +472,7 @@ tbody tr:hover td { background:var(--surface2); }
 
       <div class="footnote">
         <strong>Fuentes oficiales:</strong> Riot Games — "Collectability in Riftbound" · GAMA Expo 2026 · riftbound.leagueoflegends.com<br>
-        <strong>Nota:</strong> Datos de Vendetta y Radiance preliminares. Pull rates de Spiritforged inferidos de Origins salvo donde se indique.
+        <strong>Nota:</strong> Datos de Vendetta preliminares. Pull rates de Spiritforged inferidos de Origins salvo donde se indique.
       </div>
     </div>
 
@@ -692,7 +677,7 @@ tbody tr:hover td { background:var(--surface2); }
       <div class="set-header">
         <h2>Vendetta</h2>
         <span class="set-badge" style="color:var(--s4);border-color:var(--s4);">Set 4</span>
-        <span class="set-date">Julio 31, 2026</span>
+        <span class="set-date">Julio 2026</span>
         <span class="set-total"><strong>166</strong> base + premium</span>
       </div>
 
@@ -725,47 +710,6 @@ tbody tr:hover td { background:var(--surface2); }
       </div>
     </div>
 
-    <!-- ===== RADIANCE ===== -->
-    <div class="section" id="sec-radiance">
-      <div class="set-header">
-        <h2>Radiance</h2>
-        <span class="set-badge" style="color:var(--s5);border-color:var(--s5);">Set 5</span>
-        <span class="set-date">Octubre 23, 2026</span>
-        <span class="set-total"><strong>TBD</strong> base + premium</span>
-      </div>
-
-      <div class="sub-tabs">
-        <div class="sub-tab active" data-tab="legends-r">Leyendas (9)</div>
-        <div class="sub-tab" data-tab="epic-r">&Eacute;picas+</div>
-        <div class="sub-tab" data-tab="info-r">Información</div>
-      </div>
-
-      <div class="sub-tab-content active" id="tab-legends-r">
-        <div class="search-bar">
-          <input type="text" id="search-r" placeholder="Buscar leyenda…" oninput="filterLegends('r',this.value)">
-        </div>
-        <div class="legend-grid" id="grid-r" style="grid-template-columns:repeat(auto-fill,minmax(180px,1fr));"></div>
-      </div>
-
-      <div class="sub-tab-content" id="tab-epic-r">
-        <div class="empty-state">La lista de cartas de Radiance todavia no esta disponible en la fuente de datos. La pesta&ntilde;a queda preparada para a&ntilde;adirlas cuando se publiquen.</div>
-      </div>
-
-      <div class="sub-tab-content" id="tab-info-r">
-        <div class="metrics-grid">
-          <div class="mcard" style="--accent:var(--s5)"><div class="mcard-label">Total cartas</div><div class="mcard-num">TBD</div><div class="mcard-sub">Sin información de Premium</div></div>
-          <div class="mcard" style="--accent:var(--s5)"><div class="mcard-label">Leyendas</div><div class="mcard-num">9</div><div class="mcard-sub">Ekko · Seraphine · Evelynn · Ziggs · Jarvan IV · +4 por confirmar</div></div>
-          <div class="mcard" style="--accent:var(--s5)"><div class="mcard-label">Nuevos productos</div><div class="mcard-num">4</div><div class="mcard-sub">Booster Display · Showdown Deck · Radiance Vault · Pre-Rift Kits</div></div>
-        </div>
-        <div class="sec-label">Novedades</div>
-        <div class="mechanics-grid">
-          <div class="mechanic-card" style="--accent:var(--s5)"><div class="mechanic-kicker">Producto</div><div class="mechanic-name">Showdown Deck Evelynn vs Seraphine</div><div class="mechanic-desc">Mazo preconstruido para 1v1 con temática de Evelynn y Seraphine.</div></div>
-          <div class="mechanic-card" style="--accent:var(--s5)"><div class="mechanic-kicker">Coleccionismo</div><div class="mechanic-name">Radiance Vault</div><div class="mechanic-desc">Bundle premium con boosters, runas y tokens de arte completo.</div></div>
-        </div>
-        <p style="font-size:.8rem;color:var(--muted);margin-top:1rem;">Los datos de Radiance son preliminares. La información completa se publicará durante la temporada de revelación (28 de septiembre - 9 de octubre de 2026).</p>
-      </div>
-    </div>
-
     <!-- ===== PULL RATES ===== -->
     <div class="section" id="sec-rates">
       <div class="set-header">
@@ -776,7 +720,7 @@ tbody tr:hover td { background:var(--surface2); }
       <div class="sec-label">Por caja (24 packs)</div>
       <div class="table-wrap">
         <table>
-          <thead><tr><th style="min-width:130px">Tipo de carta</th><th>Origins</th><th>Spiritforged</th><th>Unleashed</th><th>Vendetta</th><th>Radiance</th></tr></thead>
+          <thead><tr><th style="min-width:130px">Tipo de carta</th><th>Origins</th><th>Spiritforged</th><th>Unleashed</th><th>Vendetta</th></tr></thead>
           <tbody>
             <tr>
               <td class="row-label">Épica</td>
@@ -784,7 +728,6 @@ tbody tr:hover td { background:var(--surface2); }
               <td><span class="pill pill-blue">~6 por caja</span><span class="pill-sub">~1 cada 4 packs</span></td>
               <td><span class="pill pill-blue">~5–6 por caja</span><span class="pill-sub">~1 cada 4 packs</span></td>
               <td><span class="tbd">Sin publicar</span></td>
-              <td><span class="tbd">Sin confirmar</span></td>
             </tr>
             <tr>
               <td class="row-label">Showcase / Alt-Art</td>
@@ -792,7 +735,6 @@ tbody tr:hover td { background:var(--surface2); }
               <td><span class="pill pill-green">~2 por caja</span><span class="pill-sub">~1 cada 12 packs</span></td>
               <td><span class="pill pill-green">~2 por caja</span><span class="pill-sub">~1 cada 12 packs</span></td>
               <td><span class="tbd">Sin publicar</span></td>
-              <td><span class="tbd">Sin confirmar</span></td>
             </tr>
             <tr>
               <td class="row-label">Overnumbered</td>
@@ -800,7 +742,6 @@ tbody tr:hover td { background:var(--surface2); }
               <td><span class="pill pill-amber">1 cada 3 cajas</span><span class="pill-sub">~1 cada 72 packs</span></td>
               <td><span class="pill pill-amber">1 cada 3 cajas</span><span class="pill-sub">~1 cada 72 packs</span></td>
               <td><span class="tbd">Sin publicar</span></td>
-              <td><span class="tbd">Sin confirmar</span></td>
             </tr>
             <tr>
               <td class="row-label">OVR con firma</td>
@@ -808,14 +749,12 @@ tbody tr:hover td { background:var(--surface2); }
               <td><span class="pill pill-pink">1 cada 10 OVR</span><span class="pill-sub">~1 cada 720 packs</span></td>
               <td><span class="pill pill-pink">1 cada 10 OVR</span><span class="pill-sub">~1 cada 720 packs</span></td>
               <td><span class="tbd">Sin publicar</span></td>
-              <td><span class="tbd">Sin confirmar</span></td>
             </tr>
             <tr>
               <td class="row-label">Ultimate Rare</td>
               <td><span class="pill pill-dim">No existe</span></td>
               <td><span class="pill pill-dim">No existe</span></td>
               <td><span class="pill pill-red">&lt;0.1% de packs</span><span class="pill-sub">Baron Nashor</span></td>
-              <td><span class="tbd">Sin confirmar</span></td>
               <td><span class="tbd">Sin confirmar</span></td>
             </tr>
           </tbody>
@@ -835,7 +774,7 @@ tbody tr:hover td { background:var(--surface2); }
       </div>
 
       <div class="footnote">
-        <strong>Nota:</strong> Las tasas de Spiritforged no fueron publicadas oficialmente por Riot; se infieren de Origins y de datos comunitarios. Los datos de Vendetta y Radiance son preliminares (lanzamiento de Vendetta 31 Jul 2026, Radiance 23 Oct 2026). <br>
+        <strong>Nota:</strong> Las tasas de Spiritforged no fueron publicadas oficialmente por Riot; se infieren de Origins y de datos comunitarios. Los datos de Vendetta son preliminares (lanzamiento 31 Jul 2026).<br>
         <strong>Fuente:</strong> Riot Games — Collectability Guide · GAMA Expo 2026
       </div>
     </div>
@@ -935,21 +874,6 @@ const SETS = {
       {name:'+2 TBC', title:'Por confirmar'}
     ],
     imgBase:null
-  },
-  radiance: {
-    id:'radiance', name:'Radiance', abbr:'RAD', color:'var(--s5)',
-    legends: [
-      {name:'Ekko', title:''},
-      {name:'Seraphine', title:''},
-      {name:'Evelynn', title:''},
-      {name:'Ziggs', title:''},
-      {name:'Jarvan IV', title:''},
-      {name:'TBC', title:'Por confirmar'},
-      {name:'TBC', title:'Por confirmar'},
-      {name:'TBC', title:'Por confirmar'},
-      {name:'TBC', title:'Por confirmar'}
-    ],
-    imgBase:null
   }
 };
 
@@ -1035,7 +959,7 @@ const LEGEND_DESC = {
 // ===== RENDER LEGENDS =====
 function renderSet(setId) {
   const set = SETS[setId];
-  const grid = document.getElementById('grid-'+setId);
+  const grid = document.getElementById('grid-'+setId[0]);
   if(!grid) return;
   grid.innerHTML = '';
   set.legends.forEach((leg,i)=>{
@@ -1046,7 +970,7 @@ function renderSet(setId) {
     // Build img
     const imgDiv = document.createElement('div');
     imgDiv.className = 'lc-img';
-    const imgKey = Object.keys(CARD_IMGS).find(k => CARD_IMGS[k]===leg.name && CARD_IMGS[k]===setId);
+    const imgKey = Object.keys(CARD_IMGS).find(k => CARD_IMGS[k][0]===leg.name && CARD_IMGS[k][1]===setId);
     if(imgKey && set.imgBase) {
       const ext = imgKey.endsWith('.avif')?'avif':imgKey.endsWith('.webp')?'webp':'png';
       const img = document.createElement('img');
@@ -1062,7 +986,7 @@ function renderSet(setId) {
     const info = document.createElement('div');
     info.className = 'lc-info';
     info.innerHTML = `<div class="lc-name">${leg.name}</div>
-      <div class="lc-sub">${leg.title||leg.n||''}</div>
+      <div class="lc-sub">${leg.title||leg.n}</div>
       <span class="lc-set" style="background:color-mix(in srgb,${set.color},transparent 80%);color:var(--text)">${set.abbr}</span>`;
 
     card.appendChild(imgDiv);
@@ -1084,7 +1008,7 @@ function filterLegends(setId, query) {
 }
 
 // ===== PREMIUM CARDS =====
-const PREMIUM_SET_PREFIX = { OGN:'o', SFD:'s', UNL:'u', VEN:'v', RAD:'r' };
+const PREMIUM_SET_PREFIX = { OGN:'o', SFD:'s', UNL:'u', VEN:'v' };
 
 function premiumLabel(card) {
   if(card.signature) return 'Signature';
@@ -1163,7 +1087,7 @@ function openModal(leg, set) {
 
   const imgDiv = document.getElementById('modal-img');
   imgDiv.innerHTML = '';
-  const imgKey = Object.keys(CARD_IMGS).find(k => CARD_IMGS[k]===leg.name && CARD_IMGS[k]===set.id);
+  const imgKey = Object.keys(CARD_IMGS).find(k => CARD_IMGS[k][0]===leg.name && CARD_IMGS[k][1]===set.id);
   if(imgKey && set.imgBase) {
     const img = document.createElement('img');
     img.src = set.imgBase + imgKey;
@@ -1195,7 +1119,7 @@ function openPremiumModal(card, set) {
 
   document.getElementById('modal').classList.add('active');
   const idParts = card.id.match(/-(\d+)([a-z]?)/);
-  const cn = idParts ? idParts + idParts : (card.number ? String(card.number).padStart(3,'0') : '');
+  const cn = idParts ? idParts[1] + idParts[2] : (card.number ? String(card.number).padStart(3,'0') : '');
   fetchCardmarketPrice(card.name, set, cn);
 }
 
@@ -1230,7 +1154,7 @@ const CM_TITLES = {
 };
 
 function fetchCardmarketPrice(name, set, cardNo) {
-  const setExp = { origins:'Origins', spiritforged:'Spiritforged', unleashed:'Unleashed', vendetta:'Vendetta', radiance:'Radiance' };
+  const setExp = { origins:'Origins', spiritforged:'Spiritforged', unleashed:'Unleashed', vendetta:'Vendetta' };
   const exp = setExp[set.id] || set.name;
   let link;
 
@@ -1328,12 +1252,12 @@ if(ovrCtx) {
   new Chart(ovrCtx, {
     type:'bar',
     data:{
-      labels:['Origins','Spiritforged','Unleashed','Vendetta','Radiance'],
+      labels:['Origins','Spiritforged','Unleashed','Vendetta'],
       datasets:[
-        {label:'OVR base',data:,backgroundColor:'#4a9eff'},
-        {label:'OVR firma',data:,backgroundColor:'#85b7eb'},
-        {label:'Showcase/Alt-Art',data:,backgroundColor:'#3ecf8e'},
-        {label:'Ultimate Rare',data:,backgroundColor:'#f05252'}
+        {label:'OVR base',data:[12,18,5,4],backgroundColor:'#4a9eff'},
+        {label:'OVR firma',data:[12,12,2,0],backgroundColor:'#85b7eb'},
+        {label:'Showcase/Alt-Art',data:[12,11,21,50],backgroundColor:'#3ecf8e'},
+        {label:'Ultimate Rare',data:[0,0,1,0],backgroundColor:'#f05252'}
       ]
     },
     options:{
@@ -1369,9 +1293,7 @@ function makeProbChart(id, horiz) {
       indexAxis:horiz?'y':undefined,
       responsive:true, maintainAspectRatio:false,
       plugins:{legend:{display:false},
-        tooltip:{callbacks:{label:c=>' '+c.parsed[valueAxis].toFixed(1)+'%'},
-          mode: 'index', intersect: false
-        }},
+        tooltip:{callbacks:{label:c=>' '+c.parsed[valueAxis].toFixed(1)+'%'}}},
       scales:{
         [valueAxis]:{max:110,ticks:{color:tickColor,callback:v=>v+'%'},grid:{color:gridColor}},
         [labelAxis]:{ticks:{color:tickColor},grid:{display:false}}
@@ -1391,7 +1313,7 @@ function makePacksChart(id, horiz) {
       labels:['Épica','Alt-Art','OVR','OVR firma','Ultimate'],
       datasets:[{
         label:'packs necesarios',
-        data:,
+        data:[4,12,72,720,1000],
         backgroundColor:['#4a9eff','#3ecf8e','#f4a535','#e879a0','#f05252'],
         borderRadius:4
       }]
@@ -1400,9 +1322,7 @@ function makePacksChart(id, horiz) {
       indexAxis:horiz?'y':undefined,
       responsive:true, maintainAspectRatio:false,
       plugins:{legend:{display:false},
-        tooltip:{callbacks:{label:c=>' ~'+c.parsed[valueAxis].toLocaleString()+' packs'},
-          mode: 'index', intersect: false
-        }},
+        tooltip:{callbacks:{label:c=>' ~'+c.parsed[valueAxis].toLocaleString()+' packs'}}},
       scales:{
         [valueAxis]:{type:'logarithmic',
            ticks:{color:tickColor,callback:v=>v>=1000?'1k+':v},
@@ -1419,8 +1339,8 @@ makeProbChart('probChartRates',true);
 makePacksChart('packsChartRates',true);
 
 // ===== INIT =====
-// Render sets with known images
-['origins','spiritforged','unleashed'].forEach(renderSet);
+Object.keys(SETS).filter(k => k !== 'vendetta').forEach(renderSet);
+['OGN','SFD','UNL'].forEach(renderPremiumSet);
 
 // Render Vendetta as text cards
 const gridV = document.getElementById('grid-v');
@@ -1444,31 +1364,6 @@ if(gridV) {
     gridV.appendChild(card);
   });
 }
-
-// Render Radiance as text cards
-const gridR = document.getElementById('grid-r');
-if(gridR) {
-  SETS.radiance.legends.forEach(leg=>{
-    const card = document.createElement('div');
-    card.className = 'legend-card';
-    const isTbc = leg.name.includes('TBC');
-    const info = document.createElement('div');
-    info.className = 'lc-img';
-    info.style.cssText = 'aspect-ratio:auto;padding:1.5rem;background:var(--surface);';
-    info.innerHTML = `<div style="font-size:1.8rem;opacity:.3;text-align:center;">${isTbc?'?':'🎴'}</div>`;
-    const info2 = document.createElement('div');
-    info2.className = 'lc-info';
-    info2.innerHTML = `<div class="lc-name" style="${isTbc?'color:var(--dim);':''}">${leg.name}</div>
-      <div class="lc-sub">${leg.title}</div>
-      <span class="lc-set" style="background:color-mix(in srgb,var(--s5),transparent 80%);color:var(--text)">RAD</span>`;
-    card.appendChild(info);
-    card.appendChild(info2);
-    if(!isTbc) card.onclick = ()=>openModal(leg,SETS.radiance);
-    gridR.appendChild(card);
-  });
-}
-
-['OGN','SFD','UNL','VEN','RAD'].forEach(renderPremiumSet);
 </script>
 </body>
 </html>
