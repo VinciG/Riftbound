@@ -54,6 +54,9 @@ REGLAS
 - NO hagas mejoras cosméticas.
 - NO reescribas textos por preferencias de estilo.
 - Conserva toda la estructura existente.
+- NO resumas el código bajo ninguna circunstancia.
+- NO uses comentarios como "".
+- Debes transcribir CADA UNA de las líneas del HTML original si no sufren cambios.
 
 SOLO modifica contenido cuando:
 
