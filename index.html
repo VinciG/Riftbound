@@ -959,7 +959,7 @@ const LEGEND_DESC = {
 // ===== RENDER LEGENDS =====
 function renderSet(setId) {
   const set = SETS[setId];
-  const grid = document.getElementById('grid-'+setId);
+  const grid = document.getElementById('grid-'+setId[0]);
   if(!grid) return;
   grid.innerHTML = '';
   set.legends.forEach((leg,i)=>{
@@ -970,7 +970,7 @@ function renderSet(setId) {
     // Build img
     const imgDiv = document.createElement('div');
     imgDiv.className = 'lc-img';
-    const imgKey = Object.keys(CARD_IMGS).find(k => CARD_IMGS[k]===leg.name && CARD_IMGS[k]===setId);
+    const imgKey = Object.keys(CARD_IMGS).find(k => CARD_IMGS[k][0]===leg.name && CARD_IMGS[k][1]===setId);
     if(imgKey && set.imgBase) {
       const ext = imgKey.endsWith('.avif')?'avif':imgKey.endsWith('.webp')?'webp':'png';
       const img = document.createElement('img');
@@ -1087,7 +1087,7 @@ function openModal(leg, set) {
 
   const imgDiv = document.getElementById('modal-img');
   imgDiv.innerHTML = '';
-  const imgKey = Object.keys(CARD_IMGS).find(k => CARD_IMGS[k]===leg.name && CARD_IMGS[k]===set.id);
+  const imgKey = Object.keys(CARD_IMGS).find(k => CARD_IMGS[k][0]===leg.name && CARD_IMGS[k][1]===set.id);
   if(imgKey && set.imgBase) {
     const img = document.createElement('img');
     img.src = set.imgBase + imgKey;
@@ -1119,7 +1119,7 @@ function openPremiumModal(card, set) {
 
   document.getElementById('modal').classList.add('active');
   const idParts = card.id.match(/-(\d+)([a-z]?)/);
-  const cn = idParts ? idParts + idParts : (card.number ? String(card.number).padStart(3,'0') : '');
+  const cn = idParts ? idParts[1] + idParts[2] : (card.number ? String(card.number).padStart(3,'0') : '');
   fetchCardmarketPrice(card.name, set, cn);
 }
 
@@ -1254,10 +1254,10 @@ if(ovrCtx) {
     data:{
       labels:['Origins','Spiritforged','Unleashed','Vendetta'],
       datasets:[
-        {label:'OVR base',data:,backgroundColor:'#4a9eff'},
-        {label:'OVR firma',data:,backgroundColor:'#85b7eb'},
-        {label:'Showcase/Alt-Art',data:,backgroundColor:'#3ecf8e'},
-        {label:'Ultimate Rare',data:,backgroundColor:'#f05252'}
+        {label:'OVR base',data:[12,18,5,4],backgroundColor:'#4a9eff'},
+        {label:'OVR firma',data:[12,12,2,0],backgroundColor:'#85b7eb'},
+        {label:'Showcase/Alt-Art',data:[12,11,21,50],backgroundColor:'#3ecf8e'},
+        {label:'Ultimate Rare',data:[0,0,1,0],backgroundColor:'#f05252'}
       ]
     },
     options:{
@@ -1313,7 +1313,7 @@ function makePacksChart(id, horiz) {
       labels:['Épica','Alt-Art','OVR','OVR firma','Ultimate'],
       datasets:[{
         label:'packs necesarios',
-        data:,
+        data:[4,12,72,720,1000],
         backgroundColor:['#4a9eff','#3ecf8e','#f4a535','#e879a0','#f05252'],
         borderRadius:4
       }]
@@ -1367,3 +1367,4 @@ if(gridV) {
 </script>
 </body>
 </html>
+
