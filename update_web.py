@@ -1,183 +1,112 @@
 import os
+import json
 import time
 from google import genai
 from google.genai import types
 from google.genai.errors import ClientError
 
 # ==========================================
-# Leer HTML actual
+# Leer base de datos actual (JSON)
 # ==========================================
+json_file = "cartas.json"
 
-if not os.path.exists("index.html"):
-    print("❌ Error: No se encuentra el archivo index.html")
-    exit(1)
-
-with open("index.html", "r", encoding="utf-8") as f:
-    html_actual = f.read()
+# Si no existe el archivo de datos, creamos uno base inicial
+if not os.path.exists(json_file):
+    datos_actuales = {
+        "sets": {
+            "Origins": {"cartas_reveladas": 0, "total": 0, "productos": []},
+            "Spiritforged": {"cartas_reveladas": 0, "total": 0, "productos": []},
+            "Unleashed": {"cartas_reveladas": 0, "total": 0, "productos": []},
+            "Vendetta": {"cartas_reveladas": 0, "total": 0, "productos": []}
+        },
+        "pull_rates": {}
+    }
+    with open(json_file, "w", encoding="utf-8") as f:
+        json.dump(datos_actuales, f, indent=4, ensure_ascii=False)
+else:
+    with open(json_file, "r", encoding="utf-8") as f:
+        datos_actuales = json.load(f)
 
 # ==========================================
-# Gemini Configuration
+# Configuración de Gemini
 # ==========================================
-
 client = genai.Client()
 
 mensaje = f"""
-Eres el mantenedor automático de una base de datos de Riftbound TCG.
+Eres el mantenedor automático de la base de datos de Riftbound TCG.
+Tu único trabajo es actualizar la información de las expansiones, cartas y productos en formato JSON.
 
-OBJETIVO
-Mantener la web actualizada usando únicamente información oficial y verificable.
-
-FUENTES PRIORITARIAS
-
+FUENTES PRIORITARIAS:
 - riftbound.leagueoflegends.com
 - Riot Games
-- Card galleries oficiales
-- Artículos oficiales de Riftbound
 
-TAREAS
+TAREAS:
+1. Detectar nuevas expansiones o cartas reveladas.
+2. Actualizar el número de cartas y productos de: Origins, Spiritforged, Unleashed, Vendetta.
+3. Detectar cambios en Pull Rates.
 
-1. Detectar nuevas expansiones.
-2. Detectar nuevas cartas reveladas.
-3. Detectar nuevos productos.
-4. Detectar cambios en rarezas.
-5. Detectar cambios en pull rates.
-6. Completar información que actualmente aparezca como preliminar o pendiente.
-7. Corregir errores factuales demostrables.
+DATA ACTUAL:
+{json.dumps(datos_actuales, indent=2, ensure_ascii=False)}
 
-REGLAS
-
-- NO inventes información.
-- NO hagas estimaciones.
-- NO cambies estilos CSS.
-- NO modifiques JavaScript.
-- NO reorganices secciones.
-- NO hagas mejoras cosméticas.
-- NO reescribas textos por preferencias de estilo.
-- Conserva toda la estructura existente.
-- NO resumas el código bajo ninguna circunstancia.
-- NO uses comentarios como "".
-- Debes transcribir CADA UNA de las líneas del HTML original si no sufren cambios.
-
-SOLO modifica contenido cuando:
-
-- exista información nueva oficial
-- exista una corrección verificable
-
-Si no encuentras novedades ni correcciones:
-
-DEVUELVE EXACTAMENTE EL MISMO HTML SIN CAMBIOS.
-
-VALIDACIÓN
-
-Antes de responder verifica que siguen existiendo:
-
-- Origins
-- Spiritforged
-- Unleashed
-- Vendetta
-- Pull Rates
-- const SETS
-
-RESPUESTA
-
-Devuelve exclusivamente HTML válido.
-Sin markdown.
-Sin explicaciones.
-Sin bloques de código.
-
-HTML ACTUAL:
-
-{html_actual}
+REGLA CRÍTICA:
+Devuelve EXCLUSIVAMENTE el objeto JSON actualizado. No incluyas explicaciones, ni bloques de código markdown, ni texto extra. Si no hay cambios, devuelve el mismo JSON exacto que te di.
 """
 
-# ==========================================
-# Ejecución con control de cuota (Manejo de Error 429)
-# ==========================================
-
+# Ejecución con control de cuota
 intentos_maximos = 3
-espera_inicial = 10  # segundos a esperar si da error 429
+espera_inicial = 10
 response = None
 
 for intento in range(intentos_maximos):
     try:
-        print(f"🚀 Enviando solicitud a Gemini (Intento {intento + 1}/{intentos_maximos})...")
+        print(f"🚀 Consultando novedades a Gemini (Intento {intento + 1})...")
         response = client.models.generate_content(
             model="gemini-2.5-flash",
             contents=mensaje,
             config=types.GenerateContentConfig(
-                max_output_tokens=30000,
                 temperature=0.1,
-                tools=[{"google_search": {}}] 
+                # Forzamos a la IA a responder estrictamente en formato JSON válido
+                response_mime_type="application/json", 
+                tools=[{"google_search": {}}]
             )
         )
-        # Si la llamada es exitosa, rompemos el bucle de reintentos
         break
     except ClientError as e:
         if e.code == 429:
-            print(f"⚠️ Error 429: Límite de cuota alcanzado. Esperando {espera_inicial} segundos antes de reintentar...")
+            print(f"⚠️ Cuota agotada, esperando {espera_inicial}s...")
             time.sleep(espera_inicial)
-            espera_inicial *= 2  # Aumenta el tiempo de espera para el siguiente intento
+            espera_inicial *= 2
         else:
-            # Si es otro tipo de error de cliente (400, 403, 404, etc.), fallamos inmediatamente
-            print(f"❌ Error de API: {e}")
+            print(f"❌ Error: {e}")
             exit(1)
-    except Exception as e:
-        print(f"❌ Error inesperado: {e}")
-        exit(1)
 
 if not response:
-    print("❌ Se agotaron los intentos debido a límites de cuota (429).")
+    print("❌ No se pudo conectar con la API.")
     exit(1)
 
-html_nuevo = response.text.strip()
-
 # ==========================================
-# Limpieza markdown
+# Validación del JSON generado
 # ==========================================
-
-if html_nuevo.startswith("```html"):
-    html_nuevo = html_nuevo.split("```html", 1)[1]
-
-if html_nuevo.startswith("```"):
-    html_nuevo = html_nuevo.split("```", 1)[1]
-
-if html_nuevo.endswith("```"):
-    html_nuevo = html_nuevo.rsplit("```", 1)[0]
-
-html_nuevo = html_nuevo.strip()
-
-# ==========================================
-# Validaciones fuertes
-# ==========================================
-
-required_strings = [
-    "<html",
-    "Origins",
-    "Spiritforged",
-    "Unleashed",
-    "Vendetta",
-    "Pull Rates",
-    "const SETS"
-]
-
-for item in required_strings:
-    if item not in html_nuevo:
-        print(f"❌ Validación fallida: falta '{item}'")
-        exit(0)
-
-if len(html_nuevo) < len(html_actual) * 0.7:
-    print("❌ HTML sospechosamente pequeño")
+try:
+    datos_nuevos = json.loads(response.text.strip())
+    
+    # Verificación de que no eliminó las expansiones clave
+    for exp in ["Origins", "Spiritforged", "Unleashed", "Vendetta"]:
+        if exp not in datos_nuevos.get("sets", {}):
+            raise ValueError(f"Falta la expansión obligatoria: {exp}")
+            
+except (json.JSONDecodeError, ValueError) as e:
+    print(f"❌ Validación fallida (JSON inválido o incompleto): {e}")
     exit(0)
 
 # ==========================================
-# Guardar únicamente si hay cambios
+# Guardar únicamente si hay cambios reales
 # ==========================================
-
-if html_nuevo == html_actual:
-    print("ℹ️ No hay cambios")
+if datos_nuevos == datos_actuales:
+    print("ℹ️ No se detectaron novedades en las fuentes oficiales.")
     exit(0)
 
-with open("index.html", "w", encoding="utf-8") as f:
-    f.write(html_nuevo)
+with open(json_file, "w", encoding="utf-8") as f:
+    json.dump(datos_nuevos, f, indent=4, ensure_ascii=False)
 
-print("✅ HTML actualizado con éxito")
+print("✅ Base de datos 'cartas.json' actualizada con éxito.")
