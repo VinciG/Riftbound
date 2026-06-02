@@ -2,65 +2,108 @@ import os
 from google import genai
 from google.genai import types
 
-# 1. Leer el HTML actual
+# ==========================================
+# Leer HTML actual
+# ==========================================
+
 with open("index.html", "r", encoding="utf-8") as f:
     html_actual = f.read()
 
-# 2. Inicializar el cliente oficial moderno
-# El cliente busca automáticamente la variable "GEMINI_API_KEY" en el entorno
+# ==========================================
+# Gemini
+# ==========================================
+
 client = genai.Client()
 
-mensaje = f"""Eres un experto en el TCG Riftbound (el juego de cartas de League of Legends).
-Tienes esta página web en HTML que es una base de datos del juego.
+mensaje = f"""
+Eres el mantenedor automático de una base de datos de Riftbound TCG.
 
-## TAREA PRINCIPAL — Buscar novedades antes de editar
+OBJETIVO
+Mantener la web actualizada usando únicamente información oficial y verificable.
 
-Busca en la web información actualizada sobre Riftbound:
-- "Riftbound TCG new set"
-- "Riftbound Vendetta card gallery"
-- "riftbound.leagueoflegends.com"
-- Cualquier set o expansión que NO aparezca ya en el HTML
+FUENTES PRIORITARIAS
 
-## REGLAS según lo que encuentres
+- riftbound.leagueoflegends.com
+- Riot Games
+- Card galleries oficiales
+- Artículos oficiales de Riftbound
 
-### Si encuentras una colección NUEVA que no está en el HTML:
-- Añade una sección completa con el mismo formato que las existentes
-- Incluye: nombre, fecha, número de cartas, leyendas, mecánicas nuevas, tabla OVR/Showcase
-- Si los datos son parciales, márcalos como "preliminares"
-- Actualiza la sección "Visión General" con los nuevos totales
-- Actualiza la tabla de Pull Rates con la nueva columna
+TAREAS
 
-### Si Vendetta ya ha salido (fecha >= 31 julio 2026) y encuentras su card list completa:
-- Rellena todos los datos que faltan en la sección Vendetta
-- Quita el aviso de "datos preliminares" si los datos son definitivos
-- Añade la tabla completa de OVR/Showcase
+1. Detectar nuevas expansiones.
+2. Detectar nuevas cartas reveladas.
+3. Detectar nuevos productos.
+4. Detectar cambios en rarezas.
+5. Detectar cambios en pull rates.
+6. Completar información que actualmente aparezca como preliminar o pendiente.
+7. Corregir errores factuales demostrables.
 
-### Si no encuentras nada nuevo:
-- Haz una mejora pequeña al HTML existente (redacción, claridad, corrección de datos)
-- No inventes datos de cartas
+REGLAS
 
-## FORMATO DE RESPUESTA
-Devuelve SOLO el HTML completo, sin explicaciones, sin markdown, sin bloques de código.
+- NO inventes información.
+- NO hagas estimaciones.
+- NO cambies estilos CSS.
+- NO modifiques JavaScript.
+- NO reorganices secciones.
+- NO hagas mejoras cosméticas.
+- NO reescribas textos por preferencias de estilo.
+- Conserva toda la estructura existente.
 
-## HTML ACTUAL:
-{html_actual}"""
+SOLO modifica contenido cuando:
 
-# 3. Ejecutar la llamada con Gemini 3.5 Flash y Google Search activado de forma nativa
+- exista información nueva oficial
+- exista una corrección verificable
+
+Si no encuentras novedades ni correcciones:
+
+DEVUELVE EXACTAMENTE EL MISMO HTML SIN CAMBIOS.
+
+VALIDACIÓN
+
+Antes de responder verifica que siguen existiendo:
+
+- Origins
+- Spiritforged
+- Unleashed
+- Vendetta
+- Pull Rates
+- const SETS
+
+RESPUESTA
+
+Devuelve exclusivamente HTML válido.
+Sin markdown.
+Sin explicaciones.
+Sin bloques de código.
+
+HTML ACTUAL:
+
+{html_actual}
+"""
+
 response = client.models.generate_content(
-    model='gemini-3.5-flash',
+    model="gemini-2.5-flash",
     contents=mensaje,
     config=types.GenerateContentConfig(
-        max_output_tokens=16000,
-        tools=[types.Tool(google_search=types.GoogleSearch())] # Sintaxis correcta del nuevo SDK
+        max_output_tokens=30000,
+        tools=[
+            types.Tool(
+                google_search=types.GoogleSearch()
+            )
+        ]
     )
 )
 
-html_nuevo = response.text
+html_nuevo = response.text.strip()
 
-# 4. Limpieza de bloques markdown molestos
+# ==========================================
+# Limpieza markdown
+# ==========================================
+
 if html_nuevo.startswith("```html"):
     html_nuevo = html_nuevo.split("```html", 1)[1]
-elif html_nuevo.startswith("```"):
+
+if html_nuevo.startswith("```"):
     html_nuevo = html_nuevo.split("```", 1)[1]
 
 if html_nuevo.endswith("```"):
@@ -68,13 +111,38 @@ if html_nuevo.endswith("```"):
 
 html_nuevo = html_nuevo.strip()
 
-# 5. Validación elemental de seguridad
-if not html_nuevo or len(html_nuevo) < 1000 or "<html" not in html_nuevo:
-    print("⚠️ Respuesta inválida o vacía. Manteniendo el archivo original.")
+# ==========================================
+# Validaciones fuertes
+# ==========================================
+
+required_strings = [
+    "<html",
+    "Origins",
+    "Spiritforged",
+    "Unleashed",
+    "Vendetta",
+    "Pull Rates",
+    "const SETS"
+]
+
+for item in required_strings:
+    if item not in html_nuevo:
+        print(f"❌ Validación fallida: falta '{item}'")
+        exit(0)
+
+if len(html_nuevo) < len(html_actual) * 0.7:
+    print("❌ HTML sospechosamente pequeño")
     exit(0)
 
-# 6. Guardar los cambios
+# ==========================================
+# Guardar únicamente si hay cambios
+# ==========================================
+
+if html_nuevo == html_actual:
+    print("ℹ️ No hay cambios")
+    exit(0)
+
 with open("index.html", "w", encoding="utf-8") as f:
     f.write(html_nuevo)
 
-print("✅ HTML actualizado correctamente con el nuevo SDK")
+print("✅ HTML actualizado")
