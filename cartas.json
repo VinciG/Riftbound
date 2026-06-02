@@ -264,7 +264,7 @@
                 "Booster Box (24 packs)",
                 "Showdown Decks: Zed vs Shen",
                 "Vault Bundle",
-                "Player Kit",
+                "Pre-Rift Event Kit",
                 "Themed Playmats",
                 "Rivalry-themed Art Sleeves"
             ],
@@ -319,9 +319,7 @@
             "leyendas": [
                 "Evelynn",
                 "Ekko",
-                "Seraphine",
-                "Jarvan IV",
-                "Ziggs"
+                "Seraphine"
             ],
             "productos": [
                 "Booster Packs",
@@ -348,7 +346,8 @@
                     "name": "Brilliance and Creativity",
                     "desc": "Explora la brillantez y la creatividad a través de Runeterra, con un enfoque en el rendimiento, grandes jugadas o grandes turnos."
                 }
-            ]
+            ],
+            "_source_url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGbTw5o7wu2-Z3a2flmZmOsQA3UGjzs7a0icOQlhYYmjyrcrXJMkH6Z-OYdulpzq1IBMBd1jbXI_NwEZULluXJ3KwRQEtjxOVwjBCgwoSzHeQJefmDJ4DO0am8h50l1AAPUSWhVUiG351REtIhMkQrTeoFqW44gYGL1An9RjG12fSiYW5H7K7Rd0zsMP0zLnIxagU4_J1RVHHA=="
         }
     },
     "pull_rates": {
