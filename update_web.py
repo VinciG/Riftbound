@@ -79,7 +79,9 @@ ESTRUCTURA JSON REQUERIDA (debes devolver EXACTAMENTE este formato):
             "total_ovr": número de cartas OVR/Showcase/Alt-Art,
             "imgBase": "URL base de imágenes (o null si no hay)",
             "legend_count": número de leyendas,
-            "leyendas": ["Lista", "de", "nombres", "de", "campeones"],
+            "leyendas": [
+                {"name": "Nombre del campeón", "img": "URL directa de la imagen (o null si no encuentras)"}
+            ],
             "productos": ["Lista", "de", "productos"],
             "champion_decks": ["Campeones", "con", "Champion Deck"],
             "ovr_breakdown": [
@@ -112,6 +114,13 @@ TAREAS:
 DATA ACTUAL:
 {json.dumps(datos_actuales, indent=2, ensure_ascii=False)}
 
+FORMATO DE LEYENDAS:
+Cada leyenda es un objeto con "name" (obligatorio) e "img" (opcional, URL directa de la imagen de la carta o null). Ejemplo:
+"leyendas": [
+    {"name": "Evelynn", "img": "https://cardgamer.com/.../imagen.png"},
+    {"name": "Ekko", "img": null}
+]
+
 REGLAS CRÍTICAS:
 1. Devuelve EXCLUSIVAMENTE el objeto JSON actualizado exactamente con la estructura de arriba.
 2. No incluyas explicaciones, markdown, ni texto extra.
@@ -121,6 +130,7 @@ REGLAS CRÍTICAS:
 6. NO CAMBIES champion_decks ni mecánicas de expansiones existentes a menos que tengas confirmación en fuente oficial publicada por Riot Games.
 7. Todo debe estar contrastado con fuentes oficiales de Riot Games, riftbound.leagueoflegends.com, riftbound.gg o cardgamer.com. No uses otras webs.
 8. Si cambias total, total_base o total_ovr de un set ya lanzado, DEBES incluir el campo "_source_url": "URL_DE_LA_FUENTE" dentro de ese set. La URL debe ser de riftbound.leagueoflegends.com, riftbound.gg o cardgamer.com. Sin ese campo o con URL no válida, el cambio será RECHAZADO automáticamente.
+9. Para el campo "img" de cada leyenda, usa SOLO URLs de cardgamer.com, riftbound.leagueoflegends.com o riftbound.gg. Si no encuentras la URL exacta de la imagen, pon null.
 """
 
 # Ejecución con control de cuota

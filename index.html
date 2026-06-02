@@ -589,11 +589,14 @@ function renderSet(setId) {
     // Build img
     const imgDiv = document.createElement('div');
     imgDiv.className = 'lc-img';
-    const imgKey = Object.keys(CARD_IMGS).find(k => CARD_IMGS[k][0]===leg.name && CARD_IMGS[k][1]===setId);
-    if(imgKey && set.imgBase) {
-      const ext = imgKey.endsWith('.avif')?'avif':imgKey.endsWith('.webp')?'webp':'png';
+    let imgUrl = leg.img || null;
+    if (!imgUrl) {
+      const imgKey = Object.keys(CARD_IMGS).find(k => CARD_IMGS[k][0]===leg.name && CARD_IMGS[k][1]===setId);
+      if (imgKey && set.imgBase) imgUrl = set.imgBase + imgKey;
+    }
+    if (imgUrl) {
       const img = document.createElement('img');
-      img.src = set.imgBase + imgKey;
+      img.src = imgUrl;
       img.alt = leg.name;
       img.loading = 'lazy';
       img.onerror = function(){ this.style.display='none'; this.parentElement.innerHTML='<div class=\"placeholder\">?</div>'; };
@@ -706,10 +709,14 @@ function openModal(leg, set) {
 
   const imgDiv = document.getElementById('modal-img');
   imgDiv.innerHTML = '';
-  const imgKey = Object.keys(CARD_IMGS).find(k => CARD_IMGS[k][0]===leg.name && CARD_IMGS[k][1]===set.id);
-  if(imgKey && set.imgBase) {
+  let imgUrl = leg.img || null;
+  if (!imgUrl) {
+    const imgKey = Object.keys(CARD_IMGS).find(k => CARD_IMGS[k][0]===leg.name && CARD_IMGS[k][1]===set.id);
+    if (imgKey && set.imgBase) imgUrl = set.imgBase + imgKey;
+  }
+  if (imgUrl) {
     const img = document.createElement('img');
-    img.src = set.imgBase + imgKey;
+    img.src = imgUrl;
     img.alt = leg.name;
     img.onerror = function(){ this.style.display='none'; this.parentElement.innerHTML='<div class="placeholder">?</div>'; };
     imgDiv.appendChild(img);
@@ -997,7 +1004,10 @@ async function buildPage() {
     if (!SETS[s.id]) {
       SETS[s.id] = {
         id: s.id, name: setName, abbr: s.abbr, color: s.color,
-        legends: s.leyendas.map(l => ({ name: l, title: '', n: '' })),
+        legends: (s.leyendas || []).map(l => {
+          if (typeof l === 'string') return { name: l, title: '', n: '' };
+          return { name: l.name || '', title: l.title || '', n: '', img: l.img || null };
+        }),
         imgBase: s.imgBase || null
       };
     }
@@ -1120,31 +1130,8 @@ function makePacksChart(id, horiz) {
 
 // ===== INIT (after buildPage creates DOM) =====
 buildPage().then(() => {
-  Object.keys(SETS).filter(k => k !== 'vendetta').forEach(renderSet);
-  ['OGN','SFD','UNL'].forEach(renderPremiumSet);
-
-  // Render Vendetta as text cards
-  const gridV = document.getElementById('grid-v');
-  if(gridV) {
-    SETS.vendetta.legends.forEach(leg=>{
-      const card = document.createElement('div');
-      card.className = 'legend-card';
-      const isTbc = leg.name.includes('TBC');
-      const info = document.createElement('div');
-      info.className = 'lc-img';
-      info.style.cssText = 'aspect-ratio:auto;padding:1.5rem;background:var(--surface);';
-      info.innerHTML = `<div style="font-size:1.8rem;opacity:.3;text-align:center;">${isTbc?'?':'🎴'}</div>`;
-      const info2 = document.createElement('div');
-      info2.className = 'lc-info';
-      info2.innerHTML = `<div class="lc-name" style="${isTbc?'color:var(--dim);':''}">${leg.name}</div>
-        <div class="lc-sub">${leg.title}</div>
-        <span class="lc-set" style="background:color-mix(in srgb,var(--s4),transparent 80%);color:var(--text)">VEN</span>`;
-      card.appendChild(info);
-      card.appendChild(info2);
-      if(!isTbc) card.onclick = ()=>openModal(leg,SETS.vendetta);
-      gridV.appendChild(card);
-    });
-  }
+  Object.keys(SETS).forEach(renderSet);
+  Object.keys(PREMIUM_SET_PREFIX).forEach(renderPremiumSet);
 
   // Charts (must run after DOM is built)
   const ovrCtx = document.getElementById('ovrChartOverview');
