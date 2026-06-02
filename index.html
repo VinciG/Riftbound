@@ -358,357 +358,13 @@ tbody tr:hover td { background:var(--surface2); }
       Rift<span>bound</span>
       <small>Vinci - Base de datos TCG</small>
     </div>
-    <div class="nav-item active" data-set="all" style="--nav-c:var(--text)">
-      <span class="nav-dot" style="background:var(--text)"></span>
-      <span>Visión general</span>
-    </div>
-    <div class="nav-item" data-set="origins" style="--nav-c:var(--s1)">
-      <span class="nav-dot" style="background:var(--s1)"></span>
-      <span>Origins</span>
-    </div>
-    <div class="nav-item" data-set="spiritforged" style="--nav-c:var(--s2)">
-      <span class="nav-dot" style="background:var(--s2)"></span>
-      <span>Spiritforged</span>
-    </div>
-    <div class="nav-item" data-set="unleashed" style="--nav-c:var(--s3)">
-      <span class="nav-dot" style="background:var(--s3)"></span>
-      <span>Unleashed</span>
-    </div>
-    <div class="nav-item" data-set="vendetta" style="--nav-c:var(--s4)">
-      <span class="nav-dot" style="background:var(--s4)"></span>
-      <span>Vendetta</span>
-    </div>
-    <div class="nav-item" data-set="rates" style="--nav-c:var(--pink)">
-      <span class="nav-dot" style="background:var(--pink)"></span>
-      <span>Pull Rates</span>
-    </div>
+    <div id="nav-container"></div>
   </aside>
 
   <!-- MAIN -->
   <main class="main">
 
-    <!-- ===== OVERVIEW ===== -->
-    <div class="section active" id="sec-all">
-      <div class="set-header">
-        <h2>Visión General</h2>
-        <span class="set-badge" style="color:var(--muted);border-color:var(--border);">Todos los sets</span>
-      </div>
-
-      <div class="sec-label">Cartas totales por set</div>
-      <div class="metrics-grid">
-        <div class="mcard" style="--accent:var(--s1)">
-          <div class="mcard-label">Origins · Oct 2025</div>
-          <div class="mcard-num">298</div>
-        </div>
-        <div class="mcard" style="--accent:var(--s2)">
-          <div class="mcard-label">Spiritforged · Feb 2026</div>
-          <div class="mcard-num">221</div>
-        </div>
-        <div class="mcard" style="--accent:var(--s3)">
-          <div class="mcard-label">Unleashed · May 2026</div>
-          <div class="mcard-num">219</div>
-        </div>
-        <div class="mcard" style="--accent:var(--s4)">
-          <div class="mcard-label">Vendetta · Jul 2026</div>
-          <div class="mcard-num">166</div>
-        </div>
-      </div>
-
-      <div class="sec-label">Leyendas por set</div>
-      <div class="metrics-grid">
-        <div class="mcard" style="--accent:var(--s1)">
-          <div class="mcard-label">Origins</div>
-          <div class="mcard-num">12</div>
-          <div class="mcard-names" style="font-size:.65rem;color:var(--dim);margin-top:.3rem;line-height:1.5;">
-            Kai'Sa · Volibear · Jinx · Darius · Ahri · Lee Sin · Yasuo · Leona · Teemo · Viktor · Miss Fortune · Sett
-          </div>
-        </div>
-        <div class="mcard" style="--accent:var(--s2)">
-          <div class="mcard-label">Spiritforged</div>
-          <div class="mcard-num">12</div>
-          <div class="mcard-names" style="font-size:.65rem;color:var(--dim);margin-top:.3rem;line-height:1.5;">
-            Rumble · Lucian · Draven · Rek'Sai · Ornn · Jax · Irelia · Azir · Ezreal · Renata Glasc · Sivir · Fiora
-          </div>
-        </div>
-        <div class="mcard" style="--accent:var(--s3)">
-          <div class="mcard-label">Unleashed</div>
-          <div class="mcard-num">12</div>
-          <div class="mcard-names" style="font-size:.65rem;color:var(--dim);margin-top:.3rem;line-height:1.5;">
-            Vi · Rengar · Kha'Zix · Poppy · Ivern · Vex · Lillia · Diana · LeBlanc · Pyke · Master Yi · Jhin
-          </div>
-        </div>
-        <div class="mcard" style="--accent:var(--s4)">
-          <div class="mcard-label">Vendetta</div>
-          <div class="mcard-num">9</div>
-          <div class="mcard-names" style="font-size:.65rem;color:var(--dim);margin-top:.3rem;line-height:1.5;">
-            Nasus · Renekton · Akali · Zed · Shen · Ambessa · Mel · +2 por confirmar
-          </div>
-        </div>
-      </div>
-
-      <div class="sec-label">Anatomía del booster (14 cartas)</div>
-      <div class="pack-grid">
-        <div class="pack-slot" style="--accent:#888780"><div class="slot-count">7</div><div class="slot-name">Comunes</div></div>
-        <div class="pack-slot" style="--accent:var(--green)"><div class="slot-count">3</div><div class="slot-name">Infrecuentes</div></div>
-        <div class="pack-slot" style="--accent:var(--blue)"><div class="slot-count">2</div><div class="slot-name">Rara o mejor<br><span style="font-size:.58rem;color:var(--muted)">foil garantizado</span></div></div>
-        <div class="pack-slot" style="--accent:var(--amber)"><div class="slot-count">1</div><div class="slot-name">Slot foil libre<br><span style="font-size:.58rem;color:var(--muted)">C → Épica/OVR</span></div></div>
-        <div class="pack-slot" style="--accent:var(--pink)"><div class="slot-count">1</div><div class="slot-name">Token / Runa<br><span style="font-size:.58rem;color:var(--muted)">o Alt Runa</span></div></div>
-      </div>
-
-      <div class="sec-label">Overnumbered y Showcase por set</div>
-      <div class="chart-box"><div style="position:relative;height:220px;"><canvas id="ovrChartOverview"></canvas></div></div>
-
-      <div class="sec-label">Probabilidad acumulada por caja (24 packs)</div>
-      <div class="two-col">
-        <div class="chart-box">
-          <div class="chart-title">% de conseguir 1+ pull por caja</div>
-          <div style="position:relative;height:180px;"><canvas id="probChartOverview"></canvas></div>
-        </div>
-        <div class="chart-box">
-          <div class="chart-title">Packs necesarios (media) para 1 pull</div>
-          <div style="position:relative;height:180px;"><canvas id="packsChartOverview"></canvas></div>
-        </div>
-      </div>
-
-      <div class="footnote">
-        <strong>Fuentes oficiales:</strong> Riot Games — "Collectability in Riftbound" · GAMA Expo 2026 · riftbound.leagueoflegends.com<br>
-        <strong>Nota:</strong> Datos de Vendetta preliminares. Pull rates de Spiritforged inferidos de Origins salvo donde se indique.
-      </div>
-    </div>
-
-    <!-- ===== ORIGINS ===== -->
-    <div class="section" id="sec-origins">
-      <div class="set-header">
-        <h2>Origins</h2>
-        <span class="set-badge" style="color:var(--s1);border-color:var(--s1);">Set 1</span>
-        <span class="set-date">Octubre 2025</span>
-        <span class="set-total"><strong>298</strong> base + <strong>24</strong> OVR</span>
-      </div>
-      <div class="pg-note">
-        <strong>ⓘ Origins: Proving Grounds</strong> — Lanzado junto a Origins, incluye 4 leyendas adicionales (Garen, Lux, Annie, Master Yi) en un producto de inicio para 2-4 jugadores. No forman parte del set principal.
-      </div>
-
-      <div class="sub-tabs">
-        <div class="sub-tab active" data-tab="legends-o">Leyendas (12)</div>
-        <div class="sub-tab" data-tab="epic-o">&Eacute;picas+</div>
-        <div class="sub-tab" data-tab="ovr-o">Overnumbered</div>
-        <div class="sub-tab" data-tab="info-o">Información</div>
-      </div>
-
-      <div class="sub-tab-content active" id="tab-legends-o">
-        <div class="search-bar">
-          <input type="text" id="search-o" placeholder="Buscar leyenda…" oninput="filterLegends('o',this.value)">
-        </div>
-        <div class="legend-grid" id="grid-o"></div>
-      </div>
-
-      <div class="sub-tab-content" id="tab-epic-o">
-        <div class="search-bar">
-          <input type="text" placeholder="Buscar carta..." oninput="filterPremium('o')">
-          <select onchange="filterPremium('o')">
-            <option value="">Todas</option>
-            <option value="Epic">Epicas</option>
-            <option value="Showcase">Showcase / OVR</option>
-          </select>
-        </div>
-        <div class="count-note" id="epic-count-o"></div>
-        <div class="legend-grid" id="grid-epic-o"></div>
-      </div>
-
-      <div class="sub-tab-content" id="tab-ovr-o">
-        <p style="font-size:.8rem;color:var(--muted);margin-bottom:.75rem;">Cartas Overnumbered (numeración extendida) y Alt-Art disponibles en Origins.</p>
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>Tipo</th><th>Cantidad</th><th>Numeración</th><th>Notas</th></tr></thead>
-            <tbody>
-              <tr><td class="row-label">Alt-Art</td><td>12</td><td>—</td><td>Unidad Campeón con skin alternativo · ~2 por caja</td></tr>
-              <tr><td class="row-label">OVR base</td><td>12</td><td>299–310</td><td>Leyenda con arte de artista de Riot</td></tr>
-              <tr><td class="row-label">OVR con firma</td><td>12</td><td>311–322</td><td>OVR + firma foil del artista</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="sub-tab-content" id="tab-info-o">
-        <div class="metrics-grid">
-          <div class="mcard" style="--accent:var(--s1)"><div class="mcard-label">Total cartas</div><div class="mcard-num">322</div><div class="mcard-sub">298 base + 24 OVR</div></div>
-          <div class="mcard" style="--accent:var(--s1)"><div class="mcard-label">Leyendas</div><div class="mcard-num">12</div><div class="mcard-sub">Champions principales</div></div>
-          <div class="mcard" style="--accent:var(--s1)"><div class="mcard-label">Champion Decks</div><div class="mcard-num">3</div><div class="mcard-sub">Jinx · Viktor · Lee Sin</div></div>
-          <div class="mcard" style="--accent:var(--s1)"><div class="mcard-label">Proving Grounds</div><div class="mcard-num">+4</div><div class="mcard-sub">Garen · Lux · Annie · Master Yi</div></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ===== SPIRITFORGED ===== -->
-    <div class="section" id="sec-spiritforged">
-      <div class="set-header">
-        <h2>Spiritforged</h2>
-        <span class="set-badge" style="color:var(--s2);border-color:var(--s2);">Set 2</span>
-        <span class="set-date">Febrero 2026</span>
-        <span class="set-total"><strong>221</strong> base + <strong>30</strong> OVR</span>
-      </div>
-
-      <div class="sub-tabs">
-        <div class="sub-tab active" data-tab="legends-s">Leyendas (12)</div>
-        <div class="sub-tab" data-tab="epic-s">&Eacute;picas+</div>
-        <div class="sub-tab" data-tab="ovr-s">Overnumbered</div>
-        <div class="sub-tab" data-tab="info-s">Información</div>
-      </div>
-
-      <div class="sub-tab-content active" id="tab-legends-s">
-        <div class="search-bar">
-          <input type="text" id="search-s" placeholder="Buscar leyenda…" oninput="filterLegends('s',this.value)">
-        </div>
-        <div class="legend-grid" id="grid-s"></div>
-      </div>
-
-      <div class="sub-tab-content" id="tab-epic-s">
-        <div class="search-bar">
-          <input type="text" placeholder="Buscar carta..." oninput="filterPremium('s')">
-          <select onchange="filterPremium('s')">
-            <option value="">Todas</option>
-            <option value="Epic">Epicas</option>
-            <option value="Showcase">Showcase / OVR</option>
-          </select>
-        </div>
-        <div class="count-note" id="epic-count-s"></div>
-        <div class="legend-grid" id="grid-epic-s"></div>
-      </div>
-
-      <div class="sub-tab-content" id="tab-ovr-s">
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>Tipo</th><th>Cantidad</th><th>Numeración</th><th>Notas</th></tr></thead>
-            <tbody>
-              <tr><td class="row-label">Alt-Art</td><td>11</td><td>—</td><td>Cartas con arte alternativo</td></tr>
-              <tr><td class="row-label">OVR base</td><td>18</td><td>222–239</td><td>Numeración extendida</td></tr>
-              <tr><td class="row-label">OVR con firma</td><td>12</td><td>240–251</td><td>Arte + firma del artista</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="sub-tab-content" id="tab-info-s">
-        <div class="metrics-grid">
-          <div class="mcard" style="--accent:var(--s2)"><div class="mcard-label">Total cartas</div><div class="mcard-num">251</div><div class="mcard-sub">221 base + 30 OVR</div></div>
-          <div class="mcard" style="--accent:var(--s2)"><div class="mcard-label">Leyendas</div><div class="mcard-num">12</div></div>
-          <div class="mcard" style="--accent:var(--s2)"><div class="mcard-label">Champion Decks</div><div class="mcard-num">2</div><div class="mcard-sub">Rumble · Fiora</div></div>
-        </div>
-        <div class="sec-label">Mec&aacute;nicas nuevas</div>
-        <div class="mechanics-grid">
-          <div class="mechanic-card" style="--accent:var(--s2)"><div class="mechanic-kicker">Recurso</div><div class="mechanic-name">Gold</div><div class="mechanic-desc">Ficha Gear de un solo uso: se agota y se sacrifica para pagar 1 Power.</div></div>
-          <div class="mechanic-card" style="--accent:var(--s2)"><div class="mechanic-kicker">Gear</div><div class="mechanic-name">Equipment</div><div class="mechanic-desc">Equipo que se adjunta a unidades para darles mejoras, efectos o bonus de Might.</div></div>
-          <div class="mechanic-card" style="--accent:var(--s2)"><div class="mechanic-kicker">Reaction</div><div class="mechanic-name">Quick-Draw</div><div class="mechanic-desc">Permite jugar Equipment como Reaction y adjuntarlo al instante a una unidad.</div></div>
-          <div class="mechanic-card" style="--accent:var(--s2)"><div class="mechanic-kicker">Unidad</div><div class="mechanic-name">Weaponmaster</div><div class="mechanic-desc">Al jugar la unidad, puede equiparse pagando menos Power, incluso moviendo Equipment ya adjunto.</div></div>
-          <div class="mechanic-card" style="--accent:var(--s2)"><div class="mechanic-kicker">Hechizo</div><div class="mechanic-name">Repeat</div><div class="mechanic-desc">Coste adicional opcional: si lo pagas, resuelves el efecto del hechizo una vez m&aacute;s.</div></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ===== UNLEASHED ===== -->
-    <div class="section" id="sec-unleashed">
-      <div class="set-header">
-        <h2>Unleashed</h2>
-        <span class="set-badge" style="color:var(--s3);border-color:var(--s3);">Set 3</span>
-        <span class="set-date">Mayo 2026</span>
-        <span class="set-total"><strong>219</strong> base + <strong>29</strong> premium</span>
-      </div>
-
-      <div class="sub-tabs">
-        <div class="sub-tab active" data-tab="legends-u">Leyendas (12)</div>
-        <div class="sub-tab" data-tab="epic-u">&Eacute;picas+</div>
-        <div class="sub-tab" data-tab="showcase-u">Showcase &amp; Ultimate</div>
-        <div class="sub-tab" data-tab="info-u">Información</div>
-      </div>
-
-      <div class="sub-tab-content active" id="tab-legends-u">
-        <div class="search-bar">
-          <input type="text" id="search-u" placeholder="Buscar leyenda…" oninput="filterLegends('u',this.value)">
-        </div>
-        <div class="legend-grid" id="grid-u"></div>
-      </div>
-
-      <div class="sub-tab-content" id="tab-epic-u">
-        <div class="search-bar">
-          <input type="text" placeholder="Buscar carta..." oninput="filterPremium('u')">
-          <select onchange="filterPremium('u')">
-            <option value="">Todas</option>
-            <option value="Epic">Epicas</option>
-            <option value="Showcase">Showcase / OVR</option>
-          </select>
-        </div>
-        <div class="count-note" id="epic-count-u"></div>
-        <div class="legend-grid" id="grid-epic-u"></div>
-      </div>
-
-      <div class="sub-tab-content" id="tab-showcase-u">
-        <p style="font-size:.8rem;color:var(--muted);margin-bottom:.75rem;">Unleashed introduce la rareza <strong style="color:var(--red)">Ultimate</strong> y múltiples variantes Showcase.</p>
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>Tipo</th><th>Cantidad</th><th>Numeración</th><th>Notas</th></tr></thead>
-            <tbody>
-              <tr><td class="row-label">Showcase / Alt-Art</td><td>21</td><td>220–240</td><td>Arte alternativo de cartas selectas</td></tr>
-              <tr><td class="row-label">OVR base</td><td>5</td><td>241–245</td><td>Numeración extendida</td></tr>
-              <tr><td class="row-label">OVR con firma</td><td>2</td><td>246–247</td><td>Arte + firma del artista</td></tr>
-              <tr><td class="row-label" style="color:var(--red)">Ultimate Rare</td><td>1</td><td>248</td><td><strong>Baron Nashor</strong> · &lt;0.1% de packs</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="sub-tab-content" id="tab-info-u">
-        <div class="metrics-grid">
-          <div class="mcard" style="--accent:var(--s3)"><div class="mcard-label">Total cartas</div><div class="mcard-num">248</div><div class="mcard-sub">219 base + 21 showcase + 7 OVR + 1 Ultimate</div></div>
-          <div class="mcard" style="--accent:var(--s3)"><div class="mcard-label">Leyendas</div><div class="mcard-num">12</div></div>
-          <div class="mcard" style="--accent:var(--s3)"><div class="mcard-label">Champion Decks</div><div class="mcard-num">2</div><div class="mcard-sub">Vi · Vex</div></div>
-        </div>
-        <div class="sec-label">Mec&aacute;nicas nuevas</div>
-        <div class="mechanics-grid">
-          <div class="mechanic-card" style="--accent:var(--s3)"><div class="mechanic-kicker">Recurso</div><div class="mechanic-name">XP</div><div class="mechanic-desc">Recurso que acumulas y puedes gastar para activar ventajas y efectos especiales.</div></div>
-          <div class="mechanic-card" style="--accent:var(--s3)"><div class="mechanic-kicker">Escalado</div><div class="mechanic-name">Level</div><div class="mechanic-desc">Las cartas con Level ganan beneficios cuando alcanzas cierta cantidad de XP.</div></div>
-          <div class="mechanic-card" style="--accent:var(--s3)"><div class="mechanic-kicker">XP</div><div class="mechanic-name">Hunt</div><div class="mechanic-desc">Cuando una unidad con Hunt conquista o mantiene un campo de batalla, ganas el XP indicado.</div></div>
-          <div class="mechanic-card" style="--accent:var(--s3)"><div class="mechanic-kicker">Reaction</div><div class="mechanic-name">Ambush</div><div class="mechanic-desc">Permite jugar una unidad como Reaction en un campo de batalla donde ya tienes unidades.</div></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ===== VENDETTA ===== -->
-    <div class="section" id="sec-vendetta">
-      <div class="set-header">
-        <h2>Vendetta</h2>
-        <span class="set-badge" style="color:var(--s4);border-color:var(--s4);">Set 4</span>
-        <span class="set-date">Julio 2026</span>
-        <span class="set-total"><strong>166</strong> base + premium</span>
-      </div>
-
-      <div class="sub-tabs">
-        <div class="sub-tab active" data-tab="legends-v">Leyendas (9)</div>
-        <div class="sub-tab" data-tab="epic-v">&Eacute;picas+</div>
-        <div class="sub-tab" data-tab="info-v">Información</div>
-      </div>
-
-      <div class="sub-tab-content active" id="tab-legends-v">
-        <div class="legend-grid" id="grid-v" style="grid-template-columns:repeat(auto-fill,minmax(180px,1fr));"></div>
-      </div>
-
-      <div class="sub-tab-content" id="tab-epic-v">
-        <div class="empty-state">La lista de cartas de Vendetta todavia no esta disponible en la fuente de datos. La pesta&ntilde;a queda preparada para a&ntilde;adirlas cuando se publiquen.</div>
-      </div>
-
-      <div class="sub-tab-content" id="tab-info-v">
-        <div class="metrics-grid">
-          <div class="mcard" style="--accent:var(--s4)"><div class="mcard-label">Total cartas</div><div class="mcard-num">~166</div><div class="mcard-sub">~50 Showcase (incluye OVR) · 4 OVR conectadas confirmadas</div></div>
-          <div class="mcard" style="--accent:var(--s4)"><div class="mcard-label">Leyendas</div><div class="mcard-num">9</div><div class="mcard-sub">Menos leyendas, más rejugabilidad</div></div>
-          <div class="mcard" style="--accent:var(--s4)"><div class="mcard-label">Showdown Decks</div><div class="mcard-num">2</div><div class="mcard-sub">Shen vs Zed</div></div>
-        </div>
-        <div class="sec-label">Novedades</div>
-        <div class="mechanics-grid">
-          <div class="mechanic-card" style="--accent:var(--s4)"><div class="mechanic-kicker">Producto</div><div class="mechanic-name">Showdown Decks</div><div class="mechanic-desc">Dos mazos enfrentados listos para jugar, centrados en el duelo Shen contra Zed.</div></div>
-          <div class="mechanic-card" style="--accent:var(--s4)"><div class="mechanic-kicker">Coleccionismo</div><div class="mechanic-name">Duo Art</div><div class="mechanic-desc">Variantes Showcase con composiciones de dos personajes, pensadas como piezas destacadas del set.</div></div>
-        </div>
-        <p style="font-size:.8rem;color:var(--muted);margin-top:1rem;">Los datos de Vendetta son preliminares. La información completa se publicará tras el lanzamiento global el 31 de julio de 2026.</p>
-      </div>
-    </div>
+    <div class="main" id="sec-container"></div>
 
     <!-- ===== PULL RATES ===== -->
     <div class="section" id="sec-rates">
@@ -720,44 +376,8 @@ tbody tr:hover td { background:var(--surface2); }
       <div class="sec-label">Por caja (24 packs)</div>
       <div class="table-wrap">
         <table>
-          <thead><tr><th style="min-width:130px">Tipo de carta</th><th>Origins</th><th>Spiritforged</th><th>Unleashed</th><th>Vendetta</th></tr></thead>
-          <tbody>
-            <tr>
-              <td class="row-label">Épica</td>
-              <td><span class="pill pill-blue">~6 por caja</span><span class="pill-sub">~1 cada 4 packs</span></td>
-              <td><span class="pill pill-blue">~6 por caja</span><span class="pill-sub">~1 cada 4 packs</span></td>
-              <td><span class="pill pill-blue">~5–6 por caja</span><span class="pill-sub">~1 cada 4 packs</span></td>
-              <td><span class="tbd">Sin publicar</span></td>
-            </tr>
-            <tr>
-              <td class="row-label">Showcase / Alt-Art</td>
-              <td><span class="pill pill-green">~2 por caja</span><span class="pill-sub">~1 cada 12 packs</span></td>
-              <td><span class="pill pill-green">~2 por caja</span><span class="pill-sub">~1 cada 12 packs</span></td>
-              <td><span class="pill pill-green">~2 por caja</span><span class="pill-sub">~1 cada 12 packs</span></td>
-              <td><span class="tbd">Sin publicar</span></td>
-            </tr>
-            <tr>
-              <td class="row-label">Overnumbered</td>
-              <td><span class="pill pill-amber">1 cada 3 cajas</span><span class="pill-sub">~1 cada 72 packs</span></td>
-              <td><span class="pill pill-amber">1 cada 3 cajas</span><span class="pill-sub">~1 cada 72 packs</span></td>
-              <td><span class="pill pill-amber">1 cada 3 cajas</span><span class="pill-sub">~1 cada 72 packs</span></td>
-              <td><span class="tbd">Sin publicar</span></td>
-            </tr>
-            <tr>
-              <td class="row-label">OVR con firma</td>
-              <td><span class="pill pill-pink">1 cada 10 OVR</span><span class="pill-sub">~1 cada 720 packs</span></td>
-              <td><span class="pill pill-pink">1 cada 10 OVR</span><span class="pill-sub">~1 cada 720 packs</span></td>
-              <td><span class="pill pill-pink">1 cada 10 OVR</span><span class="pill-sub">~1 cada 720 packs</span></td>
-              <td><span class="tbd">Sin publicar</span></td>
-            </tr>
-            <tr>
-              <td class="row-label">Ultimate Rare</td>
-              <td><span class="pill pill-dim">No existe</span></td>
-              <td><span class="pill pill-dim">No existe</span></td>
-              <td><span class="pill pill-red">&lt;0.1% de packs</span><span class="pill-sub">Baron Nashor</span></td>
-              <td><span class="tbd">Sin confirmar</span></td>
-            </tr>
-          </tbody>
+          <thead><tr><th style="min-width:130px">Tipo de carta</th><th id="pr-h-Origins">Origins</th><th id="pr-h-Spiritforged">Spiritforged</th><th id="pr-h-Unleashed">Unleashed</th><th id="pr-h-Vendetta">Vendetta</th></tr></thead>
+          <tbody id="pr-body"></tbody>
         </table>
       </div>
 
@@ -778,7 +398,6 @@ tbody tr:hover td { background:var(--surface2); }
         <strong>Fuente:</strong> Riot Games — Collectability Guide · GAMA Expo 2026
       </div>
     </div>
-
   </main>
 </div>
 
@@ -1193,30 +812,222 @@ document.getElementById('modal').onclick = function(e) {
   if(e.target===this) closeModal();
 };
 
-// ===== NAV =====
-document.querySelectorAll('.nav-item').forEach(item=>{
-  item.onclick = function(){
-    document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
-    document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-    this.classList.add('active');
-    document.getElementById('sec-'+this.dataset.set).classList.add('active');
-    // Delay chart resize for visibility
-    setTimeout(()=>{ window.dispatchEvent(new Event('resize')); },100);
+// ===== DYNAMIC PAGE FROM cartas.json =====
+async function buildPage() {
+  let db = { sets: {}, pull_rates: {} };
+  try {
+    const resp = await fetch('cartas.json?' + Date.now());
+    if (resp.ok) db = await resp.json();
+  } catch(e) { console.warn('cartas.json not loaded, using default'); }
+
+  const sets = db.sets || {};
+  const setIds = Object.keys(sets);
+
+  // 1. Build nav items
+  const navC = document.getElementById('nav-container');
+  navC.innerHTML = '';
+  const addNav = (label, ds, color, active) => {
+    const el = document.createElement('div');
+    el.className = 'nav-item' + (active ? ' active' : '');
+    el.dataset.set = ds;
+    el.style.setProperty('--nav-c', color);
+    el.innerHTML = `<span class="nav-dot" style="background:${color}"></span><span>${label}</span>`;
+    navC.appendChild(el);
   };
+  addNav('Visión general', 'all', 'var(--text)', true);
+  for (const s of Object.values(sets)) addNav(Object.keys(sets).find(k => sets[k]===s), s.id, s.color);
+  addNav('Pull Rates', 'rates', 'var(--pink)');
+
+  // 2. Build Overview section
+  const main = document.getElementById('sec-container');
+  main.innerHTML = `
+    <div class="section active" id="sec-all">
+      <div class="set-header">
+        <h2>Visión general</h2>
+        <span class="set-badge" style="color:var(--text);border-color:var(--text);">${setIds.length} expansiones</span>
+      </div>
+      <div class="metrics-grid" id="overview-metrics"></div>
+      <div class="sec-label">Leyendas por set</div>
+      <div class="metrics-grid" id="legends-by-set"></div>
+
+      <div class="sec-label">Anatomía del booster (14 cartas)</div>
+      <div class="pack-grid">
+        <div class="pack-slot" style="--accent:#888780"><div class="slot-count">7</div><div class="slot-name">Comunes</div></div>
+        <div class="pack-slot" style="--accent:var(--green)"><div class="slot-count">3</div><div class="slot-name">Infrecuentes</div></div>
+        <div class="pack-slot" style="--accent:var(--blue)"><div class="slot-count">2</div><div class="slot-name">Rara o mejor<br><span style="font-size:.58rem;color:var(--muted)">foil garantizado</span></div></div>
+        <div class="pack-slot" style="--accent:var(--amber)"><div class="slot-count">1</div><div class="slot-name">Slot foil libre<br><span style="font-size:.58rem;color:var(--muted)">C → Épica/OVR</span></div></div>
+        <div class="pack-slot" style="--accent:var(--pink)"><div class="slot-count">1</div><div class="slot-name">Token / Runa<br><span style="font-size:.58rem;color:var(--muted)">o Alt Runa</span></div></div>
+      </div>
+
+      <div class="sec-label">Overnumbered y Showcase por set</div>
+      <div class="chart-box"><div style="position:relative;height:220px;"><canvas id="ovrChartOverview"></canvas></div></div>
+
+      <div class="sec-label">Probabilidad acumulada por caja (24 packs)</div>
+      <div class="two-col">
+        <div class="chart-box">
+          <div class="chart-title">% de conseguir 1+ pull por caja</div>
+          <div style="position:relative;height:180px;"><canvas id="probChartOverview"></canvas></div>
+        </div>
+        <div class="chart-box">
+          <div class="chart-title">Packs necesarios (media) para 1 pull</div>
+          <div style="position:relative;height:180px;"><canvas id="packsChartOverview"></canvas></div>
+        </div>
+      </div>
+
+      <div class="footnote">
+        <strong>Fuentes oficiales:</strong> Riot Games — "Collectability in Riftbound" · GAMA Expo 2026 · riftbound.leagueoflegends.com<br>
+        <strong>Nota:</strong> Datos de Vendetta preliminares. Pull rates de Spiritforged inferidos de Origins salvo donde se indique.
+      </div>
+    </div>`;
+
+  for (const k of setIds) {
+    const s = sets[k];
+    const om = document.createElement('div');
+    om.className = 'mcard'; om.style.setProperty('--accent', s.color);
+    om.innerHTML = `<div class="mcard-label">${k} · ${s.date}</div><div class="mcard-num">${s.cartas_reveladas}</div><div class="mcard-sub">${s.legend_count} leyendas</div>`;
+    document.getElementById('overview-metrics').appendChild(om);
+    const lb = document.createElement('div');
+    lb.className = 'mcard'; lb.style.setProperty('--accent', s.color);
+    lb.innerHTML = `<div class="mcard-label">${k} · ${s.date}</div><div class="mcard-num">${s.legend_count}</div><div class="mcard-sub">${s.leyendas.join(' · ')}</div>`;
+    document.getElementById('legends-by-set').appendChild(lb);
+  }
+
+  // 3. Build per-set sections
+  const tabIds = {}; // track tab IDs for click handler
+  for (const k of setIds) {
+    const s = sets[k];
+    const sfx = s.id[0];
+    const sec = document.createElement('div');
+    sec.className = 'section'; sec.id = 'sec-' + s.id;
+
+    const ovrTab = s.ovr_breakdown && s.ovr_breakdown.length > 0;
+    const ovrTabId = s.id === 'unleashed' ? 'showcase' : 'ovr';
+
+    let html = `
+      <div class="set-header">
+        <h2>${k}</h2>
+        <span class="set-badge" style="color:${s.color};border-color:${s.color};">Set ${s.set_number}</span>
+        <span class="set-date">${s.date}</span>
+        <span class="set-total"><strong>${s.total_base}</strong> base + <strong>${s.total_ovr}</strong> premium</span>
+      </div>`;
+    if (s.id === 'origins') html += `<div class="pg-note"><strong>ⓘ Origins: Proving Grounds</strong> — Lanzado junto a Origins, incluye 4 leyendas adicionales (Garen, Lux, Annie, Master Yi) en un producto de inicio para 2-4 jugadores. No forman parte del set principal.</div>`;
+    html += `<div class="sub-tabs">
+      <div class="sub-tab active" data-tab="legends-${sfx}">Leyendas (${s.legend_count})</div>
+      <div class="sub-tab" data-tab="epic-${sfx}">Épicas+</div>`;
+    if (ovrTab) html += `<div class="sub-tab" data-tab="${ovrTabId}-${sfx}">${s.id === 'unleashed' ? 'Showcase &amp; Ultimate' : 'Overnumbered'}</div>`;
+    html += `<div class="sub-tab" data-tab="info-${sfx}">Información</div></div>`;
+
+    // Legend tab
+    html += `<div class="sub-tab-content active" id="tab-legends-${sfx}">
+      <div class="search-bar"><input type="text" id="search-${sfx}" placeholder="Buscar leyenda…" oninput="filterLegends('${sfx}',this.value)"></div>
+      <div class="legend-grid" id="grid-${sfx}"></div></div>`;
+
+    // Epic tab
+    html += `<div class="sub-tab-content" id="tab-epic-${sfx}">
+      <div class="search-bar">
+        <input type="text" placeholder="Buscar carta..." oninput="filterPremium('${sfx}')">
+        <select onchange="filterPremium('${sfx}')">
+          <option value="">Todas</option><option value="Epic">Epicas</option><option value="Showcase">Showcase / OVR</option>
+        </select>
+      </div>
+      <div class="count-note" id="epic-count-${sfx}"></div>
+      <div class="legend-grid" id="grid-epic-${sfx}"></div></div>`;
+
+    // OVR/Showcase tab
+    if (ovrTab) {
+      const intro = s.id === 'unleashed' ? 'Unleashed introduce la rareza <strong style="color:var(--red)">Ultimate</strong> y múltiples variantes Showcase.' : 'Cartas Overnumbered (numeración extendida) y Alt-Art disponibles.';
+      html += `<div class="sub-tab-content" id="tab-${ovrTabId}-${sfx}">
+        <p style="font-size:.8rem;color:var(--muted);margin-bottom:.75rem;">${intro}</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Tipo</th><th>Cantidad</th><th>Numeración</th><th>Notas</th></tr></thead>
+          <tbody>${s.ovr_breakdown.map(r => `<tr${r.tipo.includes('Ultimate') ? ' style="color:var(--red)"' : ''}><td class="row-label">${r.tipo}</td><td>${r.cantidad}</td><td>${r.numeracion}</td><td>${r.notas}</td></tr>`).join('')}</tbody>
+        </table></div></div>`;
+    }
+
+    // Info tab
+    html += `<div class="sub-tab-content" id="tab-info-${sfx}">
+      <div class="metrics-grid">
+        <div class="mcard" style="--accent:${s.color}"><div class="mcard-label">Total cartas</div><div class="mcard-num">${s.total}</div><div class="mcard-sub">${s.total_base} base + ${s.total_ovr} premium</div></div>
+        <div class="mcard" style="--accent:${s.color}"><div class="mcard-label">Leyendas</div><div class="mcard-num">${s.legend_count}</div></div>`;
+    if (s.champion_decks && s.champion_decks.length > 0) {
+      html += `<div class="mcard" style="--accent:${s.color}"><div class="mcard-label">Champion Decks</div><div class="mcard-num">${s.champion_decks.length}</div><div class="mcard-sub">${s.champion_decks.join(' · ')}</div></div>`;
+    }
+    if (s.id === 'vendetta') {
+      html += `<div class="mcard" style="--accent:var(--s4)"><div class="mcard-label">Showdown Decks</div><div class="mcard-num">2</div><div class="mcard-sub">Shen vs Zed</div></div>`;
+    }
+    html += `</div>`;
+    if (s.mecanicas && s.mecanicas.length > 0) {
+      html += `<div class="sec-label">${s.id === 'vendetta' ? 'Novedades' : 'Mecánicas nuevas'}</div><div class="mechanics-grid">`;
+      for (const m of s.mecanicas) {
+        html += `<div class="mechanic-card" style="--accent:${s.color}"><div class="mechanic-kicker">${m.kicker}</div><div class="mechanic-name">${m.name}</div><div class="mechanic-desc">${m.desc}</div></div>`;
+      }
+      html += `</div>`;
+    }
+    if (s.id === 'vendetta') {
+      html += `<p style="font-size:.8rem;color:var(--muted);margin-top:1rem;">Los datos de Vendetta son preliminares. La información completa se publicará tras el lanzamiento global el 31 de julio de 2026.</p>`;
+    }
+    html += `</div>`;
+    sec.innerHTML = html;
+    main.appendChild(sec);
+  }
+
+  // 4. Populate Pull Rates table
+  if (db.pull_rates && db.pull_rates.per_box) {
+    const prBody = document.getElementById('pr-body');
+    if (prBody) {
+      const labelMap = { Epic:'Épica', Showcase:'Showcase / Alt-Art', Overnumbered:'Overnumbered', Signature:'OVR con firma', Ultimate_Rare:'Ultimate Rare' };
+      for (const [rarity, perSet] of Object.entries(db.pull_rates.per_box)) {
+        const tr = document.createElement('tr');
+        let cells = `<td class="row-label">${labelMap[rarity]||rarity}</td>`;
+        for (const sn of setIds) {
+          const v = perSet[sn];
+          if (!v || v === 'Sin publicar') cells += `<td><span class="tbd">Sin publicar</span></td>`;
+          else if (v === 'No existe') cells += `<td><span class="pill pill-dim">No existe</span></td>`;
+          else if (v === 'Sin confirmar') cells += `<td><span class="tbd">Sin confirmar</span></td>`;
+          else cells += `<td>${v}</td>`;
+        }
+        tr.innerHTML = cells;
+        prBody.appendChild(tr);
+      }
+    }
+  }
+
+  // 5. Sync SETS and PREMIUM_SET_PREFIX from JSON
+  for (const [setName, s] of Object.entries(sets)) {
+    if (!SETS[s.id]) {
+      SETS[s.id] = {
+        id: s.id, name: setName, abbr: s.abbr, color: s.color,
+        legends: s.leyendas.map(l => ({ name: l, title: '', n: '' })),
+        imgBase: s.imgBase || null
+      };
+    }
+    PREMIUM_SET_PREFIX[s.abbr] = s.id[0];
+  }
+}
+
+// ===== NAV (delegation for dynamic nav-items) =====
+document.addEventListener('click', function(e) {
+  const item = e.target.closest('.nav-item');
+  if (!item) return;
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  item.classList.add('active');
+  const el = document.getElementById('sec-'+item.dataset.set);
+  if (el) el.classList.add('active');
+  setTimeout(()=>{ window.dispatchEvent(new Event('resize')); },100);
 });
 
-// ===== SUB TABS =====
-document.querySelectorAll('.sub-tab').forEach(tab=>{
-  tab.onclick = function(){
-    const parent = this.closest('.section')||this.closest('.main');
-    const container = this.parentElement;
-    container.querySelectorAll('.sub-tab').forEach(t=>t.classList.remove('active'));
-    this.classList.add('active');
-    const target = this.dataset.tab;
-    container.parentElement.querySelectorAll('.sub-tab-content').forEach(c=>c.classList.remove('active'));
-    const el = document.getElementById('tab-'+target);
-    if(el) el.classList.add('active');
-  };
+// ===== SUB TABS (delegation) =====
+document.addEventListener('click', function(e) {
+  const tab = e.target.closest('.sub-tab');
+  if (!tab) return;
+  const container = tab.parentElement;
+  container.querySelectorAll('.sub-tab').forEach(t=>t.classList.remove('active'));
+  tab.classList.add('active');
+  const target = tab.dataset.tab;
+  container.parentElement.querySelectorAll('.sub-tab-content').forEach(c=>c.classList.remove('active'));
+  const el = document.getElementById('tab-'+target);
+  if (el) el.classList.add('active');
 });
 
 // ===== CHARTS =====
@@ -1338,32 +1149,34 @@ makePacksChart('packsChartOverview');
 makeProbChart('probChartRates',true);
 makePacksChart('packsChartRates',true);
 
-// ===== INIT =====
-Object.keys(SETS).filter(k => k !== 'vendetta').forEach(renderSet);
-['OGN','SFD','UNL'].forEach(renderPremiumSet);
+// ===== INIT (after buildPage creates DOM) =====
+buildPage().then(() => {
+  Object.keys(SETS).filter(k => k !== 'vendetta').forEach(renderSet);
+  ['OGN','SFD','UNL'].forEach(renderPremiumSet);
 
-// Render Vendetta as text cards
-const gridV = document.getElementById('grid-v');
-if(gridV) {
-  SETS.vendetta.legends.forEach(leg=>{
-    const card = document.createElement('div');
-    card.className = 'legend-card';
-    const isTbc = leg.name.includes('TBC');
-    const info = document.createElement('div');
-    info.className = 'lc-img';
-    info.style.cssText = 'aspect-ratio:auto;padding:1.5rem;background:var(--surface);';
-    info.innerHTML = `<div style="font-size:1.8rem;opacity:.3;text-align:center;">${isTbc?'?':'🎴'}</div>`;
-    const info2 = document.createElement('div');
-    info2.className = 'lc-info';
-    info2.innerHTML = `<div class="lc-name" style="${isTbc?'color:var(--dim);':''}">${leg.name}</div>
-      <div class="lc-sub">${leg.title}</div>
-      <span class="lc-set" style="background:color-mix(in srgb,var(--s4),transparent 80%);color:var(--text)">VEN</span>`;
-    card.appendChild(info);
-    card.appendChild(info2);
-    if(!isTbc) card.onclick = ()=>openModal(leg,SETS.vendetta);
-    gridV.appendChild(card);
-  });
-}
+  // Render Vendetta as text cards
+  const gridV = document.getElementById('grid-v');
+  if(gridV) {
+    SETS.vendetta.legends.forEach(leg=>{
+      const card = document.createElement('div');
+      card.className = 'legend-card';
+      const isTbc = leg.name.includes('TBC');
+      const info = document.createElement('div');
+      info.className = 'lc-img';
+      info.style.cssText = 'aspect-ratio:auto;padding:1.5rem;background:var(--surface);';
+      info.innerHTML = `<div style="font-size:1.8rem;opacity:.3;text-align:center;">${isTbc?'?':'🎴'}</div>`;
+      const info2 = document.createElement('div');
+      info2.className = 'lc-info';
+      info2.innerHTML = `<div class="lc-name" style="${isTbc?'color:var(--dim);':''}">${leg.name}</div>
+        <div class="lc-sub">${leg.title}</div>
+        <span class="lc-set" style="background:color-mix(in srgb,var(--s4),transparent 80%);color:var(--text)">VEN</span>`;
+      card.appendChild(info);
+      card.appendChild(info2);
+      if(!isTbc) card.onclick = ()=>openModal(leg,SETS.vendetta);
+      gridV.appendChild(card);
+    });
+  }
+});
 </script>
 </body>
 </html>

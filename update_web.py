@@ -10,17 +10,39 @@ from google.genai.errors import ClientError
 # ==========================================
 json_file = "cartas.json"
 
-# Si no existe el archivo de datos, creamos uno base inicial
-if not os.path.exists(json_file):
-    datos_actuales = {
-        "sets": {
-            "Origins": {"cartas_reveladas": 0, "total": 0, "productos": []},
-            "Spiritforged": {"cartas_reveladas": 0, "total": 0, "productos": []},
-            "Unleashed": {"cartas_reveladas": 0, "total": 0, "productos": []},
-            "Vendetta": {"cartas_reveladas": 0, "total": 0, "productos": []}
+# Estructura por defecto si no existe
+ESQUEMA_BASE = {
+    "sets": {
+        "Origins": {
+            "id": "origins", "abbr": "OGN", "set_number": 1, "color": "#4a9eff",
+            "date": "", "cartas_reveladas": 0, "total": 0, "total_base": 0, "total_ovr": 0,
+            "imgBase": "", "legend_count": 0, "leyendas": [],
+            "productos": [], "champion_decks": [], "ovr_breakdown": [], "mecanicas": []
         },
-        "pull_rates": {}
-    }
+        "Spiritforged": {
+            "id": "spiritforged", "abbr": "SFD", "set_number": 2, "color": "#3ecf8e",
+            "date": "", "cartas_reveladas": 0, "total": 0, "total_base": 0, "total_ovr": 0,
+            "imgBase": "", "legend_count": 0, "leyendas": [],
+            "productos": [], "champion_decks": [], "ovr_breakdown": [], "mecanicas": []
+        },
+        "Unleashed": {
+            "id": "unleashed", "abbr": "UNL", "set_number": 3, "color": "#f4a535",
+            "date": "", "cartas_reveladas": 0, "total": 0, "total_base": 0, "total_ovr": 0,
+            "imgBase": "", "legend_count": 0, "leyendas": [],
+            "productos": [], "champion_decks": [], "ovr_breakdown": [], "mecanicas": []
+        },
+        "Vendetta": {
+            "id": "vendetta", "abbr": "VEN", "set_number": 4, "color": "#e879a0",
+            "date": "", "cartas_reveladas": 0, "total": 0, "total_base": 0, "total_ovr": 0,
+            "imgBase": "", "legend_count": 0, "leyendas": [],
+            "productos": [], "champion_decks": [], "ovr_breakdown": [], "mecanicas": []
+        }
+    },
+    "pull_rates": {}
+}
+
+if not os.path.exists(json_file):
+    datos_actuales = json.loads(json.dumps(ESQUEMA_BASE))
     with open(json_file, "w", encoding="utf-8") as f:
         json.dump(datos_actuales, f, indent=4, ensure_ascii=False)
 else:
@@ -32,24 +54,69 @@ else:
 # ==========================================
 client = genai.Client()
 
+EXPANSIONES = ["Origins", "Spiritforged", "Unleashed", "Vendetta"]
+
 mensaje = f"""
 Eres el mantenedor automático de la base de datos de Riftbound TCG.
-Tu único trabajo es actualizar la información de las expansiones, cartas y productos en formato JSON.
+Tu trabajo es actualizar el JSON completo de las expansiones con TODOS los campos.
 
 FUENTES PRIORITARIAS:
 - riftbound.leagueoflegends.com
 - Riot Games
 
+ESTRUCTURA JSON REQUERIDA (debes devolver EXACTAMENTE este formato):
+{{
+    "sets": {{
+        "NOMBRE_EXPANSION": {{
+            "id": "nombre en minúsculas",
+            "abbr": "siglas (OGN, SFD, UNL, VEN)",
+            "set_number": 1-4,
+            "color": "código hex",
+            "date": "Mes Año del lanzamiento",
+            "cartas_reveladas": número,
+            "total": número total de cartas del set,
+            "total_base": número de cartas base,
+            "total_ovr": número de cartas OVR/Showcase/Alt-Art,
+            "imgBase": "URL base de imágenes (o null si no hay)",
+            "legend_count": número de leyendas,
+            "leyendas": ["Lista", "de", "nombres", "de", "campeones"],
+            "productos": ["Lista", "de", "productos"],
+            "champion_decks": ["Campeones", "con", "Champion Deck"],
+            "ovr_breakdown": [
+                {{"tipo":"Alt-Art","cantidad":N,"numeracion":"rangos","notas":"descripción"}},
+                {{"tipo":"OVR base","cantidad":N,"numeracion":"rangos","notas":"descripción"}},
+                {{"tipo":"OVR con firma","cantidad":N,"numeracion":"rangos","notas":"descripción"}}
+            ],
+            "mecanicas": [
+                {{"kicker":"tipo","name":"nombre","desc":"descripción"}}
+            ]
+        }}
+    }},
+    "pull_rates": {{
+        "general_booster_pack_contents": {{...}},
+        "rarity_odds": {{...}},
+        "set_specific": {{...}},
+        "per_box": {{
+            "rareza": {{"Origins":"texto","Spiritforged":"texto","Unleashed":"texto","Vendetta":"texto"}}
+        }}
+    }}
+}}
+
 TAREAS:
-1. Detectar nuevas expansiones o cartas reveladas.
-2. Actualizar el número de cartas y productos de: Origins, Spiritforged, Unleashed, Vendetta.
-3. Detectar cambios en Pull Rates.
+1. Detectar nuevas expansiones (si aparece una nueva, AÑÁDELA al JSON).
+2. Detectar nuevas cartas o leyendas reveladas y actualizar leyendas, total_base, total_ovr.
+3. Mantener productos, ovr_breakdown, mecanicas por cada expansión.
+4. Actualizar pull_rates si hay cambios oficiales.
+5. Para expansiones NUEVAS, rellena todos los campos con la información disponible.
 
 DATA ACTUAL:
 {json.dumps(datos_actuales, indent=2, ensure_ascii=False)}
 
 REGLA CRÍTICA:
-Devuelve EXCLUSIVAMENTE el objeto JSON actualizado. No incluyas explicaciones, ni bloques de código markdown, ni texto extra. Si no hay cambios, devuelve el mismo JSON exacto que te di.
+Devuelve EXCLUSIVAMENTE el objeto JSON actualizado exactamente con la estructura de arriba.
+No incluyas explicaciones, markdown, ni texto extra.
+Si no hay cambios, devuelve el mismo JSON exacto que te di.
+Para expansiones existentes, mantén los campos que no cambien.
 """
 
 # Ejecución con control de cuota
@@ -65,7 +132,6 @@ for intento in range(intentos_maximos):
             contents=mensaje,
             config=types.GenerateContentConfig(
                 temperature=0.1,
-                # 💡 Corregido: Se quitó response_mime_type porque la API no permite usarlo junto a Google Search
                 tools=[{"google_search": {}}]
             )
         )
@@ -91,7 +157,7 @@ if not response:
 # ==========================================
 texto_respuesta = response.text.strip()
 
-# 💡 Corregido: Limpieza inteligente por si Gemini devuelve bloques de markdown como ```json ... ```
+# Limpieza de bloques markdown
 if "```json" in texto_respuesta:
     texto_respuesta = texto_respuesta.split("```json")[1].split("```")[0].strip()
 elif "```" in texto_respuesta:
@@ -99,15 +165,23 @@ elif "```" in texto_respuesta:
 
 try:
     datos_nuevos = json.loads(texto_respuesta)
-    
-    # Verificación de que no eliminó las expansiones clave dentro del JSON
-    for exp in ["Origins", "Spiritforged", "Unleashed", "Vendetta"]:
+
+    # Verificación de que no eliminó las expansiones clave
+    for exp in EXPANSIONES:
         if "sets" not in datos_nuevos or exp not in datos_nuevos["sets"]:
-            raise ValueError(f"Falta la expansión obligatoria dentro del JSON: {exp}")
-            
+            raise ValueError(f"Falta la expansión obligatoria: {exp}")
+
+    # Verificar campos esenciales por expansión
+    for exp in EXPANSIONES:
+        s = datos_nuevos["sets"][exp]
+        for campo in ["id", "abbr", "total", "total_base", "total_ovr", "legend_count",
+                      "leyendas", "productos", "ovr_breakdown", "mecanicas"]:
+            if campo not in s:
+                raise ValueError(f"Falta campo '{campo}' en {exp}")
+
 except (json.JSONDecodeError, ValueError) as e:
-    print(f"❌ Validación fallida (La IA no devolvió un JSON limpio o compatible): {e}")
-    print("Respuesta cruda de la IA para revisar errores:", texto_respuesta)
+    print(f"❌ Validación fallida: {e}")
+    print("Respuesta cruda:", texto_respuesta)
     exit(0)
 
 # ==========================================

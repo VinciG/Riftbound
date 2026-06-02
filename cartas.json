@@ -1,8 +1,21 @@
 {
     "sets": {
         "Origins": {
+            "id": "origins",
+            "abbr": "OGN",
+            "set_number": 1,
+            "color": "#4a9eff",
+            "date": "Octubre 2025",
             "cartas_reveladas": 353,
-            "total": 353,
+            "total": 322,
+            "total_base": 298,
+            "total_ovr": 24,
+            "imgBase": "https://cardgamer.com/wp-content/uploads/2025/06/",
+            "legend_count": 12,
+            "leyendas": [
+                "Kai'Sa","Volibear","Jinx","Darius","Ahri","Lee Sin",
+                "Yasuo","Leona","Teemo","Viktor","Miss Fortune","Sett"
+            ],
             "productos": [
                 "Booster Packs",
                 "Booster Display (24 packs)",
@@ -13,11 +26,31 @@
                 "Art Sleeves: Miss Fortune",
                 "Art Sleeves: Volibear",
                 "Art Sleeves: Jinx"
-            ]
+            ],
+            "champion_decks": ["Jinx","Viktor","Lee Sin"],
+            "ovr_breakdown": [
+                {"tipo":"Alt-Art","cantidad":12,"numeracion":"—","notas":"Unidad Campeón con skin alternativo · ~2 por caja"},
+                {"tipo":"OVR base","cantidad":12,"numeracion":"299–310","notas":"Leyenda con arte de artista de Riot"},
+                {"tipo":"OVR con firma","cantidad":12,"numeracion":"311–322","notas":"OVR + firma foil del artista"}
+            ],
+            "mecanicas": []
         },
         "Spiritforged": {
+            "id": "spiritforged",
+            "abbr": "SFD",
+            "set_number": 2,
+            "color": "#3ecf8e",
+            "date": "Febrero 2026",
             "cartas_reveladas": 302,
-            "total": 302,
+            "total": 251,
+            "total_base": 221,
+            "total_ovr": 30,
+            "imgBase": "https://cardgamer.com/wp-content/uploads/2026/01/",
+            "legend_count": 12,
+            "leyendas": [
+                "Rumble","Lucian","Draven","Rek'Sai","Ornn","Jax",
+                "Irelia","Azir","Ezreal","Renata Glasc","Sivir","Fiora"
+            ],
             "productos": [
                 "Booster Packs",
                 "Booster Box",
@@ -26,11 +59,37 @@
                 "Champion Deck: Fiora",
                 "Art Sleeves: Spirit Blossom Teemo",
                 "Art Sleeves: Spirit Blossom Darius"
+            ],
+            "champion_decks": ["Rumble","Fiora"],
+            "ovr_breakdown": [
+                {"tipo":"Alt-Art","cantidad":11,"numeracion":"—","notas":"Cartas con arte alternativo"},
+                {"tipo":"OVR base","cantidad":18,"numeracion":"222–239","notas":"Numeración extendida"},
+                {"tipo":"OVR con firma","cantidad":12,"numeracion":"240–251","notas":"Arte + firma del artista"}
+            ],
+            "mecanicas": [
+                {"kicker":"Recurso","name":"Gold","desc":"Ficha Gear de un solo uso: se agota y se sacrifica para pagar 1 Power."},
+                {"kicker":"Gear","name":"Equipment","desc":"Equipo que se adjunta a unidades para darles mejoras, efectos o bonus de Might."},
+                {"kicker":"Reaction","name":"Quick-Draw","desc":"Permite jugar Equipment como Reaction y adjuntarlo al instante a una unidad."},
+                {"kicker":"Unidad","name":"Weaponmaster","desc":"Al jugar la unidad, puede equiparse pagando menos Power, incluso moviendo Equipment ya adjunto."},
+                {"kicker":"Hechizo","name":"Repeat","desc":"Coste adicional opcional: si lo pagas, resuelves el efecto del hechizo una vez más."}
             ]
         },
         "Unleashed": {
+            "id": "unleashed",
+            "abbr": "UNL",
+            "set_number": 3,
+            "color": "#f4a535",
+            "date": "Mayo 2026",
             "cartas_reveladas": 299,
-            "total": 299,
+            "total": 248,
+            "total_base": 219,
+            "total_ovr": 29,
+            "imgBase": "https://cardgamer.com/wp-content/uploads/2026/03/",
+            "legend_count": 12,
+            "leyendas": [
+                "Vi","Rengar","Kha'Zix","Poppy","Ivern","Vex",
+                "Lillia","Diana","LeBlanc","Pyke","Master Yi","Jhin"
+            ],
             "productos": [
                 "Booster Packs",
                 "Booster Display (24 packs)",
@@ -38,16 +97,47 @@
                 "Champion Deck: Vex",
                 "Art Sleeves: Vi",
                 "Art Sleeves: Master Yi"
+            ],
+            "champion_decks": ["Vi","Vex"],
+            "ovr_breakdown": [
+                {"tipo":"Showcase / Alt-Art","cantidad":21,"numeracion":"220–240","notas":"Arte alternativo de cartas selectas"},
+                {"tipo":"OVR base","cantidad":5,"numeracion":"241–245","notas":"Numeración extendida"},
+                {"tipo":"OVR con firma","cantidad":2,"numeracion":"246–247","notas":"Arte + firma del artista"},
+                {"tipo":"Ultimate Rare","cantidad":1,"numeracion":"248","notas":"Baron Nashor · <0.1% de packs"}
+            ],
+            "mecanicas": [
+                {"kicker":"Recurso","name":"XP","desc":"Recurso que acumulas y puedes gastar para activar ventajas y efectos especiales."},
+                {"kicker":"Escalado","name":"Level","desc":"Las cartas con Level ganan beneficios cuando alcanzas cierta cantidad de XP."},
+                {"kicker":"XP","name":"Hunt","desc":"Cuando una unidad con Hunt conquista o mantiene un campo de batalla, ganas el XP indicado."},
+                {"kicker":"Reaction","name":"Ambush","desc":"Permite jugar una unidad como Reaction en un campo de batalla donde ya tienes unidades."}
             ]
         },
         "Vendetta": {
+            "id": "vendetta",
+            "abbr": "VEN",
+            "set_number": 4,
+            "color": "#e879a0",
+            "date": "Julio 2026",
             "cartas_reveladas": 0,
             "total": 166,
+            "total_base": 166,
+            "total_ovr": 0,
+            "imgBase": null,
+            "legend_count": 9,
+            "leyendas": [
+                "Nasus","Renekton","Akali","Zed","Shen","Ambessa","Mel"
+            ],
             "productos": [
                 "Booster Box (24 packs)",
                 "Showdown Decks: Zed vs Shen",
                 "Vault Bundle",
                 "Player Kit"
+            ],
+            "champion_decks": [],
+            "ovr_breakdown": [],
+            "mecanicas": [
+                {"kicker":"Producto","name":"Showdown Decks","desc":"Dos mazos enfrentados listos para jugar, centrados en el duelo Shen contra Zed."},
+                {"kicker":"Coleccionismo","name":"Duo Art","desc":"Variantes Showcase con composiciones de dos personajes, pensadas como piezas destacadas del set."}
             ]
         }
     },
@@ -72,6 +162,13 @@
             "Vendetta": {
                 "note": "Official pull rates for premium rarities not yet fully detailed, but booster pack contents are consistent with general rates."
             }
+        },
+        "per_box": {
+            "Epic": {"Origins":"~6 por caja","Spiritforged":"~6 por caja","Unleashed":"~5–6 por caja","Vendetta":"Sin publicar"},
+            "Showcase": {"Origins":"~2 por caja","Spiritforged":"~2 por caja","Unleashed":"~2 por caja","Vendetta":"Sin publicar"},
+            "Overnumbered": {"Origins":"1 cada 3 cajas","Spiritforged":"1 cada 3 cajas","Unleashed":"1 cada 3 cajas","Vendetta":"Sin publicar"},
+            "Signature": {"Origins":"1 cada 10 OVR","Spiritforged":"1 cada 10 OVR","Unleashed":"1 cada 10 OVR","Vendetta":"Sin publicar"},
+            "Ultimate_Rare": {"Origins":"No existe","Spiritforged":"No existe","Unleashed":"<0.1% de packs","Vendetta":"Sin confirmar"}
         }
     }
 }
