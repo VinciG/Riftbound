@@ -6,8 +6,8 @@
             "set_number": 1,
             "color": "#4a9eff",
             "date": "Octubre 2025",
-            "cartas_reveladas": 365,
-            "total": 365,
+            "cartas_reveladas": 377,
+            "total": 377,
             "total_base": 286,
             "total_ovr": 79,
             "imgBase": "https://cardgamer.com/wp-content/uploads/2025/06/",
@@ -70,10 +70,10 @@
             "set_number": 2,
             "color": "#3ecf8e",
             "date": "Febrero 2026",
-            "cartas_reveladas": 322,
-            "total": 322,
-            "total_base": 281,
-            "total_ovr": 41,
+            "cartas_reveladas": 221,
+            "total": 221,
+            "total_base": 161,
+            "total_ovr": 60,
             "imgBase": "https://cardgamer.com/wp-content/uploads/2026/01/",
             "legend_count": 12,
             "leyendas": [
@@ -106,21 +106,9 @@
             "ovr_breakdown": [
                 {
                     "tipo": "Alt-Art",
-                    "cantidad": 11,
+                    "cantidad": 60,
                     "numeracion": "—",
-                    "notas": "Cartas con arte alternativo"
-                },
-                {
-                    "tipo": "OVR base",
-                    "cantidad": 18,
-                    "numeracion": "222–239",
-                    "notas": "Numeración extendida"
-                },
-                {
-                    "tipo": "OVR con firma",
-                    "cantidad": 12,
-                    "numeracion": "240–251",
-                    "notas": "Arte + firma del artista"
+                    "notas": "Más de 60 cartas con arte alternativo"
                 }
             ],
             "mecanicas": [
@@ -157,10 +145,10 @@
             "set_number": 3,
             "color": "#f4a535",
             "date": "Mayo 2026",
-            "cartas_reveladas": 311,
-            "total": 311,
-            "total_base": 282,
-            "total_ovr": 29,
+            "cartas_reveladas": 219,
+            "total": 219,
+            "total_base": 169,
+            "total_ovr": 50,
             "imgBase": "https://cardgamer.com/wp-content/uploads/2026/03/",
             "legend_count": 12,
             "leyendas": [
@@ -193,15 +181,9 @@
             "ovr_breakdown": [
                 {
                     "tipo": "Showcase / Alt-Art",
-                    "cantidad": 21,
+                    "cantidad": 47,
                     "numeracion": "220–240",
                     "notas": "Arte alternativo de cartas selectas"
-                },
-                {
-                    "tipo": "OVR base",
-                    "cantidad": 5,
-                    "numeracion": "241–245",
-                    "notas": "Numeración extendida"
                 },
                 {
                     "tipo": "OVR con firma",
@@ -245,7 +227,7 @@
             "set_number": 4,
             "color": "#e879a0",
             "date": "Julio 2026",
-            "cartas_reveladas": 0,
+            "cartas_reveladas": 166,
             "total": 166,
             "total_base": 116,
             "total_ovr": 50,
@@ -268,7 +250,10 @@
                 "Themed Playmats",
                 "Rivalry-themed Art Sleeves"
             ],
-            "champion_decks": [],
+            "champion_decks": [
+                "Zed",
+                "Shen"
+            ],
             "ovr_breakdown": [
                 {
                     "tipo": "Showcase / Alt-Art / Duo Art",
