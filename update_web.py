@@ -103,7 +103,7 @@ for intento in range(intentos_maximos):
             contents=mensaje,
             config=types.GenerateContentConfig(
                 max_output_tokens=30000,
-                # Sintaxis correcta para activar Google Search en la nueva SDK
+                temperature=0.1,
                 tools=[{"google_search": {}}] 
             )
         )
