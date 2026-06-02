@@ -1057,32 +1057,6 @@ function buildChart(id, type, labels, datasets, opts={}) {
   });
 }
 
-// OVR chart
-const ovrCtx = document.getElementById('ovrChartOverview');
-if(ovrCtx) {
-  new Chart(ovrCtx, {
-    type:'bar',
-    data:{
-      labels:['Origins','Spiritforged','Unleashed','Vendetta'],
-      datasets:[
-        {label:'OVR base',data:[12,18,5,4],backgroundColor:'#4a9eff'},
-        {label:'OVR firma',data:[12,12,2,0],backgroundColor:'#85b7eb'},
-        {label:'Showcase/Alt-Art',data:[12,11,21,50],backgroundColor:'#3ecf8e'},
-        {label:'Ultimate Rare',data:[0,0,1,0],backgroundColor:'#f05252'}
-      ]
-    },
-    options:{
-      responsive:true, maintainAspectRatio:false,
-      plugins:{legend:{display:false}},
-      scales:{
-        x:{ticks:{color:tickColor},grid:{color:gridColor}},
-        y:{ticks:{color:tickColor,stepSize:5},grid:{color:gridColor},
-           title:{display:true,text:'cartas',color:tickColor}}
-      }
-    }
-  });
-}
-
 // Probability charts
 function makeProbChart(id, horiz) {
   const ctx = document.getElementById(id);
@@ -1144,11 +1118,6 @@ function makePacksChart(id, horiz) {
   });
 }
 
-makeProbChart('probChartOverview');
-makePacksChart('packsChartOverview');
-makeProbChart('probChartRates',true);
-makePacksChart('packsChartRates',true);
-
 // ===== INIT (after buildPage creates DOM) =====
 buildPage().then(() => {
   Object.keys(SETS).filter(k => k !== 'vendetta').forEach(renderSet);
@@ -1176,6 +1145,36 @@ buildPage().then(() => {
       gridV.appendChild(card);
     });
   }
+
+  // Charts (must run after DOM is built)
+  const ovrCtx = document.getElementById('ovrChartOverview');
+  if(ovrCtx) {
+    new Chart(ovrCtx, {
+      type:'bar',
+      data:{
+        labels:['Origins','Spiritforged','Unleashed','Vendetta'],
+        datasets:[
+          {label:'OVR base',data:[12,18,5,4],backgroundColor:'#4a9eff'},
+          {label:'OVR firma',data:[12,12,2,0],backgroundColor:'#85b7eb'},
+          {label:'Showcase/Alt-Art',data:[12,11,21,50],backgroundColor:'#3ecf8e'},
+          {label:'Ultimate Rare',data:[0,0,1,0],backgroundColor:'#f05252'}
+        ]
+      },
+      options:{
+        responsive:true, maintainAspectRatio:false,
+        plugins:{legend:{display:false}},
+        scales:{
+          x:{ticks:{color:tickColor},grid:{color:gridColor}},
+          y:{ticks:{color:tickColor,stepSize:5},grid:{color:gridColor},
+             title:{display:true,text:'cartas',color:tickColor}}
+        }
+      }
+    });
+  }
+  makeProbChart('probChartOverview');
+  makePacksChart('packsChartOverview');
+  makeProbChart('probChartRates',true);
+  makePacksChart('packsChartRates',true);
 });
 </script>
 </body>

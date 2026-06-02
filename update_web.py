@@ -120,7 +120,7 @@ REGLAS CRÍTICAS:
 5. NO INVENTES URLs. Si no encuentras una URL oficial de imágenes (de riotgames.com, riftbound.leagueoflegends.com, riftbound.gg o cardgamer.com), pon "imgBase": null.
 6. NO CAMBIES champion_decks ni mecánicas de expansiones existentes a menos que tengas confirmación en fuente oficial publicada por Riot Games.
 7. Todo debe estar contrastado con fuentes oficiales de Riot Games, riftbound.leagueoflegends.com, riftbound.gg o cardgamer.com. No uses otras webs.
-8. Si cambias total, total_base o total_ovr de un set ya lanzado, DEBES incluir el campo "_source_url": "URL_DE_LA_FUENTE" dentro de ese set. Sin ese campo, el cambio será RECHAZADO automáticamente.
+8. Si cambias total, total_base o total_ovr de un set ya lanzado, DEBES incluir el campo "_source_url": "URL_DE_LA_FUENTE" dentro de ese set. La URL debe ser de riftbound.leagueoflegends.com, riftbound.gg o cardgamer.com. Sin ese campo o con URL no válida, el cambio será RECHAZADO automáticamente.
 """
 
 # Ejecución con control de cuota
@@ -183,16 +183,25 @@ try:
             if campo not in s:
                 raise ValueError(f"Falta campo '{campo}' en {exp}")
 
-    # Validar Regla 8: cambios en totals requieren _source_url
+    FUENTES_VALIDAS = ["riftbound.leagueoflegends.com", "riftbound.gg", "cardgamer.com"]
+
+    # Validar Regla 8: cambios en totals requieren _source_url de fuente válida
     for exp in EXPANSIONES:
         old = datos_actuales.get("sets", {}).get(exp, {})
         new = datos_nuevos["sets"][exp]
         for campo in ["total", "total_base", "total_ovr"]:
-            if old.get(campo) != new.get(campo) and "_source_url" not in new:
-                raise ValueError(
-                    f"Regla 8 violada: {exp}.{campo} cambió de {old.get(campo)} a {new.get(campo)} "
-                    f"sin incluir '_source_url' en el set. Cambio rechazado."
-                )
+            if old.get(campo) != new.get(campo):
+                url = new.get("_source_url", "")
+                if not url:
+                    raise ValueError(
+                        f"Regla 8 violada: {exp}.{campo} cambió de {old.get(campo)} a {new.get(campo)} "
+                        f"sin incluir '_source_url'. Cambio rechazado."
+                    )
+                if not any(dom in url for dom in FUENTES_VALIDAS):
+                    raise ValueError(
+                        f"Regla 8 violada: {exp}.{campo} cambió de {old.get(campo)} a {new.get(campo)} "
+                        f"con _source_url '{url}' que no es de fuente válida ({', '.join(FUENTES_VALIDAS)}). Cambio rechazado."
+                    )
 
 except (json.JSONDecodeError, ValueError) as e:
     print(f"❌ Validación fallida: {e}")
