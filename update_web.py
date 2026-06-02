@@ -119,7 +119,7 @@ REGLAS CRÍTICAS:
 4. Para expansiones existentes, mantén los campos que no cambien.
 5. NO INVENTES URLs. Si no encuentras una URL oficial de imágenes (de riotgames.com o riftbound.leagueoflegends.com), pon "imgBase": null.
 6. NO CAMBIES champion_decks ni mecánicas de expansiones existentes a menos que tengas confirmación en fuente oficial publicada por Riot Games.
-7. Todo debe estar contrastado con fuentes oficiales de Riot Games o riftbound.leagueoflegends.com. No uses otras webs.
+7. Todo debe estar contrastado con fuentes oficiales de Riot Games, riftbound.leagueoflegends.com o cardgamer.com. No uses otras webs.
 """
 
 # Ejecución con control de cuota
