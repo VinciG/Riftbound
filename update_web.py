@@ -9,6 +9,7 @@ genai.configure(api_key=os.environ["GEMINI_API_KEY"])
 model = genai.GenerativeModel(
     model_name="gemini-1.5-flash",
     generation_config={"max_output_tokens": 16000}
+    tools=[{"google_search": {}}]
 )
 
 mensaje = f"""Eres un experto en el TCG Riftbound (el juego de cartas de League of Legends).
