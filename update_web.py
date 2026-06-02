@@ -120,7 +120,7 @@ REGLAS CRÍTICAS:
 5. NO INVENTES URLs. Si no encuentras una URL oficial de imágenes (de riotgames.com, riftbound.leagueoflegends.com, riftbound.gg o cardgamer.com), pon "imgBase": null.
 6. NO CAMBIES champion_decks ni mecánicas de expansiones existentes a menos que tengas confirmación en fuente oficial publicada por Riot Games.
 7. Todo debe estar contrastado con fuentes oficiales de Riot Games, riftbound.leagueoflegends.com, riftbound.gg o cardgamer.com. No uses otras webs.
-8. Si el total, total_base o total_ovr de un set ya lanzado cambia respecto al JSON actual, DEBES incluir la URL exacta de la fuente que respalda ese cambio.
+8. Si cambias total, total_base o total_ovr de un set ya lanzado, DEBES incluir el campo "_source_url": "URL_DE_LA_FUENTE" dentro de ese set. Sin ese campo, el cambio será RECHAZADO automáticamente.
 """
 
 # Ejecución con control de cuota
@@ -183,6 +183,17 @@ try:
             if campo not in s:
                 raise ValueError(f"Falta campo '{campo}' en {exp}")
 
+    # Validar Regla 8: cambios en totals requieren _source_url
+    for exp in EXPANSIONES:
+        old = datos_actuales.get("sets", {}).get(exp, {})
+        new = datos_nuevos["sets"][exp]
+        for campo in ["total", "total_base", "total_ovr"]:
+            if old.get(campo) != new.get(campo) and "_source_url" not in new:
+                raise ValueError(
+                    f"Regla 8 violada: {exp}.{campo} cambió de {old.get(campo)} a {new.get(campo)} "
+                    f"sin incluir '_source_url' en el set. Cambio rechazado."
+                )
+
 except (json.JSONDecodeError, ValueError) as e:
     print(f"❌ Validación fallida: {e}")
     print("Respuesta cruda:", texto_respuesta)
@@ -191,6 +202,17 @@ except (json.JSONDecodeError, ValueError) as e:
 # ==========================================
 # Guardar únicamente si hay cambios reales
 # ==========================================
+# Limpiar campo interno _source_url antes de guardar
+source_urls_used = []
+for exp in EXPANSIONES:
+    new = datos_nuevos["sets"][exp]
+    if "_source_url" in new:
+        source_urls_used.append(f"  {exp}: {new.pop('_source_url')}")
+if source_urls_used:
+    print("URLs fuente reportadas por el AI:")
+    for line in source_urls_used:
+        print(line)
+
 if datos_nuevos == datos_actuales:
     print("ℹ️ No se detectaron novedades en las fuentes oficiales.")
     exit(0)
