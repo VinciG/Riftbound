@@ -1,16 +1,22 @@
 import os
+import time
 from google import genai
 from google.genai import types
+from google.genai.errors import ClientError
 
 # ==========================================
 # Leer HTML actual
 # ==========================================
 
+if not os.path.exists("index.html"):
+    print("❌ Error: No se encuentra el archivo index.html")
+    exit(1)
+
 with open("index.html", "r", encoding="utf-8") as f:
     html_actual = f.read()
 
 # ==========================================
-# Gemini
+# Gemini Configuration
 # ==========================================
 
 client = genai.Client()
@@ -81,18 +87,44 @@ HTML ACTUAL:
 {html_actual}
 """
 
-response = client.models.generate_content(
-    model="gemini-2.5-flash",
-    contents=mensaje,
-    config=types.GenerateContentConfig(
-        max_output_tokens=30000,
-        tools=[
-            types.Tool(
-                google_search=types.GoogleSearch()
+# ==========================================
+# Ejecución con control de cuota (Manejo de Error 429)
+# ==========================================
+
+intentos_maximos = 3
+espera_inicial = 10  # segundos a esperar si da error 429
+response = None
+
+for intento in range(intentos_maximos):
+    try:
+        print(f"🚀 Enviando solicitud a Gemini (Intento {intento + 1}/{intentos_maximos})...")
+        response = client.models.generate_content(
+            model="gemini-2.5-flash",
+            contents=mensaje,
+            config=types.GenerateContentConfig(
+                max_output_tokens=30000,
+                # Sintaxis correcta para activar Google Search en la nueva SDK
+                tools=[{"google_search": {}}] 
             )
-        ]
-    )
-)
+        )
+        # Si la llamada es exitosa, rompemos el bucle de reintentos
+        break
+    except ClientError as e:
+        if e.code == 429:
+            print(f"⚠️ Error 429: Límite de cuota alcanzado. Esperando {espera_inicial} segundos antes de reintentar...")
+            time.sleep(espera_inicial)
+            espera_inicial *= 2  # Aumenta el tiempo de espera para el siguiente intento
+        else:
+            # Si es otro tipo de error de cliente (400, 403, 404, etc.), fallamos inmediatamente
+            print(f"❌ Error de API: {e}")
+            exit(1)
+    except Exception as e:
+        print(f"❌ Error inesperado: {e}")
+        exit(1)
+
+if not response:
+    print("❌ Se agotaron los intentos debido a límites de cuota (429).")
+    exit(1)
 
 html_nuevo = response.text.strip()
 
@@ -145,4 +177,4 @@ if html_nuevo == html_actual:
 with open("index.html", "w", encoding="utf-8") as f:
     f.write(html_nuevo)
 
-print("✅ HTML actualizado")
+print("✅ HTML actualizado con éxito")
