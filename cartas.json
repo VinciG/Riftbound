@@ -6,10 +6,10 @@
             "set_number": 1,
             "color": "#4a9eff",
             "date": "Octubre 2025",
-            "cartas_reveladas": 353,
-            "total": 322,
+            "cartas_reveladas": 377,
+            "total": 377,
             "total_base": 298,
-            "total_ovr": 24,
+            "total_ovr": 79,
             "imgBase": "https://cardgamer.com/wp-content/uploads/2025/06/",
             "legend_count": 12,
             "leyendas": [
@@ -47,18 +47,18 @@
                     "tipo": "Alt-Art",
                     "cantidad": 12,
                     "numeracion": "—",
-                    "notas": "Unidad Campeón con skin alternativo · ~2 por caja"
+                    "notas": "Unidad Campeón con skin alternativo"
                 },
                 {
                     "tipo": "OVR base",
-                    "cantidad": 12,
-                    "numeracion": "299–310",
+                    "cantidad": 60,
+                    "numeracion": "299–358",
                     "notas": "Leyenda con arte de artista de Riot"
                 },
                 {
                     "tipo": "OVR con firma",
-                    "cantidad": 12,
-                    "numeracion": "311–322",
+                    "cantidad": 7,
+                    "numeracion": "359–365",
                     "notas": "OVR + firma foil del artista"
                 }
             ],
@@ -254,10 +254,10 @@
                 "Nasus",
                 "Renekton",
                 "Akali",
-                "Zed",
-                "Shen",
+                "Mel",
                 "Ambessa",
-                "Mel"
+                "Zed",
+                "Shen"
             ],
             "productos": [
                 "Booster Box (24 packs)",
@@ -306,7 +306,7 @@
             "set_number": 5,
             "color": "#FFD700",
             "date": "Octubre 2026",
-            "cartas_reveladas": 0,
+            "cartas_reveladas": 3,
             "total": 180,
             "total_base": 120,
             "total_ovr": 60,
@@ -322,7 +322,9 @@
             "productos": [
                 "Booster Packs",
                 "Booster Box",
-                "Showdown Decks: Seraphine vs Evelynn"
+                "Showdown Decks: Seraphine vs Evelynn",
+                "Radiance Vault",
+                "Pre-Rift event kits"
             ],
             "champion_decks": [
                 "Seraphine",
@@ -340,7 +342,7 @@
                 {
                     "kicker": "Tema",
                     "name": "Brilliance and Creativity",
-                    "desc": "Explora la brillantez y la creatividad a través de Runeterra."
+                    "desc": "Explora la brillantez y la creatividad a través de Runeterra, con un enfoque en el rendimiento, grandes jugadas o grandes turnos."
                 }
             ]
         }
@@ -393,7 +395,7 @@
                 "Radiance": "Sin publicar"
             },
             "Signature": {
-                "Origins": "1 cada 10 OVR",
+                "Origins": "1 cada 30 cajas",
                 "Spiritforged": "1 cada 10 OVR",
                 "Unleashed": "1 cada 10 OVR",
                 "Vendetta": "Sin publicar",
