@@ -895,7 +895,7 @@ async function buildPage() {
     document.getElementById('overview-metrics').appendChild(om);
     const lb = document.createElement('div');
     lb.className = 'mcard'; lb.style.setProperty('--accent', s.color);
-    lb.innerHTML = `<div class="mcard-label">${k} · ${s.date}</div><div class="mcard-num">${s.legend_count}</div><div class="mcard-sub">${s.leyendas.join(' · ')}</div>`;
+    lb.innerHTML = `<div class="mcard-label">${k} · ${s.date}</div><div class="mcard-num">${s.legend_count}</div><div class="mcard-sub">${s.leyendas.map(l => typeof l === 'string' ? l : l.name).join(' · ')}</div>`;
     document.getElementById('legends-by-set').appendChild(lb);
   }
 
