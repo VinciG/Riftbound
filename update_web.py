@@ -80,7 +80,7 @@ ESTRUCTURA JSON REQUERIDA (debes devolver EXACTAMENTE este formato):
             "imgBase": "URL base de imágenes (o null si no hay)",
             "legend_count": número de leyendas,
             "leyendas": [
-                {"name": "Nombre del campeón", "img": "URL directa de la imagen (o null si no encuentras)"}
+                {{"name": "Nombre del campeón", "img": "URL directa de la imagen (o null si no encuentras)"}}
             ],
             "productos": ["Lista", "de", "productos"],
             "champion_decks": ["Campeones", "con", "Champion Deck"],
@@ -117,8 +117,8 @@ DATA ACTUAL:
 FORMATO DE LEYENDAS:
 Cada leyenda es un objeto con "name" (obligatorio) e "img" (opcional, URL directa de la imagen de la carta o null). Ejemplo:
 "leyendas": [
-    {"name": "Evelynn", "img": "https://cardgamer.com/.../imagen.png"},
-    {"name": "Ekko", "img": null}
+    {{"name": "Evelynn", "img": "https://cardgamer.com/.../imagen.png"}},
+    {{"name": "Ekko", "img": null}}
 ]
 
 REGLAS CRÍTICAS:
