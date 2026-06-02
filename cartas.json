@@ -6,8 +6,8 @@
             "set_number": 1,
             "color": "#4a9eff",
             "date": "Octubre 2025",
-            "cartas_reveladas": 377,
-            "total": 377,
+            "cartas_reveladas": 365,
+            "total": 365,
             "total_base": 286,
             "total_ovr": 79,
             "imgBase": "https://cardgamer.com/wp-content/uploads/2025/06/",
@@ -70,9 +70,9 @@
             "set_number": 2,
             "color": "#3ecf8e",
             "date": "Febrero 2026",
-            "cartas_reveladas": 251,
-            "total": 251,
-            "total_base": 221,
+            "cartas_reveladas": 322,
+            "total": 322,
+            "total_base": 292,
             "total_ovr": 30,
             "imgBase": "https://cardgamer.com/wp-content/uploads/2026/01/",
             "legend_count": 12,
@@ -157,9 +157,9 @@
             "set_number": 3,
             "color": "#f4a535",
             "date": "Mayo 2026",
-            "cartas_reveladas": 248,
-            "total": 248,
-            "total_base": 219,
+            "cartas_reveladas": 311,
+            "total": 311,
+            "total_base": 282,
             "total_ovr": 29,
             "imgBase": "https://cardgamer.com/wp-content/uploads/2026/03/",
             "legend_count": 12,
@@ -275,15 +275,9 @@
             "ovr_breakdown": [
                 {
                     "tipo": "Showcase / Alt-Art / Duo Art",
-                    "cantidad": 50,
+                    "cantidad": "50+",
                     "numeracion": "—",
-                    "notas": "Más de 50 cartas Showcase, incluyendo dúos rivales como Vi y Jinx, Jayce y Viktor."
-                },
-                {
-                    "tipo": "Overnumbered",
-                    "cantidad": "Desconocido",
-                    "numeracion": "—",
-                    "notas": "Variantes Overnumbered confirmadas."
+                    "notas": "Más de 50 cartas Showcase, incluyendo variantes Overnumbered y dúos rivales como Vi y Jinx, Jayce y Viktor."
                 }
             ],
             "mecanicas": [
@@ -337,7 +331,7 @@
             "ovr_breakdown": [
                 {
                     "tipo": "Showcase",
-                    "cantidad": 60,
+                    "cantidad": "60+",
                     "numeracion": "—",
                     "notas": "Más de 60 cartas Showcase."
                 }
