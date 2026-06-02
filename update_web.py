@@ -117,9 +117,10 @@ REGLAS CRÍTICAS:
 2. No incluyas explicaciones, markdown, ni texto extra.
 3. Si no hay cambios, devuelve el mismo JSON exacto que te di.
 4. Para expansiones existentes, mantén los campos que no cambien.
-5. NO INVENTES URLs. Si no encuentras una URL oficial de imágenes (de riotgames.com o riftbound.leagueoflegends.com), pon "imgBase": null.
+5. NO INVENTES URLs. Si no encuentras una URL oficial de imágenes (de riotgames.com, riftbound.leagueoflegends.com, riftbound.gg o cardgamer.com), pon "imgBase": null.
 6. NO CAMBIES champion_decks ni mecánicas de expansiones existentes a menos que tengas confirmación en fuente oficial publicada por Riot Games.
-7. Todo debe estar contrastado con fuentes oficiales de Riot Games, riftbound.leagueoflegends.com o cardgamer.com. No uses otras webs.
+7. Todo debe estar contrastado con fuentes oficiales de Riot Games, riftbound.leagueoflegends.com, riftbound.gg o cardgamer.com. No uses otras webs.
+8. Si el total, total_base o total_ovr de un set ya lanzado cambia respecto al JSON actual, DEBES incluir la URL exacta de la fuente que respalda ese cambio.
 """
 
 # Ejecución con control de cuota
