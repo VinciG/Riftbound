@@ -1,0 +1,77 @@
+{
+    "sets": {
+        "Origins": {
+            "cartas_reveladas": 353,
+            "total": 353,
+            "productos": [
+                "Booster Packs",
+                "Booster Display (24 packs)",
+                "Proving Grounds Box Set",
+                "Champion Deck: Jinx",
+                "Champion Deck: Viktor",
+                "Champion Deck: Lee Sin",
+                "Art Sleeves: Miss Fortune",
+                "Art Sleeves: Volibear",
+                "Art Sleeves: Jinx"
+            ]
+        },
+        "Spiritforged": {
+            "cartas_reveladas": 302,
+            "total": 302,
+            "productos": [
+                "Booster Packs",
+                "Booster Box",
+                "Booster Display Case",
+                "Champion Deck: Rumble",
+                "Champion Deck: Fiora",
+                "Art Sleeves: Spirit Blossom Teemo",
+                "Art Sleeves: Spirit Blossom Darius"
+            ]
+        },
+        "Unleashed": {
+            "cartas_reveladas": 299,
+            "total": 299,
+            "productos": [
+                "Booster Packs",
+                "Booster Display (24 packs)",
+                "Champion Deck: Vi",
+                "Champion Deck: Vex",
+                "Art Sleeves: Vi",
+                "Art Sleeves: Master Yi"
+            ]
+        },
+        "Vendetta": {
+            "cartas_reveladas": 0,
+            "total": 166,
+            "productos": [
+                "Booster Box (24 packs)",
+                "Showdown Decks: Zed vs Shen",
+                "Vault Bundle",
+                "Player Kit"
+            ]
+        }
+    },
+    "pull_rates": {
+        "general_booster_pack_contents": {
+            "Common": "7 per pack",
+            "Uncommon": "3 per pack",
+            "Rare_or_better": "2 per pack",
+            "Foil_any_rarity": "1 per pack",
+            "Rune_Token_slot": "1 per pack"
+        },
+        "rarity_odds": {
+            "Epic": "1 in 4 packs (replaces a Rare slot)",
+            "Alternate_Art_Origins": "1 in 12 packs (approx. 2 per booster box)",
+            "Overnumbered": "1 in 72 packs (1 in 3 booster boxes)",
+            "Signed": "1 in 720 packs (1 in 30 booster boxes)"
+        },
+        "set_specific": {
+            "Unleashed": {
+                "Ultimate_Rare": "Less than 0.1% of packs (e.g., Baron Nashor)"
+            },
+            "Vendetta": {
+                "note": "Official pull rates for premium rarities not yet fully detailed, but booster pack contents are consistent with general rates."
+            }
+        }
+    }
+}
