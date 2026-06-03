@@ -1,6 +1,9 @@
 import os
 import json
 import time
+import re
+import urllib.request
+import urllib.error
 from google import genai
 from google.genai import types
 from google.genai.errors import ClientError
@@ -66,10 +69,84 @@ if os.path.exists(cardmarket_prices_file):
     with open(cardmarket_prices_file, "r", encoding="utf-8-sig") as f:
         cardmarket_prices_actual = json.load(f)
 
+# ==========================================
+# Obtener precios reales desde tcggo.com
+# ==========================================
+TCCGO_URLS = {
+    "origins": ["https://www.tcggo.com/riftbound/origins-main-set"],
+    "spiritforged": ["https://www.tcggo.com/riftbound/spiritforged"],
+    "unleashed": ["https://www.tcggo.com/riftbound/unleashed"],
+}
+
+def fetch_tcggo_prices(set_id, urls, legends):
+    """Fetch a tcggo.com listing page and extract card prices."""
+    html = None
+    for url in urls:
+        try:
+            req = urllib.request.Request(url, headers={
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+            })
+            with urllib.request.urlopen(req, timeout=20) as resp:
+                html = resp.read().decode("utf-8", errors="replace")
+            print(f"  tcggo {set_id} ({len(html)} bytes)")
+            break
+        except Exception as e:
+            print(f"  tcggo {set_id} error: {e}")
+    if not html:
+        return {}
+
+    epic_prices = {}
+    legend_prices = {}
+
+    for m in re.finditer(r'(?:Price|actual price)\s+([\d.,]+)\s*€', html, re.IGNORECASE):
+        price_raw = m.group(1).replace(",", ".")
+        if "." not in price_raw:
+            price_raw += ".00"
+        price_formatted = f"€{price_raw}"
+
+        before = html[max(0, m.start() - 250):m.start()]
+
+        # Extract set code → epic ID (e.g. "UNL-192/219" → "unl-192-219")
+        code_m = re.search(r'([A-Z]{3})-(\d+[a-z]*)/(\d+)', before)
+        if code_m and code_m.group(1) in SET_CODE_MAP and SET_CODE_MAP[code_m.group(1)] == set_id:
+            key = f"{code_m.group(1).lower()}-{code_m.group(2)}-{code_m.group(3)}"
+            epic_prices[key] = price_formatted
+
+        # Match champion name within last 80 chars (the card's own title, not prev card)
+        card_title = html[max(0, m.start() - 80):m.start()]
+        for leg in legends:
+            if leg and leg in card_title:
+                legend_prices[leg] = price_formatted
+
+    # Merge: epic prices + legend prices (epic wins on conflict)
+    prices = {}
+    prices.update(legend_prices)
+    prices.update(epic_prices)
+    return prices
+
+# Build legend name list per set
+legends_per_set = {}
+for s_name, s_data in datos_actuales.get("sets", {}).items():
+    sid = s_data.get("id")
+    names = []
+    for leg in s_data.get("leyendas", []):
+        n = leg.get("name") if isinstance(leg, dict) else (leg if isinstance(leg, str) else None)
+        if n:
+            names.append(n)
+    legends_per_set[sid] = names
+
+# Fetch all tcggo prices (only for sets with URLs)
+for set_id, urls in TCCGO_URLS.items():
+    if set_id in cardmarket_prices_actual:
+        fetched = fetch_tcggo_prices(set_id, urls, legends_per_set.get(set_id, []))
+        for key, val in fetched.items():
+            cardmarket_prices_actual[set_id][key] = val
+        print(f"  → {len(fetched)} precios obtenidos para {set_id}")
+
+# ==========================================
 # Cargar datos de cartas épicas para pasarlos al prompt
 epic_data_raw = {}
 try:
-    import re
     with open("epic-cards.js", "r", encoding="utf-8") as f:
         content = f.read()
     match = re.search(r"window\.EPIC_CARD_DATA\s*=\s*(\{.+?\});", content, re.DOTALL)
@@ -170,36 +247,10 @@ CARTAS ÉPICAS EXISTENTES (inclúyelas todas en cardmarket_prices):
 PRECIOS DE CARDMARKET ACTUALES (actualiza o añade según corresponda):
 {json.dumps(cardmarket_prices_actual, indent=2, ensure_ascii=False)}
 
-CÓMO ENCONTRAR PRECIOS DE CARDMARKET:
-
-tcggo.com tiene páginas de listado que muestran TODAS las cartas de un set con sus precios en EUR.
-Usa fetch directo a esas páginas y extrae los precios del HTML. Es MUCHO más eficiente que buscar carta por carta.
-
-1. Para CADA set, haz fetch a la páginas de listado de tcggo.com.
-   Las URLs correctas son (SIN /singles al final):
-   https://www.tcggo.com/riftbound/origins-main-set   (Origins)
-   https://www.tcggo.com/riftbound/spiritforged        (Spiritforged)
-   https://www.tcggo.com/riftbound/unleashed           (Unleashed)
-   (Vendetta puede que aun no tenga página en tcggo.com)
-
-2. Busca en el HTML el patrón de cada carta:
-   Ejemplo real del HTML de tcggo.com:
-   "Baron Nashor ... Price 800 €"
-   "Elder Dragon ... Price 16,00 €"
-   "Alpha Strike ... Price 1,50 €"
-   "Kai'Sa - Evolutionary ... actual price 0,02 €"
-
-3. Para cada carta en el listado, identifica su precio y asígnalo:
-   - Para leyendas: usa el nombre del campeón como clave (ej. "Kai'Sa")
-   - Para épicas: usa el ID de la carta como clave (ej. "unl-192-219")
-   El precio viene como "XX,XX €" o "XXX €".
-   Conviértelo a formato "€X.XX": 0,02 € → "€0.02", 800 € → "€800.00"
-
-4. Si una página no carga o no tiene suficientes cartas, busca con Google:
-   site:tcggo.com/riftbound "NOMBRE_DE_LA_CARTA"
-   Los snippets incluyen el precio (ej. "actual price 0,02 €")
-
-5. Para cartas sin precio, pon null.
+Los precios ya se han obtenido de tcggo.com y están incluidos abajo.
+Si faltan precios, puedes buscarlos con Google:
+site:tcggo.com/riftbound "NOMBRE_DE_LA_CARTA"
+Los snippets incluyen el precio (ej. "actual price 0,02 €")
 
 NO construyas URLs de Cardmarket — solo necesitamos el PRECIO.
 
@@ -213,7 +264,7 @@ REGLAS CRÍTICAS:
 7. Todo debe estar contrastado con fuentes oficiales de Riot Games, riftbound.leagueoflegends.com, riftbound.gg o cardgamer.com. No uses otras webs.
 8. Si cambias total, total_base o total_ovr de un set ya lanzado, DEBES incluir el campo "_source_url": "URL_DE_LA_FUENTE" dentro de ese set. La URL debe ser de riftbound.leagueoflegends.com, riftbound.gg o cardgamer.com. Sin ese campo o con URL no válida, el cambio será RECHAZADO automáticamente.
 9. Para el campo "img" de cada leyenda, usa SOLO URLs de cardgamer.com, riftbound.leagueoflegends.com o riftbound.gg. Si no encuentras la URL exacta de la imagen, pon null.
-10. cardmarket_prices debe contener TODAS las cartas (leyendas + épicas). Usa los pasos 1-5 arriba para encontrar cada precio. Si no hay precio visible, pon null.
+10. cardmarket_prices debe contener TODAS las cartas. Los precios ya vienen pre-llenados de tcggo.com arriba. Si faltan, busca con Google site:tcggo.com. Si no hay precio, pon null.
 """
 
 # Ejecución con control de cuota
@@ -312,6 +363,16 @@ except (json.JSONDecodeError, ValueError) as e:
     print(f"❌ Validación fallida: {e}")
     print("Respuesta cruda:", texto_respuesta)
     exit(0)
+
+# ==========================================
+# Merge: conservar precios de tcggo si AI devuelve null
+# ==========================================
+for set_id, entries in cardmarket_prices.items():
+    for key, val in entries.items():
+        if val is None and set_id in cardmarket_prices_actual and key in cardmarket_prices_actual[set_id]:
+            ai_val = cardmarket_prices_actual[set_id][key]
+            if ai_val is not None:
+                cardmarket_prices[set_id][key] = ai_val
 
 # ==========================================
 # Guardar cardmarket_prices.json (precios)
