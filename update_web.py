@@ -72,11 +72,14 @@ if os.path.exists(cardmarket_prices_file):
 # ==========================================
 # Obtener precios reales desde tcggo.com
 # ==========================================
-TCCGO_URLS = {
-    "origins": ["https://www.tcggo.com/riftbound/origins-main-set"],
-    "spiritforged": ["https://www.tcggo.com/riftbound/spiritforged"],
-    "unleashed": ["https://www.tcggo.com/riftbound/unleashed"],
+# Override slugs para sets cuyo slug en tcggo difiere del internal ID
+TCCGO_SLUG_OVERRIDES = {
+    "origins": "origins-main-set",
 }
+
+def tcggo_urls_for_set(set_id):
+    slug = TCCGO_SLUG_OVERRIDES.get(set_id, set_id)
+    return [f"https://www.tcggo.com/riftbound/{slug}"]
 
 def fetch_tcggo_prices(set_id, urls, legends):
     """Fetch a tcggo.com listing page and extract card prices."""
@@ -135,13 +138,21 @@ for s_name, s_data in datos_actuales.get("sets", {}).items():
             names.append(n)
     legends_per_set[sid] = names
 
-# Fetch all tcggo prices (only for sets with URLs)
-for set_id, urls in TCCGO_URLS.items():
-    if set_id in cardmarket_prices_actual:
-        fetched = fetch_tcggo_prices(set_id, urls, legends_per_set.get(set_id, []))
-        for key, val in fetched.items():
-            cardmarket_prices_actual[set_id][key] = val
+# Fetch tcggo prices for all known sets (generates URL from set ID)
+for set_id in list(cardmarket_prices_actual.keys()):
+    urls = tcggo_urls_for_set(set_id)
+    fetched = fetch_tcggo_prices(set_id, urls, legends_per_set.get(set_id, []))
+    for key, val in fetched.items():
+        cardmarket_prices_actual[set_id][key] = val
+    if fetched:
         print(f"  → {len(fetched)} precios obtenidos para {set_id}")
+
+# ==========================================
+# Guardar cardmarket_prices.json con los precios de tcggo.com
+# ==========================================
+with open(cardmarket_prices_file, "w", encoding="utf-8") as f:
+    json.dump(cardmarket_prices_actual, f, indent=4, ensure_ascii=False)
+print(f"✅ 'cardmarket_prices.json' guardado con precios de tcggo.com.")
 
 # ==========================================
 # Cargar datos de cartas épicas para pasarlos al prompt
@@ -208,23 +219,6 @@ ESTRUCTURA JSON REQUERIDA (debes devolver EXACTAMENTE este formato):
         "per_box": {{
             "rareza": {{"Origins":"texto","Spiritforged":"texto","Unleashed":"texto","Vendetta":"texto"}}
         }}
-    }},
-    "cardmarket_prices": {{
-        "origins": {{
-            "Kai'Sa": "€0.90 o null",
-            "ogn-039-298": "€1.50 o null"
-        }},
-        "spiritforged": {{
-            "Rumble": "€0.80 o null",
-            "sfd-027-221": "€1.20 o null"
-        }},
-        "unleashed": {{
-            "Jhin": "€1.10 o null",
-            "unl-022a-219": "€0.95 o null"
-        }},
-        "vendetta": {{
-            "Nasus": null
-        }}
     }}
 }}
 
@@ -234,25 +228,11 @@ TAREAS:
 3. Mantener productos, ovr_breakdown, mecanicas por cada expansión.
 4. Actualizar pull_rates si hay cambios oficiales.
 5. Para expansiones NUEVAS, rellena todos los campos con la información disponible.
-6. Extraer o actualizar los PRECIOS de Cardmarket para TODAS las cartas en cardmarket_prices.
-   Las claves son: nombre de leyenda (ej. "Kai'Sa") o ID de carta épica (ej. "ogn-039-298").
-   El valor es el precio en formato "€XX.XX" (ej. "€0.90") si se encuentra, o null si no.
-
 DATA ACTUAL DE SETS:
 {json.dumps(datos_actuales, indent=2, ensure_ascii=False)}
 
-CARTAS ÉPICAS EXISTENTES (inclúyelas todas en cardmarket_prices):
+CARTAS ÉPICAS EXISTENTES (referencia para datos del set):
 {epic_list_str}
-
-PRECIOS DE CARDMARKET ACTUALES (actualiza o añade según corresponda):
-{json.dumps(cardmarket_prices_actual, indent=2, ensure_ascii=False)}
-
-Los precios ya se han obtenido de tcggo.com y están incluidos abajo.
-Si faltan precios, puedes buscarlos con Google:
-site:tcggo.com/riftbound "NOMBRE_DE_LA_CARTA"
-Los snippets incluyen el precio (ej. "actual price 0,02 €")
-
-NO construyas URLs de Cardmarket — solo necesitamos el PRECIO.
 
 REGLAS CRÍTICAS:
 1. Devuelve EXCLUSIVAMENTE el objeto JSON actualizado exactamente con la estructura de arriba.
@@ -264,7 +244,6 @@ REGLAS CRÍTICAS:
 7. Todo debe estar contrastado con fuentes oficiales de Riot Games, riftbound.leagueoflegends.com, riftbound.gg o cardgamer.com. No uses otras webs.
 8. Si cambias total, total_base o total_ovr de un set ya lanzado, DEBES incluir el campo "_source_url": "URL_DE_LA_FUENTE" dentro de ese set. La URL debe ser de riftbound.leagueoflegends.com, riftbound.gg o cardgamer.com. Sin ese campo o con URL no válida, el cambio será RECHAZADO automáticamente.
 9. Para el campo "img" de cada leyenda, usa SOLO URLs de cardgamer.com, riftbound.leagueoflegends.com o riftbound.gg. Si no encuentras la URL exacta de la imagen, pon null.
-10. cardmarket_prices debe contener TODAS las cartas. Los precios ya vienen pre-llenados de tcggo.com arriba. Si faltan, busca con Google site:tcggo.com. Si no hay precio, pon null.
 """
 
 # Ejecución con control de cuota
@@ -314,9 +293,6 @@ elif "```" in texto_respuesta:
 try:
     datos_nuevos = json.loads(texto_respuesta)
 
-    # Extraer cardmarket_prices (acepta también clave antigua "cardmarket_urls" por si acaso)
-    cardmarket_prices = datos_nuevos.pop("cardmarket_prices", datos_nuevos.pop("cardmarket_urls", {}))
-
     # Verificación de que no eliminó las expansiones clave
     for exp in EXPANSIONES:
         if "sets" not in datos_nuevos or exp not in datos_nuevos["sets"]:
@@ -331,15 +307,6 @@ try:
                 raise ValueError(f"Falta campo '{campo}' en {exp}")
 
     FUENTES_VALIDAS = ["riftbound.leagueoflegends.com", "riftbound.gg", "cardgamer.com", "tcggo.com"]
-
-    # Validar cardmarket_prices: todos los valores deben ser null o precio con €
-    for set_id, entries in cardmarket_prices.items():
-        for card_key, val in entries.items():
-            if val is not None and "€" not in str(val):
-                raise ValueError(
-                    f"cardmarket_prices[{set_id}]['{card_key}'] = '{val}' "
-                    f"no es un precio válido (debe contener € o ser null). Cambio rechazado."
-                )
 
     # Validar Regla 8: cambios en totals requieren _source_url de fuente válida
     for exp in EXPANSIONES:
@@ -363,24 +330,6 @@ except (json.JSONDecodeError, ValueError) as e:
     print(f"❌ Validación fallida: {e}")
     print("Respuesta cruda:", texto_respuesta)
     exit(0)
-
-# ==========================================
-# Merge: conservar precios de tcggo si AI devuelve null
-# ==========================================
-for set_id, entries in cardmarket_prices.items():
-    for key, val in entries.items():
-        if val is None and set_id in cardmarket_prices_actual and key in cardmarket_prices_actual[set_id]:
-            ai_val = cardmarket_prices_actual[set_id][key]
-            if ai_val is not None:
-                cardmarket_prices[set_id][key] = ai_val
-
-# ==========================================
-# Guardar cardmarket_prices.json (precios)
-# ==========================================
-if cardmarket_prices:
-    with open("cardmarket_prices.json", "w", encoding="utf-8") as f:
-        json.dump(cardmarket_prices, f, indent=4, ensure_ascii=False)
-    print("✅ 'cardmarket_prices.json' actualizado con precios de Cardmarket.")
 
 # ==========================================
 # Guardar cartas.json solo si hay cambios
