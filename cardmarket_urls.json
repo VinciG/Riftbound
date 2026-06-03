@@ -315,7 +315,7 @@
         "unl-226-219": "https://www.cardmarket.com/en/Riftbound/Products/Singles/Unleashed/Jhin-Virtuoso-V3-Overnumbered",
         "unl-226*-219": "https://www.cardmarket.com/en/Riftbound/Products/Singles/Unleashed/Jhin-Virtuoso-OVR-Signature",
         "unl-227-219": "https://www.cardmarket.com/en/Riftbound/Products/Singles/Unleashed/Rengar-Pridestalker-V3-Overnumbered",
-        "unl-227*-219": "https://www.cardmarket.com/en/Riftbound/Products/Singles/Unleashed/Rengar-Pridestalker-OVR-Signature",
+        "unl-227*-219": "https://https://www.cardmarket.com/en/Riftbound/Products/Singles/Unleashed/Rengar-Pridestalker-OVR-Signature",
         "unl-228-219": "https://www.cardmarket.com/en/Riftbound/Products/Singles/Unleashed/Pyke-Bloodharbor-Ripper-V3-Overnumbered",
         "unl-228*-219": "https://www.cardmarket.com/en/Riftbound/Products/Singles/Unleashed/Pyke-Bloodharbor-Ripper-OVR-Signature",
         "unl-229-219": "https://www.cardmarket.com/en/Riftbound/Products/Singles/Unleashed/Vi-Piltover-Enforcer-V3-Overnumbered",
@@ -338,21 +338,6 @@
         "unl-237*-219": "https://www.cardmarket.com/en/Riftbound/Products/Singles/Unleashed/Poppy-Keeper-of-the-Hammer-OVR-Signature",
         "unl-238-219": "https://www.cardmarket.com/en/Riftbound/Products/Singles/Unleashed/Baron-Nashor-Ultimate-V3-Overnumbered"
     },
-    "vendetta": {
-        "Nasus": "https://www.cardmarket.com/en/Riftbound/Products/Singles/Vendetta/Nasus-Curator-of-the-Sands-V1-Rare",
-        "Renekton": "https://www.cardmarket.com/en/Riftbound/Products/Singles/Vendetta/Renekton-Butcher-of-the-Sands-V1-Rare",
-        "Akali": "https://www.cardmarket.com/en/Riftbound/Products/Singles/Vendetta/Akali-Rogue-Assassin-V1-Rare",
-        "Mel": "https://www.cardmarket.com/en/Riftbound/Products/Singles/Vendetta/Mel-Medarda-V1-Rare",
-        "Ambessa": "https://www.cardmarket.com/en/Riftbound/Products/Singles/Vendetta/Ambessa-Medarda-V1-Rare",
-        "Zed": "https://www.cardmarket.com/en/Riftbound/Products/Singles/Vendetta/Zed-Master-of-Shadows-V1-Rare",
-        "Shen": "https://www.cardmarket.com/en/Riftbound/Products/Singles/Vendetta/Shen-Eye-of-Twilight-V1-Rare"
-    },
-    "radiance": {
-        "Evelynn": "https://www.cardmarket.com/en/Riftbound/Products/Singles/Radiance/Evelynn-Agonys-Embrace-V1-Rare",
-        "Ekko": "https://www.cardmarket.com/en/Riftbound/Products/Singles/Radiance/Ekko-The-Boy-Who-Shattered-Time-V1-Rare",
-        "Seraphine": "https://www.cardmarket.com/en/Riftbound/Products/Singles/Radiance/Seraphine-Starry-Eyed-Songstress-V1-Rare",
-        "Jarvan IV": "https://www.cardmarket.com/en/Riftbound/Products/Singles/Radiance/JarvanIV-The-Exemplar-V1-Rare",
-        "Ziggs": "https://www.cardmarket.com/en/Riftbound/Products/Singles/Radiance/Ziggs-Hexplosives-Expert-V1-Rare",
-        "Fizz": "https://www.cardmarket.com/en/Riftbound/Products/Singles/Radiance/Fizz-The-Tidal-Trickster-V1-Rare"
-    }
+    "vendetta": {},
+    "radiance": {}
 }
