@@ -63,7 +63,7 @@ SET_CODE_MAP = {"OGN": "origins", "SFD": "spiritforged", "UNL": "unleashed", "VE
 cardmarket_urls_file = "cardmarket_urls.json"
 cardmarket_prices_actual = {}
 if os.path.exists(cardmarket_urls_file):
-    with open(cardmarket_urls_file, "r", encoding="utf-8") as f:
+    with open(cardmarket_urls_file, "r", encoding="utf-8-sig") as f:
         cardmarket_prices_actual = json.load(f)
 
 # Cargar datos de cartas épicas para pasarlos al prompt
