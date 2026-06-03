@@ -59,12 +59,12 @@ EXPANSIONES = ["Origins", "Spiritforged", "Unleashed", "Vendetta"]
 # Mapa de códigos de set a IDs internos
 SET_CODE_MAP = {"OGN": "origins", "SFD": "spiritforged", "UNL": "unleashed", "VEN": "vendetta"}
 
-# Leer cardmarket_urls actual (si existe)
-cardmarket_urls_actual = {}
+# Leer precios actuales de cardmarket_urls.json (si existe)
 cardmarket_urls_file = "cardmarket_urls.json"
+cardmarket_prices_actual = {}
 if os.path.exists(cardmarket_urls_file):
     with open(cardmarket_urls_file, "r", encoding="utf-8") as f:
-        cardmarket_urls_actual = json.load(f)
+        cardmarket_prices_actual = json.load(f)
 
 # Cargar datos de cartas épicas para pasarlos al prompt
 epic_data_raw = {}
@@ -110,7 +110,7 @@ ESTRUCTURA JSON REQUERIDA (debes devolver EXACTAMENTE este formato):
             "imgBase": "URL base de imágenes (o null si no hay)",
             "legend_count": número de leyendas,
             "leyendas": [
-                {{"name": "Nombre del campeón", "img": "URL directa de la imagen (o null si no encuentras)", "cardmarket": "URL directa a la carta en Cardmarket (o null si no la encuentras)"}}
+                {{"name": "Nombre del campeón", "img": "URL directa de la imagen (o null si no encuentras)"}}
             ],
             "productos": ["Lista", "de", "productos"],
             "champion_decks": ["Campeones", "con", "Champion Deck"],
@@ -132,21 +132,21 @@ ESTRUCTURA JSON REQUERIDA (debes devolver EXACTAMENTE este formato):
             "rareza": {{"Origins":"texto","Spiritforged":"texto","Unleashed":"texto","Vendetta":"texto"}}
         }}
     }},
-    "cardmarket_urls": {{
+    "cardmarket_prices": {{
         "origins": {{
-            "Kai'Sa": "URL o null",
-            "ogn-039-298": "URL o null"
+            "Kai'Sa": "€0.90 o null",
+            "ogn-039-298": "€1.50 o null"
         }},
         "spiritforged": {{
-            "Rumble": "URL o null",
-            "sfd-027-221": "URL o null"
+            "Rumble": "€0.80 o null",
+            "sfd-027-221": "€1.20 o null"
         }},
         "unleashed": {{
-            "Jhin": "URL o null",
-            "unl-022a-219": "URL o null"
+            "Jhin": "€1.10 o null",
+            "unl-022a-219": "€0.95 o null"
         }},
         "vendetta": {{
-            "Nasus": "URL o null"
+            "Nasus": null
         }}
     }}
 }}
@@ -157,44 +157,34 @@ TAREAS:
 3. Mantener productos, ovr_breakdown, mecanicas por cada expansión.
 4. Actualizar pull_rates si hay cambios oficiales.
 5. Para expansiones NUEVAS, rellena todos los campos con la información disponible.
-6. Generar o actualizar las URLs de Cardmarket para TODAS las cartas en cardmarket_urls.
+6. Extraer o actualizar los PRECIOS de Cardmarket para TODAS las cartas en cardmarket_prices.
    Las claves son: nombre de leyenda (ej. "Kai'Sa") o ID de carta épica (ej. "ogn-039-298").
-   El valor es la URL exacta y REAL de Cardmarket, obtenida mediante UNA búsqueda por expansión, o null si no la encuentras.
+   El valor es el precio en formato "€XX.XX" (ej. "€0.90") si se encuentra, o null si no.
 
 DATA ACTUAL DE SETS:
 {json.dumps(datos_actuales, indent=2, ensure_ascii=False)}
 
-CARTAS ÉPICAS EXISTENTES (inclúyelas todas en cardmarket_urls):
+CARTAS ÉPICAS EXISTENTES (inclúyelas todas en cardmarket_prices):
 {epic_list_str}
 
-URLS DE CARDMARKET ACTUALES (actualiza o añade según corresponda):
-{json.dumps(cardmarket_urls_actual, indent=2, ensure_ascii=False)}
+PRECIOS DE CARDMARKET ACTUALES (actualiza o añade según corresponda):
+{json.dumps(cardmarket_prices_actual, indent=2, ensure_ascii=False)}
 
-CÓMO OBTENER LAS URLs REALES DE CARDMARKET (IMPORTANTE):
+CÓMO ENCONTRAR PRECIOS DE CARDMARKET:
 
-NO CONSTRUYAS URLs con formato. BUSCA CADA EXPANSIÓN EN CARDMARKET como un todo, no carta por carta.
+Usa Google Search con el operador site: para cada carta:
+  site:riftbound.gg/cards "Nombre de la carta"
 
-Para cada expansión que exista en los datos:
-1. Busca en Google: "site:cardmarket.com Riftbound [NombreExpansión]"
-2. También busca: "cardmarket Riftbound [NombreExpansión] singles"
-3. Del resultado de búsqueda, extrae TODAS las URLs que sean cardmarket.com/en/Riftbound/Products/Singles/[Expansión]/...
-4. Relaciona cada URL con la carta correspondiente por su nombre o ID
-5. Si una carta no tiene URL en los resultados, ponle null
+Busca en los snippets de resultados de Google el texto:
+  "Buy on Cardmarket €XX.XX"
 
-SOLO busca expansiones que YA estén lanzadas y tengan cartas en venta en Cardmarket.
-Cómo saber si una expansión está lanzada: si al buscar en Google aparece la página de Singles de esa expansión en Cardmarket con resultados, entonces está lanzada. Si la búsqueda no devuelve páginas de Cartas Individuales de esa expansión en Cardmarket, entonces no está lanzada aún — pon todas sus URLs a null.
+Extrae SOLO el precio (ej. "€0.90") y guárdalo como valor.
+Si el snippet no contiene precio visible, pon null.
 
-Ejemplo de búsqueda por expansión (NO por carta):
-- Busca: "site:cardmarket.com Riftbound Origins" → obtienes URLs de todas las cartas de Origins
-- Busca: "site:cardmarket.com Riftbound Spiritforged" → obtienes URLs de todas las cartas de Spiritforged
-- No busques carta por carta individualmente
+NO construyas URLs de Cardmarket — solo necesitamos el PRECIO.
+NO intentes hacer fetch directo a riftbound.gg/cards — el contenido es JS-renderizado.
 
-REGLAS:
-- Una SOLA búsqueda por expansión, NO una búsqueda por cada carta
-- Las URLs deben ser REALES, extraídas de los resultados de búsqueda
-- NO construyas URLs manualmente ni uses formatos
-- Si la expansión no aparece en Cardmarket (no lanzada), pon todas sus URLs a null
-- Si alguna carta concreta de una expansión lanzada no aparece, ponle null
+Para cartas sin precio visible en snippet → null.
 
 REGLAS CRÍTICAS:
 1. Devuelve EXCLUSIVAMENTE el objeto JSON actualizado exactamente con la estructura de arriba.
@@ -206,7 +196,7 @@ REGLAS CRÍTICAS:
 7. Todo debe estar contrastado con fuentes oficiales de Riot Games, riftbound.leagueoflegends.com, riftbound.gg o cardgamer.com. No uses otras webs.
 8. Si cambias total, total_base o total_ovr de un set ya lanzado, DEBES incluir el campo "_source_url": "URL_DE_LA_FUENTE" dentro de ese set. La URL debe ser de riftbound.leagueoflegends.com, riftbound.gg o cardgamer.com. Sin ese campo o con URL no válida, el cambio será RECHAZADO automáticamente.
 9. Para el campo "img" de cada leyenda, usa SOLO URLs de cardgamer.com, riftbound.leagueoflegends.com o riftbound.gg. Si no encuentras la URL exacta de la imagen, pon null.
-10. cardmarket_urls debe contener TODAS las cartas (leyendas + épicas). Las URLs deben ser URLs REALES obtenidas de UNA búsqueda por expansión en Google. Si la expansión no está en Cardmarket, pon todas sus URLs a null. No construyas URLs con formato.
+10. cardmarket_prices debe contener TODAS las cartas (leyendas + épicas). Busca el precio de cada carta con site:riftbound.gg/cards y extrae "Buy on Cardmarket €XX.XX" del snippet. Si no hay precio visible, pon null.
 """
 
 # Ejecución con control de cuota
@@ -256,8 +246,8 @@ elif "```" in texto_respuesta:
 try:
     datos_nuevos = json.loads(texto_respuesta)
 
-    # Extraer cardmarket_urls antes de comparar con datos actuales
-    cardmarket_urls = datos_nuevos.pop("cardmarket_urls", {})
+    # Extraer cardmarket_prices antes de comparar con datos actuales
+    cardmarket_prices = datos_nuevos.pop("cardmarket_prices", {})
 
     # Verificación de que no eliminó las expansiones clave
     for exp in EXPANSIONES:
@@ -274,23 +264,13 @@ try:
 
     FUENTES_VALIDAS = ["riftbound.leagueoflegends.com", "riftbound.gg", "cardgamer.com"]
 
-    # Validar campo cardmarket en leyendas (redundante con cardmarket_urls, pero por compatibilidad)
-    for exp in EXPANSIONES:
-        for leyenda in datos_nuevos["sets"][exp].get("leyendas", []):
-            url = leyenda.get("cardmarket")
-            if url and "cardmarket.com" not in url:
+    # Validar cardmarket_prices: todos los valores deben ser null o precio con €
+    for set_id, entries in cardmarket_prices.items():
+        for card_key, val in entries.items():
+            if val is not None and "€" not in str(val):
                 raise ValueError(
-                    f"Leyenda {exp}/{leyenda['name']} tiene cardmarket '{url}' "
-                    f"que no es de cardmarket.com. Cambio rechazado."
-                )
-
-    # Validar cardmarket_urls: todos los valores deben ser null o cardmarket.com
-    for set_id, entries in cardmarket_urls.items():
-        for card_key, url in entries.items():
-            if url and "cardmarket.com" not in url:
-                raise ValueError(
-                    f"cardmarket_urls[{set_id}]['{card_key}'] = '{url}' "
-                    f"no es de cardmarket.com. Cambio rechazado."
+                    f"cardmarket_prices[{set_id}]['{card_key}'] = '{val}' "
+                    f"no es un precio válido (debe contener € o ser null). Cambio rechazado."
                 )
 
     # Validar Regla 8: cambios en totals requieren _source_url de fuente válida
@@ -317,12 +297,12 @@ except (json.JSONDecodeError, ValueError) as e:
     exit(0)
 
 # ==========================================
-# Guardar cardmarket_urls.json
+# Guardar cardmarket_urls.json (precios)
 # ==========================================
-if cardmarket_urls:
+if cardmarket_prices:
     with open("cardmarket_urls.json", "w", encoding="utf-8") as f:
-        json.dump(cardmarket_urls, f, indent=4, ensure_ascii=False)
-    print("✅ 'cardmarket_urls.json' actualizado con URLs de Cardmarket.")
+        json.dump(cardmarket_prices, f, indent=4, ensure_ascii=False)
+    print("✅ 'cardmarket_urls.json' actualizado con precios de Cardmarket.")
 
 # ==========================================
 # Guardar cartas.json solo si hay cambios

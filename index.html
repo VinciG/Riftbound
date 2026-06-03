@@ -700,8 +700,8 @@ function filterPremium(prefix) {
   });
 }
 
-// ===== CARDMARKET URLS (loaded from cardmarket_urls.json) =====
-let CARDMARKET_URLS = {};
+// ===== CARDMARKET PRICES (loaded from cardmarket_urls.json) =====
+let CARDMARKET_PRICES = {};
 
 // ===== MODAL =====
 function openModal(leg, set) {
@@ -729,8 +729,8 @@ function openModal(leg, set) {
   }
 
   document.getElementById('modal').classList.add('active');
-  const cmUrl = CARDMARKET_URLS[set.id]?.[leg.name] || leg.cardmarket;
-  fetchCardmarketPrice(leg.name, set, leg.n ? leg.n.replace('#','') : '', cmUrl);
+  const cmPrice = CARDMARKET_PRICES[set.id]?.[leg.name] || null;
+  showCardmarketPrice(leg.name, cmPrice);
 }
 
 function openPremiumModal(card, set) {
@@ -749,25 +749,22 @@ function openPremiumModal(card, set) {
   imgDiv.appendChild(img);
 
   document.getElementById('modal').classList.add('active');
-  const idParts = card.id.match(/-(\d+)([a-z]?)/);
-  const cn = idParts ? idParts[1] + idParts[2] : (card.number ? String(card.number).padStart(3,'0') : '');
-  const cmUrl = CARDMARKET_URLS[set.id]?.[card.id] || CARDMARKET_URLS[set.id]?.[card.name] || card.cardmarket;
-  fetchCardmarketPrice(card.name, set, cn, cmUrl);
+  const cmPrice = CARDMARKET_PRICES[set.id]?.[card.id] || CARDMARKET_PRICES[set.id]?.[card.name] || null;
+  showCardmarketPrice(card.name, cmPrice);
 }
 
 function closeModal() {
   document.getElementById('modal').classList.remove('active');
 }
 
-// ===== CARDMARKET =====
-function fetchCardmarketPrice(name, set, cardNo, cardmarketUrl) {
+// ===== CARDMARKET PRICE DISPLAY =====
+function showCardmarketPrice(name, price) {
   const priceEl = document.getElementById('price-value');
-  const url = cardmarketUrl || CARDMARKET_URLS[set.id]?.[name];
-  if (url) {
-    priceEl.innerHTML = `<a class="pl-a" href="${url}" target="_blank" rel="noopener">${name} — Cardmarket ↗</a>`;
+  if (price) {
+    priceEl.innerHTML = `<span class="pl-f">${price}</span> <span class="pl-l">Cardmarket</span>`;
     return;
   }
-  priceEl.innerHTML = `<span class="pl-na">${name} — No disponible</span>`;
+  priceEl.innerHTML = `<span class="pl-na">No disponible</span>`;
 }
 
 // ===== DYNAMIC PAGE FROM cartas.json =====
@@ -778,10 +775,10 @@ async function buildPage() {
     if (resp.ok) db = await resp.json();
   } catch(e) { console.warn('cartas.json not loaded, using default'); }
 
-  // Load Cardmarket URLs
+  // Load Cardmarket prices
   try {
     const cmResp = await fetch('cardmarket_urls.json?' + Date.now());
-    if (cmResp.ok) CARDMARKET_URLS = await cmResp.json();
+    if (cmResp.ok) CARDMARKET_PRICES = await cmResp.json();
   } catch(e) { console.warn('cardmarket_urls.json not loaded'); }
 
   const sets = db.sets || {};
