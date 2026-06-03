@@ -70,62 +70,9 @@ if os.path.exists(cardmarket_prices_file):
         cardmarket_prices_actual = json.load(f)
 
 # ==========================================
-# Obtener precios reales desde tcggo.com
+# Obtener precios reales desde DotGG API
 # ==========================================
-# Override slugs para sets cuyo slug en tcggo difiere del internal ID
-TCCGO_SLUG_OVERRIDES = {
-    "origins": "origins-main-set",
-}
-
-def tcggo_urls_for_set(set_id):
-    slug = TCCGO_SLUG_OVERRIDES.get(set_id, set_id)
-    return [f"https://www.tcggo.com/riftbound/{slug}"]
-
-def fetch_tcggo_prices(set_id, urls, legends):
-    """Fetch a tcggo.com listing page and extract card prices."""
-    html = None
-    for url in urls:
-        try:
-            req = urllib.request.Request(url, headers={
-                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
-            })
-            with urllib.request.urlopen(req, timeout=20) as resp:
-                html = resp.read().decode("utf-8", errors="replace")
-            print(f"  tcggo {set_id} ({len(html)} bytes)")
-            break
-        except Exception as e:
-            print(f"  tcggo {set_id} error: {e}")
-    if not html:
-        return {}
-
-    epic_prices = {}
-    legend_prices = {}
-
-    for m in re.finditer(r'(?:Price|actual price)\s+([\d.,]+)\s*€', html, re.IGNORECASE):
-        price_raw = m.group(1).replace(",", ".")
-        if "." not in price_raw:
-            price_raw += ".00"
-        price_formatted = f"€{price_raw}"
-
-        before = html[max(0, m.start() - 250):m.start()]
-
-        # Extract set code → epic ID (e.g. "UNL-192/219" → "unl-192-219")
-        code_m = re.search(r'([A-Z]{3})-(\d+[a-z]*)/(\d+)', before)
-        if code_m and code_m.group(1) in SET_CODE_MAP and SET_CODE_MAP[code_m.group(1)] == set_id:
-            key = f"{code_m.group(1).lower()}-{code_m.group(2)}-{code_m.group(3)}"
-            epic_prices[key] = price_formatted
-
-        # Match champion name within last 80 chars (the card's own title, not prev card)
-        card_title = html[max(0, m.start() - 80):m.start()]
-        for leg in legends:
-            if leg and leg in card_title:
-                legend_prices[leg] = price_formatted
-
-    # Merge: epic prices + legend prices (epic wins on conflict)
-    prices = {}
-    prices.update(legend_prices)
-    prices.update(epic_prices)
-    return prices
+DOTGG_API_URL = "https://api.dotgg.gg/cgfw/getcards?game=riftbound&mode=indexed"
 
 # Build legend name list per set
 legends_per_set = {}
@@ -138,24 +85,12 @@ for s_name, s_data in datos_actuales.get("sets", {}).items():
             names.append(n)
     legends_per_set[sid] = names
 
-# Fetch tcggo prices for all known sets (generates URL from set ID)
-for set_id in list(cardmarket_prices_actual.keys()):
-    urls = tcggo_urls_for_set(set_id)
-    fetched = fetch_tcggo_prices(set_id, urls, legends_per_set.get(set_id, []))
-    for key, val in fetched.items():
-        cardmarket_prices_actual[set_id][key] = val
-    if fetched:
-        print(f"  → {len(fetched)} precios obtenidos para {set_id}")
+# Build set_name → set_id map from cartas.json
+SET_NAME_MAP = {}
+for s_name, s_data in datos_actuales.get("sets", {}).items():
+    SET_NAME_MAP[s_name] = s_data.get("id")
 
-# ==========================================
-# Guardar cardmarket_prices.json con los precios de tcggo.com
-# ==========================================
-with open(cardmarket_prices_file, "w", encoding="utf-8") as f:
-    json.dump(cardmarket_prices_actual, f, indent=4, ensure_ascii=False)
-print(f"✅ 'cardmarket_prices.json' guardado con precios de tcggo.com.")
-
-# ==========================================
-# Cargar datos de cartas épicas para pasarlos al prompt
+# Cargar epic-cards.js para obtener el sufijo exacto por set
 epic_data_raw = {}
 try:
     with open("epic-cards.js", "r", encoding="utf-8") as f:
@@ -165,6 +100,94 @@ try:
         epic_data_raw = json.loads(match.group(1))
 except Exception:
     epic_data_raw = {}
+
+EPIC_SUFFIX = {}
+for set_code, cards in epic_data_raw.items():
+    set_id = SET_CODE_MAP.get(set_code)
+    if set_id and cards:
+        parts = cards[0]["id"].split("-")
+        EPIC_SUFFIX[set_id] = parts[-1]
+
+def fetch_dotgg_prices():
+    """Fetch all Riftbound cards with prices from DotGG public API (no key needed)."""
+    req = urllib.request.Request(DOTGG_API_URL, headers={
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    })
+    with urllib.request.urlopen(req, timeout=30) as resp:
+        raw = json.loads(resp.read().decode("utf-8"))
+
+    names = raw["names"]
+    rows = raw["data"]
+
+    prices = {}
+    legend_min_prices = {}
+
+    for row in rows:
+        card = dict(zip(names, row))
+        set_name = card.get("set_name")
+        set_id = SET_NAME_MAP.get(set_name)
+        if not set_id:
+            continue
+
+        cm_price = card.get("cmPrice")
+        if cm_price is None or cm_price == 0 or cm_price == "0" or cm_price == "0.000000":
+            continue
+
+        cm_price_f = float(cm_price)
+        price_str = f"€{cm_price_f:.2f}"
+
+        if set_id not in prices:
+            prices[set_id] = {}
+
+        # Key from API card id + suffix from epic-cards.js
+        # Convert API suffix -STAR → * (epic-cards.js format), -P promo suffix kept
+        api_id = card.get("id", "")
+        our_key = api_id.lower()
+        if our_key.endswith("-star"):
+            our_key = our_key[:-5] + "*"
+        suffix = EPIC_SUFFIX.get(set_id)
+        if suffix:
+            our_key = f"{our_key}-{suffix}"
+        prices[set_id][our_key] = price_str
+
+        # Legend-type cards: track minimum price per champion
+        if card.get("type") == "Legend":
+            tags = card.get("tags") or []
+            for champ_name in legends_per_set.get(set_id, []):
+                if champ_name in tags:
+                    if set_id not in legend_min_prices:
+                        legend_min_prices[set_id] = {}
+                    existing = legend_min_prices[set_id].get(champ_name)
+                    if existing is None or cm_price_f < existing:
+                        legend_min_prices[set_id][champ_name] = cm_price_f
+
+    # Add legend champion-name keys (cheapest Legend-type card for each champ)
+    for set_id, champs in legend_min_prices.items():
+        if set_id not in prices:
+            prices[set_id] = {}
+        for champ_name, min_price in champs.items():
+            prices[set_id][champ_name] = f"€{min_price:.2f}"
+
+    return prices
+
+# Fetch DotGG prices and merge into cardmarket_prices_actual
+try:
+    dotgg_prices = fetch_dotgg_prices()
+    for set_id, set_prices in dotgg_prices.items():
+        for key, val in set_prices.items():
+            cardmarket_prices_actual[set_id][key] = val
+    total = sum(len(v) for v in dotgg_prices.values())
+    print(f"  → {total} precios obtenidos desde DotGG API")
+except Exception as e:
+    print(f"  ⚠️ Error al obtener precios de DotGG API: {e}")
+    print("  Manteniendo precios anteriores.")
+
+# ==========================================
+# Guardar cardmarket_prices.json con los precios
+# ==========================================
+with open(cardmarket_prices_file, "w", encoding="utf-8") as f:
+    json.dump(cardmarket_prices_actual, f, indent=4, ensure_ascii=False)
+print(f"✅ 'cardmarket_prices.json' guardado.")
 
 # Listar las épicas para el prompt
 epic_list_lines = []
