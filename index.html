@@ -138,6 +138,7 @@ body {
 }
 .legend-card .lc-tags { display:flex; flex-wrap:wrap; gap:4px; margin-top:4px; }
 .legend-card .lc-tags .lc-set { margin-top:0; }
+.legend-card .lc-price { font-size:.62rem; color:var(--green); margin-top:3px; font-weight:500; }
 .empty-state {
   background:var(--surface); border:1px solid var(--border); border-radius:8px;
   padding:1rem; color:var(--muted); font-size:.78rem; line-height:1.45;
@@ -606,11 +607,13 @@ function renderSet(setId) {
       imgDiv.innerHTML = '<div class="placeholder">?</div>';
     }
 
+    const cmPrice = CARDMARKET_PRICES[setId]?.[leg.name] || null;
     const info = document.createElement('div');
     info.className = 'lc-info';
     info.innerHTML = `<div class="lc-name">${leg.name}</div>
       <div class="lc-sub">${leg.title||leg.n}</div>
-      <span class="lc-set" style="background:color-mix(in srgb,${set.color},transparent 80%);color:var(--text)">${set.abbr}</span>`;
+      <span class="lc-set" style="background:color-mix(in srgb,${set.color},transparent 80%);color:var(--text)">${set.abbr}</span>
+      ${cmPrice ? `<div class="lc-price">${cmPrice}</div>` : ''}`;
 
     card.appendChild(imgDiv);
     card.appendChild(info);
@@ -671,6 +674,7 @@ function renderPremiumSet(setCode) {
     img.onerror = function(){ this.style.display='none'; this.parentElement.innerHTML='<div class="placeholder">?</div>'; };
     imgDiv.appendChild(img);
 
+    const cmPrice = CARDMARKET_PRICES[set.id]?.[card.id] || CARDMARKET_PRICES[set.id]?.[card.name] || null;
     const info = document.createElement('div');
     info.className = 'lc-info';
     info.innerHTML = `<div class="lc-name">${card.name}</div>
@@ -678,7 +682,8 @@ function renderPremiumSet(setCode) {
       <div class="lc-tags">
         <span class="lc-set" style="background:color-mix(in srgb,${set.color},transparent 80%);color:var(--text)">${set.abbr}</span>
         <span class="lc-set" style="background:var(--surface2);color:var(--muted)">${premiumLabel(card)}</span>
-      </div>`;
+      </div>
+      ${cmPrice ? `<div class="lc-price">${cmPrice}</div>` : ''}`;
 
     el.appendChild(imgDiv);
     el.appendChild(info);
@@ -700,7 +705,7 @@ function filterPremium(prefix) {
   });
 }
 
-// ===== CARDMARKET PRICES (loaded from cardmarket_urls.json) =====
+// ===== CARDMARKET PRICES (loaded from cardmarket_prices.json) =====
 let CARDMARKET_PRICES = {};
 
 // ===== MODAL =====

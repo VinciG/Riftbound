@@ -172,24 +172,36 @@ PRECIOS DE CARDMARKET ACTUALES (actualiza o añade según corresponda):
 
 CÓMO ENCONTRAR PRECIOS DE CARDMARKET:
 
-Para cada carta, busca su precio en tcggo.com que muestra precios de Cardmarket en EUR:
+tcggo.com tiene páginas de listado que muestran TODAS las cartas de un set con sus precios en EUR.
+Usa fetch directo a esas páginas y extrae los precios del HTML. Es MUCHO más eficiente que buscar carta por carta.
 
-1. Busca en Google: site:tcggo.com/riftbound "Nombre de la carta"
-   Ejemplo: site:tcggo.com/riftbound "Kai'Sa"
-   Los resultados de Google suelen incluir el precio directamente en el snippet (ej. "1.800 €")
+1. Para CADA set, haz fetch a la páginas de listado de tcggo.com.
+   Las URLs correctas son (SIN /singles al final):
+   https://www.tcggo.com/riftbound/origins-main-set   (Origins)
+   https://www.tcggo.com/riftbound/spiritforged        (Spiritforged)
+   https://www.tcggo.com/riftbound/unleashed           (Unleashed)
+   (Vendetta puede que aun no tenga página en tcggo.com)
 
-2. Si el snippet ya contiene el precio, extráelo directamente (ej. "€1.80").
-   Si no, haz fetch a la página de tcggo.com y busca en el HTML:
-   - Tabla con precios de Cardmarket (columna "Price" con valores en "€")
-   - Texto como "1.800 €" o "0.90 €"
-   - "CARDMARKET" section con precio
+2. Busca en el HTML el patrón de cada carta:
+   Ejemplo real del HTML de tcggo.com:
+   "Baron Nashor ... Price 800 €"
+   "Elder Dragon ... Price 16,00 €"
+   "Alpha Strike ... Price 1,50 €"
+   "Kai'Sa - Evolutionary ... actual price 0,02 €"
 
-3. El precio viene en formato "X.XXX €" (ej. "1.800 €", "0.90 €").
-   Extrae SOLO el precio simplificado: "€1.80", "€0.90", etc.
+3. Para cada carta en el listado, identifica su precio y asígnalo:
+   - Para leyendas: usa el nombre del campeón como clave (ej. "Kai'Sa")
+   - Para épicas: usa el ID de la carta como clave (ej. "unl-192-219")
+   El precio viene como "XX,XX €" o "XXX €".
+   Conviértelo a formato "€X.XX": 0,02 € → "€0.02", 800 € → "€800.00"
 
-Si no hay precio visible, pon null.
+4. Si una página no carga o no tiene suficientes cartas, busca con Google:
+   site:tcggo.com/riftbound "NOMBRE_DE_LA_CARTA"
+   Los snippets incluyen el precio (ej. "actual price 0,02 €")
 
-NO uses otros sitios. NO construyas URLs de Cardmarket — solo necesitamos el PRECIO.
+5. Para cartas sin precio, pon null.
+
+NO construyas URLs de Cardmarket — solo necesitamos el PRECIO.
 
 REGLAS CRÍTICAS:
 1. Devuelve EXCLUSIVAMENTE el objeto JSON actualizado exactamente con la estructura de arriba.
@@ -201,7 +213,7 @@ REGLAS CRÍTICAS:
 7. Todo debe estar contrastado con fuentes oficiales de Riot Games, riftbound.leagueoflegends.com, riftbound.gg o cardgamer.com. No uses otras webs.
 8. Si cambias total, total_base o total_ovr de un set ya lanzado, DEBES incluir el campo "_source_url": "URL_DE_LA_FUENTE" dentro de ese set. La URL debe ser de riftbound.leagueoflegends.com, riftbound.gg o cardgamer.com. Sin ese campo o con URL no válida, el cambio será RECHAZADO automáticamente.
 9. Para el campo "img" de cada leyenda, usa SOLO URLs de cardgamer.com, riftbound.leagueoflegends.com o riftbound.gg. Si no encuentras la URL exacta de la imagen, pon null.
-10. cardmarket_prices debe contener TODAS las cartas (leyendas + épicas). Busca el precio de cada carta con site:riftbound.gg/cards y extrae "Buy on Cardmarket €XX.XX" del snippet. Si no hay precio visible, pon null.
+10. cardmarket_prices debe contener TODAS las cartas (leyendas + épicas). Usa los pasos 1-5 arriba para encontrar cada precio. Si no hay precio visible, pon null.
 """
 
 # Ejecución con control de cuota
@@ -302,12 +314,12 @@ except (json.JSONDecodeError, ValueError) as e:
     exit(0)
 
 # ==========================================
-# Guardar cardmarket_urls.json (precios)
+# Guardar cardmarket_prices.json (precios)
 # ==========================================
 if cardmarket_prices:
-    with open("cardmarket_urls.json", "w", encoding="utf-8") as f:
+    with open("cardmarket_prices.json", "w", encoding="utf-8") as f:
         json.dump(cardmarket_prices, f, indent=4, ensure_ascii=False)
-    print("✅ 'cardmarket_urls.json' actualizado con precios de Cardmarket.")
+    print("✅ 'cardmarket_prices.json' actualizado con precios de Cardmarket.")
 
 # ==========================================
 # Guardar cartas.json solo si hay cambios
