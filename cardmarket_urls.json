@@ -315,7 +315,7 @@
         "unl-226-219": "https://www.cardmarket.com/en/Riftbound/Products/Singles/Unleashed/Jhin-Virtuoso-V3-Overnumbered",
         "unl-226*-219": "https://www.cardmarket.com/en/Riftbound/Products/Singles/Unleashed/Jhin-Virtuoso-OVR-Signature",
         "unl-227-219": "https://www.cardmarket.com/en/Riftbound/Products/Singles/Unleashed/Rengar-Pridestalker-V3-Overnumbered",
-        "unl-227*-219": "https://https://www.cardmarket.com/en/Riftbound/Products/Singles/Unleashed/Rengar-Pridestalker-OVR-Signature",
+        "unl-227*-219": "https://www.cardmarket.com/en/Riftbound/Products/Singles/Unleashed/Rengar-Pridestalker-OVR-Signature",
         "unl-228-219": "https://www.cardmarket.com/en/Riftbound/Products/Singles/Unleashed/Pyke-Bloodharbor-Ripper-V3-Overnumbered",
         "unl-228*-219": "https://www.cardmarket.com/en/Riftbound/Products/Singles/Unleashed/Pyke-Bloodharbor-Ripper-OVR-Signature",
         "unl-229-219": "https://www.cardmarket.com/en/Riftbound/Products/Singles/Unleashed/Vi-Piltover-Enforcer-V3-Overnumbered",
@@ -338,6 +338,21 @@
         "unl-237*-219": "https://www.cardmarket.com/en/Riftbound/Products/Singles/Unleashed/Poppy-Keeper-of-the-Hammer-OVR-Signature",
         "unl-238-219": "https://www.cardmarket.com/en/Riftbound/Products/Singles/Unleashed/Baron-Nashor-Ultimate-V3-Overnumbered"
     },
-    "vendetta": {},
-    "radiance": {}
+    "vendetta": {
+        "Nasus": null,
+        "Renekton": null,
+        "Akali": null,
+        "Mel": null,
+        "Ambessa": null,
+        "Zed": null,
+        "Shen": null
+    },
+    "radiance": {
+        "Evelynn": null,
+        "Ekko": null,
+        "Seraphine": null,
+        "Jarvan IV": null,
+        "Ziggs": null,
+        "Fizz": null
+    }
 }
