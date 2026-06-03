@@ -777,9 +777,9 @@ async function buildPage() {
 
   // Load Cardmarket prices
   try {
-    const cmResp = await fetch('cardmarket_urls.json?' + Date.now());
+    const cmResp = await fetch('cardmarket_prices.json?' + Date.now());
     if (cmResp.ok) CARDMARKET_PRICES = await cmResp.json();
-  } catch(e) { console.warn('cardmarket_urls.json not loaded'); }
+  } catch(e) { console.warn('cardmarket_prices.json not loaded'); }
 
   const sets = db.sets || {};
   const setIds = Object.keys(sets);

@@ -59,11 +59,11 @@ EXPANSIONES = ["Origins", "Spiritforged", "Unleashed", "Vendetta"]
 # Mapa de códigos de set a IDs internos
 SET_CODE_MAP = {"OGN": "origins", "SFD": "spiritforged", "UNL": "unleashed", "VEN": "vendetta"}
 
-# Leer precios actuales de cardmarket_urls.json (si existe)
-cardmarket_urls_file = "cardmarket_urls.json"
+# Leer precios actuales de cardmarket_prices.json (si existe)
+cardmarket_prices_file = "cardmarket_prices.json"
 cardmarket_prices_actual = {}
-if os.path.exists(cardmarket_urls_file):
-    with open(cardmarket_urls_file, "r", encoding="utf-8-sig") as f:
+if os.path.exists(cardmarket_prices_file):
+    with open(cardmarket_prices_file, "r", encoding="utf-8-sig") as f:
         cardmarket_prices_actual = json.load(f)
 
 # Cargar datos de cartas épicas para pasarlos al prompt
@@ -172,19 +172,24 @@ PRECIOS DE CARDMARKET ACTUALES (actualiza o añade según corresponda):
 
 CÓMO ENCONTRAR PRECIOS DE CARDMARKET:
 
-Usa Google Search con el operador site: para cada carta:
-  site:riftbound.gg/cards "Nombre de la carta"
+Para cada carta, busca su precio en tcggo.com que muestra precios de Cardmarket en EUR:
 
-Busca en los snippets de resultados de Google el texto:
-  "Buy on Cardmarket €XX.XX"
+1. Busca en Google: site:tcggo.com/riftbound "Nombre de la carta"
+   Ejemplo: site:tcggo.com/riftbound "Kai'Sa"
+   Los resultados de Google suelen incluir el precio directamente en el snippet (ej. "1.800 €")
 
-Extrae SOLO el precio (ej. "€0.90") y guárdalo como valor.
-Si el snippet no contiene precio visible, pon null.
+2. Si el snippet ya contiene el precio, extráelo directamente (ej. "€1.80").
+   Si no, haz fetch a la página de tcggo.com y busca en el HTML:
+   - Tabla con precios de Cardmarket (columna "Price" con valores en "€")
+   - Texto como "1.800 €" o "0.90 €"
+   - "CARDMARKET" section con precio
 
-NO construyas URLs de Cardmarket — solo necesitamos el PRECIO.
-NO intentes hacer fetch directo a riftbound.gg/cards — el contenido es JS-renderizado.
+3. El precio viene en formato "X.XXX €" (ej. "1.800 €", "0.90 €").
+   Extrae SOLO el precio simplificado: "€1.80", "€0.90", etc.
 
-Para cartas sin precio visible en snippet → null.
+Si no hay precio visible, pon null.
+
+NO uses otros sitios. NO construyas URLs de Cardmarket — solo necesitamos el PRECIO.
 
 REGLAS CRÍTICAS:
 1. Devuelve EXCLUSIVAMENTE el objeto JSON actualizado exactamente con la estructura de arriba.
@@ -246,8 +251,8 @@ elif "```" in texto_respuesta:
 try:
     datos_nuevos = json.loads(texto_respuesta)
 
-    # Extraer cardmarket_prices antes de comparar con datos actuales
-    cardmarket_prices = datos_nuevos.pop("cardmarket_prices", {})
+    # Extraer cardmarket_prices (acepta también clave antigua "cardmarket_urls" por si acaso)
+    cardmarket_prices = datos_nuevos.pop("cardmarket_prices", datos_nuevos.pop("cardmarket_urls", {}))
 
     # Verificación de que no eliminó las expansiones clave
     for exp in EXPANSIONES:
@@ -262,7 +267,7 @@ try:
             if campo not in s:
                 raise ValueError(f"Falta campo '{campo}' en {exp}")
 
-    FUENTES_VALIDAS = ["riftbound.leagueoflegends.com", "riftbound.gg", "cardgamer.com"]
+    FUENTES_VALIDAS = ["riftbound.leagueoflegends.com", "riftbound.gg", "cardgamer.com", "tcggo.com"]
 
     # Validar cardmarket_prices: todos los valores deben ser null o precio con €
     for set_id, entries in cardmarket_prices.items():
