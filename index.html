@@ -190,6 +190,7 @@ body {
 .price-value .pl-f { color:var(--green); font-weight:600; }
 .price-value .pl-e { color:var(--red); font-size:.7rem; }
 .price-value .pl-a { color:var(--blue); font-size:.7rem; cursor:pointer; text-decoration:underline; }
+.price-value .pl-na { color:var(--muted); font-size:.7rem; }
 
 /* PACK ANATOMY */
 .pack-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:8px; }
@@ -759,73 +760,14 @@ function closeModal() {
 }
 
 // ===== CARDMARKET =====
-const CM_TITLES = {
-  'Kai\'Sa':'Daughter-of-the-Void','Volibear':'Relentless-Storm',
-  'Jinx':'Loose-Cannon','Darius':'Hand-of-Noxus',
-  'Ahri':'Nine-Tailed-Fox','Lee Sin':'Blind-Monk',
-  'Yasuo':'Unforgiven','Leona':'Radiant-Dawn',
-  'Teemo':'Swift-Scout','Viktor':'Herald-of-the-Arcane',
-  'Miss Fortune':'Bounty-Hunter','Sett':'The-Boss',
-  'Rumble':'Mechanized-Menace','Lucian':'Purifier',
-  'Draven':'Glorious-Executioner','Rek\'Sai':'Void-Burrower',
-  'Ornn':'Fire-Below-the-Mountain','Jax':'Grandmaster-at-Arms',
-  'Irelia':'Blade-Dancer','Azir':'Emperor-of-the-Sands',
-  'Ezreal':'Prodigal-Explorer','Renata Glasc':'Chem-Baroness',
-  'Sivir':'Battle-Mistress','Fiora':'Grand-Duelist',
-  'Jhin':'Virtuoso','Rengar':'Pridestalker',
-  'Pyke':'Bloodharbor-Ripper','Vi':'Piltover-Enforcer',
-  'Lillia':'Bashful-Bloom','Master Yi':'Wuju-Bladesman',
-  'Vex':'Gloomist','Ivern':'Green-Father',
-  'Diana':'Scorn-of-the-Moon','LeBlanc':'Deceiver',
-  'Kha\'Zix':'Voidreaver','Poppy':'Keeper-of-the-Hammer',
-  'Nasus':'Curator-of-Sands','Renekton':'Butcher-of-the-Sands',
-  'Akali':'Shadow-Fist','Zed':'Master-of-Shadows',
-  'Shen':'Eye-of-Twilight','Ambessa':'General-Medarda',
-  'Mel':'Counselor-Medarda'
-};
-
-function buildCardmarketUrl(name, set, cardNo) {
-  const setExp = { origins:'Origins', spiritforged:'Spiritforged', unleashed:'Unleashed', vendetta:'Vendetta' };
-  const exp = setExp[set.id] || set.name;
-
-  if (CM_TITLES[name] && cardNo) {
-    const champSlug = name.replace(/'/g, '').replace(/ /g, '-');
-    const suffix = (name === 'Viktor') ? '' : '-V1-Rare';
-    return `https://www.cardmarket.com/en/Riftbound/Products/Singles/${exp}/${champSlug}-${CM_TITLES[name]}${suffix}`;
-  }
-
-  const cleanName = name.replace(/\s*\([^)]*\)\s*/g, '').trim();
-  const dashIdx = cleanName.indexOf(' - ');
-  const champName = dashIdx > 0 ? cleanName.substring(0, dashIdx) : null;
-
-  if (champName && CM_TITLES[champName]) {
-    const champSlug = champName.replace(/'/g, '').replace(/ /g, '-');
-    const epicTitle = cleanName.substring(dashIdx + 3).replace(/ /g, '-');
-    if (name.includes('(Alternate Art)')) {
-      return `https://www.cardmarket.com/en/Riftbound/Products/Singles/${exp}/${champSlug}-${epicTitle}-V2-Showcase`;
-    }
-    if (name.includes('(Overnumbered)') || name.includes('(Signature)')) {
-      return `https://www.cardmarket.com/en/Riftbound/Products/Singles/${exp}/${champSlug}-${epicTitle}-V3-Overnumbered`;
-    }
-    return `https://www.cardmarket.com/en/Riftbound/Products/Singles/${exp}/${champSlug}-${epicTitle}-V1-Epic`;
-  }
-
-  const slug = cleanName.replace(/ - /g, '-').replace(/ /g, '-').replace(/'/g, '');
-  if (name.includes('(Alternate Art)')) {
-    return `https://www.cardmarket.com/en/Riftbound/Products/Singles/${exp}/${slug}-V2-Showcase`;
-  }
-  return `https://www.cardmarket.com/en/Riftbound/Products/Singles/${exp}/${slug}`;
-}
-
 function fetchCardmarketPrice(name, set, cardNo, cardmarketUrl) {
   const priceEl = document.getElementById('price-value');
-  const url = cardmarketUrl || CARDMARKET_URLS[set.id]?.[name] || (set.id && buildCardmarketUrl(name, set, cardNo));
+  const url = cardmarketUrl || CARDMARKET_URLS[set.id]?.[name];
   if (url) {
     priceEl.innerHTML = `<a class="pl-a" href="${url}" target="_blank" rel="noopener">${name} — Cardmarket ↗</a>`;
     return;
   }
-  const q = encodeURIComponent(name.replace(/ - /g, ' ').replace(/\([^)]*\)/g, '').trim());
-  priceEl.innerHTML = `<a class="pl-a" href="https://www.cardmarket.com/en/Riftbound/Search?searchString=${q}" target="_blank" rel="noopener">${name} — Buscar en Cardmarket ↗</a>`;
+  priceEl.innerHTML = `<span class="pl-na">${name} — No disponible</span>`;
 }
 
 // ===== DYNAMIC PAGE FROM cartas.json =====
