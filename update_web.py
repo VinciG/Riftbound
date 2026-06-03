@@ -56,6 +56,36 @@ client = genai.Client()
 
 EXPANSIONES = ["Origins", "Spiritforged", "Unleashed", "Vendetta"]
 
+# Mapa de códigos de set a IDs internos
+SET_CODE_MAP = {"OGN": "origins", "SFD": "spiritforged", "UNL": "unleashed", "VEN": "vendetta"}
+
+# Leer cardmarket_urls actual (si existe)
+cardmarket_urls_actual = {}
+cardmarket_urls_file = "cardmarket_urls.json"
+if os.path.exists(cardmarket_urls_file):
+    with open(cardmarket_urls_file, "r", encoding="utf-8") as f:
+        cardmarket_urls_actual = json.load(f)
+
+# Cargar datos de cartas épicas para pasarlos al prompt
+epic_data_raw = {}
+try:
+    import re
+    with open("epic-cards.js", "r", encoding="utf-8") as f:
+        content = f.read()
+    match = re.search(r"window\.EPIC_CARD_DATA\s*=\s*(\{.+?\});", content, re.DOTALL)
+    if match:
+        epic_data_raw = json.loads(match.group(1))
+except Exception:
+    epic_data_raw = {}
+
+# Listar las épicas para el prompt
+epic_list_lines = []
+for set_code, cards in epic_data_raw.items():
+    set_id = SET_CODE_MAP.get(set_code, set_code.lower())
+    for card in cards:
+        epic_list_lines.append(f'  {set_id}/{card["id"]}: {card["name"]} [{card["rarity"]}]')
+epic_list_str = "\n".join(epic_list_lines)
+
 mensaje = f"""
 Eres el mantenedor automático de la base de datos de Riftbound TCG.
 Tu trabajo es actualizar el JSON completo de las expansiones con TODOS los campos.
@@ -80,7 +110,7 @@ ESTRUCTURA JSON REQUERIDA (debes devolver EXACTAMENTE este formato):
             "imgBase": "URL base de imágenes (o null si no hay)",
             "legend_count": número de leyendas,
             "leyendas": [
-                {{"name": "Nombre del campeón", "img": "URL directa de la imagen (o null si no encuentras)"}}
+                {{"name": "Nombre del campeón", "img": "URL directa de la imagen (o null si no encuentras)", "cardmarket": "URL directa a la carta en Cardmarket (o null si no la encuentras)"}}
             ],
             "productos": ["Lista", "de", "productos"],
             "champion_decks": ["Campeones", "con", "Champion Deck"],
@@ -101,6 +131,23 @@ ESTRUCTURA JSON REQUERIDA (debes devolver EXACTAMENTE este formato):
         "per_box": {{
             "rareza": {{"Origins":"texto","Spiritforged":"texto","Unleashed":"texto","Vendetta":"texto"}}
         }}
+    }},
+    "cardmarket_urls": {{
+        "origins": {{
+            "Kai'Sa": "URL o null",
+            "ogn-039-298": "URL o null"
+        }},
+        "spiritforged": {{
+            "Rumble": "URL o null",
+            "sfd-027-221": "URL o null"
+        }},
+        "unleashed": {{
+            "Jhin": "URL o null",
+            "unl-022a-219": "URL o null"
+        }},
+        "vendetta": {{
+            "Nasus": "URL o null"
+        }}
     }}
 }}
 
@@ -110,16 +157,41 @@ TAREAS:
 3. Mantener productos, ovr_breakdown, mecanicas por cada expansión.
 4. Actualizar pull_rates si hay cambios oficiales.
 5. Para expansiones NUEVAS, rellena todos los campos con la información disponible.
+6. Generar o actualizar las URLs de Cardmarket para TODAS las cartas en cardmarket_urls.
+   Las claves son: nombre de leyenda (ej. "Kai'Sa") o ID de carta épica (ej. "ogn-039-298").
+   El valor es la URL directa de Cardmarket o null si no puedes determinarla.
 
-DATA ACTUAL:
+DATA ACTUAL DE SETS:
 {json.dumps(datos_actuales, indent=2, ensure_ascii=False)}
 
-FORMATO DE LEYENDAS:
-Cada leyenda es un objeto con "name" (obligatorio) e "img" (opcional, URL directa de la imagen de la carta o null). Ejemplo:
-"leyendas": [
-    {{"name": "Evelynn", "img": "https://cardgamer.com/.../imagen.png"}},
-    {{"name": "Ekko", "img": null}}
-]
+CARTAS ÉPICAS EXISTENTES (inclúyelas todas en cardmarket_urls):
+{epic_list_str}
+
+URLS DE CARDMARKET ACTUALES (actualiza o añade según corresponda):
+{json.dumps(cardmarket_urls_actual, indent=2, ensure_ascii=False)}
+
+CÓMO CONSTRUIR LA URL DE CARDMARKET:
+
+Para LEYENDAS (campeones):
+- Formato típico: https://www.cardmarket.com/en/Riftbound/Products/Singles/{{Expansion}}/{{ChampSlug}}-{{CardmarketTitle}}-V1-Rare
+- ChampSlug = nombre sin espacios ni apóstrofes, separado por guiones
+- CardmarketTitle = título inglés en Cardmarket (ej. "Unforgiven" para Yasuo)
+- Ejemplo: Yasuo → https://www.cardmarket.com/en/Riftbound/Products/Singles/Origins/Yasuo-Unforgiven-V1-Rare
+- Excepción: Viktor no lleva sufijo -V1-Rare: https://www.cardmarket.com/en/Riftbound/Products/Singles/Origins/Viktor-Herald-of-the-Arcane
+
+Para CARTAS ÉPICAS:
+- Formato típico: https://www.cardmarket.com/en/Riftbound/Products/Singles/{{Expansion}}/{{Slug}}-V1-Epic
+- Para Alternate Art: usar -V2-Showcase en vez de -V1-Epic
+- Para Overnumbered: usar -V3-Overnumbered en vez de -V1-Epic
+- Para Signature: usar -OVR-Signature o similar
+- Slug = nombre de la carta sin paréntesis, reemplazando espacios por guiones
+- Si la carta tiene guión (Champ - Título), úsalo como pista para construir el slug
+- Ejemplo: "Inviolus Vox" → .../Inviolus-Vox-V1-Epic
+- Ejemplo: "Red Brambleback (Alternate Art)" → .../Red-Brambleback-V2-Showcase
+- Ejemplo: "Pouty Poro (Overnumbered)" → .../Pouty-Poro-V3-Overnumbered
+- Ejemplo: "Jhin - Virtuoso (Signature)" → .../Jhin-Virtuoso-OVR-Signature
+
+Si no puedes determinar la URL exacta, pon null. NO INVENTES URLs.
 
 REGLAS CRÍTICAS:
 1. Devuelve EXCLUSIVAMENTE el objeto JSON actualizado exactamente con la estructura de arriba.
@@ -131,6 +203,7 @@ REGLAS CRÍTICAS:
 7. Todo debe estar contrastado con fuentes oficiales de Riot Games, riftbound.leagueoflegends.com, riftbound.gg o cardgamer.com. No uses otras webs.
 8. Si cambias total, total_base o total_ovr de un set ya lanzado, DEBES incluir el campo "_source_url": "URL_DE_LA_FUENTE" dentro de ese set. La URL debe ser de riftbound.leagueoflegends.com, riftbound.gg o cardgamer.com. Sin ese campo o con URL no válida, el cambio será RECHAZADO automáticamente.
 9. Para el campo "img" de cada leyenda, usa SOLO URLs de cardgamer.com, riftbound.leagueoflegends.com o riftbound.gg. Si no encuentras la URL exacta de la imagen, pon null.
+10. cardmarket_urls debe contener TODAS las cartas (leyendas + épicas). Las URLs deben ser de cardmarket.com. Si no puedes determinar una URL, pon null.
 """
 
 # Ejecución con control de cuota
@@ -180,6 +253,9 @@ elif "```" in texto_respuesta:
 try:
     datos_nuevos = json.loads(texto_respuesta)
 
+    # Extraer cardmarket_urls antes de comparar con datos actuales
+    cardmarket_urls = datos_nuevos.pop("cardmarket_urls", {})
+
     # Verificación de que no eliminó las expansiones clave
     for exp in EXPANSIONES:
         if "sets" not in datos_nuevos or exp not in datos_nuevos["sets"]:
@@ -194,6 +270,25 @@ try:
                 raise ValueError(f"Falta campo '{campo}' en {exp}")
 
     FUENTES_VALIDAS = ["riftbound.leagueoflegends.com", "riftbound.gg", "cardgamer.com"]
+
+    # Validar campo cardmarket en leyendas (redundante con cardmarket_urls, pero por compatibilidad)
+    for exp in EXPANSIONES:
+        for leyenda in datos_nuevos["sets"][exp].get("leyendas", []):
+            url = leyenda.get("cardmarket")
+            if url and "cardmarket.com" not in url:
+                raise ValueError(
+                    f"Leyenda {exp}/{leyenda['name']} tiene cardmarket '{url}' "
+                    f"que no es de cardmarket.com. Cambio rechazado."
+                )
+
+    # Validar cardmarket_urls: todos los valores deben ser null o cardmarket.com
+    for set_id, entries in cardmarket_urls.items():
+        for card_key, url in entries.items():
+            if url and "cardmarket.com" not in url:
+                raise ValueError(
+                    f"cardmarket_urls[{set_id}]['{card_key}'] = '{url}' "
+                    f"no es de cardmarket.com. Cambio rechazado."
+                )
 
     # Validar Regla 8: cambios en totals requieren _source_url de fuente válida
     for exp in EXPANSIONES:
@@ -219,7 +314,15 @@ except (json.JSONDecodeError, ValueError) as e:
     exit(0)
 
 # ==========================================
-# Guardar únicamente si hay cambios reales
+# Guardar cardmarket_urls.json
+# ==========================================
+if cardmarket_urls:
+    with open("cardmarket_urls.json", "w", encoding="utf-8") as f:
+        json.dump(cardmarket_urls, f, indent=4, ensure_ascii=False)
+    print("✅ 'cardmarket_urls.json' actualizado con URLs de Cardmarket.")
+
+# ==========================================
+# Guardar cartas.json solo si hay cambios
 # ==========================================
 # Limpiar campo interno _source_url de todos los sets antes de guardar
 source_urls_used = []
@@ -232,10 +335,8 @@ if source_urls_used:
         print(line)
 
 if datos_nuevos == datos_actuales:
-    print("ℹ️ No se detectaron novedades en las fuentes oficiales.")
-    exit(0)
-
-with open(json_file, "w", encoding="utf-8") as f:
-    json.dump(datos_nuevos, f, indent=4, ensure_ascii=False)
-
-print("✅ Base de datos 'cartas.json' actualizada con éxito.")
+    print("ℹ️ No se detectaron novedades en las fuentes oficiales para cartas.json.")
+else:
+    with open(json_file, "w", encoding="utf-8") as f:
+        json.dump(datos_nuevos, f, indent=4, ensure_ascii=False)
+    print("✅ 'cartas.json' actualizado con éxito.")

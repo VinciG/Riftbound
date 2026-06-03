@@ -699,6 +699,9 @@ function filterPremium(prefix) {
   });
 }
 
+// ===== CARDMARKET URLS (loaded from cardmarket_urls.json) =====
+let CARDMARKET_URLS = {};
+
 // ===== MODAL =====
 function openModal(leg, set) {
   document.getElementById('modal-name').textContent = leg.name;
@@ -725,7 +728,8 @@ function openModal(leg, set) {
   }
 
   document.getElementById('modal').classList.add('active');
-  fetchCardmarketPrice(leg.name, set, leg.n ? leg.n.replace('#','') : '');
+  const cmUrl = CARDMARKET_URLS[set.id]?.[leg.name] || leg.cardmarket;
+  fetchCardmarketPrice(leg.name, cmUrl);
 }
 
 function openPremiumModal(card, set) {
@@ -744,76 +748,23 @@ function openPremiumModal(card, set) {
   imgDiv.appendChild(img);
 
   document.getElementById('modal').classList.add('active');
-  const idParts = card.id.match(/-(\d+)([a-z]?)/);
-  const cn = idParts ? idParts[1] + idParts[2] : (card.number ? String(card.number).padStart(3,'0') : '');
-  fetchCardmarketPrice(card.name, set, cn);
+  const cmUrl = CARDMARKET_URLS[set.id]?.[card.id] || CARDMARKET_URLS[set.id]?.[card.name] || card.cardmarket;
+  fetchCardmarketPrice(card.name, cmUrl);
 }
 
 function closeModal() {
   document.getElementById('modal').classList.remove('active');
 }
 
-// ===== CARDMARKET SEARCH =====
-const CM_TITLES = {
-  'Kai\'Sa':'Daughter-of-the-Void','Volibear':'Relentless-Storm',
-  'Jinx':'Loose-Cannon','Darius':'Hand-of-Noxus',
-  'Ahri':'Nine-Tailed-Fox','Lee Sin':'Blind-Monk',
-  'Yasuo':'Unforgiven','Leona':'Radiant-Dawn',
-  'Teemo':'Swift-Scout','Viktor':'Herald-of-the-Arcane',
-  'Miss Fortune':'Bounty-Hunter','Sett':'The-Boss',
-  'Rumble':'Mechanized-Menace','Lucian':'Purifier',
-  'Draven':'Glorious-Executioner','Rek\'Sai':'Void-Burrower',
-  'Ornn':'Fire-Below-the-Mountain','Jax':'Grandmaster-at-Arms',
-  'Irelia':'Blade-Dancer','Azir':'Emperor-of-the-Sands',
-  'Ezreal':'Prodigal-Explorer','Renata Glasc':'Chem-Baroness',
-  'Sivir':'Battle-Mistress','Fiora':'Grand-Duelist',
-  'Jhin':'Virtuoso','Rengar':'Pridestalker',
-  'Pyke':'Bloodharbor-Ripper','Vi':'Piltover-Enforcer',
-  'Lillia':'Bashful-Bloom','Master Yi':'Wuju-Bladesman',
-  'Vex':'Gloomist','Ivern':'Green-Father',
-  'Diana':'Scorn-of-the-Moon','LeBlanc':'Deceiver',
-  'Kha\'Zix':'Voidreaver','Poppy':'Keeper-of-the-Hammer',
-  'Nasus':'Curator-of-Sands','Renekton':'Butcher-of-the-Sands',
-  'Akali':'Shadow-Fist','Zed':'Master-of-Shadows',
-  'Shen':'Eye-of-Twilight','Ambessa':'General-Medarda',
-  'Mel':'Counselor-Medarda'
-};
-
-function fetchCardmarketPrice(name, set, cardNo) {
-  const setExp = { origins:'Origins', spiritforged:'Spiritforged', unleashed:'Unleashed', vendetta:'Vendetta' };
-  const exp = setExp[set.id] || set.name;
-  let link;
-
-  if (CM_TITLES[name] && cardNo) {
-    const champSlug = name.replace(/'/g, '').replace(/ /g, '-');
-    const suffix = (name === 'Viktor') ? '' : '-V1-Rare';
-    link = `https://www.cardmarket.com/en/Riftbound/Products/Singles/${exp}/${champSlug}-${CM_TITLES[name]}${suffix}`;
-  } else {
-    const cleanName = name.replace(/\s*\([^)]*\)\s*/g, '').trim();
-    const dashIdx = cleanName.indexOf(' - ');
-    const champName = dashIdx > 0 ? cleanName.substring(0, dashIdx) : null;
-
-    if (champName && CM_TITLES[champName]) {
-      const champSlug = champName.replace(/'/g, '').replace(/ /g, '-');
-      const epicTitle = cleanName.substring(dashIdx + 3).replace(/ /g, '-');
-      if (name.includes('(Alternate Art)')) {
-        link = `https://www.cardmarket.com/en/Riftbound/Products/Singles/${exp}/${champSlug}-${epicTitle}-V2-Showcase`;
-      } else if (name.includes('(Overnumbered)') || name.includes('(Signature)')) {
-        link = `https://www.cardmarket.com/en/Riftbound/Products/Singles/${exp}/${champSlug}-${epicTitle}-V3-Overnumbered`;
-      } else {
-        link = `https://www.cardmarket.com/en/Riftbound/Products/Singles/${exp}/${champSlug}-${epicTitle}-V1-Epic`;
-      }
-    } else {
-      const slug = cleanName.replace(/ - /g, '-').replace(/ /g, '-').replace(/'/g, '');
-      if (name.includes('(Alternate Art)')) {
-        link = `https://www.cardmarket.com/en/Riftbound/Products/Singles/${exp}/${slug}-V2-Showcase`;
-      } else {
-        link = `https://www.cardmarket.com/en/Riftbound/Products/Singles/${exp}/${slug}`;
-      }
-    }
+// ===== CARDMARKET =====
+function fetchCardmarketPrice(name, url) {
+  const priceEl = document.getElementById('price-value');
+  if (url) {
+    priceEl.innerHTML = `<a class="pl-a" href="${url}" target="_blank" rel="noopener">${name} — Cardmarket ↗</a>`;
+    return;
   }
-
-  document.getElementById('price-value').innerHTML = `<a class="pl-a" href="${link}" target="_blank" rel="noopener">${name} — Cardmarket ↗</a>`;
+  const q = encodeURIComponent(name.replace(/ - /g, ' ').replace(/\([^)]*\)/g, '').trim());
+  priceEl.innerHTML = `<a class="pl-a" href="https://www.cardmarket.com/en/Riftbound/Search?searchString=${q}" target="_blank" rel="noopener">${name} — Buscar en Cardmarket ↗</a>`;
 }
 document.getElementById('modal').onclick = function(e) {
   if(e.target===this) closeModal();
@@ -826,6 +777,12 @@ async function buildPage() {
     const resp = await fetch('cartas.json?' + Date.now());
     if (resp.ok) db = await resp.json();
   } catch(e) { console.warn('cartas.json not loaded, using default'); }
+
+  // Load Cardmarket URLs
+  try {
+    const cmResp = await fetch('cardmarket_urls.json?' + Date.now());
+    if (cmResp.ok) CARDMARKET_URLS = await cmResp.json();
+  } catch(e) { console.warn('cardmarket_urls.json not loaded'); }
 
   const sets = db.sets || {};
   const setIds = Object.keys(sets);

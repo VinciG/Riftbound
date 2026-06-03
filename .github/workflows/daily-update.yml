@@ -43,14 +43,10 @@ jobs:
           git config user.name "Riftbound Bot"
           git config user.email "actions@github.com"
           
-          # 💡 Cambiado para guardar el archivo JSON en vez del HTML
-          git add cartas.json
-          
+          git add cartas.json cardmarket_urls.json
           git diff --cached --quiet || git commit -m "Auto update Riftbound database JSON"
           
           git add index.html
-          
-          # Solo hace commit si el script de Python modificó el archivo index.html
           git diff --cached --quiet || git commit -m "Auto update Riftbound database"
 
       - name: Push
