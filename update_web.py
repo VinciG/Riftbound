@@ -159,7 +159,7 @@ TAREAS:
 5. Para expansiones NUEVAS, rellena todos los campos con la información disponible.
 6. Generar o actualizar las URLs de Cardmarket para TODAS las cartas en cardmarket_urls.
    Las claves son: nombre de leyenda (ej. "Kai'Sa") o ID de carta épica (ej. "ogn-039-298").
-   El valor es la URL directa de Cardmarket o null si no puedes determinarla.
+   El valor es la URL exacta y REAL de Cardmarket, obtenida mediante búsqueda, o null si no la encuentras.
 
 DATA ACTUAL DE SETS:
 {json.dumps(datos_actuales, indent=2, ensure_ascii=False)}
@@ -170,28 +170,26 @@ CARTAS ÉPICAS EXISTENTES (inclúyelas todas en cardmarket_urls):
 URLS DE CARDMARKET ACTUALES (actualiza o añade según corresponda):
 {json.dumps(cardmarket_urls_actual, indent=2, ensure_ascii=False)}
 
-CÓMO CONSTRUIR LA URL DE CARDMARKET:
+CÓMO OBTENER LA URL REAL DE CARDMARKET (IMPORTANTE):
 
-Para LEYENDAS (campeones):
-- Formato típico: https://www.cardmarket.com/en/Riftbound/Products/Singles/{{Expansion}}/{{ChampSlug}}-{{CardmarketTitle}}-V1-Rare
-- ChampSlug = nombre sin espacios ni apóstrofes, separado por guiones
-- CardmarketTitle = título inglés en Cardmarket (ej. "Unforgiven" para Yasuo)
-- Ejemplo: Yasuo → https://www.cardmarket.com/en/Riftbound/Products/Singles/Origins/Yasuo-Unforgiven-V1-Rare
-- Excepción: Viktor no lleva sufijo -V1-Rare: https://www.cardmarket.com/en/Riftbound/Products/Singles/Origins/Viktor-Herald-of-the-Arcane
+NO CONSTRUYAS URLs con formato. DEBES BUSCAR CADA CARTA en Cardmarket usando Google Search y extraer la URL real.
 
-Para CARTAS ÉPICAS:
-- Formato típico: https://www.cardmarket.com/en/Riftbound/Products/Singles/{{Expansion}}/{{Slug}}-V1-Epic
-- Para Alternate Art: usar -V2-Showcase en vez de -V1-Epic
-- Para Overnumbered: usar -V3-Overnumbered en vez de -V1-Epic
-- Para Signature: usar -OVR-Signature o similar
-- Slug = nombre de la carta sin paréntesis, reemplazando espacios por guiones
-- Si la carta tiene guión (Champ - Título), úsalo como pista para construir el slug
-- Ejemplo: "Inviolus Vox" → .../Inviolus-Vox-V1-Epic
-- Ejemplo: "Red Brambleback (Alternate Art)" → .../Red-Brambleback-V2-Showcase
-- Ejemplo: "Pouty Poro (Overnumbered)" → .../Pouty-Poro-V3-Overnumbered
-- Ejemplo: "Jhin - Virtuoso (Signature)" → .../Jhin-Virtuoso-OVR-Signature
+Para cada carta:
+1. Busca en Google: "Riftbound [nombre carta] cardmarket"
+2. Si no aparece, busca: "cardmarket Riftbound [nombre carta]"
+3. Si no aparece, busca: "cardmarket Riftbound [set] [número de carta]"
+4. Extrae la URL exacta del resultado de búsqueda — DEBE ser cardmarket.com/en/Riftbound/Products/Singles/...
+5. Si no encuentras la URL exacta tras varios intentos, pon null.
 
-Si no puedes determinar la URL exacta, pon null. NO INVENTES URLs.
+Ejemplos de búsqueda:
+- Para "Kai'Sa": busca "Riftbound Kai'Sa cardmarket"
+- Para "ogn-039-298" (Kai'Sa Survivor): busca "Riftbound Kai'Sa Survivor cardmarket" o "Riftbound ogn-039 cardmarket"
+
+REGLAS:
+- La URL debe ser REAL, obtenida de los resultados de búsqueda
+- NO uses formatos, plantillas ni construyas la URL manualmente
+- Si Google no encuentra la carta, pon null
+- Si la URL que encuentras no es de cardmarket.com, pon null
 
 REGLAS CRÍTICAS:
 1. Devuelve EXCLUSIVAMENTE el objeto JSON actualizado exactamente con la estructura de arriba.
@@ -203,7 +201,7 @@ REGLAS CRÍTICAS:
 7. Todo debe estar contrastado con fuentes oficiales de Riot Games, riftbound.leagueoflegends.com, riftbound.gg o cardgamer.com. No uses otras webs.
 8. Si cambias total, total_base o total_ovr de un set ya lanzado, DEBES incluir el campo "_source_url": "URL_DE_LA_FUENTE" dentro de ese set. La URL debe ser de riftbound.leagueoflegends.com, riftbound.gg o cardgamer.com. Sin ese campo o con URL no válida, el cambio será RECHAZADO automáticamente.
 9. Para el campo "img" de cada leyenda, usa SOLO URLs de cardgamer.com, riftbound.leagueoflegends.com o riftbound.gg. Si no encuentras la URL exacta de la imagen, pon null.
-10. cardmarket_urls debe contener TODAS las cartas (leyendas + épicas). Las URLs deben ser de cardmarket.com. Si no puedes determinar una URL, pon null.
+10. cardmarket_urls debe contener TODAS las cartas (leyendas + épicas). Las URLs deben ser URLs REALES obtenidas de búsqueda en Google, no construidas con formato. Si la búsqueda no encuentra la URL exacta, pon null.
 """
 
 # Ejecución con control de cuota
