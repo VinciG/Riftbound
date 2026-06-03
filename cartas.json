@@ -15,51 +15,63 @@
             "leyendas": [
                 {
                     "name": "Kai'Sa",
-                    "img": null
+                    "img": null,
+                    "cardmarket": null
                 },
                 {
                     "name": "Volibear",
-                    "img": null
+                    "img": null,
+                    "cardmarket": null
                 },
                 {
                     "name": "Jinx",
-                    "img": null
+                    "img": null,
+                    "cardmarket": null
                 },
                 {
                     "name": "Darius",
-                    "img": null
+                    "img": null,
+                    "cardmarket": null
                 },
                 {
                     "name": "Ahri",
-                    "img": null
+                    "img": null,
+                    "cardmarket": null
                 },
                 {
                     "name": "Lee Sin",
-                    "img": null
+                    "img": null,
+                    "cardmarket": null
                 },
                 {
                     "name": "Yasuo",
-                    "img": null
+                    "img": null,
+                    "cardmarket": null
                 },
                 {
                     "name": "Leona",
-                    "img": null
+                    "img": null,
+                    "cardmarket": null
                 },
                 {
                     "name": "Teemo",
-                    "img": null
+                    "img": null,
+                    "cardmarket": null
                 },
                 {
                     "name": "Viktor",
-                    "img": null
+                    "img": null,
+                    "cardmarket": null
                 },
                 {
                     "name": "Miss Fortune",
-                    "img": null
+                    "img": null,
+                    "cardmarket": null
                 },
                 {
                     "name": "Sett",
-                    "img": null
+                    "img": null,
+                    "cardmarket": null
                 }
             ],
             "productos": [
@@ -115,51 +127,63 @@
             "leyendas": [
                 {
                     "name": "Rumble",
-                    "img": null
+                    "img": null,
+                    "cardmarket": null
                 },
                 {
                     "name": "Lucian",
-                    "img": null
+                    "img": null,
+                    "cardmarket": null
                 },
                 {
                     "name": "Draven",
-                    "img": null
+                    "img": null,
+                    "cardmarket": null
                 },
                 {
                     "name": "Rek'Sai",
-                    "img": null
+                    "img": null,
+                    "cardmarket": null
                 },
                 {
                     "name": "Ornn",
-                    "img": null
+                    "img": null,
+                    "cardmarket": null
                 },
                 {
                     "name": "Jax",
-                    "img": null
+                    "img": null,
+                    "cardmarket": null
                 },
                 {
                     "name": "Irelia",
-                    "img": null
+                    "img": null,
+                    "cardmarket": null
                 },
                 {
                     "name": "Azir",
-                    "img": null
+                    "img": null,
+                    "cardmarket": null
                 },
                 {
                     "name": "Ezreal",
-                    "img": null
+                    "img": null,
+                    "cardmarket": null
                 },
                 {
                     "name": "Renata Glasc",
-                    "img": null
+                    "img": null,
+                    "cardmarket": null
                 },
                 {
                     "name": "Sivir",
-                    "img": null
+                    "img": null,
+                    "cardmarket": null
                 },
                 {
                     "name": "Fiora",
-                    "img": null
+                    "img": null,
+                    "cardmarket": null
                 }
             ],
             "productos": [
@@ -238,51 +262,63 @@
             "leyendas": [
                 {
                     "name": "Vi",
-                    "img": null
+                    "img": null,
+                    "cardmarket": null
                 },
                 {
                     "name": "Rengar",
-                    "img": null
+                    "img": null,
+                    "cardmarket": null
                 },
                 {
                     "name": "Kha'Zix",
-                    "img": null
+                    "img": null,
+                    "cardmarket": null
                 },
                 {
                     "name": "Poppy",
-                    "img": null
+                    "img": null,
+                    "cardmarket": null
                 },
                 {
                     "name": "Ivern",
-                    "img": null
+                    "img": null,
+                    "cardmarket": null
                 },
                 {
                     "name": "Vex",
-                    "img": null
+                    "img": null,
+                    "cardmarket": null
                 },
                 {
                     "name": "Lillia",
-                    "img": null
+                    "img": null,
+                    "cardmarket": null
                 },
                 {
                     "name": "Diana",
-                    "img": null
+                    "img": null,
+                    "cardmarket": null
                 },
                 {
                     "name": "LeBlanc",
-                    "img": null
+                    "img": null,
+                    "cardmarket": null
                 },
                 {
                     "name": "Pyke",
-                    "img": null
+                    "img": null,
+                    "cardmarket": null
                 },
                 {
                     "name": "Master Yi",
-                    "img": null
+                    "img": null,
+                    "cardmarket": null
                 },
                 {
                     "name": "Jhin",
-                    "img": null
+                    "img": null,
+                    "cardmarket": null
                 }
             ],
             "productos": [
@@ -362,31 +398,38 @@
             "leyendas": [
                 {
                     "name": "Nasus",
-                    "img": null
+                    "img": null,
+                    "cardmarket": null
                 },
                 {
                     "name": "Renekton",
-                    "img": null
+                    "img": null,
+                    "cardmarket": null
                 },
                 {
                     "name": "Akali",
-                    "img": null
+                    "img": null,
+                    "cardmarket": null
                 },
                 {
                     "name": "Mel",
-                    "img": null
+                    "img": null,
+                    "cardmarket": null
                 },
                 {
                     "name": "Ambessa",
-                    "img": null
+                    "img": null,
+                    "cardmarket": null
                 },
                 {
                     "name": "Zed",
-                    "img": null
+                    "img": null,
+                    "cardmarket": null
                 },
                 {
                     "name": "Shen",
-                    "img": null
+                    "img": null,
+                    "cardmarket": null
                 }
             ],
             "productos": [
@@ -442,27 +485,33 @@
             "leyendas": [
                 {
                     "name": "Evelynn",
-                    "img": null
+                    "img": null,
+                    "cardmarket": null
                 },
                 {
                     "name": "Ekko",
-                    "img": null
+                    "img": null,
+                    "cardmarket": null
                 },
                 {
                     "name": "Seraphine",
-                    "img": null
+                    "img": null,
+                    "cardmarket": null
                 },
                 {
                     "name": "Jarvan IV",
-                    "img": null
+                    "img": null,
+                    "cardmarket": null
                 },
                 {
                     "name": "Ziggs",
-                    "img": null
+                    "img": null,
+                    "cardmarket": null
                 },
                 {
                     "name": "Fizz",
-                    "img": null
+                    "img": null,
+                    "cardmarket": null
                 }
             ],
             "productos": [
