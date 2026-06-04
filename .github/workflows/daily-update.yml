@@ -2,7 +2,7 @@ name: Daily Riftbound Update
 
 on:
   schedule:
-    - cron: "0 6 * * *" #Forzar commit
+    - cron: "43 4 * * *" #Forzar commit
 
   workflow_dispatch:
 
