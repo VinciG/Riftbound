@@ -267,6 +267,20 @@ tbody tr:hover td { background:var(--surface2); }
 .search-bar {
   display:flex; gap:8px; margin-bottom:1rem; flex-wrap:wrap;
 }
+.global-search-bar {
+  margin-bottom:1rem; position:sticky; top:0; z-index:40;
+}
+.global-search-bar input {
+  width:100%; padding:.6rem 1rem; font-size:.85rem;
+  background:var(--surface); border:1px solid var(--border); border-radius:10px;
+  color:var(--text); font-family:'DM Sans',sans-serif;
+  backdrop-filter:blur(8px);
+}
+.global-search-bar input:focus { outline:none; border-color:var(--blue); }
+.global-search-bar input::placeholder { color:var(--dim); }
+.global-results { display:none; margin-bottom:1.5rem; }
+.global-results.active { display:block; }
+.global-results .legend-grid { max-height:70vh; overflow-y:auto; }
 .search-bar input {
   flex:1; min-width:180px; padding:.5rem .75rem; font-size:.78rem;
   background:var(--surface); border:1px solid var(--border); border-radius:8px;
@@ -330,6 +344,9 @@ tbody tr:hover td { background:var(--surface2); }
   .sub-tab { flex:0 0 auto; padding:.35rem .7rem; font-size:.65rem; }
   .search-bar { display:grid; grid-template-columns:1fr; gap:6px; }
   .search-bar input, .search-bar select { width:100%; min-width:0; }
+  .search-bar select.sort-price { min-width:0; }
+  .global-search-bar { margin-bottom:.5rem; top:36px; }
+  .global-search-bar input { font-size:.72rem; padding:.4rem .65rem; border-radius:8px; }
   .two-col { grid-template-columns:1fr; }
   .pack-grid { grid-template-columns:repeat(3,1fr); }
   .legend-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:7px; }
@@ -754,6 +771,8 @@ function renderPremiumSet(setCode) {
     el.className = 'legend-card';
     el.setAttribute('data-name', `${card.name} ${card.type} ${card.domain}`.toLowerCase());
     el.setAttribute('data-rarity', card.rarity);
+    const cmPrice = CARDMARKET_PRICES[set.id]?.[card.id] || CARDMARKET_PRICES[set.id]?.[card.name] || null;
+    el.setAttribute('data-price', cmPrice ? parseFloat(cmPrice.replace('€','')) : '');
 
     const imgDiv = document.createElement('div');
     imgDiv.className = 'lc-img';
@@ -788,11 +807,121 @@ function filterPremium(prefix) {
   if(!tab || !grid) return;
   const query = (tab.querySelector('input')?.value || '').toLowerCase().trim();
   const rarity = tab.querySelector('select')?.value || '';
-  grid.querySelectorAll('.legend-card').forEach(card=>{
+  const sort = tab.querySelector('.sort-price')?.value || '';
+  const cards = [...grid.querySelectorAll('.legend-card')];
+  cards.forEach(card=>{
     const matchesQuery = !query || (card.getAttribute('data-name') || '').includes(query);
     const matchesRarity = !rarity || card.getAttribute('data-rarity') === rarity;
     card.style.display = matchesQuery && matchesRarity ? '' : 'none';
+    card.dataset._visible = matchesQuery && matchesRarity ? '1' : '0';
   });
+  if (sort) {
+    const visible = cards.filter(c => c.dataset._visible === '1');
+    visible.sort((a, b) => {
+      const pa = parseFloat(a.getAttribute('data-price')) || 0;
+      const pb = parseFloat(b.getAttribute('data-price')) || 0;
+      return sort === 'asc' ? pa - pb : pb - pa;
+    });
+    visible.forEach(el => grid.appendChild(el));
+  }
+}
+
+// ===== GLOBAL SEARCH =====
+function globalSearch() {
+  const q = (document.getElementById('global-search-input')?.value || '').trim().toLowerCase();
+  const grid = document.getElementById('global-results-grid');
+  const container = document.getElementById('global-results');
+  if (!grid || !container) return;
+
+  // Show/hide sections and search results
+  document.querySelectorAll('.section').forEach(s => s.classList.toggle('active', !q));
+  container.classList.toggle('active', !!q);
+
+  if (!q) { grid.innerHTML = ''; return; }
+
+  grid.innerHTML = '';
+  const results = [];
+
+  // Search legends
+  for (const setId of Object.keys(SETS)) {
+    const set = SETS[setId];
+    for (const leg of set.legends) {
+      if (leg.name.toLowerCase().includes(q)) {
+        results.push({ type:'legend', set, leg });
+      }
+    }
+  }
+
+  // Search epic+ cards
+  for (const setCode of Object.keys(PREMIUM_SET_PREFIX)) {
+    const cards = (window.EPIC_CARD_DATA && window.EPIC_CARD_DATA[setCode]) || [];
+    const set = Object.values(SETS).find(s => s.abbr === setCode);
+    if (!set) continue;
+    for (const card of cards) {
+      if (card.name.toLowerCase().includes(q) || card.type.toLowerCase().includes(q)) {
+        results.push({ type:'epic', set, card });
+      }
+    }
+  }
+
+  if (!results.length) {
+    grid.innerHTML = `<div class="empty-state">No se encontraron resultados para "${q}".</div>`;
+    return;
+  }
+
+  for (const r of results) {
+    const el = document.createElement('div');
+    el.className = 'legend-card';
+
+    const imgDiv = document.createElement('div');
+    imgDiv.className = 'lc-img';
+    if (r.type === 'legend') {
+      let imgUrl = r.leg.img || null;
+      if (!imgUrl) {
+        const imgKey = Object.keys(CARD_IMGS).find(k => CARD_IMGS[k][0]===r.leg.name && CARD_IMGS[k][1]===r.set.id);
+        if (imgKey && r.set.imgBase) imgUrl = r.set.imgBase + imgKey;
+      }
+      if (imgUrl) {
+        const img = document.createElement('img'); img.src = imgUrl; img.alt = r.leg.name; img.loading = 'lazy';
+        img.onerror = function(){ this.style.display='none'; this.parentElement.innerHTML='<div class="placeholder">?</div>'; };
+        imgDiv.appendChild(img);
+      } else {
+        imgDiv.innerHTML = '<div class="placeholder">?</div>';
+      }
+    } else {
+      const img = document.createElement('img'); img.src = r.card.image; img.alt = r.card.name; img.loading = 'lazy';
+      img.onerror = function(){ this.style.display='none'; this.parentElement.innerHTML='<div class="placeholder">?</div>'; };
+      imgDiv.appendChild(img);
+    }
+
+    const cmPrice = r.type === 'legend'
+      ? (CARDMARKET_PRICES[r.set.id]?.[r.leg.name] || null)
+      : (CARDMARKET_PRICES[r.set.id]?.[r.card.id] || CARDMARKET_PRICES[r.set.id]?.[r.card.name] || null);
+
+    const info = document.createElement('div');
+    info.className = 'lc-info';
+    if (r.type === 'legend') {
+      info.innerHTML = `<div class="lc-name">${r.leg.name}</div>
+        <div class="lc-sub">${r.set.abbr} · Leyenda</div>
+        <span class="lc-set" style="background:color-mix(in srgb,${r.set.color},transparent 80%);color:var(--text)">${r.set.abbr}</span>
+        ${cmPrice ? `<div class="lc-price">${cmPrice}</div>` : ''}`;
+      el.onclick = ()=>openModal(r.leg, r.set);
+    } else {
+      const label = r.card.signature ? 'Signature' : r.card.ovr ? 'OVR' : r.card.alt ? 'Alt-Art' : r.card.rarity;
+      info.innerHTML = `<div class="lc-name">${r.card.name}</div>
+        <div class="lc-sub">#${r.card.number} · ${r.card.type}${r.card.domain ? ' · '+r.card.domain : ''}</div>
+        <div class="lc-tags">
+          <span class="lc-set" style="background:color-mix(in srgb,${r.set.color},transparent 80%);color:var(--text)">${r.set.abbr}</span>
+          <span class="lc-set" style="background:var(--surface2);color:var(--muted)">${label}</span>
+        </div>
+        ${cmPrice ? `<div class="lc-price">${cmPrice}</div>` : ''}`;
+      el.onclick = ()=>openPremiumModal(r.card, r.set);
+    }
+
+    el.appendChild(imgDiv);
+    el.appendChild(info);
+    grid.appendChild(el);
+  }
 }
 
 // ===== CARDMARKET PRICES (loaded from cardmarket_prices.json) =====
@@ -899,6 +1028,13 @@ async function buildPage() {
   // 2. Build Overview section
   const main = document.getElementById('sec-container');
   main.innerHTML = `
+    <div class="global-search-bar">
+      <input type="text" id="global-search-input" placeholder="Buscar en todas las colecciones…" oninput="globalSearch()" autocomplete="off">
+    </div>
+    <div class="global-results" id="global-results">
+      <div class="sec-label" style="margin-top:0">Resultados globales</div>
+      <div class="legend-grid" id="global-results-grid"></div>
+    </div>
     <div class="section active" id="sec-all">
       <div class="set-header">
         <h2>Visión general</h2>
@@ -987,6 +1123,11 @@ async function buildPage() {
         <select onchange="filterPremium('${sfx}')">
           <option value="">Todas</option><option value="Epic">Epicas</option><option value="Showcase">Showcase / OVR</option>
         </select>
+        <select class="sort-price" onchange="filterPremium('${sfx}')">
+          <option value="">Orden</option>
+          <option value="asc">Precio ↑</option>
+          <option value="desc">Precio ↓</option>
+        </select>
       </div>
       <div class="count-note" id="epic-count-${sfx}"></div>
       <div class="legend-grid" id="grid-epic-${sfx}"></div></div>`;
@@ -1072,9 +1213,15 @@ document.addEventListener('click', function(e) {
   if (!item) return;
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.global-results, .global-search-bar').forEach(s=>s.classList.remove('active'));
   item.classList.add('active');
   const el = document.getElementById('sec-'+item.dataset.set);
   if (el) el.classList.add('active');
+  // Auto-scroll the sidebar to center the clicked item (mobile)
+  const sidebar = document.querySelector('.sidebar');
+  if (sidebar && window.innerWidth < 768) {
+    item.scrollIntoView({ behavior:'smooth', inline:'center', block:'nearest' });
+  }
   setTimeout(()=>{ window.dispatchEvent(new Event('resize')); },100);
 });
 
