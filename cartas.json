@@ -360,7 +360,7 @@
             "total_base": 116,
             "total_ovr": 50,
             "imgBase": null,
-            "legend_count": 7,
+            "legend_count": 9,
             "leyendas": [
                 {
                     "name": "Nasus",
@@ -388,6 +388,14 @@
                 },
                 {
                     "name": "Shen",
+                    "img": null
+                },
+                {
+                    "name": null,
+                    "img": null
+                },
+                {
+                    "name": null,
                     "img": null
                 }
             ],
