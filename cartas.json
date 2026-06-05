@@ -441,7 +441,7 @@
             "set_number": 5,
             "color": "#FFD700",
             "date": "Octubre 23 2026",
-            "cartas_reveladas": 3,
+            "cartas_reveladas": 5,
             "total": 180,
             "total_base": 120,
             "total_ovr": 60,
@@ -465,7 +465,7 @@
                     "img": null
                 },
                 {
-                    "name": null,
+                    "name": "Ziggs",
                     "img": null
                 },
                 {
