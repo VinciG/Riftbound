@@ -502,10 +502,6 @@ tbody tr:hover td { background:var(--surface2); }
         </div>
       </div>
 
-      <div class="footnote">
-        <strong>Nota:</strong> Las tasas de Spiritforged no fueron publicadas oficialmente por Riot; se infieren de Origins y de datos comunitarios. Los datos de Vendetta son preliminares (lanzamiento 31 Jul 2026).<br>
-        <strong>Fuente:</strong> Riot Games — Collectability Guide · GAMA Expo 2026
-      </div>
     </div>
   </main>
 </div>
@@ -535,77 +531,7 @@ tbody tr:hover td { background:var(--surface2); }
 let LEGEND_DATA = {};
 
 // ===== DATA =====
-const SETS = {
-  origins: {
-    id:'origins', name:'Origins', abbr:'OGN', color:'var(--s1)',
-    legends: [
-      {name:'Kai\'Sa', title:'Hija del Vacío', n:'#247'},
-      {name:'Volibear', title:'Tormenta Implacable', n:'#249'},
-      {name:'Jinx', title:'Cañón Suelto', n:'#251'},
-      {name:'Darius', title:'Mano de Noxus', n:'#253'},
-      {name:'Ahri', title:'Zorro de Nueve Colas', n:'#255'},
-      {name:'Lee Sin', title:'Monje Ciego', n:'#257'},
-      {name:'Yasuo', title:'El Imperdonable', n:'#259'},
-      {name:'Leona', title:'Alba Radiante', n:'#261'},
-      {name:'Teemo', title:'Explorador Veloz', n:'#263'},
-      {name:'Viktor', title:'Heraldo del Arcano', n:'#265'},
-      {name:'Miss Fortune', title:'Cazarrecompensas', n:'#267'},
-      {name:'Sett', title:'El Jefe', n:'#269'}
-    ],
-    imgBase:'https://cardgamer.com/wp-content/uploads/2025/06/'
-  },
-  spiritforged: {
-    id:'spiritforged', name:'Spiritforged', abbr:'SFD', color:'var(--s2)',
-    legends: [
-      {name:'Rumble', title:'', n:'SFD-181'},
-      {name:'Lucian', title:'', n:'SFD-183'},
-      {name:'Draven', title:'', n:'SFD-185'},
-      {name:'Rek\'Sai', title:'', n:'SFD-187'},
-      {name:'Ornn', title:'', n:'SFD-189'},
-      {name:'Jax', title:'', n:'SFD-193'},
-      {name:'Irelia', title:'', n:'SFD-195'},
-      {name:'Azir', title:'', n:'SFD-197'},
-      {name:'Ezreal', title:'', n:'SFD-199'},
-      {name:'Renata Glasc', title:'', n:'SFD-201'},
-      {name:'Sivir', title:'', n:'SFD-203'},
-      {name:'Fiora', title:'', n:'SFD-205'}
-    ],
-    imgBase:'https://cardgamer.com/wp-content/uploads/2026/01/'
-  },
-  unleashed: {
-    id:'unleashed', name:'Unleashed', abbr:'UNL', color:'var(--s3)',
-    legends: [
-      {name:'Vi', title:'Intocable de Piltover', n:'UNL-187'},
-      {name:'Rengar', title:'Acechador de Presas', n:'UNL-183'},
-      {name:'Kha\'Zix', title:'Devorador del Vacío', n:'UNL-201'},
-      {name:'Poppy', title:'Guardiana del Martillo', n:'UNL-203'},
-      {name:'Ivern', title:'Padre Verde', n:'UNL-195'},
-      {name:'Vex', title:'Gloomista', n:'UNL-193'},
-      {name:'Lillia', title:'Brote Tímido', n:'UNL-189'},
-      {name:'Diana', title:'Burla de la Luna', n:'UNL-197'},
-      {name:'LeBlanc', title:'La Engañadora', n:'UNL-199'},
-      {name:'Pyke', title:'Destripador de Puertohierro', n:'UNL-185'},
-      {name:'Master Yi', title:'Espadachín Wuju', n:'UNL-191'},
-      {name:'Jhin', title:'Artista Metódico', n:'UNL-181'}
-    ],
-    imgBase:'https://cardgamer.com/wp-content/uploads/2026/03/'
-  },
-  vendetta: {
-    id:'vendetta', name:'Vendetta', abbr:'VEN', color:'var(--s4)',
-    legends: [
-      {name:'Nasus', title:'Curador de Arenas'},
-      {name:'Renekton', title:'Carnicero de las Arenas'},
-      {name:'Akali', title:'Puño Sombra'},
-      {name:'Zed', title:'Maestro de las Sombras'},
-      {name:'Shen', title:'Ojo del Crepúsculo'},
-      {name:'Ambessa', title:'General Medarda'},
-      {name:'Mel', title:'Consejera Medarda'},
-      {name:'+2 TBC', title:'Por confirmar'},
-      {name:'+2 TBC', title:'Por confirmar'}
-    ],
-    imgBase:null
-  }
-};
+const SETS = {};
 
 // Card image URLs
 const CARD_IMGS = {
@@ -743,7 +669,7 @@ function filterLegends(setId, query) {
 }
 
 // ===== PREMIUM CARDS =====
-const PREMIUM_SET_PREFIX = { OGN:'o', SFD:'s', UNL:'u', VEN:'v' };
+const PREMIUM_SET_PREFIX = {};
 
 function premiumLabel(card) {
   if(card.signature) return 'Signature';
@@ -1081,10 +1007,6 @@ async function buildPage() {
         </div>
       </div>
 
-      <div class="footnote">
-        <strong>Fuentes oficiales:</strong> Riot Games — "Collectability in Riftbound" · GAMA Expo 2026 · riftbound.leagueoflegends.com<br>
-        <strong>Nota:</strong> Datos de Vendetta preliminares. Pull rates de Spiritforged inferidos de Origins salvo donde se indique.
-      </div>
     </div>`;
 
   for (const k of setIds) {
@@ -1108,7 +1030,6 @@ async function buildPage() {
     sec.className = 'section'; sec.id = 'sec-' + s.id;
 
     const ovrTab = s.ovr_breakdown && s.ovr_breakdown.length > 0;
-    const ovrTabId = s.id === 'unleashed' ? 'showcase' : 'ovr';
 
     let html = `
       <div class="set-header">
@@ -1117,11 +1038,10 @@ async function buildPage() {
         <span class="set-date">${s.date}</span>
         <span class="set-total"><strong>${s.total_base}</strong> base + <strong>${s.total_ovr}</strong> premium</span>
       </div>`;
-    if (s.id === 'origins') html += `<div class="pg-note"><strong>ⓘ Origins: Proving Grounds</strong> — Lanzado junto a Origins, incluye 4 leyendas adicionales (Garen, Lux, Annie, Master Yi) en un producto de inicio para 2-4 jugadores. No forman parte del set principal.</div>`;
     html += `<div class="sub-tabs">
       <div class="sub-tab active" data-tab="legends-${sfx}">Leyendas (${s.legend_count})</div>
       <div class="sub-tab" data-tab="epic-${sfx}">Épicas+</div>`;
-    if (ovrTab) html += `<div class="sub-tab" data-tab="${ovrTabId}-${sfx}">${s.id === 'unleashed' ? 'Showcase &amp; Ultimate' : 'Overnumbered'}</div>`;
+    if (ovrTab) html += `<div class="sub-tab" data-tab="showcase-${sfx}">Showcase &amp; Premium</div>`;
     html += `<div class="sub-tab" data-tab="info-${sfx}">Información</div></div>`;
 
     // Legend tab
@@ -1147,9 +1067,7 @@ async function buildPage() {
 
     // OVR/Showcase tab
     if (ovrTab) {
-      const intro = s.id === 'unleashed' ? 'Unleashed introduce la rareza <strong style="color:var(--red)">Ultimate</strong> y múltiples variantes Showcase.' : 'Cartas Overnumbered (numeración extendida) y Alt-Art disponibles.';
-      html += `<div class="sub-tab-content" id="tab-${ovrTabId}-${sfx}">
-        <p style="font-size:.8rem;color:var(--muted);margin-bottom:.75rem;">${intro}</p>
+      html += `<div class="sub-tab-content" id="tab-showcase-${sfx}">
         <div class="table-wrap"><table>
           <thead><tr><th>Tipo</th><th>Cantidad</th><th>Numeración</th><th>Notas</th></tr></thead>
           <tbody>${s.ovr_breakdown.map(r => `<tr${r.tipo.includes('Ultimate') ? ' style="color:var(--red)"' : ''}><td class="row-label">${r.tipo}</td><td>${r.cantidad}</td><td>${r.numeracion}</td><td>${r.notas}</td></tr>`).join('')}</tbody>
@@ -1164,19 +1082,13 @@ async function buildPage() {
     if (s.champion_decks && s.champion_decks.length > 0) {
       html += `<div class="mcard" style="--accent:${s.color}"><div class="mcard-label">Champion Decks</div><div class="mcard-num">${s.champion_decks.length}</div><div class="mcard-sub">${s.champion_decks.join(' · ')}</div></div>`;
     }
-    if (s.id === 'vendetta') {
-      html += `<div class="mcard" style="--accent:var(--s4)"><div class="mcard-label">Showdown Decks</div><div class="mcard-num">2</div><div class="mcard-sub">Shen vs Zed</div></div>`;
-    }
     html += `</div>`;
     if (s.mecanicas && s.mecanicas.length > 0) {
-      html += `<div class="sec-label">${s.id === 'vendetta' ? 'Novedades' : 'Mecánicas nuevas'}</div><div class="mechanics-grid">`;
+      html += `<div class="sec-label">Mecánicas</div><div class="mechanics-grid">`;
       for (const m of s.mecanicas) {
         html += `<div class="mechanic-card" style="--accent:${s.color}"><div class="mechanic-kicker">${m.kicker}</div><div class="mechanic-name">${m.name}</div><div class="mechanic-desc">${m.desc}</div></div>`;
       }
       html += `</div>`;
-    }
-    if (s.id === 'vendetta') {
-      html += `<p style="font-size:.8rem;color:var(--muted);margin-top:1rem;">Los datos de Vendetta son preliminares. La información completa se publicará tras el lanzamiento global el 31 de julio de 2026.</p>`;
     }
     html += `</div>`;
     sec.innerHTML = html;
