@@ -268,13 +268,12 @@ tbody tr:hover td { background:var(--surface2); }
   display:flex; gap:8px; margin-bottom:1rem; flex-wrap:wrap;
 }
 .global-search-bar {
-  margin-bottom:1rem; position:sticky; top:0; z-index:40;
+  margin-bottom:1.25rem;
 }
 .global-search-bar input {
   width:100%; padding:.6rem 1rem; font-size:.85rem;
   background:var(--surface); border:1px solid var(--border); border-radius:10px;
   color:var(--text); font-family:'DM Sans',sans-serif;
-  backdrop-filter:blur(8px);
 }
 .global-search-bar input:focus { outline:none; border-color:var(--blue); }
 .global-search-bar input::placeholder { color:var(--dim); }
@@ -345,7 +344,7 @@ tbody tr:hover td { background:var(--surface2); }
   .search-bar { display:grid; grid-template-columns:1fr; gap:6px; }
   .search-bar input, .search-bar select { width:100%; min-width:0; }
   .search-bar select.sort-price { min-width:0; }
-  .global-search-bar { margin-bottom:.5rem; top:36px; }
+  .global-search-bar { margin-bottom:.75rem; position:sticky; top:38px; z-index:40; }
   .global-search-bar input { font-size:.72rem; padding:.4rem .65rem; border-radius:8px; }
   .two-col { grid-template-columns:1fr; }
   .pack-grid { grid-template-columns:repeat(3,1fr); }
