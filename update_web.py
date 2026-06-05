@@ -445,6 +445,17 @@ else:
     print("✅ 'cartas.json' actualizado con éxito.")
     datos_actuales = datos_nuevos  # use updated data for suffix rebuilding
 
+    # Rebuild legends_per_set from updated data
+    legends_per_set.clear()
+    for s_name, s_data in datos_actuales.get("sets", {}).items():
+        sid = s_data.get("id")
+        names = []
+        for leg in s_data.get("leyendas", []):
+            n = leg.get("name") if isinstance(leg, dict) else (leg if isinstance(leg, str) else None)
+            if n:
+                names.append(n)
+        legends_per_set[sid] = names
+
 # ==========================================
 # Reconstruir sufijos y regenerar archivos finales
 # ==========================================
