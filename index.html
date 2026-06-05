@@ -292,13 +292,6 @@ tbody tr:hover td { background:var(--surface2); }
   font-family:'DM Mono',monospace; cursor:pointer;
 }
 
-/* PROVING GROUNDS NOTE */
-.pg-note {
-  background:var(--blue-bg); border:1px solid rgba(74,158,255,.2); border-radius:10px;
-  padding:.75rem 1rem; font-size:.75rem; margin-bottom:1rem; line-height:1.5;
-}
-.pg-note strong { color:var(--blue); }
-
 /* === RESPONSIVE === */
 
 /* Tablet / small desktop (768–1024) */
@@ -422,12 +415,10 @@ tbody tr:hover td { background:var(--surface2); }
   .modal-info .mod-desc { font-size:.72rem; }
   .chart-box { padding:.55rem; }
   .chart-box > div[style*="height"] { height:150px !important; }
-  .pg-note { font-size:.65rem; padding:.5rem .6rem; }
-  .count-note { font-size:.58rem; }
-  .empty-state { font-size:.68rem; padding:.7rem; }
   .footnote { font-size:.6rem; }
   .table-wrap table { font-size:.68rem; }
-  .table-wrap th, .table-wrap td { padding:.35rem .4rem; }
+  .count-note { font-size:.58rem; }
+  .empty-state { font-size:.68rem; padding:.7rem; }
 }
 
 /* Very small phones (< 420px) */
@@ -533,85 +524,6 @@ let LEGEND_DATA = {};
 // ===== DATA =====
 const SETS = {};
 
-// Card image URLs
-const CARD_IMGS = {
-  '247-Daughter-of-the-Void-R-2-733x1024.png': ['Kai\'Sa','origins'],
-  '249-Relentless-Storm-R-733x1024.png': ['Volibear','origins'],
-  '251-Loose-Cannon-R-2-733x1024.png': ['Jinx','origins'],
-  '253-Hand-of-Noxus-R-2-733x1024.png': ['Darius','origins'],
-  '255-Nine-Tailed-Fox-R-2-733x1024.png': ['Ahri','origins'],
-  '257-Blind-Monk-R-2-733x1024.png': ['Lee Sin','origins'],
-  '259-Unforgiven-R-2-733x1024.png': ['Yasuo','origins'],
-  '261-Radiant-Dawn-R-2-733x1024.png': ['Leona','origins'],
-  '263-Swift-Scout-R-2-733x1024.png': ['Teemo','origins'],
-  '265-Herald-of-the-Arcane-R-2-733x1024.png': ['Viktor','origins'],
-  '267-Bounty-Hunter-R-2-733x1024.png': ['Miss Fortune','origins'],
-  '269-The-Boss-R-2-733x1024.png': ['Sett','origins'],
-  'sfd-181-733x1024.webp': ['Rumble','spiritforged'],
-  'sfd-183-733x1024.webp': ['Lucian','spiritforged'],
-  'sfd-185-733x1024.webp': ['Draven','spiritforged'],
-  'sfd-187-733x1024.webp': ['Rek\'Sai','spiritforged'],
-  'sfd-189-733x1024.webp': ['Ornn','spiritforged'],
-  'sfd-193-733x1024.webp': ['Jax','spiritforged'],
-  'sfd-195-733x1024.webp': ['Irelia','spiritforged'],
-  'sfd-197-733x1024.webp': ['Azir','spiritforged'],
-  'sfd-199-733x1024.webp': ['Ezreal','spiritforged'],
-  'sfd-201-733x1024.webp': ['Renata Glasc','spiritforged'],
-  'sfd-203-733x1024.webp': ['Sivir','spiritforged'],
-  'sfd-205-733x1024.webp': ['Fiora','spiritforged'],
-  'Riftbound-UNL-181.avif': ['Jhin','unleashed'],
-  'Riftbound-UNL-183.avif': ['Rengar','unleashed'],
-  'Riftbound-UNL-185.avif': ['Pyke','unleashed'],
-  'Riftbound-UNL-187.avif': ['Vi','unleashed'],
-  'Riftbound-UNL-189.avif': ['Lillia','unleashed'],
-  'Riftbound-UNL-191.avif': ['Master Yi','unleashed'],
-  'Riftbound-UNL-193.avif': ['Vex','unleashed'],
-  'Riftbound-UNL-195.avif': ['Ivern','unleashed'],
-  'Riftbound-UNL-197.avif': ['Diana','unleashed'],
-  'Riftbound-UNL-199.avif': ['LeBlanc','unleashed'],
-  'Riftbound-UNL-201.avif': ['Kha\'Zix','unleashed'],
-  'Riftbound-UNL-203.avif': ['Poppy','unleashed']
-};
-
-const LEGEND_DESC = {
-  'Kai\'Sa':'Kai\'Sa evoluciona durante la partida, adaptándose al Vacío y presionando constantemente al oponente.',
-  'Volibear':'Volibear personifica la tormenta, castigando a los enemigos que osan desafiar su poder.',
-  'Jinx':'Jinx desata el caos con cohetes y explosiones, recompensando el juego agresivo.',
-  'Darius':'Darius ejecuta a los débiles, volviéndose imparable tras acumular poder en combate.',
-  'Ahri':'Ahri teje engaños y movilidad, encantando a sus enemigos para crear oportunidades.',
-  'Lee Sin':'Lee Sin fluye como el monje guerrero, combinando combos y presión constante.',
-  'Yasuo':'Yasuo corta el viento mismo, respondiendo a cada movimiento enemigo con precisión.',
-  'Leona':'Leona protege y lidera la carga, blindando aliados mientras inmoviliza amenazas.',
-  'Teemo':'Teemo siembra trampas y desgasta al rival con veneno y sigilo.',
-  'Viktor':'Viktor mejora su equipamiento, escalando hacia un poder imparable.',
-  'Miss Fortune':'Miss Fortune acribilla a los enemigos con lluvia de balas desde la distancia.',
-  'Sett':'Sett recibe golpes para devolverlos con creces, un verdadero jefe del ringside.',
-  'Rumble':'Rumble sobrecalienta sus mecanismos para arrasar en el campo de batalla.',
-  'Lucian':'Lucian baila entre disparos, castigando con velocidad y furia.',
-  'Draven':'Draven exige protagonismo, recompensando el riesgo con hachas letales.',
-  'Rek\'Sai':'Rek\'Sai acecha bajo la superficie, emergiendo para devorar a sus presas.',
-  'Ornn':'Ornn forja equipamiento legendario para potenciar a sus aliados.',
-  'Jax':'Jax empuña su lámpara, un guerrero imparable en duelo directo.',
-  'Irelia':'Irelia baila con cuchillas, controlando el ritmo del combate.',
-  'Azir':'Azir comanda legados de arena, construyendo un imperio imparable.',
-  'Ezreal':'Ezreal golpea desde lejos con magia arcana, siempre escurridizo.',
-  'Renata Glasc':'Renata manipula el campo de batalla con química y contratos.',
-  'Sivir':'Sivir lidera cargas imparables, devolviendo cada ataque recibido.',
-  'Fiora':'Fiora busca el duelo perfecto, explotando cada punto débil.',
-  'Vi':'Vi golpea primero y con fuerza, rompiendo defensas sin piedad.',
-  'Rengar':'Rengar acecha desde la maleza, saltando sobre su presa en el momento perfecto.',
-  'Kha\'Zix':'Kha\'Zix evoluciona al aislar y cazar a sus víctimas.',
-  'Poppy':'Poppy protege el martillo y empodera a sus aliados con determinación.',
-  'Ivern':'Ivern transforma el campo de batalla en un bosque viviente.',
-  'Vex':'Vex se alimenta de la desesperación, castigando la sobreextensión enemiga.',
-  'Lillia':'Lillia teje sueños y velocidad, golpeando y retirándose con gracia.',
-  'Diana':'Diana invoca la ira lunar para destrozar concentraciones enemigas.',
-  'LeBlanc':'LeBlanc crea copias y confunde, eliminando objetivos clave en un abrir y cerrar de ojos.',
-  'Pyke':'Pyke acecha desde las sombras, ejecutando a los heridos.',
-  'Master Yi':'Master Yi acumula experiencia para desatar un poder imparable.',
-  'Jhin':'Jhin coreografía cada asesinato, disparando con precisión letal.'
-};
-
 // ===== RENDER LEGENDS =====
 function renderSet(setId) {
   const set = SETS[setId];
@@ -627,10 +539,6 @@ function renderSet(setId) {
     const imgDiv = document.createElement('div');
     imgDiv.className = 'lc-img';
     let imgUrl = leg.img || null;
-    if (!imgUrl) {
-      const imgKey = Object.keys(CARD_IMGS).find(k => CARD_IMGS[k][0]===leg.name && CARD_IMGS[k][1]===setId);
-      if (imgKey && set.imgBase) imgUrl = set.imgBase + imgKey;
-    }
     if (imgUrl) {
       const img = document.createElement('img');
       img.src = imgUrl;
@@ -809,10 +717,6 @@ function globalSearch() {
     imgDiv.className = 'lc-img';
     if (r.type === 'legend') {
       let imgUrl = r.leg.img || null;
-      if (!imgUrl) {
-        const imgKey = Object.keys(CARD_IMGS).find(k => CARD_IMGS[k][0]===r.leg.name && CARD_IMGS[k][1]===r.set.id);
-        if (imgKey && r.set.imgBase) imgUrl = r.set.imgBase + imgKey;
-      }
       if (imgUrl) {
         const img = document.createElement('img'); img.src = imgUrl; img.alt = r.leg.name; img.loading = 'lazy';
         img.onerror = function(){ this.style.display='none'; this.parentElement.innerHTML='<div class="placeholder">?</div>'; };
@@ -863,17 +767,13 @@ let CARDMARKET_PRICES = {};
 function openModal(leg, set) {
   document.getElementById('modal-name').textContent = leg.name;
   document.getElementById('modal-set').textContent = `${set.name} (${set.abbr}) · ${leg.n||leg.title||''}`;
-  document.getElementById('modal-desc').textContent = LEGEND_DESC[leg.name]||'Leyenda de Riftbound.';
+  document.getElementById('modal-desc').textContent = 'Leyenda de Riftbound.';
   const tags = document.getElementById('modal-tags');
   tags.innerHTML = `<span>${set.abbr}</span><span>Leyenda</span>`;
 
   const imgDiv = document.getElementById('modal-img');
   imgDiv.innerHTML = '';
   let imgUrl = leg.img || null;
-  if (!imgUrl) {
-    const imgKey = Object.keys(CARD_IMGS).find(k => CARD_IMGS[k][0]===leg.name && CARD_IMGS[k][1]===set.id);
-    if (imgKey && set.imgBase) imgUrl = set.imgBase + imgKey;
-  }
   if (imgUrl) {
     const img = document.createElement('img');
     img.src = imgUrl;
@@ -1211,9 +1111,11 @@ function normCat(t) {
 function getChartData(db) {
   const pr = db.pull_rates && db.pull_rates.per_box;
   if (!pr) return null;
-  const order = ['Epic', 'Showcase', 'Overnumbered', 'Signature', 'Ultimate_Rare'];
-  const labels = ['Épica', 'Showcase / Alt-Art', 'OVR', 'OVR firma', 'Ultimate'];
-  const colors = ['#4a9eff', '#3ecf8e', '#f4a535', '#e879a0', '#f05252'];
+  const labelMap = { Epic:'Épica', Showcase:'Showcase / Alt-Art', Overnumbered:'OVR', Signature:'OVR firma', Ultimate_Rare:'Ultimate' };
+  const colorMap = { Epic:'#4a9eff', Showcase:'#3ecf8e', Overnumbered:'#f4a535', Signature:'#e879a0', Ultimate_Rare:'#f05252' };
+  const order = Object.keys(pr).filter(k => k !== 'rareza');
+  const labels = order.map(r => labelMap[r] || r);
+  const colors = order.map(r => colorMap[r] || '#888780');
   const λ = order.map(r => avgPerBox(r, pr));
   return {
     prob: λ.map(v => v > 0 ? +(100 * (1 - Math.exp(-v))).toFixed(1) : 0),
