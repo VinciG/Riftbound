@@ -28,11 +28,25 @@ def load_json(path, from_git=False):
     with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
 
+def parse_price(s):
+    return float(s.replace("€", "")) if s else None
+
+def fmt_price_change(key, old_str, new_str):
+    old_v = parse_price(old_str)
+    new_v = parse_price(new_str)
+    if old_v is not None and new_v is not None:
+        diff = new_v - old_v
+        arrow = "🔺" if diff > 0 else "🔻"
+        sign = "+" if diff > 0 else ""
+        return f"  {arrow} {key}: {old_str} → {new_str} ({sign}{diff:.2f})"
+    return f"  {key}: {old_str} → {new_str}"
+
 def compare_prices(old, new):
     lines = []
     total_old = sum(len(v) for v in old.values()) if old else 0
     total_new = sum(len(v) for v in new.values()) if new else 0
-    lines.append(f"📦 Precios: {total_new} cartas con precio ({'+' if total_new >= total_old else ''}{total_new - total_old} vs ayer)")
+    diff_total = total_new - total_old
+    lines.append(f"📦 Precios: {total_new} cartas con precio ({'+' if diff_total >= 0 else ''}{diff_total} vs ayer)")
 
     if old and new:
         for set_id in sorted(set(list(old.keys()) + list(new.keys()))):
@@ -43,6 +57,7 @@ def compare_prices(old, new):
             added = new_keys - old_keys
             removed = old_keys - new_keys
             changed = {k for k in old_keys & new_keys if old_set[k] != new_set[k]}
+
             parts = []
             if added:
                 parts.append(f"+{len(added)} nuevas")
@@ -50,8 +65,24 @@ def compare_prices(old, new):
                 parts.append(f"-{len(removed)} eliminadas")
             if changed:
                 parts.append(f"~{len(changed)} cambiadas")
-            if parts:
-                lines.append(f"  ▫ {set_id}: {', '.join(parts)}")
+            if not parts:
+                continue
+
+            changes_detail = []
+            for k in sorted(changed):
+                changes_detail.append(fmt_price_change(k, old_set[k], new_set[k]))
+            for k in sorted(added):
+                changes_detail.append(f"  ➕ {k}: {new_set[k]} (nueva)")
+            for k in sorted(removed):
+                changes_detail.append(f"  ➖ {k}: {old_set[k]} (eliminada)")
+
+            CHUNK_LIMIT = 25
+            if len(changes_detail) > CHUNK_LIMIT:
+                changes_detail = changes_detail[:CHUNK_LIMIT]
+                changes_detail.append(f"  ... y {len(changed) + len(added) + len(removed) - CHUNK_LIMIT} cambios más")
+
+            lines.append(f"\n▫ {set_id}: {', '.join(parts)}")
+            lines.extend(changes_detail)
     return "\n".join(lines)
 
 def compare_cartas(old, new):
