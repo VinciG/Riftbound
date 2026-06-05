@@ -1,0 +1,420 @@
+{
+    "sets": {
+        "Origins": {
+            "id": "origins",
+            "abbr": "OGN",
+            "set_number": 1,
+            "color": "#4a9eff",
+            "date": "October 2025",
+            "cartas_reveladas": 89,
+            "total": 300,
+            "total_base": 40,
+            "total_ovr": 49,
+            "imgBase": null,
+            "legend_count": 16,
+            "leyendas": [
+                {
+                    "name": "Ahri",
+                    "img": null
+                },
+                {
+                    "name": "Caitlyn",
+                    "img": null
+                },
+                {
+                    "name": "Darius",
+                    "img": null
+                },
+                {
+                    "name": "Heimerdinger",
+                    "img": null
+                },
+                {
+                    "name": "Jinx",
+                    "img": null
+                },
+                {
+                    "name": "Kai'Sa",
+                    "img": null
+                },
+                {
+                    "name": "Lee Sin",
+                    "img": null
+                },
+                {
+                    "name": "Leona",
+                    "img": null
+                },
+                {
+                    "name": "Miss Fortune",
+                    "img": null
+                },
+                {
+                    "name": "Sett",
+                    "img": null
+                },
+                {
+                    "name": "Teemo",
+                    "img": null
+                },
+                {
+                    "name": "Vi",
+                    "img": null
+                },
+                {
+                    "name": "Viktor",
+                    "img": null
+                },
+                {
+                    "name": "Volibear",
+                    "img": null
+                },
+                {
+                    "name": "Warwick",
+                    "img": null
+                },
+                {
+                    "name": "Yasuo",
+                    "img": null
+                }
+            ],
+            "productos": [
+                "Booster Box",
+                "Proving Grounds",
+                "Champion Deck Display - Lee Sin",
+                "Champion Deck Display - Viktor",
+                "Champion Deck - Jinx",
+                "Arcane Box Set"
+            ],
+            "champion_decks": [
+                "Lee Sin",
+                "Viktor",
+                "Jinx"
+            ],
+            "ovr_breakdown": [],
+            "mecanicas": []
+        },
+        "Spiritforged": {
+            "id": "spiritforged",
+            "abbr": "SFD",
+            "set_number": 2,
+            "color": "#3ecf8e",
+            "date": "February 2026",
+            "cartas_reveladas": 79,
+            "total": 221,
+            "total_base": 30,
+            "total_ovr": 49,
+            "imgBase": null,
+            "legend_count": 23,
+            "leyendas": [
+                {
+                    "name": "Ahri",
+                    "img": null
+                },
+                {
+                    "name": "Aphelios",
+                    "img": null
+                },
+                {
+                    "name": "Azir",
+                    "img": null
+                },
+                {
+                    "name": "Bard",
+                    "img": null
+                },
+                {
+                    "name": "Draven",
+                    "img": null
+                },
+                {
+                    "name": "Ezreal",
+                    "img": null
+                },
+                {
+                    "name": "Fiora",
+                    "img": null
+                },
+                {
+                    "name": "Irelia",
+                    "img": null
+                },
+                {
+                    "name": "Jax",
+                    "img": null
+                },
+                {
+                    "name": "Karma",
+                    "img": null
+                },
+                {
+                    "name": "Lucian",
+                    "img": null
+                },
+                {
+                    "name": "Ornn",
+                    "img": null
+                },
+                {
+                    "name": "Rek'Sai",
+                    "img": null
+                },
+                {
+                    "name": "Renata Glasc",
+                    "img": null
+                },
+                {
+                    "name": "Rengar",
+                    "img": null
+                },
+                {
+                    "name": "Rumble",
+                    "img": null
+                },
+                {
+                    "name": "Sett",
+                    "img": null
+                },
+                {
+                    "name": "Sivir",
+                    "img": null
+                },
+                {
+                    "name": "Soraka",
+                    "img": null
+                },
+                {
+                    "name": "Teemo",
+                    "img": null
+                },
+                {
+                    "name": "Vayne",
+                    "img": null
+                },
+                {
+                    "name": "Yasuo",
+                    "img": null
+                },
+                {
+                    "name": "Yone",
+                    "img": null
+                }
+            ],
+            "productos": [
+                "Booster Sleeves",
+                "Pre-Rift Event Kit",
+                "Bulk Runes",
+                "Champion Decks - Rumble",
+                "Champion Decks - Fiora"
+            ],
+            "champion_decks": [
+                "Rumble",
+                "Fiora"
+            ],
+            "ovr_breakdown": [
+                {
+                    "tipo": "OVR base",
+                    "cantidad": 18,
+                    "numeracion": "N/A",
+                    "notas": "30 Overnumbered cards total, 12 of which are Signature variants"
+                },
+                {
+                    "tipo": "OVR con firma",
+                    "cantidad": 12,
+                    "numeracion": "N/A",
+                    "notas": "12 Signature variants of Overnumbered cards"
+                }
+            ],
+            "mecanicas": [
+                {
+                    "kicker": "subtype",
+                    "name": "Equipment",
+                    "desc": "This new card subtype can be attached to units to make them stronger, and remains in play even if that unit is killed."
+                },
+                {
+                    "kicker": "token",
+                    "name": "Gold",
+                    "desc": "Featured by Draven and Renata Glasc, players can “spend” this new type of token card to generate Power of any color."
+                },
+                {
+                    "kicker": "spell",
+                    "name": "Repeat",
+                    "desc": "Spells with effects that can be doubled if players pay their cost a second time."
+                }
+            ]
+        },
+        "Unleashed": {
+            "id": "unleashed",
+            "abbr": "UNL",
+            "set_number": 3,
+            "color": "#f4a535",
+            "date": "May 2026",
+            "cartas_reveladas": 79,
+            "total": 219,
+            "total_base": 30,
+            "total_ovr": 49,
+            "imgBase": null,
+            "legend_count": 12,
+            "leyendas": [
+                {
+                    "name": "Diana",
+                    "img": null
+                },
+                {
+                    "name": "Ivern",
+                    "img": null
+                },
+                {
+                    "name": "Jhin",
+                    "img": null
+                },
+                {
+                    "name": "Kha'Zix",
+                    "img": null
+                },
+                {
+                    "name": "LeBlanc",
+                    "img": null
+                },
+                {
+                    "name": "Lillia",
+                    "img": null
+                },
+                {
+                    "name": "Master Yi",
+                    "img": null
+                },
+                {
+                    "name": "Poppy",
+                    "img": null
+                },
+                {
+                    "name": "Pyke",
+                    "img": null
+                },
+                {
+                    "name": "Rengar",
+                    "img": null
+                },
+                {
+                    "name": "Vex",
+                    "img": null
+                },
+                {
+                    "name": "Vi",
+                    "img": null
+                }
+            ],
+            "productos": [
+                "Booster Display boxes",
+                "Preconstructed Decks",
+                "Playmats",
+                "Art Sleeves",
+                "Pre-Rift Event Kits",
+                "The Unleashed Vault"
+            ],
+            "champion_decks": [
+                "Vi",
+                "Vex"
+            ],
+            "ovr_breakdown": [
+                {
+                    "tipo": "Alt-Art",
+                    "cantidad": 30,
+                    "numeracion": "N/A",
+                    "notas": "30+ alt-arts"
+                },
+                {
+                    "tipo": "Ultimate",
+                    "cantidad": null,
+                    "numeracion": "N/A",
+                    "notas": "New rarity, even harder to find"
+                }
+            ],
+            "mecanicas": [
+                {
+                    "kicker": "keyword",
+                    "name": "XP",
+                    "desc": "XP progression"
+                },
+                {
+                    "kicker": "keyword",
+                    "name": "Hunt",
+                    "desc": "A new XP resource can be gathered by cards with the Hunt keyword, then spent on useful abilities or saved to power up cards with Levels."
+                },
+                {
+                    "kicker": "keyword",
+                    "name": "Ambush",
+                    "desc": "Ambush mechanic"
+                },
+                {
+                    "kicker": "token",
+                    "name": "Token Battlefields",
+                    "desc": "New Token Battlefields"
+                }
+            ]
+        },
+        "Vendetta": {
+            "id": "vendetta",
+            "abbr": "VEN",
+            "set_number": 4,
+            "color": "#e879a0",
+            "date": "July 2026",
+            "cartas_reveladas": 0,
+            "total": 166,
+            "total_base": 0,
+            "total_ovr": 0,
+            "imgBase": null,
+            "legend_count": 5,
+            "leyendas": [
+                {
+                    "name": "Akali",
+                    "img": null
+                },
+                {
+                    "name": "Ambessa",
+                    "img": null
+                },
+                {
+                    "name": "Mel",
+                    "img": null
+                },
+                {
+                    "name": "Shen",
+                    "img": null
+                },
+                {
+                    "name": "Zed",
+                    "img": null
+                }
+            ],
+            "productos": [
+                "Two-player product",
+                "Showdown Deck - Zed vs. Shen",
+                "Booster Boxes",
+                "Packs",
+                "Sealed Products"
+            ],
+            "champion_decks": [
+                "Zed",
+                "Shen"
+            ],
+            "ovr_breakdown": [
+                {
+                    "tipo": "Showcase",
+                    "cantidad": 50,
+                    "numeracion": "N/A",
+                    "notas": "50+ Showcase cards"
+                }
+            ],
+            "mecanicas": [
+                {
+                    "kicker": "gameplay",
+                    "name": "New rune combinations",
+                    "desc": "New rune combinations"
+                }
+            ]
+        }
+    },
+    "pull_rates": {}
+}
