@@ -771,7 +771,7 @@ function renderPremiumSet(setCode) {
     el.className = 'legend-card';
     el.setAttribute('data-name', `${card.name} ${card.type} ${card.domain}`.toLowerCase());
     el.setAttribute('data-rarity', card.rarity);
-    const cmPrice = CARDMARKET_PRICES[set.id]?.[card.id] || CARDMARKET_PRICES[set.id]?.[card.name] || null;
+    const cmPrice = CARDMARKET_PRICES[set.id]?.[card.id] || CARDMARKET_PRICES[set.id]?.[card.id.replace(/-\w+$/, '')] || CARDMARKET_PRICES[set.id]?.[card.name] || null;
     el.setAttribute('data-price', cmPrice ? parseFloat(cmPrice.replace('€','')) : '');
     const imgDiv = document.createElement('div');
     imgDiv.className = 'lc-img';
@@ -977,7 +977,7 @@ function openPremiumModal(card, set) {
   imgDiv.appendChild(img);
 
   document.getElementById('modal').classList.add('active');
-  const cmPrice = CARDMARKET_PRICES[set.id]?.[card.id] || CARDMARKET_PRICES[set.id]?.[card.name] || null;
+  const cmPrice = CARDMARKET_PRICES[set.id]?.[card.id] || CARDMARKET_PRICES[set.id]?.[card.id.replace(/-\w+$/, '')] || CARDMARKET_PRICES[set.id]?.[card.name] || null;
   showCardmarketPrice(card.name, cmPrice);
 }
 
