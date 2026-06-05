@@ -1,0 +1,280 @@
+{
+    "sets": {
+        "Origins": {
+            "id": "origins",
+            "abbr": "OGN",
+            "set_number": 1,
+            "color": "#4a9eff",
+            "date": "",
+            "cartas_reveladas": 0,
+            "total": 416,
+            "total_base": 341,
+            "total_ovr": 75,
+            "imgBase": "",
+            "legend_count": 25,
+            "leyendas": [
+                {
+                    "name": "Ahri - Nine-Tailed Fox",
+                    "img": null
+                },
+                {
+                    "name": "Ahri - Nine-Tailed Fox (Origins Release Event Promo)",
+                    "img": null
+                },
+                {
+                    "name": "Darius",
+                    "img": null
+                },
+                {
+                    "name": "Darius - Hand of Noxus",
+                    "img": null
+                },
+                {
+                    "name": "Jinx - Loose Cannon",
+                    "img": null
+                },
+                {
+                    "name": "Jinx - Loose Cannon (Origins Release Event Promo)",
+                    "img": null
+                },
+                {
+                    "name": "Kai'Sa",
+                    "img": null
+                },
+                {
+                    "name": "Kai'Sa - Daughter of the Void",
+                    "img": null
+                },
+                {
+                    "name": "Lee Sin - Blind Monk",
+                    "img": null
+                },
+                {
+                    "name": "Lee Sin - Blind Monk (Origins Release Event Promo)",
+                    "img": null
+                },
+                {
+                    "name": "Leona - Radiant Dawn",
+                    "img": null
+                },
+                {
+                    "name": "Leona - Radiant Dawn (Origins Release Event Promo)",
+                    "img": null
+                },
+                {
+                    "name": "Miss Fortune",
+                    "img": null
+                },
+                {
+                    "name": "Miss Fortune - Bounty Hunter",
+                    "img": null
+                },
+                {
+                    "name": "Sett - The Boss",
+                    "img": null
+                },
+                {
+                    "name": "Sett - The Boss (Origins Release Event Promo)",
+                    "img": null
+                },
+                {
+                    "name": "Teemo - Swift Scout",
+                    "img": null
+                },
+                {
+                    "name": "Teemo - Swift Scout (Origins Release Event Promo)",
+                    "img": null
+                },
+                {
+                    "name": "Teemo - Swift Scout (Worlds Bundle 2025 \nPromo)",
+                    "img": null
+                },
+                {
+                    "name": "Viktor - Herald of the Arcane",
+                    "img": null
+                },
+                {
+                    "name": "Viktor - Herald of the Arcane (Origins Release Event Promo)",
+                    "img": null
+                },
+                {
+                    "name": "Volibear - Relentless Storm",
+                    "img": null
+                },
+                {
+                    "name": "Volibear - Relentless Storm (Origins Release Event Promo)",
+                    "img": null
+                },
+                {
+                    "name": "Yasuo - Unforgiven",
+                    "img": null
+                },
+                {
+                    "name": "Yasuo - Unforgiven (Origins Release Event Promo)",
+                    "img": null
+                }
+            ],
+            "productos": [],
+            "champion_decks": [],
+            "ovr_breakdown": [],
+            "mecanicas": []
+        },
+        "Spiritforged": {
+            "id": "spiritforged",
+            "abbr": "SFD",
+            "set_number": 2,
+            "color": "#3ecf8e",
+            "date": "",
+            "cartas_reveladas": 0,
+            "total": 340,
+            "total_base": 260,
+            "total_ovr": 80,
+            "imgBase": "",
+            "legend_count": 13,
+            "leyendas": [
+                {
+                    "name": "Azir - Emperor of the Sands",
+                    "img": null
+                },
+                {
+                    "name": "Draven - Glorious Executioner",
+                    "img": null
+                },
+                {
+                    "name": "Ezreal - Prodigal Explorer",
+                    "img": null
+                },
+                {
+                    "name": "Fiora - Grand Duelist",
+                    "img": null
+                },
+                {
+                    "name": "Irelia - Blade Dancer",
+                    "img": null
+                },
+                {
+                    "name": "Irelia - Blade Dancer (Lunar Revel Bundle 2026)",
+                    "img": null
+                },
+                {
+                    "name": "Jax - Grandmaster at Arms",
+                    "img": null
+                },
+                {
+                    "name": "Lucian - Purifier",
+                    "img": null
+                },
+                {
+                    "name": "Ornn - Fire Below the Mountain",
+                    "img": null
+                },
+                {
+                    "name": "Rek'Sai - Void Burrower",
+                    "img": null
+                },
+                {
+                    "name": "Renata Glasc - Chem-Baroness",
+                    "img": null
+                },
+                {
+                    "name": "Rumble - Mechanized Menace",
+                    "img": null
+                },
+                {
+                    "name": "Sivir - Battle Mistress",
+                    "img": null
+                }
+            ],
+            "productos": [],
+            "champion_decks": [],
+            "ovr_breakdown": [],
+            "mecanicas": []
+        },
+        "Unleashed": {
+            "id": "unleashed",
+            "abbr": "UNL",
+            "set_number": 3,
+            "color": "#f4a535",
+            "date": "",
+            "cartas_reveladas": 0,
+            "total": 338,
+            "total_base": 261,
+            "total_ovr": 77,
+            "imgBase": "",
+            "legend_count": 12,
+            "leyendas": [
+                {
+                    "name": "Diana - Scorn of the Moon",
+                    "img": null
+                },
+                {
+                    "name": "Ivern - Green Father",
+                    "img": null
+                },
+                {
+                    "name": "Jhin - Virtuoso",
+                    "img": null
+                },
+                {
+                    "name": "Kha'Zix - Voidreaver",
+                    "img": null
+                },
+                {
+                    "name": "LeBlanc - Deceiver",
+                    "img": null
+                },
+                {
+                    "name": "Lillia - Bashful Bloom",
+                    "img": null
+                },
+                {
+                    "name": "Master Yi - Wuju Master",
+                    "img": null
+                },
+                {
+                    "name": "Poppy - Keeper of the Hammer",
+                    "img": null
+                },
+                {
+                    "name": "Pyke - Bloodharbor Ripper",
+                    "img": null
+                },
+                {
+                    "name": "Rengar - Pridestalker",
+                    "img": null
+                },
+                {
+                    "name": "Vex - Gloomist",
+                    "img": null
+                },
+                {
+                    "name": "Vi - Piltover Enforcer",
+                    "img": null
+                }
+            ],
+            "productos": [],
+            "champion_decks": [],
+            "ovr_breakdown": [],
+            "mecanicas": []
+        },
+        "Vendetta": {
+            "id": "vendetta",
+            "abbr": "VEN",
+            "set_number": 4,
+            "color": "#e879a0",
+            "date": "",
+            "cartas_reveladas": 0,
+            "total": 0,
+            "total_base": 0,
+            "total_ovr": 0,
+            "imgBase": "",
+            "legend_count": 0,
+            "leyendas": [],
+            "productos": [],
+            "champion_decks": [],
+            "ovr_breakdown": [],
+            "mecanicas": []
+        }
+    },
+    "pull_rates": {}
+}
