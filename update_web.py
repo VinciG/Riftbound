@@ -405,6 +405,8 @@ try:
         new = datos_nuevos["sets"][exp]
         for campo in ["total", "total_base", "total_ovr"]:
             if old.get(campo) != new.get(campo):
+                if not old.get(campo):
+                    continue  # fresh population (was 0/null), no source URL needed
                 url = new.get("_source_url", "")
                 if not url:
                     raise ValueError(
