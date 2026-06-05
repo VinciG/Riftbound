@@ -485,7 +485,7 @@ tbody tr:hover td { background:var(--surface2); }
       <div class="sec-label">Por caja (24 packs)</div>
       <div class="table-wrap">
         <table>
-          <thead><tr><th style="min-width:130px">Tipo de carta</th><th id="pr-h-Origins">Origins</th><th id="pr-h-Spiritforged">Spiritforged</th><th id="pr-h-Unleashed">Unleashed</th><th id="pr-h-Vendetta">Vendetta</th></tr></thead>
+          <thead id="pr-head"><tr><th style="min-width:130px">Tipo de carta</th></tr></thead>
           <tbody id="pr-body"></tbody>
         </table>
       </div>
@@ -1185,6 +1185,17 @@ async function buildPage() {
 
   // 4. Populate Pull Rates table
   if (db.pull_rates && db.pull_rates.per_box) {
+    const prHead = document.getElementById('pr-head');
+    if (prHead) {
+      const headRow = prHead.querySelector('tr');
+      for (const sn of setIds) {
+        const th = document.createElement('th');
+        // use the first abbr found from sets that matches this key
+        const sObj = sets[sn] || Object.values(sets).find(s => s.id === sn);
+        th.textContent = sObj ? (sObj.name || sn) : sn;
+        headRow.appendChild(th);
+      }
+    }
     const prBody = document.getElementById('pr-body');
     if (prBody) {
       const labelMap = { Epic:'Épica', Showcase:'Showcase / Alt-Art', Overnumbered:'Overnumbered', Signature:'OVR con firma', Ultimate_Rare:'Ultimate Rare' };

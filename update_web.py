@@ -243,6 +243,11 @@ for row in api_rows:
     epic_list_lines.append(f'  {SET_NAME_MAP.get(set_name,"?")}/{card["id"]}: {card["name"]} [{card["rarity"]}]')
 epic_list_str = "\n".join(epic_list_lines)
 
+abbrs = ", ".join(s_data.get("abbr","") for s_name, s_data in datos_actuales.get("sets",{}).items())
+set_nums = f"1-{len(datos_actuales.get('sets',{}))}"
+per_box_example = {sn: "texto" for sn in EXPANSIONES}
+per_box_str = json.dumps({"rareza": per_box_example}, separators=(",", ":")).replace("{","{{").replace("}","}}")
+
 mensaje = f"""
 Eres el mantenedor automático de la base de datos de Riftbound TCG.
 Tu trabajo es actualizar el JSON completo de las expansiones con TODOS los campos.
@@ -256,8 +261,8 @@ ESTRUCTURA JSON REQUERIDA (debes devolver EXACTAMENTE este formato):
     "sets": {{
         "NOMBRE_EXPANSION": {{
             "id": "nombre en minúsculas",
-            "abbr": "siglas (OGN, SFD, UNL, VEN)",
-            "set_number": 1-4,
+            "abbr": "siglas ({abbrs})",
+            "set_number": {set_nums},
             "color": "código hex",
             "date": "Mes Año del lanzamiento",
             "cartas_reveladas": número,
@@ -285,9 +290,7 @@ ESTRUCTURA JSON REQUERIDA (debes devolver EXACTAMENTE este formato):
         "general_booster_pack_contents": {{...}},
         "rarity_odds": {{...}},
         "set_specific": {{...}},
-        "per_box": {{
-            "rareza": {{"Origins":"texto","Spiritforged":"texto","Unleashed":"texto","Vendetta":"texto"}}
-        }}
+        "per_box": {per_box_str}
     }}
 }}
 
