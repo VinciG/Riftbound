@@ -242,6 +242,12 @@ with open(cardmarket_prices_file, "w", encoding="utf-8") as f:
 total_prelim = sum(len(v) for v in prelim_prices.values())
 print(f"✅ 'cardmarket_prices.json' guardado ({total_prelim} precios).")
 
+# Ensure auxiliary files exist (git add safety)
+for fname in ("id_to_name.json", "legend_data.json"):
+    if not os.path.exists(fname):
+        with open(fname, "w", encoding="utf-8") as f:
+            json.dump({}, f)
+
 # Listar cartas épicas+ para el prompt (desde DotGG)
 epic_list_lines = []
 REVERSE_CODE_MAP = {v: k for k, v in SET_CODE_MAP.items()}
@@ -439,6 +445,12 @@ else:
 # ==========================================
 if not api_rows:
     print("⚠️ Sin datos DotGG — se mantienen archivos anteriores.")
+    # Ensure files exist for git add
+    for fname in ("id_to_name.json", "legend_data.json"):
+        if not os.path.exists(fname):
+            with open(fname, "w", encoding="utf-8") as f:
+                json.dump({}, f)
+            print(f"ℹ️ '{fname}' vacío generado.")
 else:
     # Re-read total_base from (potentially updated) cartas.json for EPIC_SUFFIX
     EPIC_SUFFIX_FINAL = {}
