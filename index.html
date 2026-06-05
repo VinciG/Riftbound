@@ -996,6 +996,7 @@ async function buildPage() {
     const resp = await fetch('cartas.json?' + Date.now());
     if (resp.ok) db = await resp.json();
   } catch(e) { console.warn('cartas.json not loaded, using default'); }
+  window._db = db;
 
   // Load Cardmarket prices
   try {
@@ -1236,6 +1237,44 @@ document.addEventListener('click', function(e) {
   if (el) el.classList.add('active');
 });
 
+// ===== CHART HELPERS =====
+function perBoxVal(t) {
+  if (!t) return 0; t = String(t);
+  let m = t.match(/~?(\d+)\s*por caja/);
+  if (m) return +m[1];
+  m = t.match(/~?(\d+)[–-](\d+)\s*por caja/);
+  if (m) return (+m[1] + +m[2]) / 2;
+  m = t.match(/([\d.]+)\s*cada\s*([\d.]+)\s*cajas?/);
+  if (m) return +m[1] / +m[2];
+  m = t.match(/<([\d.]+)%/);
+  if (m) return +m[1] / 100 * 24;
+  return 0;
+}
+function avgPerBox(rarity, perBox) {
+  const vals = Object.values(perBox[rarity] || {}).map(perBoxVal).filter(v => v > 0);
+  return vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : 0;
+}
+function normCat(t) {
+  const s = t.toLowerCase();
+  if (s.includes('ultimate')) return 'Ultimate Rare';
+  if (s.includes('firma') || s.includes('signed')) return 'OVR firma';
+  if (s.includes('ovr') || s.includes('over')) return 'OVR base';
+  return 'Showcase / Alt-Art';
+}
+function getChartData(db) {
+  const pr = db.pull_rates && db.pull_rates.per_box;
+  if (!pr) return null;
+  const order = ['Epic', 'Showcase', 'Overnumbered', 'Signature', 'Ultimate_Rare'];
+  const labels = ['Épica', 'Showcase / Alt-Art', 'OVR', 'OVR firma', 'Ultimate'];
+  const colors = ['#4a9eff', '#3ecf8e', '#f4a535', '#e879a0', '#f05252'];
+  const λ = order.map(r => avgPerBox(r, pr));
+  return {
+    prob: λ.map(v => v > 0 ? +(100 * (1 - Math.exp(-v))).toFixed(1) : 0),
+    packs: λ.map(v => v > 0 ? Math.round(24 / v) : 0),
+    labels, colors
+  };
+}
+
 // ===== CHARTS =====
 const gridColor = 'rgba(255,255,255,0.05)';
 const tickColor = '#6b6a65';
@@ -1264,7 +1303,7 @@ function buildChart(id, type, labels, datasets, opts={}) {
 }
 
 // Probability charts
-function makeProbChart(id, horiz) {
+function makeProbChart(id, data, labels, colors, horiz) {
   const ctx = document.getElementById(id);
   if(!ctx) return;
   const valueAxis = horiz ? 'x' : 'y';
@@ -1272,11 +1311,11 @@ function makeProbChart(id, horiz) {
   new Chart(ctx, {
     type:'bar',
     data:{
-      labels:['Épica','Alt-Art','OVR','OVR firma','Ultimate'],
+      labels,
       datasets:[{
         label:'% por caja',
-        data:[100,99,33,3.3,2.4],
-        backgroundColor:['#4a9eff','#3ecf8e','#f4a535','#e879a0','#f05252'],
+        data,
+        backgroundColor:colors,
         borderRadius:4
       }]
     },
@@ -1293,7 +1332,7 @@ function makeProbChart(id, horiz) {
   });
 }
 
-function makePacksChart(id, horiz) {
+function makePacksChart(id, data, labels, colors, horiz) {
   const ctx = document.getElementById(id);
   if(!ctx) return;
   const valueAxis = horiz ? 'x' : 'y';
@@ -1301,11 +1340,11 @@ function makePacksChart(id, horiz) {
   new Chart(ctx, {
     type:'bar',
     data:{
-      labels:['Épica','Alt-Art','OVR','OVR firma','Ultimate'],
+      labels,
       datasets:[{
         label:'packs necesarios',
-        data:[4,12,72,720,1000],
-        backgroundColor:['#4a9eff','#3ecf8e','#f4a535','#e879a0','#f05252'],
+        data,
+        backgroundColor:colors,
         borderRadius:4
       }]
     },
@@ -1330,34 +1369,43 @@ buildPage().then(() => {
   Object.keys(PREMIUM_SET_PREFIX).forEach(renderPremiumSet);
 
   // Charts (must run after DOM is built)
+  const cd = getChartData(window._db);
+  if (cd) {
+    makeProbChart('probChartOverview', cd.prob, cd.labels, cd.colors);
+    makePacksChart('packsChartOverview', cd.packs, cd.labels, cd.colors);
+    makeProbChart('probChartRates', cd.prob, cd.labels, cd.colors, true);
+    makePacksChart('packsChartRates', cd.packs, cd.labels, cd.colors, true);
+  }
+
+  // OVR chart by set
   const ovrCtx = document.getElementById('ovrChartOverview');
   if(ovrCtx) {
-    new Chart(ovrCtx, {
-      type:'bar',
-      data:{
-        labels:['Origins','Spiritforged','Unleashed','Vendetta'],
-        datasets:[
-          {label:'OVR base',data:[12,18,5,4],backgroundColor:'#4a9eff'},
-          {label:'OVR firma',data:[12,12,2,0],backgroundColor:'#85b7eb'},
-          {label:'Showcase/Alt-Art',data:[12,11,21,50],backgroundColor:'#3ecf8e'},
-          {label:'Ultimate Rare',data:[0,0,1,0],backgroundColor:'#f05252'}
-        ]
-      },
-      options:{
-        responsive:true, maintainAspectRatio:false,
-        plugins:{legend:{display:false}},
-        scales:{
-          x:{ticks:{color:tickColor},grid:{color:gridColor}},
-          y:{ticks:{color:tickColor,stepSize:5},grid:{color:gridColor},
-             title:{display:true,text:'cartas',color:tickColor}}
+    const sets = window._db.sets || {};
+    const ovrSetIds = Object.keys(sets).filter(k => sets[k].ovr_breakdown && sets[k].ovr_breakdown.length);
+    if (ovrSetIds.length) {
+      const catSet = {};
+      for (const sk of ovrSetIds) {
+        for (const item of sets[sk].ovr_breakdown) {
+          const cat = normCat(item.tipo);
+          if (!catSet[cat]) catSet[cat] = { label: cat, data: new Array(ovrSetIds.length).fill(0), backgroundColor: { 'OVR base': '#4a9eff', 'OVR firma': '#85b7eb', 'Showcase / Alt-Art': '#3ecf8e', 'Ultimate Rare': '#f05252' }[cat] || '#888780' };
+          catSet[cat].data[ovrSetIds.indexOf(sk)] += item.cantidad;
         }
       }
-    });
+      new Chart(ovrCtx, {
+        type:'bar',
+        data:{ labels: ovrSetIds, datasets: Object.values(catSet) },
+        options:{
+          responsive:true, maintainAspectRatio:false,
+          plugins:{legend:{display:false}},
+          scales:{
+            x:{ticks:{color:tickColor},grid:{color:gridColor}},
+            y:{ticks:{color:tickColor,stepSize:5},grid:{color:gridColor},
+               title:{display:true,text:'cartas',color:tickColor}}
+          }
+        }
+      });
+    }
   }
-  makeProbChart('probChartOverview');
-  makePacksChart('packsChartOverview');
-  makeProbChart('probChartRates',true);
-  makePacksChart('packsChartRates',true);
 });
 </script>
 </body>
