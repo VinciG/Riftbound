@@ -247,6 +247,9 @@ for fname in ("id_to_name.json", "legend_data.json"):
     if not os.path.exists(fname):
         with open(fname, "w", encoding="utf-8") as f:
             json.dump({}, f)
+if not os.path.exists("epic-cards.js"):
+    with open("epic-cards.js", "w", encoding="utf-8") as f:
+        f.write("window.EPIC_CARD_DATA = {};")
 
 # Listar cartas épicas+ para el prompt (desde DotGG)
 epic_list_lines = []
@@ -451,6 +454,10 @@ if not api_rows:
             with open(fname, "w", encoding="utf-8") as f:
                 json.dump({}, f)
             print(f"ℹ️ '{fname}' vacío generado.")
+    if not os.path.exists("epic-cards.js"):
+        with open("epic-cards.js", "w", encoding="utf-8") as f:
+            f.write("window.EPIC_CARD_DATA = {};")
+        print("ℹ️ 'epic-cards.js' vacío generado.")
 else:
     # Re-read total_base from (potentially updated) cartas.json for EPIC_SUFFIX
     EPIC_SUFFIX_FINAL = {}
