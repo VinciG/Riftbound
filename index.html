@@ -832,8 +832,14 @@ function globalSearch() {
   if (!grid || !container) return;
 
   // Show/hide sections and search results
-  document.querySelectorAll('.section').forEach(s => s.classList.toggle('active', !q));
   container.classList.toggle('active', !!q);
+  if (q) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  } else {
+    const activeNav = document.querySelector('.nav-item.active');
+    const setId = activeNav ? activeNav.dataset.set : 'all';
+    document.querySelectorAll('.section').forEach(s => s.classList.toggle('active', s.id === 'sec-' + setId));
+  }
 
   if (!q) { grid.innerHTML = ''; return; }
 
