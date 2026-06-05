@@ -22,7 +22,7 @@
 * { box-sizing:border-box; margin:0; padding:0; }
 body {
   font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text);
-  min-height:100vh; padding:0;
+  min-height:100vh; padding:0; overflow-x:hidden;
 }
 ::-webkit-scrollbar { width:6px; }
 ::-webkit-scrollbar-track { background:var(--bg); }
@@ -286,68 +286,125 @@ tbody tr:hover td { background:var(--surface2); }
 }
 .pg-note strong { color:var(--blue); }
 
-/* RESPONSIVE */
+/* === RESPONSIVE === */
+
+/* Tablet / small desktop (768–1024) */
+@media(max-width:1024px){
+  .sidebar { width:190px; }
+  .main { padding:1.25rem 1.25rem 3rem; }
+}
+
+/* Medium / landscape phones (640–768): compact top bar */
 @media(max-width:768px){
   .app { display:block; }
   .sidebar {
     width:100%; height:auto; max-height:none; position:sticky; top:0; z-index:50;
-    display:flex; align-items:center; gap:4px; overflow-x:auto; overflow-y:hidden;
-    padding:.55rem .6rem; border-right:none; border-bottom:1px solid var(--border);
+    display:flex; align-items:center; gap:3px; overflow-x:auto; overflow-y:hidden;
+    padding:.45rem .5rem; border-right:none; border-bottom:1px solid var(--border);
   }
   .sidebar-logo {
-    flex:0 0 auto; padding:0 .7rem 0 0; margin:0 .35rem 0 0;
+    flex:0 0 auto; padding:0 .5rem 0 0; margin:0 .25rem 0 0;
     border-bottom:none; border-right:1px solid var(--border);
-    font-size:1rem; line-height:1;
+    font-size:.85rem; line-height:1;
   }
   .sidebar-logo small { display:none; }
   .nav-item {
     flex:0 0 auto; border-left:none; border-bottom:2px solid transparent;
-    padding:.48rem .65rem; border-radius:8px; gap:7px; font-size:.72rem;
+    padding:.35rem .5rem; border-radius:6px; gap:5px; font-size:.65rem;
   }
   .nav-item.active { border-left-color:transparent; border-bottom-color:var(--nav-c,var(--blue)); }
   .nav-item .nav-dot { width:6px; height:6px; }
-  .main { width:100%; max-width:none; padding:.9rem .75rem 3rem; overflow-x:hidden; }
-  .set-header { display:grid; grid-template-columns:1fr auto; gap:.45rem .6rem; align-items:center; }
-  .set-header h2 { font-size:1.35rem; grid-column:1 / -1; }
-  .set-header .set-total { margin-left:0; grid-column:1 / -1; font-size:.78rem; }
-  .sec-label { margin:1.5rem 0 .65rem; font-size:.62rem; letter-spacing:.08em; }
-  .metrics-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:7px; }
-  .mcard { padding:.72rem .75rem; border-radius:8px; }
-  .mcard-num { font-size:1.35rem; }
-  .mcard-label { font-size:.6rem; }
-  .mcard-sub { font-size:.64rem; }
+  .main { width:100%; max-width:none; padding:.75rem .7rem 2.5rem; overflow-x:hidden; }
+  .set-header { display:grid; grid-template-columns:1fr auto; gap:.4rem .5rem; align-items:center; }
+  .set-header h2 { font-size:1.25rem; grid-column:1 / -1; }
+  .set-header .set-total { margin-left:0; grid-column:1 / -1; font-size:.72rem; }
+  .sec-label { margin:1.25rem 0 .5rem; font-size:.6rem; letter-spacing:.08em; }
+  .metrics-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:6px; }
+  .mcard { padding:.65rem .7rem; border-radius:8px; }
+  .mcard-num { font-size:1.25rem; }
+  .mcard-label { font-size:.58rem; }
+  .mcard-sub { font-size:.62rem; }
   .mechanics-grid { grid-template-columns:1fr; }
-  .sub-tabs { flex-wrap:nowrap; overflow-x:auto; padding-bottom:.25rem; scrollbar-width:none; }
+  .sub-tabs { flex-wrap:nowrap; overflow-x:auto; padding-bottom:.2rem; scrollbar-width:none; }
   .sub-tabs::-webkit-scrollbar { display:none; }
-  .sub-tab { flex:0 0 auto; padding:.42rem .8rem; font-size:.68rem; }
-  .search-bar { display:grid; grid-template-columns:1fr; gap:7px; }
+  .sub-tab { flex:0 0 auto; padding:.35rem .7rem; font-size:.65rem; }
+  .search-bar { display:grid; grid-template-columns:1fr; gap:6px; }
   .search-bar input, .search-bar select { width:100%; min-width:0; }
   .two-col { grid-template-columns:1fr; }
   .pack-grid { grid-template-columns:repeat(3,1fr); }
-  .legend-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }
+  .legend-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:7px; }
   .legend-card { border-radius:8px; }
   .legend-card:hover { transform:none; }
-  .legend-card .lc-info { padding:.48rem .55rem .55rem; }
-  .legend-card .lc-name { white-space:normal; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; min-height:2.1em; font-size:.7rem; }
-  .legend-card .lc-sub { font-size:.58rem; line-height:1.3; }
-  .chart-box { padding:.75rem; border-radius:8px; }
-  .chart-box > div[style*="height"] { height:190px !important; }
-  .modal-overlay { align-items:flex-start; padding:1rem .65rem; overflow-y:auto; }
-  .modal { width:100%; max-height:none; padding:1rem; border-radius:10px; }
-  .modal-body { flex-direction:column; align-items:center; gap:.9rem; }
-  .modal-img { width:min(68vw,220px); }
+  .legend-card .lc-info { padding:.4rem .5rem .5rem; }
+  .legend-card .lc-name { white-space:normal; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; min-height:2.1em; font-size:.68rem; }
+  .legend-card .lc-sub { font-size:.56rem; line-height:1.3; }
+  .legend-card .lc-price { font-size:.58rem; }
+  .chart-box { padding:.7rem; border-radius:8px; }
+  .chart-box > div[style*="height"] { height:180px !important; }
+  .modal-overlay { align-items:flex-start; padding:.8rem .5rem; overflow-y:auto; }
+  .modal { width:100%; max-height:none; padding:.9rem; border-radius:10px; }
+  .modal-body { flex-direction:column; align-items:center; gap:.75rem; }
+  .modal-img { width:min(68vw,200px); }
   .modal-info { width:100%; }
-  .modal-info h3 { font-size:1rem; padding-right:1.5rem; }
+  .modal-info h3 { font-size:.95rem; padding-right:1.5rem; }
 }
-@media(max-width:480px){
-  .pack-grid { grid-template-columns:1fr 1fr; }
+
+/* Phones (< 640px): bottom navigation bar instead of top sidebar */
+@media(max-width:639px){
+  .sidebar {
+    position:fixed; bottom:0; top:auto; left:0; width:100%; height:52px;
+    flex-direction:row; align-items:center; justify-content:space-around;
+    padding:0 4px; gap:0; overflow-x:auto; overflow-y:hidden;
+    border-right:none; border-top:1px solid var(--border); border-bottom:none;
+    background:var(--surface); z-index:100;
+  }
+  .sidebar-logo { display:none; }
+  .nav-item {
+    flex:1 0 auto; flex-direction:column; align-items:center; justify-content:center;
+    border-left:none; border-bottom:none;
+    padding:4px 6px; border-radius:6px; gap:2px; font-size:.55rem; line-height:1.1;
+    min-width:0; text-align:center;
+  }
+  .nav-item.active { border-left-color:transparent; background:var(--surface2); }
+  .nav-item .nav-dot { width:5px; height:5px; }
+  .nav-item span:last-child { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:100%; }
+  .app { padding-bottom:52px; }
+  .main { padding:.6rem .55rem 1rem; }
+  .set-header h2 { font-size:1.1rem; }
+  .pack-grid { grid-template-columns:1fr 1fr; gap:5px; }
+  .pack-slot { padding:.5rem .4rem; border-radius:8px; }
+  .pack-slot .slot-count { font-size:1.2rem; }
+  .pack-slot .slot-name { font-size:.55rem; }
+  .metrics-grid { gap:5px; }
+  .mcard { padding:.55rem .6rem; }
+  .mcard-num { font-size:1.1rem; }
+  .legend-grid { gap:6px; }
+  .legend-card .lc-info { padding:.35rem .4rem .4rem; }
+  .legend-card .lc-name { font-size:.65rem; }
+  .modal { padding:.75rem; }
+  .modal-img { width:min(75vw,180px); }
+  .chart-box > div[style*="height"] { height:170px !important; }
+  .pg-note { font-size:.7rem; padding:.6rem .7rem; }
+}
+
+/* Very small phones (< 420px) */
+@media(max-width:420px){
   .metrics-grid { grid-template-columns:1fr 1fr; }
-  .main { padding:.75rem .55rem 2.5rem; }
-  .nav-item { padding:.45rem .55rem; }
+  .legend-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .pack-grid { grid-template-columns:1fr 1fr; }
+  .main { padding:.5rem .45rem 1rem; }
+  .nav-item { font-size:.5rem; padding:3px 4px; }
+  .nav-item .nav-dot { width:4px; height:4px; }
+  .sidebar { height:46px; }
+  .app { padding-bottom:46px; }
+  .modal-img { width:70vw; }
 }
+
+/* Tiny screens (< 360px) */
 @media(max-width:360px){
   .metrics-grid, .legend-grid { grid-template-columns:1fr; }
   .pack-grid { grid-template-columns:1fr; }
+  .legend-card .lc-name { font-size:.6rem; }
 }
 </style>
 </head>
