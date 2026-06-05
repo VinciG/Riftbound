@@ -1,1 +1,0 @@
-window.EPIC_CARD_DATA = {};

@@ -12,67 +12,102 @@ from google.genai.errors import ClientError
 # Leer base de datos actual (JSON)
 # ==========================================
 json_file = "cartas.json"
-
-# Estructura por defecto si no existe
-ESQUEMA_BASE = {
-    "sets": {
-        "Origins": {
-            "id": "origins", "abbr": "OGN", "set_number": 1, "color": "#4a9eff",
-            "date": "", "cartas_reveladas": 0, "total": 0, "total_base": 0, "total_ovr": 0,
-            "imgBase": "", "legend_count": 0, "leyendas": [],
-            "productos": [], "champion_decks": [], "ovr_breakdown": [], "mecanicas": []
-        },
-        "Spiritforged": {
-            "id": "spiritforged", "abbr": "SFD", "set_number": 2, "color": "#3ecf8e",
-            "date": "", "cartas_reveladas": 0, "total": 0, "total_base": 0, "total_ovr": 0,
-            "imgBase": "", "legend_count": 0, "leyendas": [],
-            "productos": [], "champion_decks": [], "ovr_breakdown": [], "mecanicas": []
-        },
-        "Unleashed": {
-            "id": "unleashed", "abbr": "UNL", "set_number": 3, "color": "#f4a535",
-            "date": "", "cartas_reveladas": 0, "total": 0, "total_base": 0, "total_ovr": 0,
-            "imgBase": "", "legend_count": 0, "leyendas": [],
-            "productos": [], "champion_decks": [], "ovr_breakdown": [], "mecanicas": []
-        },
-        "Vendetta": {
-            "id": "vendetta", "abbr": "VEN", "set_number": 4, "color": "#e879a0",
-            "date": "", "cartas_reveladas": 0, "total": 0, "total_base": 0, "total_ovr": 0,
-            "imgBase": "", "legend_count": 0, "leyendas": [],
-            "productos": [], "champion_decks": [], "ovr_breakdown": [], "mecanicas": []
-        }
-    },
-    "pull_rates": {}
-}
-
-if not os.path.exists(json_file):
-    datos_actuales = json.loads(json.dumps(ESQUEMA_BASE))
-    with open(json_file, "w", encoding="utf-8") as f:
-        json.dump(datos_actuales, f, indent=4, ensure_ascii=False)
-else:
+if os.path.exists(json_file):
     with open(json_file, "r", encoding="utf-8") as f:
         datos_actuales = json.load(f)
+else:
+    datos_actuales = {"sets": {}, "pull_rates": {}}
 
 # ==========================================
 # Configuración de Gemini
 # ==========================================
 client = genai.Client()
 
-EXPANSIONES = ["Origins", "Spiritforged", "Unleashed", "Vendetta"]
-
-# Mapa de códigos de set a IDs internos
-SET_CODE_MAP = {"OGN": "origins", "SFD": "spiritforged", "UNL": "unleashed", "VEN": "vendetta"}
-
 # Leer precios actuales de cardmarket_prices.json (si existe)
 cardmarket_prices_file = "cardmarket_prices.json"
-cardmarket_prices_actual = {}
-if os.path.exists(cardmarket_prices_file):
-    with open(cardmarket_prices_file, "r", encoding="utf-8-sig") as f:
-        cardmarket_prices_actual = json.load(f)
 
 # ==========================================
-# Obtener precios reales desde DotGG API
+# Obtener todos los datos desde DotGG API
 # ==========================================
 DOTGG_API_URL = "https://api.dotgg.gg/cgfw/getcards?game=riftbound&mode=indexed"
+
+def fetch_dotgg_all():
+    req = urllib.request.Request(DOTGG_API_URL, headers={
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    })
+    with urllib.request.urlopen(req, timeout=30) as resp:
+        raw = json.loads(resp.read().decode("utf-8"))
+    return raw["names"], raw["data"]
+
+api_names, api_rows = [], []
+try:
+    api_names, api_rows = fetch_dotgg_all()
+    print(f"  → {len(api_rows)} cartas desde DotGG API")
+except Exception as e:
+    print(f"  ⚠️ Error fetching DotGG: {e}")
+
+# ==========================================
+# Auto-descubrir colecciones desde DotGG
+# ==========================================
+COLOR_PALETTE = ["#4a9eff", "#3ecf8e", "#f4a535", "#e879a0", "#a78bfa", "#f97316", "#06b6d4", "#84cc16"]
+
+DOTGG_SET_NAMES = set()  # Original DotGG set names for mapping
+
+def discover_sets(rows, names):
+    """Detect new sets from DotGG and add them to datos_actuales."""
+    global DOTGG_SET_NAMES
+    DOTGG_SET_NAMES.clear()
+    set_names = set()
+    abbr_from_id = {}
+    for row in rows:
+        card = dict(zip(names, row))
+        sn = card.get("set_name", "")
+        if not sn: continue
+        set_names.add(sn)
+        aid = card.get("id", "")
+        m = re.match(r"^([A-Z]+)", aid)
+        if m and sn not in abbr_from_id:
+            abbr_from_id[sn] = m.group(1)
+
+    DOTGG_SET_NAMES = set_names  # Save original DotGG names
+
+    for i, sn in enumerate(sorted(set_names)):
+        sid = sn.lower().replace(" ", "_")
+        if sid not in datos_actuales["sets"]:
+            abbr = abbr_from_id.get(sn, sn[:3].upper())
+            color = COLOR_PALETTE[i % len(COLOR_PALETTE)]
+            datos_actuales["sets"][sid] = {
+                "id": sid, "abbr": abbr, "set_number": i + 1, "color": color,
+                "date": "", "cartas_reveladas": 0, "total": 0, "total_base": 0, "total_ovr": 0,
+                "imgBase": "", "legend_count": 0, "leyendas": [],
+                "productos": [], "champion_decks": [], "ovr_breakdown": [], "mecanicas": []
+            }
+        else:
+            s = datos_actuales["sets"][sid]
+            defaults = {"date":"","cartas_reveladas":0,"total":0,"total_base":0,"total_ovr":0,
+                        "imgBase":"","legend_count":0,"leyendas":[],"productos":[],
+                        "champion_decks":[],"ovr_breakdown":[],"mecanicas":[]}
+            for k, v in defaults.items():
+                if k not in s:
+                    s[k] = v
+
+if api_rows:
+    discover_sets(api_rows, api_names)
+
+# Build maps from datos_actuales (after discovery)
+SET_NAME_MAP = {}
+EPIC_SUFFIX = {}
+for s_name, s_data in datos_actuales.get("sets", {}).items():
+    sid = s_data.get("id")
+    SET_NAME_MAP[s_name] = sid
+    tb = s_data.get("total_base", 0)
+    if tb:
+        EPIC_SUFFIX[sid] = str(tb)
+
+# Also map DotGG original set names to internal ids
+for dotgg_name in DOTGG_SET_NAMES:
+    sid = dotgg_name.lower().replace(" ", "_")
+    SET_NAME_MAP[dotgg_name] = sid
 
 # Build legend name list per set
 legends_per_set = {}
@@ -85,125 +120,28 @@ for s_name, s_data in datos_actuales.get("sets", {}).items():
             names.append(n)
     legends_per_set[sid] = names
 
-# Build set_name → set_id map AND EPIC_SUFFIX from cartas.json total_base
-SET_NAME_MAP = {}
-EPIC_SUFFIX = {}
-for s_name, s_data in datos_actuales.get("sets", {}).items():
-    sid = s_data.get("id")
-    SET_NAME_MAP[s_name] = sid
-    tb = s_data.get("total_base", 0)
-    if tb:
-        EPIC_SUFFIX[sid] = str(tb)
-
-def fetch_dotgg_prices():
-    """Fetch all Riftbound cards with prices from DotGG public API (no key needed)."""
-    req = urllib.request.Request(DOTGG_API_URL, headers={
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
-    })
-    with urllib.request.urlopen(req, timeout=30) as resp:
-        raw = json.loads(resp.read().decode("utf-8"))
-
-    names = raw["names"]
-    rows = raw["data"]
-
-    prices = {}
-    legend_min_prices = {}
-
-    for row in rows:
-        card = dict(zip(names, row))
-        set_name = card.get("set_name")
-        set_id = SET_NAME_MAP.get(set_name)
-        if not set_id:
-            continue
-
-        cm_price = card.get("cmPrice")
-        if cm_price is None or cm_price == 0 or cm_price == "0" or cm_price == "0.000000":
-            continue
-
-        cm_price_f = float(cm_price)
-        price_str = f"€{cm_price_f:.2f}"
-
-        if set_id not in prices:
-            prices[set_id] = {}
-
-        # Key from API card id + suffix from epic-cards.js
-        # Convert API suffix -STAR → * (epic-cards.js format), -P promo suffix kept
-        api_id = card.get("id", "")
-        our_key = api_id.lower()
-        if our_key.endswith("-star"):
-            our_key = our_key[:-5] + "*"
-        suffix = EPIC_SUFFIX.get(set_id)
-        if suffix:
-            our_key = f"{our_key}-{suffix}"
-        prices[set_id][our_key] = price_str
-
-        # Legend-type cards: track minimum price per champion
-        if card.get("type") == "Legend":
-            tags = card.get("tags") or []
-            for champ_name in legends_per_set.get(set_id, []):
-                if champ_name in tags:
-                    if set_id not in legend_min_prices:
-                        legend_min_prices[set_id] = {}
-                    existing = legend_min_prices[set_id].get(champ_name)
-                    if existing is None or cm_price_f < existing:
-                        legend_min_prices[set_id][champ_name] = cm_price_f
-
-    # Add legend champion-name keys (cheapest Legend-type card for each champ)
-    for set_id, champs in legend_min_prices.items():
-        if set_id not in prices:
-            prices[set_id] = {}
-        for champ_name, min_price in champs.items():
-            prices[set_id][champ_name] = f"€{min_price:.2f}"
-
-    return prices
-
-# Fetch DotGG prices and merge into cardmarket_prices_actual
-try:
-    dotgg_prices = fetch_dotgg_prices()
-    for set_id, set_prices in dotgg_prices.items():
-        for key, val in set_prices.items():
-            cardmarket_prices_actual[set_id][key] = val
-    total = sum(len(v) for v in dotgg_prices.values())
-    print(f"  → {total} precios obtenidos desde DotGG API")
-except Exception as e:
-    print(f"  ⚠️ Error al obtener precios de DotGG API: {e}")
-    print("  Manteniendo precios anteriores.")
+# Dynamic lists for validation
+EXPANSIONES = list(datos_actuales.get("sets", {}).keys())
+SET_CODE_MAP = {s_data["abbr"]: sid for sid, s_data in datos_actuales["sets"].items()}
 
 # ==========================================
-# Obtener todos los datos desde DotGG API
+# Seed totals from DotGG data
 # ==========================================
-DOTGG_API_URL = "https://api.dotgg.gg/cgfw/getcards?game=riftbound&mode=indexed"
-
-def fetch_dotgg_all():
-    """Fetch ALL cards with prices from DotGG public API (no key needed)."""
-    req = urllib.request.Request(DOTGG_API_URL, headers={
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
-    })
-    with urllib.request.urlopen(req, timeout=30) as resp:
-        raw = json.loads(resp.read().decode("utf-8"))
-    return raw["names"], raw["data"]
-
-api_names, api_rows = [], []
-try:
-    api_names, api_rows = fetch_dotgg_all()
-    print(f"  → {len(api_rows)} cartas obtenidas desde DotGG API")
-except Exception as e:
-    print(f"  ⚠️ Error al obtener datos de DotGG API: {e}")
-
-# Seed datos_actuales with real counts from DotGG before Gemini
 def seed_from_dotgg(rows, names, base):
     """Fill set totals, legend lists and ovr counts from DotGG data."""
-    from collections import Counter, defaultdict
-    set_data = defaultdict(lambda: {"total": 0, "legends": set(), "ovr": 0, "abbr": None})
+    from collections import defaultdict
+    set_data = defaultdict(lambda: {"total": 0, "legends": set(), "ovr": 0, "abbr": None, "ids": set()})
     for row in rows:
         card = dict(zip(names, row))
         sn = card.get("set_name", "")
         sid = SET_NAME_MAP.get(sn)
         if not sid: continue
-        set_data[sid]["total"] += 1
         set_data[sid]["abbr"] = sid
+        aid = card.get("id", "")
+        base_id = re.sub(r'(?i)(-p|-a|-star|-promo)$', '', aid)
+        set_data[sid]["ids"].add(base_id)
         if card.get("type") == "Legend":
-            cn = card.get("name", "").split(",", 1)[0].strip()
+            cn = re.split(r' - |, ', card.get("name", ""), maxsplit=1)[0].strip()
             if cn:
                 set_data[sid]["legends"].add(cn)
         if card.get("rarity") == "Showcase":
@@ -211,9 +149,10 @@ def seed_from_dotgg(rows, names, base):
     for sid, d in set_data.items():
         for s_name, s_val in base.get("sets", {}).items():
             if s_val.get("id") == sid:
-                if s_val.get("total", 0) == 0 and d["total"] > 0:
-                    s_val["total"] = d["total"]
-                    s_val["total_base"] = d["total"] - d["ovr"]
+                uid_count = len(d["ids"])
+                if s_val.get("total", 0) == 0 and uid_count > 0:
+                    s_val["total"] = uid_count
+                    s_val["total_base"] = uid_count - d["ovr"]
                     s_val["total_ovr"] = d["ovr"]
                     s_val["legend_count"] = len(d["legends"])
                     s_val["leyendas"] = [{"name": n, "img": None} for n in sorted(d["legends"])]
@@ -221,12 +160,14 @@ def seed_from_dotgg(rows, names, base):
 
 if api_rows:
     seed_from_dotgg(api_rows, api_names, datos_actuales)
-    # Save seeded data immediately (before Gemini) so we have correct totals even if Gemini fails
     with open(json_file, "w", encoding="utf-8") as f:
         json.dump(datos_actuales, f, indent=4, ensure_ascii=False)
     total_seeded = sum(s.get("total",0) for s in datos_actuales.get("sets",{}).values())
     print(f"✅ 'cartas.json' seedeado desde DotGG ({total_seeded} cartas totales).")
 
+# ==========================================
+# Build prices from DotGG data
+# ==========================================
 def make_price_key(api_id, set_id):
     k = api_id.lower()
     if k.endswith("-star"):
@@ -398,100 +339,103 @@ for intento in range(intentos_maximos):
             espera_inicial *= 2
         else:
             print(f"❌ Error de API: {e}")
-            exit(1)
+            break
     except Exception as e:
         print(f"❌ Error inesperado: {e}")
-        exit(1)
+        break
 
-if not response:
-    print("❌ No se pudo conectar con la API.")
-    exit(1)
+gemini_ok = False
 
-# ==========================================
-# Validación y extracción del JSON generado
-# ==========================================
-texto_respuesta = response.text.strip()
+if response:
+    # ==========================================
+    # Validación y extracción del JSON generado
+    # ==========================================
+    texto_respuesta = response.text.strip()
 
-# Limpieza de bloques markdown
-if "```json" in texto_respuesta:
-    texto_respuesta = texto_respuesta.split("```json")[1].split("```")[0].strip()
-elif "```" in texto_respuesta:
-    texto_respuesta = texto_respuesta.split("```")[1].split("```")[0].strip()
+    # Limpieza de bloques markdown
+    if "```json" in texto_respuesta:
+        texto_respuesta = texto_respuesta.split("```json")[1].split("```")[0].strip()
+    elif "```" in texto_respuesta:
+        texto_respuesta = texto_respuesta.split("```")[1].split("```")[0].strip()
 
-try:
-    datos_nuevos = json.loads(texto_respuesta)
+    try:
+        gemini_ok = True
+        datos_nuevos = json.loads(texto_respuesta)
 
-    # Verificación de que no eliminó las expansiones clave
-    for exp in EXPANSIONES:
-        if "sets" not in datos_nuevos or exp not in datos_nuevos["sets"]:
-            raise ValueError(f"Falta la expansión obligatoria: {exp}")
+        # Verificación de que no eliminó las expansiones clave
+        for exp in EXPANSIONES:
+            if "sets" not in datos_nuevos or exp not in datos_nuevos["sets"]:
+                raise ValueError(f"Falta la expansión obligatoria: {exp}")
 
-    # Verificar campos esenciales por expansión
-    for exp in EXPANSIONES:
-        s = datos_nuevos["sets"][exp]
-        for campo in ["id", "abbr", "total", "total_base", "total_ovr", "legend_count",
-                      "leyendas", "productos", "ovr_breakdown", "mecanicas"]:
-            if campo not in s:
-                raise ValueError(f"Falta campo '{campo}' en {exp}")
+        # Verificar campos esenciales por expansión
+        for exp in EXPANSIONES:
+            s = datos_nuevos["sets"][exp]
+            for campo in ["id", "abbr", "total", "total_base", "total_ovr", "legend_count",
+                          "leyendas", "productos", "ovr_breakdown", "mecanicas"]:
+                if campo not in s:
+                    raise ValueError(f"Falta campo '{campo}' en {exp}")
 
-    FUENTES_VALIDAS = ["riftbound.leagueoflegends.com", "riftbound.gg", "cardgamer.com", "tcggo.com"]
+        FUENTES_VALIDAS = ["riftbound.leagueoflegends.com", "riftbound.gg", "cardgamer.com", "tcggo.com"]
 
-    # Validar Regla 8: cambios en totals requieren _source_url de fuente válida
-    for exp in EXPANSIONES:
-        old = datos_actuales.get("sets", {}).get(exp, {})
-        new = datos_nuevos["sets"][exp]
-        for campo in ["total", "total_base", "total_ovr"]:
-            if old.get(campo) != new.get(campo):
-                if not old.get(campo):
-                    continue  # fresh population (was 0/null), no source URL needed
-                url = new.get("_source_url", "")
-                if not url:
-                    raise ValueError(
-                        f"Regla 8 violada: {exp}.{campo} cambió de {old.get(campo)} a {new.get(campo)} "
-                        f"sin incluir '_source_url'. Cambio rechazado."
-                    )
-                if not any(dom in url for dom in FUENTES_VALIDAS):
-                    raise ValueError(
-                        f"Regla 8 violada: {exp}.{campo} cambió de {old.get(campo)} a {new.get(campo)} "
-                        f"con _source_url '{url}' que no es de fuente válida ({', '.join(FUENTES_VALIDAS)}). Cambio rechazado."
-                    )
+        # Validar Regla 8: cambios en totals requieren _source_url de fuente válida
+        for exp in EXPANSIONES:
+            old = datos_actuales.get("sets", {}).get(exp, {})
+            new = datos_nuevos["sets"][exp]
+            for campo in ["total", "total_base", "total_ovr"]:
+                if old.get(campo) != new.get(campo):
+                    if not old.get(campo):
+                        continue  # fresh population (was 0/null), no source URL needed
+                    url = new.get("_source_url", "")
+                    if not url:
+                        raise ValueError(
+                            f"Regla 8 violada: {exp}.{campo} cambió de {old.get(campo)} a {new.get(campo)} "
+                            f"sin incluir '_source_url'. Cambio rechazado."
+                        )
+                    if not any(dom in url for dom in FUENTES_VALIDAS):
+                        raise ValueError(
+                            f"Regla 8 violada: {exp}.{campo} cambió de {old.get(campo)} a {new.get(campo)} "
+                            f"con _source_url '{url}' que no es de fuente válida ({', '.join(FUENTES_VALIDAS)}). Cambio rechazado."
+                        )
 
-except (json.JSONDecodeError, ValueError) as e:
-    print(f"❌ Validación fallida: {e}")
-    print("Respuesta cruda:", texto_respuesta)
-    exit(0)
+    except (json.JSONDecodeError, ValueError) as e:
+        print(f"❌ Validación fallida: {e}")
+        print("Respuesta cruda:", texto_respuesta if 'texto_respuesta' in dir() else "(no hay respuesta)")
+        gemini_ok = False
 
-# ==========================================
-# Guardar cartas.json solo si hay cambios
-# ==========================================
-# Limpiar campo interno _source_url de todos los sets antes de guardar
-source_urls_used = []
-for nombre_set, data_set in datos_nuevos["sets"].items():
-    if "_source_url" in data_set:
-        source_urls_used.append(f"  {nombre_set}: {data_set.pop('_source_url')}")
-if source_urls_used:
-    print("URLs fuente reportadas por el AI:")
-    for line in source_urls_used:
-        print(line)
+    if gemini_ok:
+        # ==========================================
+        # Guardar cartas.json solo si hay cambios
+        # ==========================================
+        # Limpiar campo interno _source_url de todos los sets antes de guardar
+        source_urls_used = []
+        for nombre_set, data_set in datos_nuevos["sets"].items():
+            if "_source_url" in data_set:
+                source_urls_used.append(f"  {nombre_set}: {data_set.pop('_source_url')}")
+        if source_urls_used:
+            print("URLs fuente reportadas por el AI:")
+            for line in source_urls_used:
+                print(line)
 
-if datos_nuevos == datos_actuales:
-    print("ℹ️ No se detectaron novedades en las fuentes oficiales para cartas.json.")
+        if datos_nuevos == datos_actuales:
+            print("ℹ️ No se detectaron novedades en las fuentes oficiales para cartas.json.")
+        else:
+            with open(json_file, "w", encoding="utf-8") as f:
+                json.dump(datos_nuevos, f, indent=4, ensure_ascii=False)
+            print("✅ 'cartas.json' actualizado con éxito.")
+            datos_actuales = datos_nuevos  # use updated data for suffix rebuilding
+
+            # Rebuild legends_per_set from updated data
+            legends_per_set.clear()
+            for s_name, s_data in datos_actuales.get("sets", {}).items():
+                sid = s_data.get("id")
+                names = []
+                for leg in s_data.get("leyendas", []):
+                    n = leg.get("name") if isinstance(leg, dict) else (leg if isinstance(leg, str) else None)
+                    if n:
+                        names.append(n)
+                legends_per_set[sid] = names
 else:
-    with open(json_file, "w", encoding="utf-8") as f:
-        json.dump(datos_nuevos, f, indent=4, ensure_ascii=False)
-    print("✅ 'cartas.json' actualizado con éxito.")
-    datos_actuales = datos_nuevos  # use updated data for suffix rebuilding
-
-    # Rebuild legends_per_set from updated data
-    legends_per_set.clear()
-    for s_name, s_data in datos_actuales.get("sets", {}).items():
-        sid = s_data.get("id")
-        names = []
-        for leg in s_data.get("leyendas", []):
-            n = leg.get("name") if isinstance(leg, dict) else (leg if isinstance(leg, str) else None)
-            if n:
-                names.append(n)
-        legends_per_set[sid] = names
+    print("⚠️ Gemini no disponible — continuando con datos seedeados.")
 
 # ==========================================
 # Reconstruir sufijos y regenerar archivos finales
@@ -521,6 +465,9 @@ else:
     SET_NAME_MAP_FINAL = {}
     for s_name, s_data in datos_actuales.get("sets", {}).items():
         SET_NAME_MAP_FINAL[s_name] = s_data.get("id")
+    for dotgg_name in DOTGG_SET_NAMES:
+        sid = dotgg_name.lower().replace(" ", "_")
+        SET_NAME_MAP_FINAL[dotgg_name] = sid
 
     def make_key(api_id, set_id):
         k = api_id.lower()
@@ -609,7 +556,7 @@ else:
         num_m = re.search(r"-(\d+)", api_id)
         number = num_m.group(1) if num_m else ""
         full_name = card.get("name", "")
-        title = full_name.split(", ", 1)[1] if ", " in full_name else ""
+        title = full_name.split(" - ", 1)[1] if " - " in full_name else (full_name.split(", ", 1)[1] if ", " in full_name else "")
         legend_data_save[sid][champ] = {
             "img": card.get("image") or "",
             "title": title,
@@ -622,11 +569,12 @@ else:
     # Generate epic-cards.js from DotGG data
     def build_epic_cards():
         """Build window.EPIC_CARD_DATA from DotGG API data."""
-        sn_to_code = {}
+        id_to_abbr = {}
         for s_name, s_data in datos_actuales.get("sets", {}).items():
             abbr = s_data.get("abbr")
-            if abbr:
-                sn_to_code[s_name] = abbr
+            sid = s_data.get("id")
+            if abbr and sid:
+                id_to_abbr[sid] = abbr
 
         premium_rarities = {"Epic", "Showcase"}
         result = {}
@@ -636,7 +584,8 @@ else:
             if rarity not in premium_rarities:
                 continue
             sn = card.get("set_name", "")
-            sc = sn_to_code.get(sn)
+            sid = SET_NAME_MAP_FINAL.get(sn)
+            sc = id_to_abbr.get(sid)
             if not sc: continue
             if sc not in result: result[sc] = []
 
