@@ -360,7 +360,7 @@
             "total_base": 116,
             "total_ovr": 50,
             "imgBase": null,
-            "legend_count": 9,
+            "legend_count": 7,
             "leyendas": [
                 {
                     "name": "Nasus",
@@ -389,18 +389,10 @@
                 {
                     "name": "Shen",
                     "img": null
-                },
-                {
-                    "name": null,
-                    "img": null
-                },
-                {
-                    "name": null,
-                    "img": null
                 }
             ],
             "productos": [
-                "Booster Box (24 packs)",
+                "Booster Display (24 packs)",
                 "Showdown Decks: Zed vs Shen",
                 "Vendetta Vault",
                 "Pre-Rift Event Kit",
@@ -482,7 +474,8 @@
                 "Booster Box",
                 "Showdown Decks: Seraphine vs Evelynn",
                 "Radiance Vault",
-                "Pre-Rift event kits"
+                "Pre-Rift Event Kits",
+                "Art Sleeves: Radiance Style 1"
             ],
             "champion_decks": [
                 "Seraphine",
