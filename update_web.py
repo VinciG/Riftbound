@@ -526,8 +526,11 @@ else:
             if rarity == "Showcase" and not alt and not sig:
                 ovr = True
 
-            color_raw = card.get("color", "") or ""
-            domain = color_raw.title() if color_raw else ""
+            color_raw = card.get("color") or []
+            if isinstance(color_raw, list):
+                domain = " / ".join(c.title() for c in color_raw if c)
+            else:
+                domain = str(color_raw).title() if color_raw else ""
 
             result[sc].append({
                 "name": nm,
