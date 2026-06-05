@@ -773,7 +773,6 @@ function renderPremiumSet(setCode) {
     el.setAttribute('data-rarity', card.rarity);
     const cmPrice = CARDMARKET_PRICES[set.id]?.[card.id] || CARDMARKET_PRICES[set.id]?.[card.name] || null;
     el.setAttribute('data-price', cmPrice ? parseFloat(cmPrice.replace('€','')) : '');
-
     const imgDiv = document.createElement('div');
     imgDiv.className = 'lc-img';
     const img = document.createElement('img');
@@ -783,7 +782,6 @@ function renderPremiumSet(setCode) {
     img.onerror = function(){ this.style.display='none'; this.parentElement.innerHTML='<div class="placeholder">?</div>'; };
     imgDiv.appendChild(img);
 
-    const cmPrice = CARDMARKET_PRICES[set.id]?.[card.id] || CARDMARKET_PRICES[set.id]?.[card.name] || null;
     const info = document.createElement('div');
     info.className = 'lc-info';
     info.innerHTML = `<div class="lc-name">${card.name}</div>
