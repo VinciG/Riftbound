@@ -50,7 +50,7 @@ jobs:
           git config user.name "Riftbound Bot"
           git config user.email "actions@github.com"
           
-          git add cartas.json cardmarket_prices.json epic-cards.js id_to_name.json
+          git add cartas.json cardmarket_prices.json epic-cards.js id_to_name.json legend_data.json
           git diff --cached --quiet || git commit -m "Auto update Riftbound database JSON"
           
           git add index.html

@@ -532,6 +532,8 @@ tbody tr:hover td { background:var(--surface2); }
 
 <script src="epic-cards.js"></script>
 <script>
+let LEGEND_DATA = {};
+
 // ===== DATA =====
 const SETS = {
   origins: {
@@ -1010,6 +1012,12 @@ async function buildPage() {
     if (cmResp.ok) CARDMARKET_PRICES = await cmResp.json();
   } catch(e) { console.warn('cardmarket_prices.json not loaded'); }
 
+  // Load legend data (images, titles, numbers from DotGG)
+  try {
+    const ldResp = await fetch('legend_data.json?' + Date.now());
+    if (ldResp.ok) LEGEND_DATA = await ldResp.json();
+  } catch(e) { console.warn('legend_data.json not loaded'); }
+
   const sets = db.sets || {};
   const setIds = Object.keys(sets);
 
@@ -1199,11 +1207,21 @@ async function buildPage() {
   // 5. Sync SETS and PREMIUM_SET_PREFIX from JSON
   for (const [setName, s] of Object.entries(sets)) {
     if (!SETS[s.id]) {
+      const setLegendData = LEGEND_DATA[s.id] || {};
       SETS[s.id] = {
         id: s.id, name: setName, abbr: s.abbr, color: s.color,
         legends: (s.leyendas || []).map(l => {
-          if (typeof l === 'string') return { name: l, title: '', n: '' };
-          return { name: l.name || '', title: l.title || '', n: '', img: l.img || null };
+          const legendName = typeof l === 'string' ? l : l.name || '';
+          const extra = setLegendData[legendName] || {};
+          if (typeof l === 'string') {
+            return { name: legendName, title: extra.title || '', n: extra.number || '', img: extra.img || null };
+          }
+          return {
+            name: legendName,
+            title: l.title || extra.title || '',
+            n: extra.number || '',
+            img: l.img || extra.img || null
+          };
         }),
         imgBase: s.imgBase || null
       };

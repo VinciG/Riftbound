@@ -511,6 +511,45 @@ else:
     with open("id_to_name.json", "w", encoding="utf-8") as f:
         json.dump(id_name_map_save, f, indent=4, ensure_ascii=False)
 
+    # Save legend data (images, titles, numbers) for each set's champions
+    legend_data_save = {}
+    legend_data_min = {}
+    for row in api_rows:
+        card = dict(zip(api_names, row))
+        if card.get("type") != "Legend": continue
+        sn = card.get("set_name", "")
+        sid = SET_NAME_MAP_FINAL.get(sn)
+        if not sid: continue
+        tags = card.get("tags") or []
+        champ = None
+        for cn in legends_per_set.get(sid, []):
+            if cn in tags:
+                champ = cn
+                break
+        if not champ: continue
+        if sid not in legend_data_save: legend_data_save[sid] = {}
+        if sid not in legend_data_min: legend_data_min[sid] = {}
+        cm = card.get("cmPrice")
+        cm_f = float(cm) if (cm and cm != 0 and cm != "0" and cm != "0.000000") else None
+        prev = legend_data_min[sid].get(champ)
+        if champ in legend_data_save[sid] and prev is not None and (cm_f is None or cm_f >= prev):
+            continue
+        if cm_f is not None:
+            legend_data_min[sid][champ] = cm_f
+        api_id = card.get("id", "")
+        num_m = re.search(r"-(\d+)", api_id)
+        number = num_m.group(1) if num_m else ""
+        full_name = card.get("name", "")
+        title = full_name.split(", ", 1)[1] if ", " in full_name else ""
+        legend_data_save[sid][champ] = {
+            "img": card.get("image") or "",
+            "title": title,
+            "number": number
+        }
+    with open("legend_data.json", "w", encoding="utf-8") as f:
+        json.dump(legend_data_save, f, indent=4, ensure_ascii=False)
+    print(f"✅ 'legend_data.json' guardado ({sum(len(v) for v in legend_data_save.values())} leyendas).")
+
     # Generate epic-cards.js from DotGG data
     def build_epic_cards():
         """Build window.EPIC_CARD_DATA from DotGG API data."""
