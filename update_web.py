@@ -491,6 +491,26 @@ else:
     total_final = sum(len(v) for v in final_prices.values())
     print(f"✅ 'cardmarket_prices.json' re-escrito ({total_final} precios).")
 
+    # Save ID-to-name map for Telegram notifications
+    id_name_map_save = {}
+    for row in api_rows:
+        card = dict(zip(api_names, row))
+        sn = card.get("set_name", "")
+        sid = SET_NAME_MAP_FINAL.get(sn)
+        if not sid: continue
+        cm = card.get("cmPrice")
+        if not cm or cm == 0 or cm == "0" or cm == "0.000000": continue
+        k = make_key(card.get("id",""), sid)
+        if sid not in id_name_map_save: id_name_map_save[sid] = {}
+        id_name_map_save[sid][k] = card.get("name", k)
+    # Add legend champion-name keys (self-mapping)
+    for sid, champs in legend_min.items():
+        if sid not in id_name_map_save: id_name_map_save[sid] = {}
+        for cn in champs:
+            id_name_map_save[sid][cn] = cn
+    with open("id_to_name.json", "w", encoding="utf-8") as f:
+        json.dump(id_name_map_save, f, indent=4, ensure_ascii=False)
+
     # Generate epic-cards.js from DotGG data
     def build_epic_cards():
         """Build window.EPIC_CARD_DATA from DotGG API data."""

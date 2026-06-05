@@ -5,6 +5,11 @@ import urllib.request
 import urllib.error
 from datetime import datetime
 
+ID_TO_NAME = {}
+if os.path.exists("id_to_name.json"):
+    with open("id_to_name.json", "r", encoding="utf-8") as f:
+        ID_TO_NAME = json.load(f)
+
 TELEGRAM_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "")
 TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID", "")
 
@@ -31,15 +36,21 @@ def load_json(path, from_git=False):
 def parse_price(s):
     return float(s.replace("€", "")) if s else None
 
-def fmt_price_change(key, old_str, new_str):
+def display_name(key, set_id):
+    """Return human-readable card name from id_to_name map or fallback to key."""
+    nm = ID_TO_NAME.get(set_id, {}).get(key)
+    return nm if nm else key
+
+def fmt_price_change(key, old_str, new_str, set_id):
     old_v = parse_price(old_str)
     new_v = parse_price(new_str)
+    label = display_name(key, set_id)
     if old_v is not None and new_v is not None:
         diff = new_v - old_v
         arrow = "🔺" if diff > 0 else "🔻"
         sign = "+" if diff > 0 else ""
-        return f"  {arrow} {key}: {old_str} → {new_str} ({sign}{diff:.2f})"
-    return f"  {key}: {old_str} → {new_str}"
+        return f"  {arrow} {label}: {old_str} → {new_str} ({sign}{diff:.2f})"
+    return f"  {label}: {old_str} → {new_str}"
 
 def compare_prices(old, new):
     lines = []
@@ -70,16 +81,13 @@ def compare_prices(old, new):
 
             changes_detail = []
             for k in sorted(changed):
-                changes_detail.append(fmt_price_change(k, old_set[k], new_set[k]))
+                changes_detail.append(fmt_price_change(k, old_set[k], new_set[k], set_id))
             for k in sorted(added):
-                changes_detail.append(f"  ➕ {k}: {new_set[k]} (nueva)")
+                changes_detail.append(f"  ➕ {display_name(k, set_id)}: {new_set[k]} (nueva)")
             for k in sorted(removed):
-                changes_detail.append(f"  ➖ {k}: {old_set[k]} (eliminada)")
+                changes_detail.append(f"  ➖ {display_name(k, set_id)}: {old_set[k]} (eliminada)")
 
-            CHUNK_LIMIT = 25
-            if len(changes_detail) > CHUNK_LIMIT:
-                changes_detail = changes_detail[:CHUNK_LIMIT]
-                changes_detail.append(f"  ... y {len(changed) + len(added) + len(removed) - CHUNK_LIMIT} cambios más")
+            # No chunk limit — show all changes
 
             lines.append(f"\n▫ {set_id}: {', '.join(parts)}")
             lines.extend(changes_detail)
@@ -127,26 +135,30 @@ def send_telegram(message):
     if not TELEGRAM_TOKEN or not TELEGRAM_CHAT_ID:
         print("⚠️ TELEGRAM_BOT_TOKEN o TELEGRAM_CHAT_ID no configurados. Saltando notificación.")
         return False
-    url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
-    payload = json.dumps({
-        "chat_id": TELEGRAM_CHAT_ID,
-        "text": message,
-        "parse_mode": "HTML",
-        "disable_web_page_preview": True
-    }).encode("utf-8")
-    req = urllib.request.Request(url, data=payload, headers={"Content-Type": "application/json"})
-    try:
-        with urllib.request.urlopen(req, timeout=15) as resp:
-            resp.read()
-        print("✅ Notificación enviada por Telegram")
-        return True
-    except urllib.error.HTTPError as e:
-        body = e.read().decode()
-        print(f"❌ Error Telegram HTTP {e.code}: {body}")
-        return False
-    except Exception as e:
-        print(f"❌ Error enviando Telegram: {e}")
-        return False
+    # Split into chunks if too long (Telegram limit ~4000 chars)
+    MAX = 4000
+    parts_send = [message[i:i+MAX] for i in range(0, len(message), MAX)]
+    for chunk in parts_send:
+        url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
+        payload = json.dumps({
+            "chat_id": TELEGRAM_CHAT_ID,
+            "text": chunk,
+            "parse_mode": "HTML",
+            "disable_web_page_preview": True
+        }).encode("utf-8")
+        req = urllib.request.Request(url, data=payload, headers={"Content-Type": "application/json"})
+        try:
+            with urllib.request.urlopen(req, timeout=15) as resp:
+                resp.read()
+        except urllib.error.HTTPError as e:
+            body = e.read().decode()
+            print(f"❌ Error Telegram HTTP {e.code}: {body}")
+            return False
+        except Exception as e:
+            print(f"❌ Error enviando Telegram: {e}")
+            return False
+    print(f"✅ Notificación enviada por Telegram ({len(parts_send)} parte(s))")
+    return True
 
 def main():
     if not TELEGRAM_TOKEN or not TELEGRAM_CHAT_ID:
