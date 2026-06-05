@@ -221,6 +221,11 @@ def seed_from_dotgg(rows, names, base):
 
 if api_rows:
     seed_from_dotgg(api_rows, api_names, datos_actuales)
+    # Save seeded data immediately (before Gemini) so we have correct totals even if Gemini fails
+    with open(json_file, "w", encoding="utf-8") as f:
+        json.dump(datos_actuales, f, indent=4, ensure_ascii=False)
+    total_seeded = sum(s.get("total",0) for s in datos_actuales.get("sets",{}).values())
+    print(f"✅ 'cartas.json' seedeado desde DotGG ({total_seeded} cartas totales).")
 
 def make_price_key(api_id, set_id):
     k = api_id.lower()
