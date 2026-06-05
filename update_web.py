@@ -190,6 +190,38 @@ try:
 except Exception as e:
     print(f"  ⚠️ Error al obtener datos de DotGG API: {e}")
 
+# Seed datos_actuales with real counts from DotGG before Gemini
+def seed_from_dotgg(rows, names, base):
+    """Fill set totals, legend lists and ovr counts from DotGG data."""
+    from collections import Counter, defaultdict
+    set_data = defaultdict(lambda: {"total": 0, "legends": set(), "ovr": 0, "abbr": None})
+    for row in rows:
+        card = dict(zip(names, row))
+        sn = card.get("set_name", "")
+        sid = SET_NAME_MAP.get(sn)
+        if not sid: continue
+        set_data[sid]["total"] += 1
+        set_data[sid]["abbr"] = sid
+        if card.get("type") == "Legend":
+            cn = card.get("name", "").split(",", 1)[0].strip()
+            if cn:
+                set_data[sid]["legends"].add(cn)
+        if card.get("rarity") == "Showcase":
+            set_data[sid]["ovr"] += 1
+    for sid, d in set_data.items():
+        for s_name, s_val in base.get("sets", {}).items():
+            if s_val.get("id") == sid:
+                if s_val.get("total", 0) == 0 and d["total"] > 0:
+                    s_val["total"] = d["total"]
+                    s_val["total_base"] = d["total"] - d["ovr"]
+                    s_val["total_ovr"] = d["ovr"]
+                    s_val["legend_count"] = len(d["legends"])
+                    s_val["leyendas"] = [{"name": n, "img": None} for n in sorted(d["legends"])]
+                break
+
+if api_rows:
+    seed_from_dotgg(api_rows, api_names, datos_actuales)
+
 def make_price_key(api_id, set_id):
     k = api_id.lower()
     if k.endswith("-star"):
