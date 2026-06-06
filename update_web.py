@@ -101,26 +101,6 @@ def discover_sets(rows, names):
                 if k not in s:
                     s[k] = v
 
-    for i, sn in enumerate(sorted(set_names)):
-        sid = sn.lower().replace(" ", "_")
-        if sid not in datos_actuales["sets"]:
-            abbr = abbr_from_id.get(sn, sn[:3].upper())
-            color = COLOR_PALETTE[i % len(COLOR_PALETTE)]
-            datos_actuales["sets"][sid] = {
-                "id": sid, "abbr": abbr, "set_number": i + 1, "color": color,
-                "date": "", "cartas_reveladas": 0, "total": 0, "total_base": 0, "total_ovr": 0,
-                "imgBase": "", "legend_count": 0, "leyendas": [],
-                "productos": [], "champion_decks": [], "ovr_breakdown": [], "mecanicas": []
-            }
-        else:
-            s = datos_actuales["sets"][sid]
-            defaults = {"date":"","cartas_reveladas":0,"total":0,"total_base":0,"total_ovr":0,
-                        "imgBase":"","legend_count":0,"leyendas":[],"productos":[],
-                        "champion_decks":[],"ovr_breakdown":[],"mecanicas":[]}
-            for k, v in defaults.items():
-                if k not in s:
-                    s[k] = v
-
 if api_rows:
     discover_sets(api_rows, api_names)
 
@@ -331,10 +311,13 @@ ESTRUCTURA JSON REQUERIDA (debes devolver EXACTAMENTE este formato):
 
 TAREAS:
 1. Detectar nuevas expansiones (si aparece una nueva, AÑÁDELA al JSON).
-2. Detectar nuevas cartas o leyendas reveladas y actualizar leyendas, total_base, total_ovr.
-3. Mantener productos, ovr_breakdown, mecanicas por cada expansión.
-4. Actualizar pull_rates si hay cambios oficiales.
-5. Para expansiones NUEVAS, rellena todos los campos con la información disponible.
+2. Mantener productos, ovr_breakdown, mecanicas por cada expansión.
+3. Actualizar pull_rates si hay cambios oficiales.
+4. Para expansiones NUEVAS, rellena todos los campos con la información disponible.
+
+IMPORTANTE: Los campos total, total_base, total_ovr, legend_count y leyendas
+vienen de la API de DotGG y son EXACTOS. NO los modifiques bajo ninguna circunstancia.
+Solo añade lo que falte: date, imgBase, productos, ovr_breakdown, mecanicas, pull_rates.
 DATA ACTUAL DE SETS:
 {json.dumps(datos_actuales, indent=2, ensure_ascii=False)}
 
@@ -349,7 +332,7 @@ REGLAS CRÍTICAS:
 5. NO INVENTES URLs. Si no encuentras una URL oficial de imágenes (de riotgames.com, riftbound.leagueoflegends.com, riftbound.gg o cardgamer.com), pon "imgBase": null.
 6. NO CAMBIES champion_decks ni mecánicas de expansiones existentes a menos que tengas confirmación en fuente oficial publicada por Riot Games.
 7. Todo debe estar contrastado con fuentes oficiales de Riot Games, riftbound.leagueoflegends.com, riftbound.gg o cardgamer.com. No uses otras webs.
-8. Si cambias total, total_base o total_ovr de un set ya lanzado, DEBES incluir el campo "_source_url": "URL_DE_LA_FUENTE" dentro de ese set. La URL debe ser de riftbound.leagueoflegends.com, riftbound.gg o cardgamer.com. Sin ese campo o con URL no válida, el cambio será RECHAZADO automáticamente.
+8. Los campos total, total_base, total_ovr, legend_count y leyendas vienen de la API de DotGG. NO los modifiques.
 9. Para el campo "img" de cada leyenda, usa SOLO URLs de cardgamer.com, riftbound.leagueoflegends.com o riftbound.gg. Si no encuentras la URL exacta de la imagen, pon null.
 """
 
@@ -413,27 +396,13 @@ if response:
                 if campo not in s:
                     raise ValueError(f"Falta campo '{campo}' en {exp}")
 
-        FUENTES_VALIDAS = ["riftbound.leagueoflegends.com", "riftbound.gg", "cardgamer.com", "tcggo.com"]
-
-        # Validar Regla 8: cambios en totals requieren _source_url de fuente válida
+        # Overwrite DotGG-sourced fields with seeded values (they are exact from API)
         for exp in EXPANSIONES:
-            old = datos_actuales.get("sets", {}).get(exp, {})
-            new = datos_nuevos["sets"][exp]
-            for campo in ["total", "total_base", "total_ovr"]:
-                if old.get(campo) != new.get(campo):
-                    if not old.get(campo):
-                        continue  # fresh population (was 0/null), no source URL needed
-                    url = new.get("_source_url", "")
-                    if not url:
-                        raise ValueError(
-                            f"Regla 8 violada: {exp}.{campo} cambió de {old.get(campo)} a {new.get(campo)} "
-                            f"sin incluir '_source_url'. Cambio rechazado."
-                        )
-                    if not any(dom in url for dom in FUENTES_VALIDAS):
-                        raise ValueError(
-                            f"Regla 8 violada: {exp}.{campo} cambió de {old.get(campo)} a {new.get(campo)} "
-                            f"con _source_url '{url}' que no es de fuente válida ({', '.join(FUENTES_VALIDAS)}). Cambio rechazado."
-                        )
+            seed = datos_actuales.get("sets", {}).get(exp, {})
+            if exp in datos_nuevos["sets"]:
+                for campo in ["total", "total_base", "total_ovr", "legend_count", "leyendas"]:
+                    if campo in seed:
+                        datos_nuevos["sets"][exp][campo] = seed[campo]
 
     except (json.JSONDecodeError, ValueError) as e:
         print(f"❌ Validación fallida: {e}")
