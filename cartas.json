@@ -1,0 +1,549 @@
+{
+    "sets": {
+        "origins": {
+            "id": "origins",
+            "abbr": "OGN",
+            "set_number": 1,
+            "color": "#3ecf8e",
+            "date": "Octubre 2025",
+            "cartas_reveladas": 0,
+            "total": 396,
+            "total_base": 315,
+            "total_ovr": 81,
+            "imgBase": null,
+            "legend_count": 16,
+            "leyendas": [
+                {
+                    "name": "Ahri",
+                    "img": null
+                },
+                {
+                    "name": "Annie",
+                    "img": null
+                },
+                {
+                    "name": "Darius",
+                    "img": null
+                },
+                {
+                    "name": "Garen",
+                    "img": null
+                },
+                {
+                    "name": "Jinx",
+                    "img": null
+                },
+                {
+                    "name": "Kai'Sa",
+                    "img": null
+                },
+                {
+                    "name": "Lee Sin",
+                    "img": null
+                },
+                {
+                    "name": "Leona",
+                    "img": null
+                },
+                {
+                    "name": "Lux",
+                    "img": null
+                },
+                {
+                    "name": "Master Yi",
+                    "img": null
+                },
+                {
+                    "name": "Miss Fortune",
+                    "img": null
+                },
+                {
+                    "name": "Sett",
+                    "img": null
+                },
+                {
+                    "name": "Teemo",
+                    "img": null
+                },
+                {
+                    "name": "Viktor",
+                    "img": null
+                },
+                {
+                    "name": "Volibear",
+                    "img": null
+                },
+                {
+                    "name": "Yasuo",
+                    "img": null
+                }
+            ],
+            "productos": [
+                "Booster Packs",
+                "Booster Boxes",
+                "Champion Deck: Jinx",
+                "Champion Deck: Viktor",
+                "Champion Deck: Lee Sin",
+                "Proving Grounds Starter Box"
+            ],
+            "champion_decks": [
+                "Jinx",
+                "Lee Sin",
+                "Viktor"
+            ],
+            "ovr_breakdown": [
+                {
+                    "tipo": "Alt-Art",
+                    "cantidad": 12,
+                    "numeracion": "N/A",
+                    "notas": "Alternate-Art Champion Units"
+                },
+                {
+                    "tipo": "OVR base",
+                    "cantidad": 67,
+                    "numeracion": "N/A",
+                    "notas": "Overnumbered cards without signature and other Showcase cards"
+                },
+                {
+                    "tipo": "OVR con firma",
+                    "cantidad": 2,
+                    "numeracion": "N/A",
+                    "notas": "Signature Overnumber cards"
+                }
+            ],
+            "mecanicas": []
+        },
+        "spiritforged": {
+            "id": "spiritforged",
+            "abbr": "SFD",
+            "set_number": 2,
+            "color": "#a78bfa",
+            "date": "Febrero 2026",
+            "cartas_reveladas": 0,
+            "total": 301,
+            "total_base": 221,
+            "total_ovr": 80,
+            "imgBase": null,
+            "legend_count": 12,
+            "leyendas": [
+                {
+                    "name": "Azir",
+                    "img": null
+                },
+                {
+                    "name": "Draven",
+                    "img": null
+                },
+                {
+                    "name": "Ezreal",
+                    "img": null
+                },
+                {
+                    "name": "Fiora",
+                    "img": null
+                },
+                {
+                    "name": "Irelia",
+                    "img": null
+                },
+                {
+                    "name": "Jax",
+                    "img": null
+                },
+                {
+                    "name": "Lucian",
+                    "img": null
+                },
+                {
+                    "name": "Ornn",
+                    "img": null
+                },
+                {
+                    "name": "Rek'Sai",
+                    "img": null
+                },
+                {
+                    "name": "Renata Glasc",
+                    "img": null
+                },
+                {
+                    "name": "Rumble",
+                    "img": null
+                },
+                {
+                    "name": "Sivir",
+                    "img": null
+                }
+            ],
+            "productos": [
+                "Booster Displays",
+                "Champion Deck: Rumble",
+                "Champion Deck: Fiora",
+                "Pre-Rift Event Kit",
+                "Bulk Rune SKU",
+                "Playmats",
+                "Art Sleeves"
+            ],
+            "champion_decks": [
+                "Rumble",
+                "Fiora"
+            ],
+            "ovr_breakdown": [
+                {
+                    "tipo": "Alt-Art",
+                    "cantidad": 12,
+                    "numeracion": "N/A",
+                    "notas": "Alternate-Art Champion Units (estimated)"
+                },
+                {
+                    "tipo": "OVR base",
+                    "cantidad": 66,
+                    "numeracion": "N/A",
+                    "notas": "Overnumbered cards without signature and other Showcase cards (estimated)"
+                },
+                {
+                    "tipo": "OVR con firma",
+                    "cantidad": 2,
+                    "numeracion": "N/A",
+                    "notas": "Signature Overnumber cards (estimated)"
+                }
+            ],
+            "mecanicas": [
+                {
+                    "kicker": "sistema",
+                    "name": "Sistema de Equipamiento",
+                    "desc": "Permite equipar unidades con armas y armaduras."
+                },
+                {
+                    "kicker": "token",
+                    "name": "Ficha de Oro",
+                    "desc": "Nuevo token de recurso que desbloquea líneas de juego flexibles y poderosas."
+                }
+            ]
+        },
+        "unleashed": {
+            "id": "unleashed",
+            "abbr": "UNL",
+            "set_number": 3,
+            "color": "#f97316",
+            "date": "Mayo 2026",
+            "cartas_reveladas": 0,
+            "total": 299,
+            "total_base": 222,
+            "total_ovr": 77,
+            "imgBase": null,
+            "legend_count": 12,
+            "leyendas": [
+                {
+                    "name": "Diana",
+                    "img": null
+                },
+                {
+                    "name": "Ivern",
+                    "img": null
+                },
+                {
+                    "name": "Jhin",
+                    "img": null
+                },
+                {
+                    "name": "Kha'Zix",
+                    "img": null
+                },
+                {
+                    "name": "LeBlanc",
+                    "img": null
+                },
+                {
+                    "name": "Lillia",
+                    "img": null
+                },
+                {
+                    "name": "Master Yi",
+                    "img": null
+                },
+                {
+                    "name": "Poppy",
+                    "img": null
+                },
+                {
+                    "name": "Pyke",
+                    "img": null
+                },
+                {
+                    "name": "Rengar",
+                    "img": null
+                },
+                {
+                    "name": "Vex",
+                    "img": null
+                },
+                {
+                    "name": "Vi",
+                    "img": null
+                }
+            ],
+            "productos": [
+                "Booster Packs",
+                "Booster Boxes",
+                "Champion Deck: Vi",
+                "Champion Deck: Vex",
+                "The Vault",
+                "Playmats",
+                "Art Sleeves",
+                "Pre-Rift Event Kits"
+            ],
+            "champion_decks": [
+                "Vi",
+                "Vex"
+            ],
+            "ovr_breakdown": [
+                {
+                    "tipo": "Alt-Art",
+                    "cantidad": 30,
+                    "numeracion": "N/A",
+                    "notas": "Alternate arts"
+                },
+                {
+                    "tipo": "OVR base",
+                    "cantidad": 46,
+                    "numeracion": "N/A",
+                    "notas": "Overnumbered cards without signature and other Showcase cards"
+                },
+                {
+                    "tipo": "OVR con firma",
+                    "cantidad": 1,
+                    "numeracion": "N/A",
+                    "notas": "Signature Overnumber cards (Ultimate Rare Baron Nashor is a signed overnumbered card)"
+                }
+            ],
+            "mecanicas": [
+                {
+                    "kicker": "mecanica",
+                    "name": "XP (Experiencia)",
+                    "desc": "Las cartas suben de nivel con el tiempo, desbloqueando habilidades más fuertes o nuevos efectos."
+                },
+                {
+                    "kicker": "mecanica",
+                    "name": "Emboscada",
+                    "desc": "Juega unidades de forma reactiva en mitad de la batalla para giros sorpresa."
+                },
+                {
+                    "kicker": "mecanica",
+                    "name": "Caza",
+                    "desc": "Permite presión dirigida y posicionamiento estratégico."
+                },
+                {
+                    "kicker": "token",
+                    "name": "Campos de Batalla de Fichas",
+                    "desc": "Nuevos campos de batalla que son fichas."
+                }
+            ]
+        },
+        "vendetta": {
+            "id": "vendetta",
+            "abbr": "VND",
+            "set_number": 4,
+            "color": null,
+            "date": "Julio 2026",
+            "cartas_reveladas": 0,
+            "total": 166,
+            "total_base": 116,
+            "total_ovr": 50,
+            "imgBase": null,
+            "legend_count": 9,
+            "leyendas": [
+                {
+                    "name": "Akali",
+                    "img": null
+                },
+                {
+                    "name": "Ambessa",
+                    "img": null
+                },
+                {
+                    "name": "Mel",
+                    "img": null
+                },
+                {
+                    "name": "Shen",
+                    "img": null
+                },
+                {
+                    "name": "Zed",
+                    "img": null
+                },
+                {
+                    "name": "Nasus",
+                    "img": null
+                },
+                {
+                    "name": "Renekton",
+                    "img": null
+                }
+            ],
+            "productos": [
+                "Booster Display Boxes",
+                "Champion Decks",
+                "Showdown Decks (Zed vs. Shen)",
+                "The Vendetta Vault"
+            ],
+            "champion_decks": [
+                "Zed",
+                "Shen"
+            ],
+            "ovr_breakdown": [
+                {
+                    "tipo": "Alt-Art",
+                    "cantidad": 9,
+                    "numeracion": "N/A",
+                    "notas": "Alternate-Art Champion Units (estimated)"
+                },
+                {
+                    "tipo": "OVR base",
+                    "cantidad": 39,
+                    "numeracion": "N/A",
+                    "notas": "Overnumbered cards without signature and other Showcase cards (estimated)"
+                },
+                {
+                    "tipo": "OVR con firma",
+                    "cantidad": 2,
+                    "numeracion": "N/A",
+                    "notas": "Signature Overnumber cards (estimated)"
+                }
+            ],
+            "mecanicas": [
+                {
+                    "kicker": "mecanica",
+                    "name": "Emparejamientos de Runas",
+                    "desc": "Nuevos emparejamientos de runas: Furia y Calma (Rojo y Verde), Mente y Cuerpo (Azul y Naranja), Caos y Orden (Morado y Amarillo)."
+                },
+                {
+                    "kicker": "mecanica",
+                    "name": "Emparejamientos de Dominios de Facciones Enemigas",
+                    "desc": "Nuevos emparejamientos de dominios de facciones enemigas."
+                }
+            ]
+        },
+        "radiance": {
+            "id": "radiance",
+            "abbr": "RDC",
+            "set_number": 5,
+            "color": null,
+            "date": "Octubre 2026",
+            "cartas_reveladas": 0,
+            "total": 180,
+            "total_base": 120,
+            "total_ovr": 60,
+            "imgBase": null,
+            "legend_count": 9,
+            "leyendas": [
+                {
+                    "name": "Ekko",
+                    "img": null
+                },
+                {
+                    "name": "Seraphine",
+                    "img": null
+                },
+                {
+                    "name": "Evelynn",
+                    "img": null
+                }
+            ],
+            "productos": [
+                "Showdown Deck (Seraphine vs. Evelynn)",
+                "Booster Display Boxes",
+                "Radiance Vault",
+                "Pre-Rift Event Kits"
+            ],
+            "champion_decks": [
+                "Seraphine",
+                "Evelynn"
+            ],
+            "ovr_breakdown": [
+                {
+                    "tipo": "Alt-Art",
+                    "cantidad": 9,
+                    "numeracion": "N/A",
+                    "notas": "Alternate-Art Champion Units (estimated)"
+                },
+                {
+                    "tipo": "OVR base",
+                    "cantidad": 49,
+                    "numeracion": "N/A",
+                    "notas": "Overnumbered cards without signature and other Showcase cards (estimated)"
+                },
+                {
+                    "tipo": "OVR con firma",
+                    "cantidad": 2,
+                    "numeracion": "N/A",
+                    "notas": "Signature Overnumber cards (estimated)"
+                }
+            ],
+            "mecanicas": []
+        }
+    },
+    "pull_rates": {
+        "general_booster_pack_contents": {
+            "common_cards": 7,
+            "uncommon_cards": 3,
+            "rare_or_better_slots": 2,
+            "foil_slot": 1,
+            "token_rune_alt_rune_slot": 1,
+            "informational_insert": "1 (Unleashed and later sets)"
+        },
+        "rarity_odds": {
+            "epic": "1 in 4 packs (25%)",
+            "alt_art_champion": "1 in 12 packs (8.3% per pack, ~2 per booster box)",
+            "overnumbered": "1 in 72 packs (1.4% per pack, ~1 in 3 booster boxes)",
+            "signature_overnumber": "1 in 720 packs (0.14% per pack, ~1 in 30 booster boxes)",
+            "ultimate_rare": "less than 0.1% of packs (~1 in 1000 packs, Unleashed only)"
+        },
+        "set_specific": {
+            "origins": {
+                "battlefield_cards_rarity": "Uncommon"
+            },
+            "unleashed": {
+                "ultimate_rare_card": "Baron Nashor (only Ultimate Rare in Unleashed)"
+            }
+        },
+        "per_box": {
+            "Epic": {
+                "origins": "~6 por caja",
+                "spiritforged": "~6 por caja",
+                "unleashed": "~6 por caja",
+                "vendetta": "~6 por caja",
+                "radiance": "~6 por caja"
+            },
+            "Showcase": {
+                "origins": "~2 por caja",
+                "spiritforged": "~2 por caja",
+                "unleashed": "~2 por caja",
+                "vendetta": "~2 por caja",
+                "radiance": "~2 por caja"
+            },
+            "Overnumbered": {
+                "origins": "~1 en 3 cajas",
+                "spiritforged": "~1 en 3 cajas",
+                "unleashed": "~1 en 3 cajas",
+                "vendetta": "~1 en 3 cajas",
+                "radiance": "~1 en 3 cajas"
+            },
+            "Signature": {
+                "origins": "~1 en 30 cajas",
+                "spiritforged": "~1 en 30 cajas",
+                "unleashed": "~1 en 30 cajas",
+                "vendetta": "~1 en 30 cajas",
+                "radiance": "~1 en 30 cajas"
+            },
+            "Ultimate_Rare": {
+                "origins": "N/A",
+                "spiritforged": "N/A",
+                "unleashed": "~1 en 1000 sobres",
+                "vendetta": "N/A",
+                "radiance": "N/A"
+            }
+        }
+    }
+}
