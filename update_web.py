@@ -317,8 +317,9 @@ ESTRUCTURA JSON REQUERIDA (debes devolver EXACTAMENTE este formato):
 
 NOTA IMPORTANTE sobre "per_box": usa SOLO estas claves de rareza: "Epic", "Showcase", "Overnumbered", "Signature", "Ultimate_Rare".
 Para cada rareza, pon un objeto con los IDs de set como claves y un texto descriptivo como valor.
-Ejemplos de texto: "~6 por caja", "~2 por caja", "~1 en 3 cajas", "~1 en 30 cajas", "~1 en 1000 sobres".
+Ejemplos de texto: "~6 por caja", "~2 por caja", "~1 en 3 cajas", "~1 en 30 cajas", "~1 en 42 cajas".
 NO uses "rareza" como clave. NO uses texto largo narrativo.
+IMPORTANTE: TODOS los valores deben expresarse POR CAJA (24 sobres). Usa SIEMPRE "cajas" como unidad, NUNCA "sobres".
 
 TAREAS:
 1. Detectar nuevas expansiones (si aparece una nueva, AÑÁDELA al JSON).
@@ -433,6 +434,17 @@ if response:
                         pb["Overnumbered"] = rareza_data
                         pb["Signature"] = rareza_data
                         pb["Ultimate_Rare"] = rareza_data
+
+                # Normalize any per-pack ("sobres") values to per-box ("cajas")
+                for rarity_key in pb:
+                    for set_key in list(pb[rarity_key] or {}):
+                        v = pb[rarity_key][set_key]
+                        if v and isinstance(v, str):
+                            m = re.match(r'~?([\d.]+)\s*en\s*([\d.]+)\s*sobres?', v)
+                            if m:
+                                den = float(m.group(2))
+                                new_den = max(1, round(den / 24))
+                                pb[rarity_key][set_key] = f'~1 en {new_den} cajas'
 
     except (json.JSONDecodeError, ValueError) as e:
         print(f"❌ Validación fallida: {e}")
