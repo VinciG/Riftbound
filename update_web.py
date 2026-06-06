@@ -520,6 +520,45 @@ else:
                         new_den = max(1, round(den / 24))
                         pb[rarity_key][set_key] = f'~1 en {new_den} cajas'
 
+    # Fill ovr_breakdown from DotGG data when Gemini provided 0s
+    if api_rows:
+        ovr_counts = {}
+        for row in api_rows:
+            card = dict(zip(api_names, row))
+            if card.get("rarity") != "Showcase": continue
+            sn = card.get("set_name", "")
+            sid = SET_NAME_MAP.get(sn)
+            if not sid: continue
+            if sid not in ovr_counts: ovr_counts[sid] = {"alt":0,"sig":0,"ovr":0}
+            nm = card.get("name","").lower()
+            aid = card.get("id","").lower()
+            if "alternate art" in nm or (aid.endswith("a") and card.get("rarity") == "Showcase"):
+                ovr_counts[sid]["alt"] += 1
+            elif "signature" in nm or "signed" in nm:
+                ovr_counts[sid]["sig"] += 1
+            else:
+                ovr_counts[sid]["ovr"] += 1
+        for s_name, s_data in datos_actuales.get("sets", {}).items():
+            sid = s_data.get("id")
+            ob = s_data.get("ovr_breakdown", [])
+            dc = ovr_counts.get(sid)
+            if not dc: continue
+            total_from_dotgg = dc["alt"] + dc["ovr"] + dc["sig"]
+            total_from_breakdown = sum(
+                int(e.get("cantidad", 0)) for e in ob if isinstance(e, dict)
+            )
+            if total_from_breakdown == 0 and total_from_dotgg > 0:
+                for e in ob:
+                    if isinstance(e, dict):
+                        t = e.get("tipo", "")
+                        if t == "Alt-Art":
+                            e["cantidad"] = dc["alt"]
+                        elif t == "OVR con firma" or "firma" in t:
+                            e["cantidad"] = dc["sig"]
+                        elif "OVR" in t or "ovr" in t:
+                            e["cantidad"] = dc["ovr"]
+                print(f"  ovr_breakdown rellenado para {sid}: Alt-Art={dc['alt']}, OVR={dc['ovr']}, Sig={dc['sig']}")
+
     # Re-read total_base from (potentially updated) cartas.json for EPIC_SUFFIX
     EPIC_SUFFIX_FINAL = {}
     for s_name, s_data in datos_actuales.get("sets", {}).items():
