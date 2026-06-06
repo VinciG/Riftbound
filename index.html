@@ -860,7 +860,7 @@ async function buildPage() {
   };
   addNav('Visión general', 'all', 'var(--text)', true);
   for (const s of Object.values(sets)) {
-    addNav(Object.keys(sets).find(k => sets[k]===s), s.id, s.color);
+    addNav(cap(Object.keys(sets).find(k => sets[k]===s)), s.id, s.color);
   }
   addNav('Pull Rates', 'rates', 'var(--pink)');
 
@@ -909,16 +909,17 @@ async function buildPage() {
 
     </div>`;
 
+  const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
   for (const k of setIds) {
     const s = sets[k];
     const om = document.createElement('div');
     om.className = 'mcard'; om.style.setProperty('--accent', s.color);
     const revealed = s.cartas_reveladas || s.total || 0;
-    om.innerHTML = `<div class="mcard-label">${k} · ${s.date}</div><div class="mcard-num">${revealed}</div><div class="mcard-sub">${s.total_base} base + ${s.total_ovr} premium · ${s.legend_count} leyendas</div>`;
+    om.innerHTML = `<div class="mcard-label">${cap(k)} · ${s.date}</div><div class="mcard-num">${revealed}</div><div class="mcard-sub">${s.total_base} base + ${s.total_ovr} premium · ${s.legend_count} leyendas</div>`;
     document.getElementById('overview-metrics').appendChild(om);
     const lb = document.createElement('div');
     lb.className = 'mcard'; lb.style.setProperty('--accent', s.color);
-    lb.innerHTML = `<div class="mcard-label">${k} · ${s.date}</div><div class="mcard-num">${s.legend_count}</div><div class="mcard-sub">${s.leyendas.map(l => typeof l === 'string' ? l : l.name).join(' · ')}</div>`;
+    lb.innerHTML = `<div class="mcard-label">${cap(k)} · ${s.date}</div><div class="mcard-num">${s.legend_count}</div><div class="mcard-sub">${s.leyendas.map(l => typeof l === 'string' ? l : l.name).join(' · ')}</div>`;
     document.getElementById('legends-by-set').appendChild(lb);
   }
 
@@ -934,7 +935,7 @@ async function buildPage() {
 
     let html = `
       <div class="set-header">
-        <h2>${k}</h2>
+        <h2>${k.charAt(0).toUpperCase()+k.slice(1)}</h2>
         <span class="set-badge" style="color:${s.color};border-color:${s.color};">Set ${s.set_number}</span>
         <span class="set-date">${s.date}</span>
         <span class="set-total"><strong>${s.total_base}</strong> base + <strong>${s.total_ovr}</strong> premium</span>
@@ -1005,7 +1006,7 @@ async function buildPage() {
         const th = document.createElement('th');
         // use the first abbr found from sets that matches this key
         const sObj = sets[sn] || Object.values(sets).find(s => s.id === sn);
-        th.textContent = sObj ? (sObj.name || sn) : sn;
+        th.textContent = sObj ? cap(sObj.name || sn) : cap(sn);
         headRow.appendChild(th);
       }
     }

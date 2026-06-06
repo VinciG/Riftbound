@@ -333,6 +333,10 @@ Solo añade lo que falte: date, imgBase, productos, ovr_breakdown, mecanicas, pu
 
 IMPORTANTE sobre ovr_breakdown: el campo "cantidad" debe ser un NÚMERO entero,
 nunca la letra "N" ni texto. Si no sabes la cantidad exacta, pon 0.
+
+IMPORTANTE sobre mecanicas: DEBES incluir mecanicas para TODAS las expansiones,
+incluyendo Origins. Si no estás seguro, al menos pon 1-2 mecánicas conocidas
+para cada set. No dejes el array vacío.
 DATA ACTUAL DE SETS:
 {json.dumps(datos_actuales, indent=2, ensure_ascii=False)}
 
