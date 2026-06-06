@@ -1092,7 +1092,7 @@ function perBoxVal(t) {
   if (m) return +m[1];
   m = t.match(/~?(\d+)[–-](\d+)\s*por caja/);
   if (m) return (+m[1] + +m[2]) / 2;
-  m = t.match(/([\d.]+)\s*en\s*([\d.]+)\s*(?:cajas?|sobres?)/);
+  m = t.match(/([\d.]+)\s*en\s*([\d.]+)\s*(cajas?|sobres?)/);
   if (m) { const v = +m[1] / +m[2]; return m[3].startsWith('s') ? v * 24 : v; }
   m = t.match(/([\d.]+)\s*cada\s*([\d.]+)\s*cajas?/);
   if (m) return +m[1] / +m[2];
