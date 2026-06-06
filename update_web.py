@@ -586,6 +586,16 @@ else:
                     if isinstance(e, dict) and e.get("tipo") == "Alt-Art":
                         e["cantidad"] = total_ovr
 
+    # Ensure released flag: sets that have DotGG cards get released: True
+    dotgg_sids = set()
+    for row in api_rows:
+        card = dict(zip(api_names, row))
+        sn = card.get("set_name", "")
+        sid = SET_NAME_MAP.get(sn)
+        if sid: dotgg_sids.add(sid)
+    for s_name, s_data in datos_actuales.get("sets", {}).items():
+        s_data["released"] = s_data.get("id") in dotgg_sids
+
     # Re-read total_base from (potentially updated) cartas.json for EPIC_SUFFIX
     EPIC_SUFFIX_FINAL = {}
     for s_name, s_data in datos_actuales.get("sets", {}).items():
@@ -763,3 +773,8 @@ else:
         f.write("window.EPIC_CARD_DATA = " + json.dumps(epic_data, ensure_ascii=False) + ";")
     total_epic = sum(len(v) for v in epic_data.values())
     print(f"✅ 'epic-cards.js' generado ({total_epic} cartas premium).")
+
+    # Save final datos_actuales (ovr_breakdown fill, released flag, etc.)
+    with open(json_file, "w", encoding="utf-8") as f:
+        json.dump(datos_actuales, f, indent=4, ensure_ascii=False)
+    print("✅ 'cartas.json' guardado con datos finales.")
