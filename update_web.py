@@ -90,10 +90,12 @@ def discover_sets(rows, names):
                 "id": sid, "abbr": abbr, "set_number": i + 1, "color": color,
                 "date": "", "cartas_reveladas": 0, "total": 0, "total_base": 0, "total_ovr": 0,
                 "imgBase": "", "legend_count": 0, "leyendas": [],
-                "productos": [], "champion_decks": [], "ovr_breakdown": [], "mecanicas": []
+                "productos": [], "champion_decks": [], "ovr_breakdown": [], "mecanicas": [],
+                "released": True
             }
         else:
             s = datos_actuales["sets"][sid]
+            s["released"] = True
             defaults = {"date":"","cartas_reveladas":0,"total":0,"total_base":0,"total_ovr":0,
                         "imgBase":"","legend_count":0,"leyendas":[],"productos":[],
                         "champion_decks":[],"ovr_breakdown":[],"mecanicas":[]}

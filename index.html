@@ -50,6 +50,7 @@ body {
 .nav-item:hover { color:var(--text); background:var(--surface2); }
 .nav-item.active { color:var(--text); border-left-color:var(--nav-c,var(--blue)); background:var(--surface2); }
 .nav-item .nav-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+.nav-item .nav-dot.unreleased { border-radius:2px; border:2px solid; background:transparent !important; }
 .main {
   flex:1; padding:1.5rem 2rem 4rem; max-width:1200px;
 }
@@ -851,17 +852,20 @@ async function buildPage() {
   // 1. Build nav items
   const navC = document.getElementById('nav-container');
   navC.innerHTML = '';
-  const addNav = (label, ds, color, active) => {
+  const addNav = (label, ds, color, active, released) => {
     const el = document.createElement('div');
     el.className = 'nav-item' + (active ? ' active' : '');
     el.dataset.set = ds;
     el.style.setProperty('--nav-c', color);
-    el.innerHTML = `<span class="nav-dot" style="background:${color}"></span><span>${label}</span>`;
+    const dot = released
+      ? `<span class="nav-dot" style="background:${color}"></span>`
+      : `<span class="nav-dot unreleased" style="border-color:${color}"></span>`;
+    el.innerHTML = `${dot}<span>${label}</span>`;
     navC.appendChild(el);
   };
-  addNav('Visión general', 'all', 'var(--text)', true);
+  addNav('Visión general', 'all', 'var(--text)', true, true);
   for (const s of Object.values(sets)) {
-    addNav(cap(Object.keys(sets).find(k => sets[k]===s)), s.id, s.color);
+    addNav(cap(Object.keys(sets).find(k => sets[k]===s)), s.id, s.color, false, s.released);
   }
   addNav('Pull Rates', 'rates', 'var(--pink)');
 
