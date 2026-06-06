@@ -104,6 +104,17 @@ def discover_sets(rows, names):
 if api_rows:
     discover_sets(api_rows, api_names)
 
+# Ensure ALL existing sets have defaults (including those not in DotGG)
+for i, (s_name, s_data) in enumerate(datos_actuales.get("sets", {}).items()):
+    sid = s_data.get("id")
+    defaults = {"color": COLOR_PALETTE[i % len(COLOR_PALETTE)],
+                "date":"","cartas_reveladas":0,"total":0,"total_base":0,"total_ovr":0,
+                "imgBase":"","legend_count":0,"leyendas":[],"productos":[],
+                "champion_decks":[],"ovr_breakdown":[],"mecanicas":[]}
+    for k, v in defaults.items():
+        if k not in s_data or s_data[k] is None:
+            s_data[k] = v
+
 # Build maps from datos_actuales (after discovery)
 SET_NAME_MAP = {}
 EPIC_SUFFIX = {}
