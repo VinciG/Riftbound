@@ -260,8 +260,14 @@ epic_list_str = "\n".join(epic_list_lines)
 
 abbrs = ", ".join(s_data.get("abbr","") for s_name, s_data in datos_actuales.get("sets",{}).items())
 set_nums = f"1-{len(datos_actuales.get('sets',{}))}"
-per_box_example = {sn: "texto" for sn in EXPANSIONES}
-per_box_str = json.dumps({"rareza": per_box_example}, separators=(",", ":")).replace("{","{{").replace("}","}}")
+per_box_example = {
+    "Epic": {sn: "~6 por caja" for sn in EXPANSIONES},
+    "Showcase": {sn: "~2 por caja" for sn in EXPANSIONES},
+    "Overnumbered": {sn: "~1 en 3 cajas" for sn in EXPANSIONES},
+    "Signature": {sn: "~1 en 30 cajas" for sn in EXPANSIONES},
+    "Ultimate_Rare": {sn: "~1 en 1000 sobres" for sn in EXPANSIONES}
+}
+per_box_str = json.dumps(per_box_example, separators=(",", ":")).replace("{","{{").replace("}","}}")
 
 mensaje = f"""
 Eres el mantenedor automático de la base de datos de Riftbound TCG.
@@ -308,6 +314,11 @@ ESTRUCTURA JSON REQUERIDA (debes devolver EXACTAMENTE este formato):
         "per_box": {per_box_str}
     }}
 }}
+
+NOTA IMPORTANTE sobre "per_box": usa SOLO estas claves de rareza: "Epic", "Showcase", "Overnumbered", "Signature", "Ultimate_Rare".
+Para cada rareza, pon un objeto con los IDs de set como claves y un texto descriptivo como valor.
+Ejemplos de texto: "~6 por caja", "~2 por caja", "~1 en 3 cajas", "~1 en 30 cajas", "~1 en 1000 sobres".
+NO uses "rareza" como clave. NO uses texto largo narrativo.
 
 TAREAS:
 1. Detectar nuevas expansiones (si aparece una nueva, AÑÁDELA al JSON).
@@ -403,6 +414,22 @@ if response:
                 for campo in ["total", "total_base", "total_ovr", "legend_count", "leyendas"]:
                     if campo in seed:
                         datos_nuevos["sets"][exp][campo] = seed[campo]
+
+        # Normalize per_box: ensure correct rarity keys, not "rareza"
+        VALID_RARITIES = {"Epic", "Showcase", "Overnumbered", "Signature", "Ultimate_Rare"}
+        pr = datos_nuevos.get("pull_rates", {})
+        if "per_box" in pr:
+            pb = pr["per_box"]
+            if isinstance(pb, dict):
+                # If it has "rareza" but not the valid keys, try to convert
+                if "rareza" in pb and not any(k in pb for k in VALID_RARITIES):
+                    rareza_data = pb.pop("rareza")
+                    if isinstance(rareza_data, dict):
+                        pb["Epic"] = rareza_data
+                        pb["Showcase"] = rareza_data
+                        pb["Overnumbered"] = rareza_data
+                        pb["Signature"] = rareza_data
+                        pb["Ultimate_Rare"] = rareza_data
 
     except (json.JSONDecodeError, ValueError) as e:
         print(f"❌ Validación fallida: {e}")

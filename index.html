@@ -913,7 +913,8 @@ async function buildPage() {
     const s = sets[k];
     const om = document.createElement('div');
     om.className = 'mcard'; om.style.setProperty('--accent', s.color);
-    om.innerHTML = `<div class="mcard-label">${k} · ${s.date}</div><div class="mcard-num">${s.cartas_reveladas}</div><div class="mcard-sub">${s.legend_count} leyendas</div>`;
+    const revealed = s.cartas_reveladas || s.total || 0;
+    om.innerHTML = `<div class="mcard-label">${k} · ${s.date}</div><div class="mcard-num">${revealed}</div><div class="mcard-sub">${s.total_base} base + ${s.total_ovr} premium · ${s.legend_count} leyendas</div>`;
     document.getElementById('overview-metrics').appendChild(om);
     const lb = document.createElement('div');
     lb.className = 'mcard'; lb.style.setProperty('--accent', s.color);
