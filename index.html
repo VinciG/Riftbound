@@ -846,6 +846,7 @@ async function buildPage() {
 
   const sets = db.sets || {};
   const setIds = Object.keys(sets);
+  const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
 
   // 1. Build nav items
   const navC = document.getElementById('nav-container');
@@ -909,7 +910,6 @@ async function buildPage() {
 
     </div>`;
 
-  const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
   for (const k of setIds) {
     const s = sets[k];
     const om = document.createElement('div');
