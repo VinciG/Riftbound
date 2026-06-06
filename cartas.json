@@ -113,7 +113,38 @@
                     "notas": "Signature Overnumber cards"
                 }
             ],
-            "mecanicas": []
+            "mecanicas": [
+                {
+                    "kicker": "mecanica",
+                    "name": "Campos de Batalla",
+                    "desc": "Los jugadores intentan anotar puntos capturando y manteniendo campos de batalla."
+                },
+                {
+                    "kicker": "sistema",
+                    "name": "Sistema de Runas",
+                    "desc": "Los jugadores roban dos cartas de Runa por turno, acumulando energía para jugar cartas."
+                },
+                {
+                    "kicker": "costo",
+                    "name": "Costo de Poder / Reciclaje de Runas",
+                    "desc": "Algunas cartas requieren 'Poder' (reciclar Runas) además de energía."
+                },
+                {
+                    "kicker": "keyword",
+                    "name": "Acelerar",
+                    "desc": "Las unidades entran en juego listas para actuar."
+                },
+                {
+                    "kicker": "keyword",
+                    "name": "Legión",
+                    "desc": "Las habilidades de las unidades mejoran si ya se ha lanzado algo en ese turno."
+                },
+                {
+                    "kicker": "keyword",
+                    "name": "Ganking",
+                    "desc": "Habilidades basadas en el movimiento que debilitan a las unidades enemigas."
+                }
+            ]
         },
         "spiritforged": {
             "id": "spiritforged",
