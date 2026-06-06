@@ -21,7 +21,13 @@ else:
 # ==========================================
 # Configuración de Gemini
 # ==========================================
-client = genai.Client()
+client = None
+gemini_available = False
+try:
+    client = genai.Client()
+    gemini_available = True
+except (ValueError, Exception):
+    print("⚠️ Gemini no configurado (sin API key) — se usará solo DotGG.")
 
 # Leer precios actuales de cardmarket_prices.json (si existe)
 cardmarket_prices_file = "cardmarket_prices.json"
@@ -372,29 +378,30 @@ intentos_maximos = 3
 espera_inicial = 10
 response = None
 
-for intento in range(intentos_maximos):
-    try:
-        print(f"🚀 Consultando novedades a Gemini (Intento {intento + 1})...")
-        response = client.models.generate_content(
-            model="gemini-2.5-flash",
-            contents=mensaje,
-            config=types.GenerateContentConfig(
-                temperature=0.1,
-                tools=[{"google_search": {}}]
+if gemini_available:
+    for intento in range(intentos_maximos):
+        try:
+            print(f"🚀 Consultando novedades a Gemini (Intento {intento + 1})...")
+            response = client.models.generate_content(
+                model="gemini-2.5-flash",
+                contents=mensaje,
+                config=types.GenerateContentConfig(
+                    temperature=0.1,
+                    tools=[{"google_search": {}}]
+                )
             )
-        )
-        break
-    except ClientError as e:
-        if e.code == 429:
-            print(f"⚠️ Cuota agotada, esperando {espera_inicial}s...")
-            time.sleep(espera_inicial)
-            espera_inicial *= 2
-        else:
-            print(f"❌ Error de API: {e}")
             break
-    except Exception as e:
-        print(f"❌ Error inesperado: {e}")
-        break
+        except ClientError as e:
+            if e.code == 429:
+                print(f"⚠️ Cuota agotada, esperando {espera_inicial}s...")
+                time.sleep(espera_inicial)
+                espera_inicial *= 2
+            else:
+                print(f"❌ Error de API: {e}")
+                break
+        except Exception as e:
+            print(f"❌ Error inesperado: {e}")
+            break
 
 gemini_ok = False
 
