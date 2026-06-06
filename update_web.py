@@ -435,17 +435,6 @@ if response:
                         pb["Signature"] = rareza_data
                         pb["Ultimate_Rare"] = rareza_data
 
-                # Normalize any per-pack ("sobres") values to per-box ("cajas")
-                for rarity_key in pb:
-                    for set_key in list(pb[rarity_key] or {}):
-                        v = pb[rarity_key][set_key]
-                        if v and isinstance(v, str):
-                            m = re.match(r'~?([\d.]+)\s*en\s*([\d.]+)\s*sobres?', v)
-                            if m:
-                                den = float(m.group(2))
-                                new_den = max(1, round(den / 24))
-                                pb[rarity_key][set_key] = f'~1 en {new_den} cajas'
-
     except (json.JSONDecodeError, ValueError) as e:
         print(f"❌ Validación fallida: {e}")
         print("Respuesta cruda:", texto_respuesta if 'texto_respuesta' in dir() else "(no hay respuesta)")
@@ -502,6 +491,19 @@ if not api_rows:
             f.write("window.EPIC_CARD_DATA = {};")
         print("ℹ️ 'epic-cards.js' vacío generado.")
 else:
+    # Normalize any per-pack ("sobres") values to per-box ("cajas") in current data
+    pb = datos_actuales.get("pull_rates", {}).get("per_box", {})
+    if isinstance(pb, dict):
+        for rarity_key in pb:
+            for set_key in list(pb[rarity_key] or {}):
+                v = pb[rarity_key][set_key]
+                if v and isinstance(v, str):
+                    m = re.match(r'~?([\d.]+)\s*en\s*([\d.]+)\s*sobres?', v)
+                    if m:
+                        den = float(m.group(2))
+                        new_den = max(1, round(den / 24))
+                        pb[rarity_key][set_key] = f'~1 en {new_den} cajas'
+
     # Re-read total_base from (potentially updated) cartas.json for EPIC_SUFFIX
     EPIC_SUFFIX_FINAL = {}
     for s_name, s_data in datos_actuales.get("sets", {}).items():
