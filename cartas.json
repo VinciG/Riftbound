@@ -386,7 +386,9 @@
                 "Booster Display Boxes",
                 "Champion Decks",
                 "Showdown Decks (Zed vs. Shen)",
-                "The Vendetta Vault"
+                "The Vendetta Vault",
+                "Playmats",
+                "Art Sleeves"
             ],
             "champion_decks": [
                 "Zed",
@@ -540,7 +542,7 @@
             "Ultimate_Rare": {
                 "origins": "N/A",
                 "spiritforged": "N/A",
-                "unleashed": "~1 en 1000 sobres",
+                "unleashed": "~1 en 42 cajas",
                 "vendetta": "N/A",
                 "radiance": "N/A"
             }
