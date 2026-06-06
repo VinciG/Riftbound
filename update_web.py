@@ -554,6 +554,13 @@ else:
                 int(e.get("cantidad", 0)) for e in ob if isinstance(e, dict)
             )
             if current_sum >= total_ovr: continue
+            # Ensure ob has the standard entries
+            needed = [{"tipo": "Alt-Art"}, {"tipo": "OVR base"}, {"tipo": "OVR con firma"}]
+            existing = {e.get("tipo") for e in ob if isinstance(e, dict)}
+            for tmpl in needed:
+                if tmpl["tipo"] not in existing:
+                    ob.append({"tipo": tmpl["tipo"], "cantidad": 0, "numeracion": "", "notas": ""})
+            s_data["ovr_breakdown"] = ob
             dc = ovr_counts.get(sid)
             alt = dc["alt"] if dc else 0
             sig = dc["sig"] if dc else 0
@@ -578,7 +585,6 @@ else:
                 for e in ob:
                     if isinstance(e, dict) and e.get("tipo") == "Alt-Art":
                         e["cantidad"] = total_ovr
-            print(f"  ovr_breakdown corregido para {sid}: total_ovr={total_ovr}")
 
     # Re-read total_base from (potentially updated) cartas.json for EPIC_SUFFIX
     EPIC_SUFFIX_FINAL = {}
