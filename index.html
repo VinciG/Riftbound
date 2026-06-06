@@ -975,8 +975,8 @@ async function buildPage() {
     if (ovrTab) {
       html += `<div class="sub-tab-content" id="tab-showcase-${sfx}">
         <div class="table-wrap"><table>
-          <thead><tr><th>Tipo</th><th>Cantidad</th><th>Numeración</th><th>Notas</th></tr></thead>
-          <tbody>${s.ovr_breakdown.map(r => { const c = r.cantidad; const disp = (c === 'N' || c === 'n' || c == null) ? '?' : c; return `<tr${r.tipo.includes('Ultimate') ? ' style="color:var(--red)"' : ''}><td class="row-label">${r.tipo}</td><td>${disp}</td><td>${r.numeracion}</td><td>${r.notas}</td></tr>`; }).join('')}</tbody>
+          <thead><tr><th>Tipo</th><th>Cantidad</th><th>Notas</th></tr></thead>
+          <tbody>${s.ovr_breakdown.map(r => { const c = r.cantidad; const disp = (c === 'N' || c === 'n' || c == null) ? '?' : c; return `<tr${r.tipo.includes('Ultimate') ? ' style="color:var(--red)"' : ''}><td class="row-label">${r.tipo}</td><td>${disp}</td><td>${r.notas}</td></tr>`; }).join('')}</tbody>
         </table></div></div>`;
     }
 
