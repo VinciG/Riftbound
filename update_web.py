@@ -53,6 +53,14 @@ COLOR_PALETTE = ["#4a9eff", "#3ecf8e", "#f4a535", "#e879a0", "#a78bfa", "#f97316
 
 DOTGG_SET_NAMES = set()  # Original DotGG set names for mapping
 
+# Merge known subset names into their parent sets (avoids duplicate entries)
+# Maps internal id forms to parent internal id
+DOTGG_SET_MERGE = {
+    "proving_grounds": "origins",
+    "origins_proving_grounds": "origins",
+    "arcane_box_set": "origins",
+}
+
 def discover_sets(rows, names):
     """Detect new sets from DotGG and add them to datos_actuales."""
     global DOTGG_SET_NAMES
@@ -69,7 +77,29 @@ def discover_sets(rows, names):
         if m and sn not in abbr_from_id:
             abbr_from_id[sn] = m.group(1)
 
-    DOTGG_SET_NAMES = set_names  # Save original DotGG names
+    DOTGG_SET_NAMES = set_names.copy()  # Save ALL original DotGG names
+
+    for i, sn in enumerate(sorted(set_names)):
+        sid = sn.lower().replace(" ", "_")
+        if sid in DOTGG_SET_MERGE:
+            continue  # skip merged subsets — their cards go to the parent set
+        if sid not in datos_actuales["sets"]:
+            abbr = abbr_from_id.get(sn, sn[:3].upper())
+            color = COLOR_PALETTE[i % len(COLOR_PALETTE)]
+            datos_actuales["sets"][sid] = {
+                "id": sid, "abbr": abbr, "set_number": i + 1, "color": color,
+                "date": "", "cartas_reveladas": 0, "total": 0, "total_base": 0, "total_ovr": 0,
+                "imgBase": "", "legend_count": 0, "leyendas": [],
+                "productos": [], "champion_decks": [], "ovr_breakdown": [], "mecanicas": []
+            }
+        else:
+            s = datos_actuales["sets"][sid]
+            defaults = {"date":"","cartas_reveladas":0,"total":0,"total_base":0,"total_ovr":0,
+                        "imgBase":"","legend_count":0,"leyendas":[],"productos":[],
+                        "champion_decks":[],"ovr_breakdown":[],"mecanicas":[]}
+            for k, v in defaults.items():
+                if k not in s:
+                    s[k] = v
 
     for i, sn in enumerate(sorted(set_names)):
         sid = sn.lower().replace(" ", "_")
@@ -105,9 +135,14 @@ for s_name, s_data in datos_actuales.get("sets", {}).items():
         EPIC_SUFFIX[sid] = str(tb)
 
 # Also map DotGG original set names to internal ids
+# Also map DotGG original set names to internal ids
 for dotgg_name in DOTGG_SET_NAMES:
     sid = dotgg_name.lower().replace(" ", "_")
-    SET_NAME_MAP[dotgg_name] = sid
+    # Redirect merged subsets to their parent set
+    if sid in DOTGG_SET_MERGE:
+        SET_NAME_MAP[dotgg_name] = DOTGG_SET_MERGE[sid]
+    else:
+        SET_NAME_MAP[dotgg_name] = sid
 
 # Build legend name list per set
 legends_per_set = {}
@@ -470,7 +505,10 @@ else:
         SET_NAME_MAP_FINAL[s_name] = s_data.get("id")
     for dotgg_name in DOTGG_SET_NAMES:
         sid = dotgg_name.lower().replace(" ", "_")
-        SET_NAME_MAP_FINAL[dotgg_name] = sid
+        if sid in DOTGG_SET_MERGE:
+            SET_NAME_MAP_FINAL[dotgg_name] = DOTGG_SET_MERGE[sid]
+        else:
+            SET_NAME_MAP_FINAL[dotgg_name] = sid
 
     def make_key(api_id, set_id):
         k = api_id.lower()
@@ -539,12 +577,8 @@ else:
         sn = card.get("set_name", "")
         sid = SET_NAME_MAP_FINAL.get(sn)
         if not sid: continue
-        tags = card.get("tags") or []
-        champ = None
-        for cn in legends_per_set.get(sid, []):
-            if cn in tags:
-                champ = cn
-                break
+        full_name = card.get("name", "")
+        champ = re.split(r' - |, ', full_name, maxsplit=1)[0].strip()
         if not champ: continue
         if sid not in legend_data_save: legend_data_save[sid] = {}
         if sid not in legend_data_min: legend_data_min[sid] = {}
