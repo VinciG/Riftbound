@@ -121,7 +121,8 @@
                     "name": "Reaction",
                     "desc": "Mecánica de juego fundamental"
                 }
-            ]
+            ],
+            "released": true
         },
         "spiritforged": {
             "id": "spiritforged",
@@ -197,7 +198,7 @@
             "ovr_breakdown": [
                 {
                     "tipo": "Alt-Art",
-                    "cantidad": 0,
+                    "cantidad": 60,
                     "numeracion": "SFD-XXXa",
                     "notas": "Más de 60 cartas con arte alternativo"
                 },
@@ -245,7 +246,8 @@
                     "name": "Mighty",
                     "desc": "Una unidad es Mighty cuando tiene 5+ de poder (might), representando salud y daño"
                 }
-            ]
+            ],
+            "released": true
         },
         "unleashed": {
             "id": "unleashed",
@@ -325,7 +327,7 @@
             "ovr_breakdown": [
                 {
                     "tipo": "Alt-Art",
-                    "cantidad": 0,
+                    "cantidad": 30,
                     "numeracion": "UNL-XXXa",
                     "notas": "Más de 30 cartas con arte alternativo"
                 },
@@ -364,7 +366,135 @@
                     "name": "Ambush",
                     "desc": "Mecánica de juego"
                 }
-            ]
+            ],
+            "released": true
+        },
+        "vendetta": {
+            "id": "vendetta",
+            "abbr": "VND",
+            "set_number": 4,
+            "color": null,
+            "date": "Julio 2026",
+            "cartas_reveladas": 0,
+            "total": 160,
+            "total_base": 0,
+            "total_ovr": 50,
+            "imgBase": null,
+            "legend_count": 9,
+            "leyendas": [
+                {
+                    "name": "Akali",
+                    "img": null
+                },
+                {
+                    "name": "Zed",
+                    "img": null
+                },
+                {
+                    "name": "Shed",
+                    "img": null
+                }
+            ],
+            "productos": [
+                "Booster Packs",
+                "Booster Display",
+                "Pre-Rift Prerelease Kit"
+            ],
+            "champion_decks": [],
+            "ovr_breakdown": [
+                {
+                    "tipo": "Alt-Art",
+                    "cantidad": 50,
+                    "numeracion": "VND-XXXa",
+                    "notas": "Más de 50 cartas Showcase"
+                },
+                {
+                    "tipo": "OVR base",
+                    "cantidad": 0,
+                    "numeracion": "VND-XXX",
+                    "notas": "Cartas Showcase y Overnumbered sin firma"
+                },
+                {
+                    "tipo": "OVR con firma",
+                    "cantidad": 0,
+                    "numeracion": "VND-XXX-STAR",
+                    "notas": "Cartas Overnumbered con firma"
+                }
+            ],
+            "mecanicas": [
+                {
+                    "kicker": "mechanic",
+                    "name": "New Mechanics",
+                    "desc": "Nuevas mecánicas de juego introducidas en Vendetta"
+                }
+            ],
+            "released": false
+        },
+        "radiance": {
+            "id": "radiance",
+            "abbr": "RAD",
+            "set_number": 5,
+            "color": null,
+            "date": "Octubre 2026",
+            "cartas_reveladas": 0,
+            "total": 180,
+            "total_base": 0,
+            "total_ovr": 60,
+            "imgBase": null,
+            "legend_count": 9,
+            "leyendas": [
+                {
+                    "name": "Ekko",
+                    "img": null
+                },
+                {
+                    "name": "Seraphine",
+                    "img": null
+                },
+                {
+                    "name": "Evelynn",
+                    "img": null
+                }
+            ],
+            "productos": [
+                "Booster Packs",
+                "Booster Display",
+                "Radiance Vault",
+                "Showdown decks (Seraphine, Evelynn)",
+                "Pre-Rift event kits"
+            ],
+            "champion_decks": [
+                "Seraphine",
+                "Evelynn"
+            ],
+            "ovr_breakdown": [
+                {
+                    "tipo": "Alt-Art",
+                    "cantidad": 60,
+                    "numeracion": "RAD-XXXa",
+                    "notas": "Más de 60 cartas Showcase"
+                },
+                {
+                    "tipo": "OVR base",
+                    "cantidad": 0,
+                    "numeracion": "RAD-XXX",
+                    "notas": "Cartas Showcase y Overnumbered sin firma"
+                },
+                {
+                    "tipo": "OVR con firma",
+                    "cantidad": 0,
+                    "numeracion": "RAD-XXX-STAR",
+                    "notas": "Cartas Overnumbered con firma"
+                }
+            ],
+            "mecanicas": [
+                {
+                    "kicker": "theme",
+                    "name": "Performance",
+                    "desc": "Enfoque en grandes jugadas y turnos impactantes"
+                }
+            ],
+            "released": false
         }
     },
     "pull_rates": {
@@ -393,33 +523,49 @@
             "unleashed": {
                 "alt_art_cards": "30+",
                 "ultimate_rare_baron_nashor": 1
+            },
+            "vendetta": {
+                "alt_art_cards": "50+"
+            },
+            "radiance": {
+                "alt_art_cards": "60+"
             }
         },
         "per_box": {
             "Epic": {
                 "origins": "~6 por caja",
                 "spiritforged": "~6 por caja",
-                "unleashed": "~6 por caja"
+                "unleashed": "~6 por caja",
+                "vendetta": "N/A",
+                "radiance": "N/A"
             },
             "Showcase": {
                 "origins": "~2 por caja",
                 "spiritforged": "~2 por caja",
-                "unleashed": "~2 por caja"
+                "unleashed": "~2 por caja",
+                "vendetta": "N/A",
+                "radiance": "N/A"
             },
             "Overnumbered": {
                 "origins": "~1 en 3 cajas",
                 "spiritforged": "~1 en 3 cajas",
-                "unleashed": "~1 en 3 cajas"
+                "unleashed": "~1 en 3 cajas",
+                "vendetta": "N/A",
+                "radiance": "N/A"
             },
             "Signature": {
                 "origins": "~1 en 30 cajas",
                 "spiritforged": "~1 en 30 cajas",
-                "unleashed": "~1 en 30 cajas"
+                "unleashed": "~1 en 30 cajas",
+                "vendetta": "N/A",
+                "radiance": "N/A"
             },
             "Ultimate_Rare": {
                 "origins": "N/A",
                 "spiritforged": "N/A",
-                "unleashed": "~1 en 42 cajas"
+                "unleashed": "~1 en 42 cajas",
+                "vendetta": "N/A",
+                "radiance": "N/A"
             }
         }
     }
