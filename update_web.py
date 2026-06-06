@@ -550,30 +550,35 @@ else:
             ob = s_data.get("ovr_breakdown", [])
             total_ovr = int(s_data.get("total_ovr", 0))
             if total_ovr == 0: continue
-            total_from_breakdown = sum(
+            current_sum = sum(
                 int(e.get("cantidad", 0)) for e in ob if isinstance(e, dict)
             )
-            if total_from_breakdown == 0:
-                dc = ovr_counts.get(sid)
-                alt = dc["alt"] if dc else 0
-                sig = dc["sig"] if dc else 0
-                ovr = dc["ovr"] if dc else 0
-                dotgg_sum = alt + sig + ovr
-                if dotgg_sum > 0:
-                    for e in ob:
-                        if isinstance(e, dict):
-                            t = e.get("tipo", "")
-                            if t == "Alt-Art":
-                                e["cantidad"] = alt
-                            elif "firma" in t or "OVR con firma" in t:
-                                e["cantidad"] = sig
-                            elif "OVR" in t:
-                                e["cantidad"] = ovr
-                else:
+            if current_sum >= total_ovr: continue
+            dc = ovr_counts.get(sid)
+            alt = dc["alt"] if dc else 0
+            sig = dc["sig"] if dc else 0
+            ovr = dc["ovr"] if dc else 0
+            dotgg_sum = alt + sig + ovr
+            if dotgg_sum > 0:
+                for e in ob:
+                    if isinstance(e, dict):
+                        t = e.get("tipo", "")
+                        if t == "Alt-Art":
+                            e["cantidad"] = alt
+                        elif "firma" in t or "OVR con firma" in t:
+                            e["cantidad"] = sig
+                        elif "OVR" in t:
+                            e["cantidad"] = ovr
+                new_sum = sum(int(e.get("cantidad",0)) for e in ob if isinstance(e, dict))
+                if new_sum < total_ovr:
                     for e in ob:
                         if isinstance(e, dict) and e.get("tipo") == "Alt-Art":
-                            e["cantidad"] = total_ovr
-                print(f"  ovr_breakdown rellenado para {sid}: {alt}+{ovr}+{sig} (total_ovr={total_ovr})")
+                            e["cantidad"] += total_ovr - new_sum
+            else:
+                for e in ob:
+                    if isinstance(e, dict) and e.get("tipo") == "Alt-Art":
+                        e["cantidad"] = total_ovr
+            print(f"  ovr_breakdown corregido para {sid}: total_ovr={total_ovr}")
 
     # Re-read total_base from (potentially updated) cartas.json for EPIC_SUFFIX
     EPIC_SUFFIX_FINAL = {}
