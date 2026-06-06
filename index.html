@@ -971,7 +971,7 @@ async function buildPage() {
       html += `<div class="sub-tab-content" id="tab-showcase-${sfx}">
         <div class="table-wrap"><table>
           <thead><tr><th>Tipo</th><th>Cantidad</th><th>Numeración</th><th>Notas</th></tr></thead>
-          <tbody>${s.ovr_breakdown.map(r => `<tr${r.tipo.includes('Ultimate') ? ' style="color:var(--red)"' : ''}><td class="row-label">${r.tipo}</td><td>${r.cantidad}</td><td>${r.numeracion}</td><td>${r.notas}</td></tr>`).join('')}</tbody>
+          <tbody>${s.ovr_breakdown.map(r => { const c = r.cantidad; const disp = (c === 'N' || c === 'n' || c == null) ? '?' : c; return `<tr${r.tipo.includes('Ultimate') ? ' style="color:var(--red)"' : ''}><td class="row-label">${r.tipo}</td><td>${disp}</td><td>${r.numeracion}</td><td>${r.notas}</td></tr>`; }).join('')}</tbody>
         </table></div></div>`;
     }
 
@@ -1092,6 +1092,8 @@ function perBoxVal(t) {
   if (m) return +m[1];
   m = t.match(/~?(\d+)[–-](\d+)\s*por caja/);
   if (m) return (+m[1] + +m[2]) / 2;
+  m = t.match(/([\d.]+)\s*en\s*([\d.]+)\s*(?:cajas?|sobres?)/);
+  if (m) return +m[1] / +m[2];
   m = t.match(/([\d.]+)\s*cada\s*([\d.]+)\s*cajas?/);
   if (m) return +m[1] / +m[2];
   m = t.match(/<([\d.]+)%/);
@@ -1238,7 +1240,8 @@ buildPage().then(() => {
         for (const item of sets[sk].ovr_breakdown) {
           const cat = normCat(item.tipo);
           if (!catSet[cat]) catSet[cat] = { label: cat, data: new Array(ovrSetIds.length).fill(0), backgroundColor: { 'OVR base': '#4a9eff', 'OVR firma': '#85b7eb', 'Showcase / Alt-Art': '#3ecf8e', 'Ultimate Rare': '#f05252' }[cat] || '#888780' };
-          catSet[cat].data[ovrSetIds.indexOf(sk)] += item.cantidad;
+          const val = parseInt(item.cantidad, 10);
+          catSet[cat].data[ovrSetIds.indexOf(sk)] += isNaN(val) ? 0 : val;
         }
       }
       new Chart(ovrCtx, {

@@ -298,9 +298,9 @@ ESTRUCTURA JSON REQUERIDA (debes devolver EXACTAMENTE este formato):
             "productos": ["Lista", "de", "productos"],
             "champion_decks": ["Campeones", "con", "Champion Deck"],
             "ovr_breakdown": [
-                {{"tipo":"Alt-Art","cantidad":N,"numeracion":"rangos","notas":"descripción"}},
-                {{"tipo":"OVR base","cantidad":N,"numeracion":"rangos","notas":"descripción"}},
-                {{"tipo":"OVR con firma","cantidad":N,"numeracion":"rangos","notas":"descripción"}}
+                {{"tipo":"Alt-Art","cantidad":20,"numeracion":"rangos","notas":"descripción"}},
+                {{"tipo":"OVR base","cantidad":40,"numeracion":"rangos","notas":"descripción"}},
+                {{"tipo":"OVR con firma","cantidad":10,"numeracion":"rangos","notas":"descripción"}}
             ],
             "mecanicas": [
                 {{"kicker":"tipo","name":"nombre","desc":"descripción"}}
@@ -329,6 +329,9 @@ TAREAS:
 IMPORTANTE: Los campos total, total_base, total_ovr, legend_count y leyendas
 vienen de la API de DotGG y son EXACTOS. NO los modifiques bajo ninguna circunstancia.
 Solo añade lo que falte: date, imgBase, productos, ovr_breakdown, mecanicas, pull_rates.
+
+IMPORTANTE sobre ovr_breakdown: el campo "cantidad" debe ser un NÚMERO entero,
+nunca la letra "N" ni texto. Si no sabes la cantidad exacta, pon 0.
 DATA ACTUAL DE SETS:
 {json.dumps(datos_actuales, indent=2, ensure_ascii=False)}
 
