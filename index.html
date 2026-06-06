@@ -98,7 +98,7 @@ body {
 .mechanics-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:8px; margin-top:1rem; }
 .mechanic-card {
   background:var(--surface); border:1px solid var(--border); border-radius:8px;
-  padding:.8rem 1rem; position:relative; overflow:hidden;
+  padding:.8rem 1rem; position:relative;
 }
 .mechanic-card::before {
   content:''; position:absolute; top:0; left:0; right:0;
@@ -108,7 +108,7 @@ body {
   font-family:'DM Mono',monospace; font-size:.62rem; color:var(--muted);
   letter-spacing:.06em; text-transform:uppercase; margin-bottom:.25rem;
 }
-.mechanic-name { font-family:'Syne',sans-serif; font-size:1rem; font-weight:700; line-height:1.1; }
+.mechanic-name { font-family:'DM Sans',sans-serif; font-size:1rem; font-weight:700; line-height:1.2; padding:.15rem 0; }
 .mechanic-desc { font-size:.72rem; color:var(--muted); margin-top:.35rem; line-height:1.45; }
 
 /* LEGEND CARDS GRID */
