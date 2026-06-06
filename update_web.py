@@ -184,7 +184,7 @@ def seed_from_dotgg(rows, names, base):
         for s_name, s_val in base.get("sets", {}).items():
             if s_val.get("id") == sid:
                 uid_count = len(d["ids"])
-                if s_val.get("total", 0) == 0 and uid_count > 0:
+                if uid_count > 0:
                     s_val["total"] = uid_count
                     s_val["total_base"] = uid_count - d["ovr"]
                     s_val["total_ovr"] = d["ovr"]
