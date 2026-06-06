@@ -1,0 +1,428 @@
+{
+    "sets": {
+        "origins": {
+            "id": "origins",
+            "abbr": "OGN",
+            "set_number": 2,
+            "color": "#3ecf8e",
+            "date": "Octubre 2025",
+            "cartas_reveladas": 0,
+            "total": 396,
+            "total_base": 315,
+            "total_ovr": 81,
+            "imgBase": null,
+            "legend_count": 16,
+            "leyendas": [
+                {
+                    "name": "Ahri",
+                    "img": null
+                },
+                {
+                    "name": "Annie",
+                    "img": null
+                },
+                {
+                    "name": "Darius",
+                    "img": null
+                },
+                {
+                    "name": "Garen",
+                    "img": null
+                },
+                {
+                    "name": "Jinx",
+                    "img": null
+                },
+                {
+                    "name": "Kai'Sa",
+                    "img": null
+                },
+                {
+                    "name": "Lee Sin",
+                    "img": null
+                },
+                {
+                    "name": "Leona",
+                    "img": null
+                },
+                {
+                    "name": "Lux",
+                    "img": null
+                },
+                {
+                    "name": "Master Yi",
+                    "img": null
+                },
+                {
+                    "name": "Miss Fortune",
+                    "img": null
+                },
+                {
+                    "name": "Sett",
+                    "img": null
+                },
+                {
+                    "name": "Teemo",
+                    "img": null
+                },
+                {
+                    "name": "Viktor",
+                    "img": null
+                },
+                {
+                    "name": "Volibear",
+                    "img": null
+                },
+                {
+                    "name": "Yasuo",
+                    "img": null
+                }
+            ],
+            "productos": [
+                "Booster Display",
+                "Champion Deck: Lee Sin",
+                "Champion Deck: Jinx",
+                "Champion Deck: Viktor",
+                "Origins: Proving Grounds",
+                "Arcane Box Set",
+                "Art Sleeves (Ahri, Jinx, Volibear, Yasuo)",
+                "Playmat (Jinx)",
+                "Riftbound Worlds Bundle 2025"
+            ],
+            "champion_decks": [
+                "Lee Sin",
+                "Jinx",
+                "Viktor"
+            ],
+            "ovr_breakdown": [
+                {
+                    "tipo": "Alt-Art",
+                    "cantidad": "N",
+                    "numeracion": "OGN-XXXa",
+                    "notas": "También conocidas como Showcase. Aparecen aproximadamente 1 en 12 sobres o ~2 por caja."
+                },
+                {
+                    "tipo": "OVR base",
+                    "cantidad": "N",
+                    "numeracion": "OGN-XXX",
+                    "notas": "Cartas Overnumbered. Aparecen aproximadamente 1 en 72 sobres o ~1 en 3 cajas."
+                },
+                {
+                    "tipo": "OVR con firma",
+                    "cantidad": "N",
+                    "numeracion": "OGN-XXX-STAR",
+                    "notas": "Cartas con firma. Aparecen aproximadamente 1 en 720 sobres o ~1 en 30 cajas."
+                }
+            ],
+            "mecanicas": []
+        },
+        "spiritforged": {
+            "id": "spiritforged",
+            "abbr": "SFD",
+            "set_number": 5,
+            "color": "#a78bfa",
+            "date": "Febrero 2026",
+            "cartas_reveladas": 0,
+            "total": 301,
+            "total_base": 221,
+            "total_ovr": 80,
+            "imgBase": null,
+            "legend_count": 12,
+            "leyendas": [
+                {
+                    "name": "Azir",
+                    "img": null
+                },
+                {
+                    "name": "Draven",
+                    "img": null
+                },
+                {
+                    "name": "Ezreal",
+                    "img": null
+                },
+                {
+                    "name": "Fiora",
+                    "img": null
+                },
+                {
+                    "name": "Irelia",
+                    "img": null
+                },
+                {
+                    "name": "Jax",
+                    "img": null
+                },
+                {
+                    "name": "Lucian",
+                    "img": null
+                },
+                {
+                    "name": "Ornn",
+                    "img": null
+                },
+                {
+                    "name": "Rek'Sai",
+                    "img": null
+                },
+                {
+                    "name": "Renata Glasc",
+                    "img": null
+                },
+                {
+                    "name": "Rumble",
+                    "img": null
+                },
+                {
+                    "name": "Sivir",
+                    "img": null
+                }
+            ],
+            "productos": [
+                "Booster Display",
+                "Champion Deck: Rumble",
+                "Champion Deck: Fiora",
+                "Playmats",
+                "Art Sleeves",
+                "Pre-Rift Event Kit",
+                "Bulk Rune SKU"
+            ],
+            "champion_decks": [
+                "Rumble",
+                "Fiora"
+            ],
+            "ovr_breakdown": [
+                {
+                    "tipo": "Alt-Art",
+                    "cantidad": "N",
+                    "numeracion": "SFD-XXXa",
+                    "notas": "Más de 60 variantes alternativas. Aparecen aproximadamente 1 en 12 sobres o ~2 por caja."
+                },
+                {
+                    "tipo": "OVR base",
+                    "cantidad": "N",
+                    "numeracion": "SFD-XXX",
+                    "notas": "Cartas Overnumbered. Aparecen aproximadamente 1 en 72 sobres o ~1 en 3 cajas."
+                },
+                {
+                    "tipo": "OVR con firma",
+                    "cantidad": "N",
+                    "numeracion": "SFD-XXX-STAR",
+                    "notas": "Cartas con firma. Aparecen aproximadamente 1 en 720 sobres o ~1 en 30 cajas."
+                }
+            ],
+            "mecanicas": [
+                {
+                    "kicker": "tipo",
+                    "name": "Equipment",
+                    "desc": "Un nuevo tipo de carta de equipo que se adjunta a las unidades para modificarlas o mejorarlas."
+                },
+                {
+                    "kicker": "keyword",
+                    "name": "Repeat",
+                    "desc": "Costo adicional opcional en hechizos que permite ejecutar el efecto del hechizo una vez más."
+                },
+                {
+                    "kicker": "keyword",
+                    "name": "Quick-Draw",
+                    "desc": "Permite jugar una carta de Equipment a velocidad de reacción y adjuntarla a una unidad sin pagar el costo de Equip."
+                },
+                {
+                    "kicker": "keyword",
+                    "name": "Equip",
+                    "desc": "Pagar el costo listado para adjuntar una carta de Equipment a una unidad que controlas."
+                },
+                {
+                    "kicker": "keyword",
+                    "name": "Weaponmaster",
+                    "desc": "Unidad que, al ser jugada, permite elegir un Equipment que controlas y adjuntarlo a la unidad con Weaponmaster, con un costo de Equip reducido."
+                },
+                {
+                    "kicker": "token",
+                    "name": "Gold",
+                    "desc": "Tokens que pueden ser gastados para generar poder de cualquier color."
+                }
+            ]
+        },
+        "unleashed": {
+            "id": "unleashed",
+            "abbr": "UNL",
+            "set_number": 6,
+            "color": "#f97316",
+            "date": "Mayo 2026",
+            "cartas_reveladas": 0,
+            "total": 299,
+            "total_base": 222,
+            "total_ovr": 77,
+            "imgBase": null,
+            "legend_count": 12,
+            "leyendas": [
+                {
+                    "name": "Diana",
+                    "img": null
+                },
+                {
+                    "name": "Ivern",
+                    "img": null
+                },
+                {
+                    "name": "Jhin",
+                    "img": null
+                },
+                {
+                    "name": "Kha'Zix",
+                    "img": null
+                },
+                {
+                    "name": "LeBlanc",
+                    "img": null
+                },
+                {
+                    "name": "Lillia",
+                    "img": null
+                },
+                {
+                    "name": "Master Yi",
+                    "img": null
+                },
+                {
+                    "name": "Poppy",
+                    "img": null
+                },
+                {
+                    "name": "Pyke",
+                    "img": null
+                },
+                {
+                    "name": "Rengar",
+                    "img": null
+                },
+                {
+                    "name": "Vex",
+                    "img": null
+                },
+                {
+                    "name": "Vi",
+                    "img": null
+                }
+            ],
+            "productos": [
+                "Booster Display",
+                "Champion Deck: Vi",
+                "Champion Deck: Vex",
+                "The Unleashed Vault",
+                "Playmats",
+                "Art Sleeves",
+                "Pre-Rift Event Kit"
+            ],
+            "champion_decks": [
+                "Vi",
+                "Vex"
+            ],
+            "ovr_breakdown": [
+                {
+                    "tipo": "Alt-Art",
+                    "cantidad": "N",
+                    "numeracion": "UNL-XXXa",
+                    "notas": "Más de 30 variantes alternativas. Aparecen aproximadamente 1 en 12 sobres o ~2 por caja."
+                },
+                {
+                    "tipo": "OVR base",
+                    "cantidad": "N",
+                    "numeracion": "UNL-XXX",
+                    "notas": "Cartas Overnumbered. Aparecen aproximadamente 1 en 72 sobres o ~1 en 3 cajas."
+                },
+                {
+                    "tipo": "OVR con firma",
+                    "cantidad": "N",
+                    "numeracion": "UNL-XXX-STAR",
+                    "notas": "Cartas con firma. Aparecen aproximadamente 1 en 720 sobres o ~1 en 30 cajas."
+                },
+                {
+                    "tipo": "Ultimate Rare",
+                    "cantidad": 1,
+                    "numeracion": "UNL-000",
+                    "notas": "La primera Ultimate Rare es una versión overnumbered de Baron Nashor. Aparece en menos del 0.1% de los sobres (~1 en 1000 sobres)."
+                }
+            ],
+            "mecanicas": [
+                {
+                    "kicker": "resource",
+                    "name": "XP",
+                    "desc": "Un contador de recursos que los jugadores ganan y gastan, y al que las habilidades de las unidades pueden hacer referencia."
+                },
+                {
+                    "kicker": "keyword",
+                    "name": "Hunt",
+                    "desc": "Una habilidad que otorga XP a su controlador cuando una unidad con Hunt conquista o mantiene un campo de batalla."
+                },
+                {
+                    "kicker": "keyword",
+                    "name": "Ambush",
+                    "desc": "Permite que las unidades se jueguen a velocidad de reacción en un campo de batalla donde ya controlas unidades."
+                },
+                {
+                    "kicker": "keyword",
+                    "name": "Level",
+                    "desc": "Una palabra clave dependiente que se activa cuando su controlador tiene una cierta cantidad de XP."
+                },
+                {
+                    "kicker": "token",
+                    "name": "Token Battlefields",
+                    "desc": "Nuevos campos de batalla creados por efectos de cartas, como Baron Pit (creado por Baron Nashor) y Brush (creado por Ivern)."
+                }
+            ]
+        }
+    },
+    "pull_rates": {
+        "general_booster_pack_contents": {
+            "commons": 7,
+            "uncommons": 3,
+            "rares_or_better": 2,
+            "foil_of_any_rarity": 1,
+            "token": 1
+        },
+        "rarity_odds": {
+            "Epic": "1 en 4 sobres",
+            "Showcase": "1 en 12 sobres",
+            "Overnumbered": "1 en 72 sobres",
+            "Signature": "1 en 720 sobres",
+            "Ultimate_Rare": "1 en 1000 sobres"
+        },
+        "set_specific": {
+            "origins": {
+                "battlefields": "Todas las cartas de campo de batalla en Origins son Uncommon."
+            },
+            "unleashed": {
+                "ultimate_rare": "La carta Ultimate Rare de Baron Nashor es la única Ultimate Rare en Unleashed."
+            }
+        },
+        "per_box": {
+            "Epic": {
+                "origins": "~6 por caja",
+                "spiritforged": "~6 por caja",
+                "unleashed": "~6 por caja"
+            },
+            "Showcase": {
+                "origins": "~2 por caja",
+                "spiritforged": "~2 por caja",
+                "unleashed": "~2 por caja"
+            },
+            "Overnumbered": {
+                "origins": "~1 en 3 cajas",
+                "spiritforged": "~1 en 3 cajas",
+                "unleashed": "~1 en 3 cajas"
+            },
+            "Signature": {
+                "origins": "~1 en 30 cajas",
+                "spiritforged": "~1 en 30 cajas",
+                "unleashed": "~1 en 30 cajas"
+            },
+            "Ultimate_Rare": {
+                "origins": null,
+                "spiritforged": null,
+                "unleashed": "~1 en 1000 sobres"
+            }
+        }
+    }
+}
