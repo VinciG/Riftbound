@@ -1,0 +1,436 @@
+{
+    "sets": {
+        "origins": {
+            "id": "origins",
+            "abbr": "OGN",
+            "set_number": 2,
+            "color": "#3ecf8e",
+            "date": "Octubre 2025",
+            "cartas_reveladas": 0,
+            "total": 396,
+            "total_base": 315,
+            "total_ovr": 81,
+            "imgBase": null,
+            "legend_count": 16,
+            "leyendas": [
+                {
+                    "name": "Ahri",
+                    "img": null
+                },
+                {
+                    "name": "Annie",
+                    "img": null
+                },
+                {
+                    "name": "Darius",
+                    "img": null
+                },
+                {
+                    "name": "Garen",
+                    "img": null
+                },
+                {
+                    "name": "Jinx",
+                    "img": null
+                },
+                {
+                    "name": "Kai'Sa",
+                    "img": null
+                },
+                {
+                    "name": "Lee Sin",
+                    "img": null
+                },
+                {
+                    "name": "Leona",
+                    "img": null
+                },
+                {
+                    "name": "Lux",
+                    "img": null
+                },
+                {
+                    "name": "Master Yi",
+                    "img": null
+                },
+                {
+                    "name": "Miss Fortune",
+                    "img": null
+                },
+                {
+                    "name": "Sett",
+                    "img": null
+                },
+                {
+                    "name": "Teemo",
+                    "img": null
+                },
+                {
+                    "name": "Viktor",
+                    "img": null
+                },
+                {
+                    "name": "Volibear",
+                    "img": null
+                },
+                {
+                    "name": "Yasuo",
+                    "img": null
+                }
+            ],
+            "productos": [
+                "Booster Display",
+                "Booster Packs",
+                "Champion Deck: Jinx",
+                "Champion Deck: Lee Sin",
+                "Champion Deck: Viktor",
+                "Origins: Proving Grounds Box Set",
+                "Arcane Box Set",
+                "Worlds Bundle 2025"
+            ],
+            "champion_decks": [
+                "Jinx",
+                "Lee Sin",
+                "Viktor"
+            ],
+            "ovr_breakdown": [
+                {
+                    "tipo": "Alt-Art",
+                    "cantidad": 55,
+                    "numeracion": "varios",
+                    "notas": "Versiones alternativas de arte de cartas existentes."
+                },
+                {
+                    "tipo": "OVR base",
+                    "cantidad": 2,
+                    "numeracion": "varios",
+                    "notas": "Cartas Overnumbered con arte exclusivo."
+                },
+                {
+                    "tipo": "OVR con firma",
+                    "cantidad": 24,
+                    "numeracion": "varios",
+                    "notas": "Cartas Overnumbered con firma del artista."
+                }
+            ],
+            "mecanicas": [
+                {
+                    "kicker": "acción",
+                    "name": "Conquistar",
+                    "desc": "Tomar el control de un campo de batalla."
+                },
+                {
+                    "kicker": "acción",
+                    "name": "Mantener",
+                    "desc": "Mantener el control de un campo de batalla."
+                },
+                {
+                    "kicker": "recurso",
+                    "name": "Runas",
+                    "desc": "Recurso utilizado para pagar el coste de las cartas."
+                },
+                {
+                    "kicker": "fase",
+                    "name": "Combate",
+                    "desc": "Enfrentamiento entre unidades en un campo de batalla."
+                }
+            ],
+            "released": true
+        },
+        "spiritforged": {
+            "id": "spiritforged",
+            "abbr": "SFD",
+            "set_number": 5,
+            "color": "#a78bfa",
+            "date": "Febrero 2026",
+            "cartas_reveladas": 0,
+            "total": 301,
+            "total_base": 221,
+            "total_ovr": 80,
+            "imgBase": null,
+            "legend_count": 12,
+            "leyendas": [
+                {
+                    "name": "Azir",
+                    "img": null
+                },
+                {
+                    "name": "Draven",
+                    "img": null
+                },
+                {
+                    "name": "Ezreal",
+                    "img": null
+                },
+                {
+                    "name": "Fiora",
+                    "img": null
+                },
+                {
+                    "name": "Irelia",
+                    "img": null
+                },
+                {
+                    "name": "Jax",
+                    "img": null
+                },
+                {
+                    "name": "Lucian",
+                    "img": null
+                },
+                {
+                    "name": "Ornn",
+                    "img": null
+                },
+                {
+                    "name": "Rek'Sai",
+                    "img": null
+                },
+                {
+                    "name": "Renata Glasc",
+                    "img": null
+                },
+                {
+                    "name": "Rumble",
+                    "img": null
+                },
+                {
+                    "name": "Sivir",
+                    "img": null
+                }
+            ],
+            "productos": [
+                "Booster Display",
+                "Booster Sleeves",
+                "Champion Deck: Rumble",
+                "Champion Deck: Fiora"
+            ],
+            "champion_decks": [
+                "Rumble",
+                "Fiora"
+            ],
+            "ovr_breakdown": [
+                {
+                    "tipo": "Alt-Art",
+                    "cantidad": 49,
+                    "numeracion": "varios",
+                    "notas": "Versiones alternativas de arte de cartas existentes."
+                },
+                {
+                    "tipo": "OVR base",
+                    "cantidad": 5,
+                    "numeracion": "varios",
+                    "notas": "Cartas Overnumbered con arte exclusivo."
+                },
+                {
+                    "tipo": "OVR con firma",
+                    "cantidad": 26,
+                    "numeracion": "varios",
+                    "notas": "Cartas Overnumbered con firma del artista."
+                }
+            ],
+            "mecanicas": [
+                {
+                    "kicker": "recurso",
+                    "name": "Gold",
+                    "desc": "Fichas que se pueden gastar para generar poder de cualquier color."
+                },
+                {
+                    "kicker": "costo",
+                    "name": "Repeat",
+                    "desc": "Costo adicional en hechizos que permite ejecutar su efecto una segunda vez."
+                },
+                {
+                    "kicker": "tipo",
+                    "name": "Equipment",
+                    "desc": "Subtipo de equipo que se adjunta a las unidades para modificarlas o mejorarlas."
+                },
+                {
+                    "kicker": "habilidad",
+                    "name": "Quick-Draw",
+                    "desc": "Permite jugar y adjuntar equipo a una unidad a velocidad de reacción sin pagar el coste de equipar."
+                },
+                {
+                    "kicker": "habilidad",
+                    "name": "Weaponmaster",
+                    "desc": "Permite adjuntar equipo a una unidad al jugarla, reduciendo su coste de equipar."
+                }
+            ],
+            "released": true
+        },
+        "unleashed": {
+            "id": "unleashed",
+            "abbr": "UNL",
+            "set_number": 6,
+            "color": "#f97316",
+            "date": "Mayo 2026",
+            "cartas_reveladas": 0,
+            "total": 299,
+            "total_base": 222,
+            "total_ovr": 77,
+            "imgBase": null,
+            "legend_count": 12,
+            "leyendas": [
+                {
+                    "name": "Diana",
+                    "img": null
+                },
+                {
+                    "name": "Ivern",
+                    "img": null
+                },
+                {
+                    "name": "Jhin",
+                    "img": null
+                },
+                {
+                    "name": "Kha'Zix",
+                    "img": null
+                },
+                {
+                    "name": "LeBlanc",
+                    "img": null
+                },
+                {
+                    "name": "Lillia",
+                    "img": null
+                },
+                {
+                    "name": "Master Yi",
+                    "img": null
+                },
+                {
+                    "name": "Poppy",
+                    "img": null
+                },
+                {
+                    "name": "Pyke",
+                    "img": null
+                },
+                {
+                    "name": "Rengar",
+                    "img": null
+                },
+                {
+                    "name": "Vex",
+                    "img": null
+                },
+                {
+                    "name": "Vi",
+                    "img": null
+                }
+            ],
+            "productos": [
+                "Booster Displays",
+                "Champion Deck: Vi",
+                "Champion Deck: Vex",
+                "The Unleashed Vault",
+                "Playmats",
+                "Art Sleeves"
+            ],
+            "champion_decks": [
+                "Vi",
+                "Vex"
+            ],
+            "ovr_breakdown": [
+                {
+                    "tipo": "Alt-Art",
+                    "cantidad": 50,
+                    "numeracion": "varios",
+                    "notas": "Versiones alternativas de arte de cartas existentes."
+                },
+                {
+                    "tipo": "OVR base",
+                    "cantidad": 2,
+                    "numeracion": "varios",
+                    "notas": "Cartas Overnumbered con arte exclusivo."
+                },
+                {
+                    "tipo": "OVR con firma",
+                    "cantidad": 24,
+                    "numeracion": "varios",
+                    "notas": "Cartas Overnumbered con firma del artista."
+                },
+                {
+                    "tipo": "Ultimate Rare",
+                    "cantidad": 1,
+                    "numeracion": "UNL-XXX",
+                    "notas": "Baron Nashor Ultimate Rare, la carta más rara del set."
+                }
+            ],
+            "mecanicas": [
+                {
+                    "kicker": "recurso",
+                    "name": "XP",
+                    "desc": "Recurso que se acumula y se gasta para obtener ventajas únicas."
+                },
+                {
+                    "kicker": "habilidad",
+                    "name": "Hunt",
+                    "desc": "Las unidades con Hunt ganan XP al conquistar o mantener un campo de batalla."
+                },
+                {
+                    "kicker": "habilidad",
+                    "name": "Ambush",
+                    "desc": "Permite jugar unidades a velocidad de reacción en campos de batalla donde ya controlas unidades."
+                },
+                {
+                    "kicker": "habilidad",
+                    "name": "Level",
+                    "desc": "Las cartas con Level desbloquean nuevas habilidades cuando el XP del jugador alcanza ciertos umbrales."
+                },
+                {
+                    "kicker": "tipo",
+                    "name": "Battlefield Tokens",
+                    "desc": "Fichas que representan campos de batalla especiales con efectos únicos."
+                }
+            ],
+            "released": true
+        }
+    },
+    "pull_rates": {
+        "general_booster_pack_contents": {
+            "common": 7,
+            "uncommon": 3,
+            "rare_or_better": 2,
+            "foil": 1,
+            "token_or_rune": 1,
+            "total_cards": 14
+        },
+        "rarity_odds": {
+            "Epic": "~1 en 4 sobres",
+            "Showcase": "~1 en 12 sobres",
+            "Overnumbered": "~1 en 72 sobres",
+            "Signature": "~1 en 720 sobres",
+            "Ultimate_Rare": "<0.1% de los sobres (solo Unleashed)"
+        },
+        "set_specific": {},
+        "per_box": {
+            "Epic": {
+                "origins": "~6 por caja",
+                "spiritforged": "~6 por caja",
+                "unleashed": "~6 por caja"
+            },
+            "Showcase": {
+                "origins": "~2 por caja",
+                "spiritforged": "~2 por caja",
+                "unleashed": "~2 por caja"
+            },
+            "Overnumbered": {
+                "origins": "~1 en 3 cajas",
+                "spiritforged": "~1 en 3 cajas",
+                "unleashed": "~1 en 3 cajas"
+            },
+            "Signature": {
+                "origins": "~1 en 30 cajas",
+                "spiritforged": "~1 en 30 cajas",
+                "unleashed": "~1 en 30 cajas"
+            },
+            "Ultimate_Rare": {
+                "origins": "N/A",
+                "spiritforged": "N/A",
+                "unleashed": "~1 en 42 cajas"
+            }
+        }
+    }
+}
