@@ -212,19 +212,19 @@
             "ovr_breakdown": [
                 {
                     "tipo": "Alt-Art",
-                    "cantidad": 49,
+                    "cantidad": 50,
                     "numeracion": "varios",
                     "notas": "Versiones alternativas de arte de cartas existentes."
                 },
                 {
                     "tipo": "OVR base",
-                    "cantidad": 5,
+                    "cantidad": 18,
                     "numeracion": "varios",
                     "notas": "Cartas Overnumbered con arte exclusivo."
                 },
                 {
                     "tipo": "OVR con firma",
-                    "cantidad": 26,
+                    "cantidad": 12,
                     "numeracion": "varios",
                     "notas": "Cartas Overnumbered con firma del artista."
                 }
