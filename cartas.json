@@ -1,0 +1,282 @@
+{
+    "sets": {
+        "origins": {
+            "id": "origins",
+            "abbr": "OGN",
+            "set_number": 2,
+            "color": "#3ecf8e",
+            "date": "",
+            "cartas_reveladas": 0,
+            "total": 396,
+            "total_base": 315,
+            "total_ovr": 81,
+            "imgBase": "",
+            "legend_count": 16,
+            "leyendas": [
+                {
+                    "name": "Ahri",
+                    "img": null
+                },
+                {
+                    "name": "Annie",
+                    "img": null
+                },
+                {
+                    "name": "Darius",
+                    "img": null
+                },
+                {
+                    "name": "Garen",
+                    "img": null
+                },
+                {
+                    "name": "Jinx",
+                    "img": null
+                },
+                {
+                    "name": "Kai'Sa",
+                    "img": null
+                },
+                {
+                    "name": "Lee Sin",
+                    "img": null
+                },
+                {
+                    "name": "Leona",
+                    "img": null
+                },
+                {
+                    "name": "Lux",
+                    "img": null
+                },
+                {
+                    "name": "Master Yi",
+                    "img": null
+                },
+                {
+                    "name": "Miss Fortune",
+                    "img": null
+                },
+                {
+                    "name": "Sett",
+                    "img": null
+                },
+                {
+                    "name": "Teemo",
+                    "img": null
+                },
+                {
+                    "name": "Viktor",
+                    "img": null
+                },
+                {
+                    "name": "Volibear",
+                    "img": null
+                },
+                {
+                    "name": "Yasuo",
+                    "img": null
+                }
+            ],
+            "productos": [],
+            "champion_decks": [],
+            "ovr_breakdown": [
+                {
+                    "tipo": "Alt-Art",
+                    "cantidad": 39,
+                    "numeracion": "",
+                    "notas": ""
+                },
+                {
+                    "tipo": "OVR base",
+                    "cantidad": 30,
+                    "numeracion": "",
+                    "notas": ""
+                },
+                {
+                    "tipo": "OVR con firma",
+                    "cantidad": 12,
+                    "numeracion": "",
+                    "notas": ""
+                }
+            ],
+            "mecanicas": [],
+            "released": true
+        },
+        "spiritforged": {
+            "id": "spiritforged",
+            "abbr": "SFD",
+            "set_number": 5,
+            "color": "#a78bfa",
+            "date": "",
+            "cartas_reveladas": 0,
+            "total": 301,
+            "total_base": 221,
+            "total_ovr": 80,
+            "imgBase": "",
+            "legend_count": 12,
+            "leyendas": [
+                {
+                    "name": "Azir",
+                    "img": null
+                },
+                {
+                    "name": "Draven",
+                    "img": null
+                },
+                {
+                    "name": "Ezreal",
+                    "img": null
+                },
+                {
+                    "name": "Fiora",
+                    "img": null
+                },
+                {
+                    "name": "Irelia",
+                    "img": null
+                },
+                {
+                    "name": "Jax",
+                    "img": null
+                },
+                {
+                    "name": "Lucian",
+                    "img": null
+                },
+                {
+                    "name": "Ornn",
+                    "img": null
+                },
+                {
+                    "name": "Rek'Sai",
+                    "img": null
+                },
+                {
+                    "name": "Renata Glasc",
+                    "img": null
+                },
+                {
+                    "name": "Rumble",
+                    "img": null
+                },
+                {
+                    "name": "Sivir",
+                    "img": null
+                }
+            ],
+            "productos": [],
+            "champion_decks": [],
+            "ovr_breakdown": [
+                {
+                    "tipo": "Alt-Art",
+                    "cantidad": 30,
+                    "numeracion": "",
+                    "notas": ""
+                },
+                {
+                    "tipo": "OVR base",
+                    "cantidad": 38,
+                    "numeracion": "",
+                    "notas": ""
+                },
+                {
+                    "tipo": "OVR con firma",
+                    "cantidad": 12,
+                    "numeracion": "",
+                    "notas": ""
+                }
+            ],
+            "mecanicas": [],
+            "released": true
+        },
+        "unleashed": {
+            "id": "unleashed",
+            "abbr": "UNL",
+            "set_number": 6,
+            "color": "#f97316",
+            "date": "",
+            "cartas_reveladas": 0,
+            "total": 299,
+            "total_base": 222,
+            "total_ovr": 77,
+            "imgBase": "",
+            "legend_count": 12,
+            "leyendas": [
+                {
+                    "name": "Diana",
+                    "img": null
+                },
+                {
+                    "name": "Ivern",
+                    "img": null
+                },
+                {
+                    "name": "Jhin",
+                    "img": null
+                },
+                {
+                    "name": "Kha'Zix",
+                    "img": null
+                },
+                {
+                    "name": "LeBlanc",
+                    "img": null
+                },
+                {
+                    "name": "Lillia",
+                    "img": null
+                },
+                {
+                    "name": "Master Yi",
+                    "img": null
+                },
+                {
+                    "name": "Poppy",
+                    "img": null
+                },
+                {
+                    "name": "Pyke",
+                    "img": null
+                },
+                {
+                    "name": "Rengar",
+                    "img": null
+                },
+                {
+                    "name": "Vex",
+                    "img": null
+                },
+                {
+                    "name": "Vi",
+                    "img": null
+                }
+            ],
+            "productos": [],
+            "champion_decks": [],
+            "ovr_breakdown": [
+                {
+                    "tipo": "Alt-Art",
+                    "cantidad": 36,
+                    "numeracion": "",
+                    "notas": ""
+                },
+                {
+                    "tipo": "OVR base",
+                    "cantidad": 29,
+                    "numeracion": "",
+                    "notas": ""
+                },
+                {
+                    "tipo": "OVR con firma",
+                    "cantidad": 12,
+                    "numeracion": "",
+                    "notas": ""
+                }
+            ],
+            "mecanicas": [],
+            "released": true
+        }
+    },
+    "pull_rates": {}
+}
