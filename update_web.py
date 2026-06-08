@@ -534,8 +534,18 @@ else:
                         new_den = max(1, round(den / 24))
                         pb[rarity_key][set_key] = f'~1 en {new_den} cajas'
 
-    # Fallback: rebuild ovr_breakdown from DotGG when Gemini didn't run
-    if not gemini_ok and api_rows:
+    # Rebuild 3 base categories from DotGG (always, keeping Gemini's Ultimate Rare)
+    if api_rows:
+        # Save any "Ultimate Rare" entries Gemini may have added
+        gemini_ur = {}
+        if gemini_ok:
+            for s_name, s_data in datos_actuales.get("sets", {}).items():
+                sid = s_data.get("id")
+                ob = s_data.get("ovr_breakdown", [])
+                for e in ob:
+                    if isinstance(e, dict) and e.get("tipo") == "Ultimate Rare":
+                        gemini_ur[sid] = e
+                        break
         ovr_counts = {}
         for row in api_rows:
             card = dict(zip(api_names, row))
@@ -571,6 +581,9 @@ else:
                     ob[0]["cantidad"] += leftover
             else:
                 ob.append({"tipo":"Alt-Art","cantidad":total_ovr,"numeracion":"","notas":""})
+            # Re-add Ultimate Rare if Gemini had added it
+            if sid in gemini_ur:
+                ob.append(gemini_ur[sid])
             s_data["ovr_breakdown"] = ob
 
     # Ensure released flag: sets that have DotGG cards get released: True
