@@ -411,7 +411,7 @@ if gemini_available:
 
 gemini_ok = False
 
-if response:
+if response and response.text:
     # ==========================================
     # Validación y extracción del JSON generado
     # ==========================================
