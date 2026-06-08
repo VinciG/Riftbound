@@ -96,21 +96,21 @@
             "ovr_breakdown": [
                 {
                     "tipo": "Alt-Art",
-                    "cantidad": 55,
-                    "numeracion": "varios",
-                    "notas": "Versiones alternativas de arte de cartas existentes."
+                    "cantidad": 39,
+                    "numeracion": "",
+                    "notas": ""
                 },
                 {
                     "tipo": "OVR base",
-                    "cantidad": 2,
-                    "numeracion": "varios",
-                    "notas": "Cartas Overnumbered con arte exclusivo."
+                    "cantidad": 30,
+                    "numeracion": "",
+                    "notas": ""
                 },
                 {
                     "tipo": "OVR con firma",
-                    "cantidad": 24,
-                    "numeracion": "varios",
-                    "notas": "Cartas Overnumbered con firma del artista."
+                    "cantidad": 12,
+                    "numeracion": "",
+                    "notas": ""
                 }
             ],
             "mecanicas": [
@@ -212,21 +212,21 @@
             "ovr_breakdown": [
                 {
                     "tipo": "Alt-Art",
-                    "cantidad": 50,
-                    "numeracion": "varios",
-                    "notas": "Versiones alternativas de arte de cartas existentes."
+                    "cantidad": 30,
+                    "numeracion": "",
+                    "notas": ""
                 },
                 {
                     "tipo": "OVR base",
-                    "cantidad": 18,
-                    "numeracion": "varios",
-                    "notas": "Cartas Overnumbered con arte exclusivo."
+                    "cantidad": 38,
+                    "numeracion": "",
+                    "notas": ""
                 },
                 {
                     "tipo": "OVR con firma",
                     "cantidad": 12,
-                    "numeracion": "varios",
-                    "notas": "Cartas Overnumbered con firma del artista."
+                    "numeracion": "",
+                    "notas": ""
                 }
             ],
             "mecanicas": [
@@ -335,27 +335,21 @@
             "ovr_breakdown": [
                 {
                     "tipo": "Alt-Art",
-                    "cantidad": 50,
-                    "numeracion": "varios",
-                    "notas": "Versiones alternativas de arte de cartas existentes."
+                    "cantidad": 36,
+                    "numeracion": "",
+                    "notas": ""
                 },
                 {
                     "tipo": "OVR base",
-                    "cantidad": 2,
-                    "numeracion": "varios",
-                    "notas": "Cartas Overnumbered con arte exclusivo."
+                    "cantidad": 29,
+                    "numeracion": "",
+                    "notas": ""
                 },
                 {
                     "tipo": "OVR con firma",
-                    "cantidad": 24,
-                    "numeracion": "varios",
-                    "notas": "Cartas Overnumbered con firma del artista."
-                },
-                {
-                    "tipo": "Ultimate Rare",
-                    "cantidad": 1,
-                    "numeracion": "UNL-XXX",
-                    "notas": "Baron Nashor Ultimate Rare, la carta más rara del set."
+                    "cantidad": 12,
+                    "numeracion": "",
+                    "notas": ""
                 }
             ],
             "mecanicas": [
@@ -391,7 +385,7 @@
             "id": "vendetta",
             "abbr": "VND",
             "set_number": 4,
-            "color": null,
+            "color": "#e879a0",
             "date": "Julio 2026",
             "cartas_reveladas": 0,
             "total": 166,
@@ -419,18 +413,22 @@
             ],
             "productos": [
                 "Booster Display Boxes",
-                "Champion decks",
+                "Champion Decks",
                 "Four champion paired playmats",
                 "Rivalry-themed art sleeves",
-                "Vendetta Vault"
+                "Vendetta Vault",
+                "Showdown Decks: Zed vs Shen"
             ],
-            "champion_decks": [],
+            "champion_decks": [
+                "Zed",
+                "Shen"
+            ],
             "ovr_breakdown": [
                 {
-                    "tipo": "Showcase",
+                    "tipo": "Alt-Art",
                     "cantidad": 50,
-                    "numeracion": "varios",
-                    "notas": "Más de 50 cartas Showcase."
+                    "numeracion": "",
+                    "notas": ""
                 }
             ],
             "mecanicas": [
@@ -461,7 +459,7 @@
             "id": "radiance",
             "abbr": "RDC",
             "set_number": 5,
-            "color": null,
+            "color": "#a78bfa",
             "date": "Octubre 2026",
             "cartas_reveladas": 0,
             "total": 180,
@@ -483,17 +481,31 @@
                     "img": null
                 }
             ],
-            "productos": [],
-            "champion_decks": [],
+            "productos": [
+                "Booster Display",
+                "Showdown Deck: Seraphine vs Evelynn",
+                "Radiance Vault",
+                "Pre-Rift Kit"
+            ],
+            "champion_decks": [
+                "Seraphine",
+                "Evelynn"
+            ],
             "ovr_breakdown": [
                 {
-                    "tipo": "Showcase",
+                    "tipo": "Alt-Art",
                     "cantidad": 60,
-                    "numeracion": "varios",
-                    "notas": "60 cartas Showcase."
+                    "numeracion": "",
+                    "notas": ""
                 }
             ],
-            "mecanicas": [],
+            "mecanicas": [
+                {
+                    "kicker": "tema",
+                    "name": "Brillo y Creatividad",
+                    "desc": "Cartas centradas en la brillantez y la creatividad a través de Runeterra, sin nuevas mecánicas o palabras clave anunciadas."
+                }
+            ],
             "released": false
         }
     },
@@ -523,11 +535,11 @@
                 "radiance": "~6 por caja"
             },
             "Showcase": {
-                "origins": "~1 en 3 cajas",
-                "spiritforged": "~1 en 3 cajas",
-                "unleashed": "~1 en 3 cajas",
-                "vendetta": "~1 en 3 cajas",
-                "radiance": "~1 en 3 cajas"
+                "origins": "~2 por caja",
+                "spiritforged": "~2 por caja",
+                "unleashed": "~2 por caja",
+                "vendetta": "~2 por caja",
+                "radiance": "~2 por caja"
             },
             "Overnumbered": {
                 "origins": "~1 en 3 cajas",
