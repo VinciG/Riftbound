@@ -538,14 +538,13 @@ else:
     if api_rows:
         # Save any "Ultimate Rare" entries Gemini may have added
         gemini_ur = {}
-        if gemini_ok:
-            for s_name, s_data in datos_actuales.get("sets", {}).items():
-                sid = s_data.get("id")
-                ob = s_data.get("ovr_breakdown", [])
-                for e in ob:
-                    if isinstance(e, dict) and e.get("tipo") == "Ultimate Rare":
-                        gemini_ur[sid] = e
-                        break
+        for s_name, s_data in datos_actuales.get("sets", {}).items():
+            sid = s_data.get("id")
+            ob = s_data.get("ovr_breakdown", [])
+            for e in ob:
+                if isinstance(e, dict) and e.get("tipo") == "Ultimate Rare":
+                    gemini_ur[sid] = e
+                    break
         ovr_counts = {}
         for row in api_rows:
             card = dict(zip(api_names, row))
