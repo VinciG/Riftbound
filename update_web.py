@@ -352,8 +352,8 @@ Solo añade lo que falte: date, imgBase, productos, ovr_breakdown, mecanicas, pu
 
 IMPORTANTE sobre ovr_breakdown: el campo "cantidad" debe ser un NÚMERO entero,
 nunca la letra "N" ni texto. Si no sabes la cantidad exacta, pon 0.
-Si en per_box existe "Ultimate_Rare" para un set, añade una entrada "Ultimate Rare"
-al ovr_breakdown de ese set con la cantidad estimada.
+Además, si el set tiene pull rates para "Ultimate_Rare", DEBES añadir
+una entrada "Ultimate Rare" al ovr_breakdown con la cantidad estimada.
 
 IMPORTANTE sobre mecanicas: DEBES incluir mecanicas para TODAS las expansiones,
 tanto las ya lanzadas como las nuevas. No dejes el array vacío para ninguna.
@@ -366,13 +366,12 @@ CARTAS ÉPICAS EXISTENTES (referencia para datos del set):
 REGLAS CRÍTICAS:
 1. Devuelve EXCLUSIVAMENTE el objeto JSON actualizado exactamente con la estructura de arriba.
 2. No incluyas explicaciones, markdown, ni texto extra.
-3. Si no hay cambios, devuelve el mismo JSON exacto que te di.
-4. Para expansiones existentes, mantén los campos que no cambien.
-5. NO INVENTES URLs. Si no encuentras una URL oficial de imágenes (de riotgames.com, riftbound.leagueoflegends.com, riftbound.gg o cardgamer.com), pon "imgBase": null.
-6. NO CAMBIES champion_decks ni mecánicas de expansiones existentes a menos que tengas confirmación en fuente oficial publicada por Riot Games.
-7. Todo debe estar contrastado con fuentes oficiales de Riot Games, riftbound.leagueoflegends.com, riftbound.gg o cardgamer.com. No uses otras webs.
-8. Los campos total, total_base, total_ovr, legend_count y leyendas vienen de la API de DotGG. NO los modifiques.
-9. Para el campo "img" de cada leyenda, usa SOLO URLs de cardgamer.com, riftbound.leagueoflegends.com o riftbound.gg. Si no encuentras la URL exacta de la imagen, pon null.
+3. Para expansiones existentes, mantén los campos que no cambien.
+4. NO INVENTES URLs. Si no encuentras una URL oficial de imágenes (de riotgames.com, riftbound.leagueoflegends.com, riftbound.gg o cardgamer.com), pon "imgBase": null.
+5. NO CAMBIES champion_decks ni mecánicas de expansiones existentes a menos que tengas confirmación en fuente oficial publicada por Riot Games.
+6. Todo debe estar contrastado con fuentes oficiales de Riot Games, riftbound.leagueoflegends.com, riftbound.gg o cardgamer.com. No uses otras webs.
+7. Los campos total, total_base, total_ovr, legend_count y leyendas vienen de la API de DotGG. NO los modifiques.
+8. Para el campo "img" de cada leyenda, usa SOLO URLs de cardgamer.com, riftbound.leagueoflegends.com o riftbound.gg. Si no encuentras la URL exacta de la imagen, pon null.
 """
 
 # Ejecución con control de cuota
