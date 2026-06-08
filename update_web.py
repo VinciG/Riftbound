@@ -392,8 +392,8 @@ if gemini_available:
             )
             break
         except ClientError as e:
-            if e.code == 429:
-                print(f"⚠️ Cuota agotada, esperando {espera_inicial}s...")
+            if e.code in (429, 503):
+                print(f"⚠️ Error {e.code}, reintentando en {espera_inicial}s...")
                 time.sleep(espera_inicial)
                 espera_inicial *= 2
             else:
