@@ -264,7 +264,7 @@
             "set_number": 3,
             "color": "#f97316",
             "date": "Mayo 2026",
-            "cartas_reveladas": 0,
+            "cartas_reveladas": 299,
             "total": 299,
             "total_base": 222,
             "total_ovr": 77,
@@ -417,7 +417,8 @@
                 "Four champion paired playmats",
                 "Rivalry-themed art sleeves",
                 "Vendetta Vault",
-                "Showdown Decks: Zed vs Shen"
+                "Showdown Decks: Zed vs Shen",
+                "Pre-Rift Kit"
             ],
             "champion_decks": [
                 "Zed",
@@ -485,7 +486,8 @@
                 "Booster Display",
                 "Showdown Deck: Seraphine vs Evelynn",
                 "Radiance Vault",
-                "Pre-Rift Kit"
+                "Pre-Rift Kit",
+                "Playmats"
             ],
             "champion_decks": [
                 "Seraphine",
