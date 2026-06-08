@@ -10,7 +10,7 @@
             "total": 396,
             "total_base": 315,
             "total_ovr": 81,
-            "imgBase": null,
+            "imgBase": "",
             "legend_count": 16,
             "leyendas": [
                 {
@@ -147,7 +147,7 @@
             "total": 301,
             "total_base": 221,
             "total_ovr": 80,
-            "imgBase": null,
+            "imgBase": "",
             "legend_count": 12,
             "leyendas": [
                 {
@@ -214,13 +214,13 @@
             "ovr_breakdown": [
                 {
                     "tipo": "Alt-Art",
-                    "cantidad": 38,
+                    "cantidad": 30,
                     "numeracion": "",
                     "notas": ""
                 },
                 {
                     "tipo": "OVR base",
-                    "cantidad": 30,
+                    "cantidad": 38,
                     "numeracion": "",
                     "notas": ""
                 },
@@ -270,7 +270,7 @@
             "total": 299,
             "total_base": 222,
             "total_ovr": 77,
-            "imgBase": null,
+            "imgBase": "",
             "legend_count": 12,
             "leyendas": [
                 {
@@ -344,7 +344,7 @@
                 },
                 {
                     "tipo": "OVR base",
-                    "cantidad": 28,
+                    "cantidad": 29,
                     "numeracion": "",
                     "notas": ""
                 },
@@ -353,12 +353,6 @@
                     "cantidad": 12,
                     "numeracion": "",
                     "notas": ""
-                },
-                {
-                    "tipo": "Ultimate Rare",
-                    "cantidad": 1,
-                    "numeracion": "UNL-UR1",
-                    "notas": "Baron Nashor"
                 }
             ],
             "mecanicas": [
@@ -400,7 +394,7 @@
             "total": 166,
             "total_base": 0,
             "total_ovr": 50,
-            "imgBase": null,
+            "imgBase": "",
             "legend_count": 7,
             "leyendas": [
                 {
@@ -474,7 +468,7 @@
             "total": 180,
             "total_base": 0,
             "total_ovr": 60,
-            "imgBase": null,
+            "imgBase": "",
             "legend_count": 9,
             "leyendas": [
                 {
