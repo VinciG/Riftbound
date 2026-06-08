@@ -533,7 +533,7 @@ else:
                         new_den = max(1, round(den / 24))
                         pb[rarity_key][set_key] = f'~1 en {new_den} cajas'
 
-    # Fill ovr_breakdown from DotGG data when Gemini provided 0s
+    # Rebuild ovr_breakdown from DotGG data (always, discarding stale Gemini values)
     if api_rows:
         ovr_counts = {}
         for row in api_rows:
@@ -545,52 +545,32 @@ else:
             if sid not in ovr_counts: ovr_counts[sid] = {"alt":0,"sig":0,"ovr":0}
             nm = card.get("name","").lower()
             aid = card.get("id","").lower()
-            if "alternate art" in nm or (aid.endswith("a") and card.get("rarity") == "Showcase"):
-                ovr_counts[sid]["alt"] += 1
-            elif "signature" in nm or "signed" in nm:
+            if aid.endswith("-star"):
                 ovr_counts[sid]["sig"] += 1
+            elif "alternate art" in nm or (aid.endswith("a") and card.get("rarity") == "Showcase"):
+                ovr_counts[sid]["alt"] += 1
             else:
                 ovr_counts[sid]["ovr"] += 1
         for s_name, s_data in datos_actuales.get("sets", {}).items():
             sid = s_data.get("id")
-            ob = s_data.get("ovr_breakdown", [])
             total_ovr = int(s_data.get("total_ovr", 0))
             if total_ovr == 0: continue
-            current_sum = sum(
-                int(e.get("cantidad", 0)) for e in ob if isinstance(e, dict)
-            )
-            if current_sum >= total_ovr: continue
-            # Ensure ob has the standard entries
-            needed = [{"tipo": "Alt-Art"}, {"tipo": "OVR base"}, {"tipo": "OVR con firma"}]
-            existing = {e.get("tipo") for e in ob if isinstance(e, dict)}
-            for tmpl in needed:
-                if tmpl["tipo"] not in existing:
-                    ob.append({"tipo": tmpl["tipo"], "cantidad": 0, "numeracion": "", "notas": ""})
-            s_data["ovr_breakdown"] = ob
+            ob = []
             dc = ovr_counts.get(sid)
             alt = dc["alt"] if dc else 0
             sig = dc["sig"] if dc else 0
             ovr = dc["ovr"] if dc else 0
             dotgg_sum = alt + sig + ovr
             if dotgg_sum > 0:
-                for e in ob:
-                    if isinstance(e, dict):
-                        t = e.get("tipo", "")
-                        if t == "Alt-Art":
-                            e["cantidad"] = alt
-                        elif "firma" in t or "OVR con firma" in t:
-                            e["cantidad"] = sig
-                        elif "OVR" in t:
-                            e["cantidad"] = ovr
-                new_sum = sum(int(e.get("cantidad",0)) for e in ob if isinstance(e, dict))
-                if new_sum < total_ovr:
-                    for e in ob:
-                        if isinstance(e, dict) and e.get("tipo") == "Alt-Art":
-                            e["cantidad"] += total_ovr - new_sum
+                ob.append({"tipo":"Alt-Art","cantidad":alt,"numeracion":"","notas":""})
+                ob.append({"tipo":"OVR base","cantidad":ovr,"numeracion":"","notas":""})
+                ob.append({"tipo":"OVR con firma","cantidad":sig,"numeracion":"","notas":""})
+                leftover = total_ovr - dotgg_sum
+                if leftover > 0:
+                    ob[0]["cantidad"] += leftover
             else:
-                for e in ob:
-                    if isinstance(e, dict) and e.get("tipo") == "Alt-Art":
-                        e["cantidad"] = total_ovr
+                ob.append({"tipo":"Alt-Art","cantidad":total_ovr,"numeracion":"","notas":""})
+            s_data["ovr_breakdown"] = ob
 
     # Ensure released flag: sets that have DotGG cards get released: True
     dotgg_sids = set()
