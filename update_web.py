@@ -400,8 +400,14 @@ if gemini_available:
                 print(f"❌ Error de API: {e}")
                 break
         except Exception as e:
-            print(f"❌ Error inesperado: {e}")
-            break
+            err_str = str(e)
+            if '503' in err_str or 'UNAVAILABLE' in err_str:
+                print(f"⚠️ Error 503 inesperado, reintentando en {espera_inicial}s...")
+                time.sleep(espera_inicial)
+                espera_inicial *= 2
+            else:
+                print(f"❌ Error inesperado: {e}")
+                break
 
 gemini_ok = False
 
