@@ -533,8 +533,8 @@ else:
                         new_den = max(1, round(den / 24))
                         pb[rarity_key][set_key] = f'~1 en {new_den} cajas'
 
-    # Rebuild ovr_breakdown from DotGG data (always, discarding stale Gemini values)
-    if api_rows:
+    # Fallback: rebuild ovr_breakdown from DotGG when Gemini didn't run
+    if not gemini_ok and api_rows:
         ovr_counts = {}
         for row in api_rows:
             card = dict(zip(api_names, row))
