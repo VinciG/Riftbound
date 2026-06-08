@@ -10,7 +10,7 @@
             "total": 396,
             "total_base": 315,
             "total_ovr": 81,
-            "imgBase": null,
+            "imgBase": "",
             "legend_count": 16,
             "leyendas": [
                 {
@@ -147,7 +147,7 @@
             "total": 301,
             "total_base": 221,
             "total_ovr": 80,
-            "imgBase": null,
+            "imgBase": "",
             "legend_count": 12,
             "leyendas": [
                 {
@@ -268,7 +268,7 @@
             "total": 299,
             "total_base": 222,
             "total_ovr": 77,
-            "imgBase": null,
+            "imgBase": "",
             "legend_count": 12,
             "leyendas": [
                 {
