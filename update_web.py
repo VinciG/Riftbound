@@ -352,6 +352,8 @@ Solo añade lo que falte: date, imgBase, productos, ovr_breakdown, mecanicas, pu
 
 IMPORTANTE sobre ovr_breakdown: el campo "cantidad" debe ser un NÚMERO entero,
 nunca la letra "N" ni texto. Si no sabes la cantidad exacta, pon 0.
+Si en per_box existe "Ultimate_Rare" para un set, añade una entrada "Ultimate Rare"
+al ovr_breakdown de ese set con la cantidad estimada.
 
 IMPORTANTE sobre mecanicas: DEBES incluir mecanicas para TODAS las expansiones,
 tanto las ya lanzadas como las nuevas. No dejes el array vacío para ninguna.
