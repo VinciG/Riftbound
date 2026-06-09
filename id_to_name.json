@@ -320,7 +320,19 @@
         "unl-t08-222": "XP Tracker",
         "unl-018-222": "Yeti Brawler",
         "unl-056-222": "Yuumi - Magical Cat",
-        "unl-086-222": "Zilean - Time Mage"
+        "unl-086-222": "Zilean - Time Mage",
+        "Diana": "Diana",
+        "Ivern": "Ivern",
+        "Jhin": "Jhin",
+        "Kha'Zix": "Kha'Zix",
+        "LeBlanc": "LeBlanc",
+        "Lillia": "Lillia",
+        "Master Yi": "Master Yi",
+        "Poppy": "Poppy",
+        "Pyke": "Pyke",
+        "Rengar": "Rengar",
+        "Vex": "Vex",
+        "Vi": "Vi"
     },
     "origins": {
         "ogn-179-315": "Acceptable Losses",
@@ -787,7 +799,23 @@
         "ogn-188-315": "Zaunite Bouncer",
         "ogn-262-315": "Zenith Blade",
         "ogs-005-315": "Zephyr Sage",
-        "ogn-077-315": "Zhonya's Hourglass"
+        "ogn-077-315": "Zhonya's Hourglass",
+        "Ahri": "Ahri",
+        "Annie": "Annie",
+        "Darius": "Darius",
+        "Garen": "Garen",
+        "Jinx": "Jinx",
+        "Kai'Sa": "Kai'Sa",
+        "Lee Sin": "Lee Sin",
+        "Leona": "Leona",
+        "Lux": "Lux",
+        "Master Yi": "Master Yi",
+        "Miss Fortune": "Miss Fortune",
+        "Sett": "Sett",
+        "Teemo": "Teemo",
+        "Viktor": "Viktor",
+        "Volibear": "Volibear",
+        "Yasuo": "Yasuo"
     },
     "spiritforged": {
         "sfd-001-221": "Against the Odds",
@@ -1127,6 +1155,18 @@
         "sfd-233*-221": "Yone - Blademaster",
         "sfd-116-p-221": "Yone - Blademaster (Pre-Rift Promo)",
         "sfd-100-221": "Yordle Explorer",
-        "sfd-160-221": "Zaun Punk"
+        "sfd-160-221": "Zaun Punk",
+        "Azir": "Azir",
+        "Draven": "Draven",
+        "Ezreal": "Ezreal",
+        "Fiora": "Fiora",
+        "Irelia": "Irelia",
+        "Jax": "Jax",
+        "Lucian": "Lucian",
+        "Ornn": "Ornn",
+        "Rek'Sai": "Rek'Sai",
+        "Renata Glasc": "Renata Glasc",
+        "Rumble": "Rumble",
+        "Sivir": "Sivir"
     }
 }
