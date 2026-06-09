@@ -5,12 +5,12 @@
             "abbr": "OGN",
             "set_number": 2,
             "color": "#3ecf8e",
-            "date": "",
+            "date": "Octubre 2025",
             "cartas_reveladas": 0,
             "total": 396,
             "total_base": 315,
             "total_ovr": 81,
-            "imgBase": "",
+            "imgBase": null,
             "legend_count": 16,
             "leyendas": [
                 {
@@ -78,8 +78,19 @@
                     "img": null
                 }
             ],
-            "productos": [],
-            "champion_decks": [],
+            "productos": [
+                "Booster Display (24 packs)",
+                "Booster Packs (14 cards)",
+                "Champion Deck: Jinx",
+                "Champion Deck: Lee Sin",
+                "Champion Deck: Viktor",
+                "Proving Grounds Starter Box"
+            ],
+            "champion_decks": [
+                "Jinx",
+                "Lee Sin",
+                "Viktor"
+            ],
             "ovr_breakdown": [
                 {
                     "tipo": "Alt-Art",
@@ -100,7 +111,18 @@
                     "notas": ""
                 }
             ],
-            "mecanicas": [],
+            "mecanicas": [
+                {
+                    "kicker": "tipo",
+                    "name": "Runas",
+                    "desc": "Recurso utilizado para pagar cartas."
+                },
+                {
+                    "kicker": "tipo",
+                    "name": "Campos de Batalla",
+                    "desc": "Zonas por las que los campeones luchan por el control."
+                }
+            ],
             "released": true
         },
         "spiritforged": {
@@ -108,12 +130,12 @@
             "abbr": "SFD",
             "set_number": 5,
             "color": "#a78bfa",
-            "date": "",
+            "date": "Febrero 2026",
             "cartas_reveladas": 0,
             "total": 301,
             "total_base": 221,
             "total_ovr": 80,
-            "imgBase": "",
+            "imgBase": null,
             "legend_count": 12,
             "leyendas": [
                 {
@@ -165,8 +187,18 @@
                     "img": null
                 }
             ],
-            "productos": [],
-            "champion_decks": [],
+            "productos": [
+                "Booster Display (24 packs)",
+                "Booster Packs (14 cards)",
+                "Champion Deck: Rumble",
+                "Champion Deck: Fiora",
+                "Pre-Rift Event Kit",
+                "Bulk Runes"
+            ],
+            "champion_decks": [
+                "Rumble",
+                "Fiora"
+            ],
             "ovr_breakdown": [
                 {
                     "tipo": "Alt-Art",
@@ -187,7 +219,33 @@
                     "notas": ""
                 }
             ],
-            "mecanicas": [],
+            "mecanicas": [
+                {
+                    "kicker": "tipo",
+                    "name": "Equipment",
+                    "desc": "Subtipo de carta que se puede adjuntar a unidades para hacerlas más fuertes y permanece en juego incluso si la unidad es destruida."
+                },
+                {
+                    "kicker": "token",
+                    "name": "Gold",
+                    "desc": "Tipo de ficha que se puede 'gastar' para generar Poder de cualquier color."
+                },
+                {
+                    "kicker": "keyword",
+                    "name": "Repeat",
+                    "desc": "Permite que los efectos de los hechizos se dupliquen pagando su coste una segunda vez."
+                },
+                {
+                    "kicker": "keyword",
+                    "name": "Quick-Draw",
+                    "desc": "Permite jugar una carta de Equipment a velocidad de reacción y adjuntarla a una unidad sin pagar el coste de Equip."
+                },
+                {
+                    "kicker": "keyword",
+                    "name": "Weaponmaster",
+                    "desc": "Las unidades con Weaponmaster pueden equipar Equipment a sí mismas por un coste reducido y pueden tener múltiples Equipment adjuntos."
+                }
+            ],
             "released": true
         },
         "unleashed": {
@@ -195,12 +253,12 @@
             "abbr": "UNL",
             "set_number": 6,
             "color": "#f97316",
-            "date": "",
+            "date": "Mayo 2026",
             "cartas_reveladas": 0,
             "total": 299,
             "total_base": 222,
             "total_ovr": 77,
-            "imgBase": "",
+            "imgBase": null,
             "legend_count": 12,
             "leyendas": [
                 {
@@ -252,7 +310,12 @@
                     "img": null
                 }
             ],
-            "productos": [],
+            "productos": [
+                "Booster Display (24 packs)",
+                "Booster Packs (14 cards)",
+                "Preconstructed Decks",
+                "The Vault!"
+            ],
             "champion_decks": [],
             "ovr_breakdown": [
                 {
@@ -272,11 +335,86 @@
                     "cantidad": 12,
                     "numeracion": "",
                     "notas": ""
+                },
+                {
+                    "tipo": "Ultimate Rare",
+                    "cantidad": 1,
+                    "numeracion": "Versión overnumbered única",
+                    "notas": "Baron Nashor. Aparece en menos del 0.1% de los sobres, extremadamente difícil de conseguir."
                 }
             ],
-            "mecanicas": [],
+            "mecanicas": [
+                {
+                    "kicker": "mechanic",
+                    "name": "XP",
+                    "desc": "Un recurso que se acumula y se gasta para obtener ventajas únicas. Cada punto de XP ganado aumenta un nivel."
+                },
+                {
+                    "kicker": "keyword",
+                    "name": "Hunt",
+                    "desc": "Cuando una unidad con Hunt conquista o mantiene un campo de batalla, ganas la cantidad de XP indicada en la carta."
+                },
+                {
+                    "kicker": "keyword",
+                    "name": "Level",
+                    "desc": "Las cartas con Level se benefician de la cantidad de XP que has ganado, obteniendo nuevas habilidades al alcanzar ciertos niveles de XP."
+                },
+                {
+                    "kicker": "keyword",
+                    "name": "Ambush",
+                    "desc": "Las cartas de unidad con Ambush se pueden jugar a velocidad de reacción en un campo de batalla donde tienes unidades, permitiendo refuerzos sorpresa."
+                },
+                {
+                    "kicker": "token",
+                    "name": "Battlefield Tokens",
+                    "desc": "Fichas que pueden unirse o reemplazar campos de batalla existentes, como Baron Pit o Brush, alterando las condiciones del campo de batalla."
+                }
+            ],
             "released": true
         }
     },
-    "pull_rates": {}
+    "pull_rates": {
+        "general_booster_pack_contents": {
+            "Common": "7 cartas",
+            "Uncommon": "3 cartas",
+            "Rare_or_better_slots": "2 cartas",
+            "Foil_any_rarity": "1 carta",
+            "Token_or_Rune": "1 carta"
+        },
+        "rarity_odds": {
+            "Epic": "~1 en 4 sobres",
+            "Alt-Art": "~1 en 12 sobres",
+            "Overnumbered": "~1 en 72 sobres",
+            "Signature": "~1 en 720 sobres",
+            "Ultimate_Rare": "<0.1% de los sobres (solo Unleashed)"
+        },
+        "set_specific": {},
+        "per_box": {
+            "Epic": {
+                "origins": "~6 por caja",
+                "spiritforged": "~6 por caja",
+                "unleashed": "~6 por caja"
+            },
+            "Showcase": {
+                "origins": "~2 por caja",
+                "spiritforged": "~2 por caja",
+                "unleashed": "~2 por caja"
+            },
+            "Overnumbered": {
+                "origins": "~1 en 3 cajas",
+                "spiritforged": "~1 en 3 cajas",
+                "unleashed": "~1 en 3 cajas"
+            },
+            "Signature": {
+                "origins": "~1 en 30 cajas",
+                "spiritforged": "~1 en 30 cajas",
+                "unleashed": "~1 en 30 cajas"
+            },
+            "Ultimate_Rare": {
+                "origins": null,
+                "spiritforged": null,
+                "unleashed": "~1 en 42 cajas"
+            }
+        }
+    }
 }
