@@ -3,12 +3,12 @@
         "origins": {
             "id": "origins",
             "abbr": "OGN",
-            "set_number": 2,
+            "set_number": 1,
             "color": "#3ecf8e",
-            "date": "Octubre 2025",
+            "date": "Octubre 31, 2025",
             "cartas_reveladas": 0,
-            "total": 396,
-            "total_base": 315,
+            "total": 395,
+            "total_base": 314,
             "total_ovr": 81,
             "imgBase": null,
             "legend_count": 16,
@@ -128,12 +128,12 @@
         "spiritforged": {
             "id": "spiritforged",
             "abbr": "SFD",
-            "set_number": 5,
+            "set_number": 2,
             "color": "#a78bfa",
-            "date": "Febrero 2026",
+            "date": "Febrero 13, 2026",
             "cartas_reveladas": 0,
-            "total": 301,
-            "total_base": 221,
+            "total": 302,
+            "total_base": 222,
             "total_ovr": 80,
             "imgBase": null,
             "legend_count": 12,
@@ -251,12 +251,12 @@
         "unleashed": {
             "id": "unleashed",
             "abbr": "UNL",
-            "set_number": 6,
+            "set_number": 3,
             "color": "#f97316",
-            "date": "Mayo 2026",
+            "date": "Mayo 8, 2026",
             "cartas_reveladas": 0,
-            "total": 299,
-            "total_base": 222,
+            "total": 306,
+            "total_base": 229,
             "total_ovr": 77,
             "imgBase": null,
             "legend_count": 12,
@@ -371,6 +371,122 @@
                 }
             ],
             "released": true
+        },
+        "vendetta": {
+            "id": "vendetta",
+            "abbr": "VND",
+            "set_number": 4,
+            "color": "#8B0000",
+            "date": "Julio 31, 2026",
+            "cartas_reveladas": 0,
+            "total": 166,
+            "total_base": 116,
+            "total_ovr": 50,
+            "imgBase": null,
+            "legend_count": 7,
+            "leyendas": [
+                {
+                    "name": "Akali",
+                    "img": null
+                },
+                {
+                    "name": "Zed",
+                    "img": null
+                },
+                {
+                    "name": "Shen",
+                    "img": null
+                },
+                {
+                    "name": "Ambessa",
+                    "img": null
+                },
+                {
+                    "name": "Mel",
+                    "img": null
+                },
+                {
+                    "name": "Renekton",
+                    "img": null
+                },
+                {
+                    "name": "Nasus",
+                    "img": null
+                }
+            ],
+            "productos": [
+                "Booster Display (24 packs)",
+                "Booster Packs (14 cards)",
+                "Champion Decks",
+                "Vendetta Vault",
+                "Playmats",
+                "Art Sleeves"
+            ],
+            "champion_decks": [],
+            "ovr_breakdown": [
+                {
+                    "tipo": "Alt-Art",
+                    "cantidad": 50,
+                    "numeracion": "",
+                    "notas": ""
+                }
+            ],
+            "mecanicas": [
+                {
+                    "kicker": "tipo",
+                    "name": "Nuevas Combinaciones de Runas",
+                    "desc": "Introduce nuevas combinaciones de runas: Furia y Calma, Mente y Cuerpo, Caos y Orden."
+                }
+            ],
+            "released": false
+        },
+        "radiance": {
+            "id": "radiance",
+            "abbr": "RDC",
+            "set_number": 5,
+            "color": "#FFD700",
+            "date": "Octubre 23, 2026",
+            "cartas_reveladas": 0,
+            "total": 180,
+            "total_base": 120,
+            "total_ovr": 60,
+            "imgBase": null,
+            "legend_count": 9,
+            "leyendas": [
+                {
+                    "name": "Ekko",
+                    "img": null
+                },
+                {
+                    "name": "Seraphine",
+                    "img": null
+                },
+                {
+                    "name": "Evelynn",
+                    "img": null
+                }
+            ],
+            "productos": [
+                "Booster Display (24 packs)",
+                "Booster Packs (14 cards)"
+            ],
+            "champion_decks": [],
+            "ovr_breakdown": [
+                {
+                    "tipo": "Alt-Art",
+                    "cantidad": 60,
+                    "numeracion": "",
+                    "notas": ""
+                }
+            ],
+            "mecanicas": [
+                {
+                    "kicker": "tipo",
+                    "name": "Nuevas Mecánicas",
+                    "desc": "Se introducirán nuevas mecánicas en esta expansión."
+                }
+            ],
+            "released": false
         }
     },
     "pull_rates": {
@@ -393,27 +509,37 @@
             "Epic": {
                 "origins": "~6 por caja",
                 "spiritforged": "~6 por caja",
-                "unleashed": "~6 por caja"
+                "unleashed": "~6 por caja",
+                "vendetta": "~6 por caja",
+                "radiance": "~6 por caja"
             },
             "Showcase": {
                 "origins": "~2 por caja",
                 "spiritforged": "~2 por caja",
-                "unleashed": "~2 por caja"
+                "unleashed": "~2 por caja",
+                "vendetta": "~2 por caja",
+                "radiance": "~2 por caja"
             },
             "Overnumbered": {
                 "origins": "~1 en 3 cajas",
                 "spiritforged": "~1 en 3 cajas",
-                "unleashed": "~1 en 3 cajas"
+                "unleashed": "~1 en 3 cajas",
+                "vendetta": "~1 en 3 cajas",
+                "radiance": "~1 en 3 cajas"
             },
             "Signature": {
                 "origins": "~1 en 30 cajas",
                 "spiritforged": "~1 en 30 cajas",
-                "unleashed": "~1 en 30 cajas"
+                "unleashed": "~1 en 30 cajas",
+                "vendetta": "~1 en 30 cajas",
+                "radiance": "~1 en 30 cajas"
             },
             "Ultimate_Rare": {
                 "origins": null,
                 "spiritforged": null,
-                "unleashed": "~1 en 42 cajas"
+                "unleashed": "~1 en 42 cajas",
+                "vendetta": null,
+                "radiance": null
             }
         }
     }
