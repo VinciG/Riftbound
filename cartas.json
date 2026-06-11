@@ -10,7 +10,7 @@
             "total": 395,
             "total_base": 314,
             "total_ovr": 81,
-            "imgBase": null,
+            "imgBase": "",
             "legend_count": 16,
             "leyendas": [
                 {
@@ -135,7 +135,7 @@
             "total": 302,
             "total_base": 222,
             "total_ovr": 80,
-            "imgBase": null,
+            "imgBase": "",
             "legend_count": 12,
             "leyendas": [
                 {
@@ -258,7 +258,7 @@
             "total": 306,
             "total_base": 229,
             "total_ovr": 77,
-            "imgBase": null,
+            "imgBase": "",
             "legend_count": 12,
             "leyendas": [
                 {
@@ -382,7 +382,7 @@
             "total": 166,
             "total_base": 116,
             "total_ovr": 50,
-            "imgBase": null,
+            "imgBase": "",
             "legend_count": 7,
             "leyendas": [
                 {
@@ -450,7 +450,7 @@
             "total": 180,
             "total_base": 120,
             "total_ovr": 60,
-            "imgBase": null,
+            "imgBase": "",
             "legend_count": 9,
             "leyendas": [
                 {
