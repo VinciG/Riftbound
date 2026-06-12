@@ -47,7 +47,7 @@ def fmt_price_change(key, old_str, new_str, set_id):
     label = display_name(key, set_id)
     if old_v is not None and new_v is not None:
         diff = new_v - old_v
-        arrow = "🟢🔺" if diff > 0 else "🔴🔻"
+        arrow = "🟢" if diff > 0 else "🔴"
         sign = "+" if diff > 0 else ""
         return f"  {arrow} {label}: {old_str} → {new_str} ({sign}{diff:.2f})"
     return f"  {label}: {old_str} → {new_str}"
