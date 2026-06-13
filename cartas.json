@@ -84,7 +84,8 @@
                 "Champion Deck: Jinx",
                 "Champion Deck: Lee Sin",
                 "Champion Deck: Viktor",
-                "Proving Grounds Starter Box"
+                "Proving Grounds Starter Box",
+                "Arcane Box Set"
             ],
             "champion_decks": [
                 "Jinx",
@@ -193,7 +194,9 @@
                 "Champion Deck: Rumble",
                 "Champion Deck: Fiora",
                 "Pre-Rift Event Kit",
-                "Bulk Runes"
+                "Bulk Runes",
+                "Card Sleeves",
+                "Playmats"
             ],
             "champion_decks": [
                 "Rumble",
@@ -313,10 +316,16 @@
             "productos": [
                 "Booster Display (24 packs)",
                 "Booster Packs (14 cards)",
-                "Preconstructed Decks",
-                "The Vault!"
+                "Champion Decks: Vi & Vex",
+                "The Vault!",
+                "Playmats",
+                "Art Sleeves",
+                "Pre-Rift Event Kits"
             ],
-            "champion_decks": [],
+            "champion_decks": [
+                "Vi",
+                "Vex"
+            ],
             "ovr_breakdown": [
                 {
                     "tipo": "Alt-Art",
@@ -417,12 +426,16 @@
             "productos": [
                 "Booster Display (24 packs)",
                 "Booster Packs (14 cards)",
-                "Champion Decks",
+                "Showdown Decks: Zed vs. Shen",
                 "Vendetta Vault",
                 "Playmats",
-                "Art Sleeves"
+                "Art Sleeves",
+                "Pre-Rift Event Kit"
             ],
-            "champion_decks": [],
+            "champion_decks": [
+                "Zed",
+                "Shen"
+            ],
             "ovr_breakdown": [
                 {
                     "tipo": "Alt-Art",
@@ -468,9 +481,15 @@
             ],
             "productos": [
                 "Booster Display (24 packs)",
-                "Booster Packs (14 cards)"
+                "Booster Packs (14 cards)",
+                "Showdown Decks: Evelynn vs. Seraphine",
+                "Pre-Rift Event Kit",
+                "Vault Bundle"
             ],
-            "champion_decks": [],
+            "champion_decks": [
+                "Evelynn",
+                "Seraphine"
+            ],
             "ovr_breakdown": [
                 {
                     "tipo": "Alt-Art",
