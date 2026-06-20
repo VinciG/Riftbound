@@ -446,7 +446,7 @@
             ],
             "mecanicas": [
                 {
-                    "kicker": "tipo",
+                    "kicker": "mechanic",
                     "name": "Nuevas Combinaciones de Runas",
                     "desc": "Introduce nuevas combinaciones de runas: Furia y Calma (rojo + verde), Mente y Cuerpo (azul + naranja), y Caos y Orden (morado + amarillo)."
                 }
@@ -500,9 +500,9 @@
             ],
             "mecanicas": [
                 {
-                    "kicker": "tipo",
+                    "kicker": "mechanic",
                     "name": "Nuevas Mecánicas",
-                    "desc": "Se introducirán nuevas mecánicas en esta expansión."
+                    "desc": "Se esperan nuevas mecánicas en esta expansión, centradas en temas de creatividad y brillantez."
                 }
             ],
             "released": false
