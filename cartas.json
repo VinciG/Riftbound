@@ -501,8 +501,8 @@
             "mecanicas": [
                 {
                     "kicker": "mechanic",
-                    "name": "Nuevas Mecánicas",
-                    "desc": "Se esperan nuevas mecánicas en esta expansión, centradas en temas de creatividad y brillantez."
+                    "name": "Creatividad y Brillantez",
+                    "desc": "Mecánicas centradas en encontrar soluciones ingeniosas, con Seraphine utilizando tokens que se fortalecen al ser agotados."
                 }
             ],
             "released": false
