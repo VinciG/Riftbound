@@ -211,6 +211,16 @@ def make_price_key(api_id, set_id):
         k = f"{k}-{suffix}"
     return k
 
+def get_price(card):
+    """Return the correct Cardmarket price: normal if available, foil otherwise."""
+    has_normal = card.get("hasNormal", "0")
+    cm = card.get("cmPrice")
+    if has_normal != "1":
+        cm = card.get("cmFoilPrice") or cm
+    if not cm or cm == 0 or cm == "0" or cm == "0.000000":
+        return None
+    return float(cm)
+
 def build_prices(rows, names):
     prices = {}
     legend_min = {}
@@ -219,9 +229,8 @@ def build_prices(rows, names):
         set_name = card.get("set_name")
         set_id = SET_NAME_MAP.get(set_name)
         if not set_id: continue
-        cm_price = card.get("cmPrice")
-        if not cm_price or cm_price == 0 or cm_price == "0" or cm_price == "0.000000": continue
-        cm_f = float(cm_price)
+        cm_f = get_price(card)
+        if cm_f is None: continue
         ps = f"€{cm_f:.2f}"
         if set_id not in prices: prices[set_id] = {}
         prices[set_id][make_price_key(card.get("id",""), set_id)] = ps
@@ -631,9 +640,8 @@ else:
         sn = card.get("set_name")
         sid = SET_NAME_MAP_FINAL.get(sn)
         if not sid: continue
-        cm = card.get("cmPrice")
-        if not cm or cm == 0 or cm == "0" or cm == "0.000000": continue
-        cm_f = float(cm)
+        cm_f = get_price(card)
+        if cm_f is None: continue
         if sid not in final_prices: final_prices[sid] = {}
         final_prices[sid][make_key(card.get("id",""), sid)] = f"€{cm_f:.2f}"
         if card.get("type") == "Legend":
@@ -659,8 +667,7 @@ else:
         sn = card.get("set_name", "")
         sid = SET_NAME_MAP_FINAL.get(sn)
         if not sid: continue
-        cm = card.get("cmPrice")
-        if not cm or cm == 0 or cm == "0" or cm == "0.000000": continue
+        if get_price(card) is None: continue
         k = make_key(card.get("id",""), sid)
         if sid not in id_name_map_save: id_name_map_save[sid] = {}
         id_name_map_save[sid][k] = card.get("name", k)
@@ -686,8 +693,7 @@ else:
         if not champ: continue
         if sid not in legend_data_save: legend_data_save[sid] = {}
         if sid not in legend_data_min: legend_data_min[sid] = {}
-        cm = card.get("cmPrice")
-        cm_f = float(cm) if (cm and cm != 0 and cm != "0" and cm != "0.000000") else None
+        cm_f = get_price(card)
         prev = legend_data_min[sid].get(champ)
         if champ in legend_data_save[sid] and prev is not None and (cm_f is None or cm_f >= prev):
             continue
