@@ -10,7 +10,7 @@
             "total": 395,
             "total_base": 314,
             "total_ovr": 81,
-            "imgBase": null,
+            "imgBase": "https://riftbound.gg/images/cards/",
             "legend_count": 16,
             "leyendas": [
                 {
@@ -136,7 +136,7 @@
             "total": 302,
             "total_base": 222,
             "total_ovr": 80,
-            "imgBase": null,
+            "imgBase": "https://riftbound.gg/images/cards/",
             "legend_count": 12,
             "leyendas": [
                 {
@@ -257,11 +257,11 @@
             "set_number": 3,
             "color": "#f97316",
             "date": "Mayo 2026",
-            "cartas_reveladas": 306,
+            "cartas_reveladas": 303,
             "total": 303,
             "total_base": 226,
             "total_ovr": 77,
-            "imgBase": null,
+            "imgBase": "https://riftbound.gg/images/cards/",
             "legend_count": 12,
             "leyendas": [
                 {
@@ -387,11 +387,11 @@
             "set_number": 4,
             "color": "#8B0000",
             "date": "Julio 2026",
-            "cartas_reveladas": 0,
+            "cartas_reveladas": 166,
             "total": 166,
             "total_base": 116,
             "total_ovr": 50,
-            "imgBase": null,
+            "imgBase": "https://riftbound.gg/images/cards/",
             "legend_count": 7,
             "leyendas": [
                 {
@@ -449,6 +449,11 @@
                     "kicker": "mechanic",
                     "name": "Nuevas Combinaciones de Runas",
                     "desc": "Introduce nuevas combinaciones de runas: Furia y Calma (rojo + verde), Mente y Cuerpo (azul + naranja), y Caos y Orden (morado + amarillo)."
+                },
+                {
+                    "kicker": "mechanic",
+                    "name": "Cartas de Rivalidad",
+                    "desc": "Cartas Overnumbered que forman escenas cohesivas al colocarse junto a su contraparte rival."
                 }
             ],
             "released": false
@@ -459,11 +464,11 @@
             "set_number": 5,
             "color": "#FFD700",
             "date": "Octubre 2026",
-            "cartas_reveladas": 0,
+            "cartas_reveladas": 180,
             "total": 180,
             "total_base": 120,
             "total_ovr": 60,
-            "imgBase": null,
+            "imgBase": "https://riftbound.gg/images/cards/",
             "legend_count": 9,
             "leyendas": [
                 {
@@ -501,8 +506,13 @@
             "mecanicas": [
                 {
                     "kicker": "mechanic",
-                    "name": "Creatividad y Brillantez",
-                    "desc": "Mecánicas centradas en encontrar soluciones ingeniosas, con Seraphine utilizando tokens que se fortalecen al ser agotados."
+                    "name": "Performance y Grandes Jugadas",
+                    "desc": "Mecánicas centradas en la performance y la ejecución de grandes jugadas."
+                },
+                {
+                    "kicker": "mechanic",
+                    "name": "Tokens de Seraphine",
+                    "desc": "Mecánica de Seraphine que utiliza tokens que se fortalecen al ser agotados."
                 }
             ],
             "released": false
