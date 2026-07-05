@@ -391,7 +391,7 @@
             "total": 166,
             "total_base": 116,
             "total_ovr": 50,
-            "imgBase": "https://riftbound.gg/images/cards/",
+            "imgBase": null,
             "legend_count": 7,
             "leyendas": [
                 {
@@ -468,7 +468,7 @@
             "total": 180,
             "total_base": 120,
             "total_ovr": 60,
-            "imgBase": "https://riftbound.gg/images/cards/",
+            "imgBase": null,
             "legend_count": 9,
             "leyendas": [
                 {
