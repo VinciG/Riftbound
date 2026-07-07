@@ -116,12 +116,12 @@
                 {
                     "kicker": "tipo",
                     "name": "Runas",
-                    "desc": "Recurso utilizado para pagar cartas."
+                    "desc": "Recurso utilizado para pagar cartas. Las runas generan Energía (genérica) y Poder (específico de color)."
                 },
                 {
                     "kicker": "tipo",
                     "name": "Campos de Batalla",
-                    "desc": "Zonas por las que los campeones luchan por el control."
+                    "desc": "Zonas por las que los campeones luchan por el control. Los jugadores ganan puntos al Conquistar o Mantener un Campo de Batalla."
                 }
             ],
             "released": true
