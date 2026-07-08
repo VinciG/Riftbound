@@ -388,30 +388,14 @@
             "color": "#8B0000",
             "date": "Julio 2026",
             "cartas_reveladas": 166,
-            "total": 166,
-            "total_base": 116,
-            "total_ovr": 50,
+            "total": 56,
+            "total_base": 56,
+            "total_ovr": 0,
             "imgBase": "https://riftbound.gg/images/cards/",
-            "legend_count": 7,
+            "legend_count": 4,
             "leyendas": [
                 {
                     "name": "Akali",
-                    "img": null
-                },
-                {
-                    "name": "Zed",
-                    "img": null
-                },
-                {
-                    "name": "Shen",
-                    "img": null
-                },
-                {
-                    "name": "Ambessa",
-                    "img": null
-                },
-                {
-                    "name": "Mel",
                     "img": null
                 },
                 {
@@ -419,7 +403,11 @@
                     "img": null
                 },
                 {
-                    "name": "Nasus",
+                    "name": "Yordle",
+                    "img": null
+                },
+                {
+                    "name": "Zed",
                     "img": null
                 }
             ],
@@ -436,14 +424,7 @@
                 "Zed",
                 "Shen"
             ],
-            "ovr_breakdown": [
-                {
-                    "tipo": "Alt-Art",
-                    "cantidad": 50,
-                    "numeracion": "",
-                    "notas": ""
-                }
-            ],
+            "ovr_breakdown": [],
             "mecanicas": [
                 {
                     "kicker": "mechanic",
@@ -456,7 +437,7 @@
                     "desc": "Cartas Overnumbered que forman escenas cohesivas al colocarse junto a su contraparte rival."
                 }
             ],
-            "released": false
+            "released": true
         },
         "radiance": {
             "id": "radiance",

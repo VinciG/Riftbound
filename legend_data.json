@@ -81,6 +81,28 @@
             "number": "259"
         }
     },
+    "vendetta": {
+        "Akali": {
+            "img": "https://static.dotgg.gg/riftbound/cards/VEN-139.webp",
+            "title": "Rogue Assassin",
+            "number": "139"
+        },
+        "Renekton": {
+            "img": "https://static.dotgg.gg/riftbound/cards/VEN-190.webp",
+            "title": "Butcher of the Sands",
+            "number": "190"
+        },
+        "Yordle": {
+            "img": "https://static.dotgg.gg/riftbound/cards/VEN-197.webp",
+            "title": "Heart of the Tempest",
+            "number": "197"
+        },
+        "Zed": {
+            "img": "https://static.dotgg.gg/riftbound/cards/VEN-191.webp",
+            "title": "Master of Shadows",
+            "number": "191"
+        }
+    },
     "spiritforged": {
         "Azir": {
             "img": "https://static.dotgg.gg/riftbound/cards/SFD-197.webp",
