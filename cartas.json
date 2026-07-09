@@ -388,14 +388,22 @@
             "color": "#8B0000",
             "date": "Julio 2026",
             "cartas_reveladas": 166,
-            "total": 56,
-            "total_base": 56,
+            "total": 76,
+            "total_base": 76,
             "total_ovr": 0,
             "imgBase": "https://riftbound.gg/images/cards/",
-            "legend_count": 4,
+            "legend_count": 6,
             "leyendas": [
                 {
                     "name": "Akali",
+                    "img": null
+                },
+                {
+                    "name": "Ambessa",
+                    "img": null
+                },
+                {
+                    "name": "Mel",
                     "img": null
                 },
                 {
@@ -435,6 +443,31 @@
                     "kicker": "mechanic",
                     "name": "Cartas de Rivalidad",
                     "desc": "Cartas Overnumbered que forman escenas cohesivas al colocarse junto a su contraparte rival."
+                },
+                {
+                    "kicker": "subtype",
+                    "name": "Unit-Gear",
+                    "desc": "Cartas que funcionan como unidades y como equipo."
+                },
+                {
+                    "kicker": "spell_type",
+                    "name": "Decrees",
+                    "desc": "Ciclo de hechizos construidos alrededor de rivalidades de Dominio."
+                },
+                {
+                    "kicker": "keyword",
+                    "name": "Flow",
+                    "desc": "Permite jugar cartas desde el descarte en lugar de la mano."
+                },
+                {
+                    "kicker": "keyword",
+                    "name": "Burn",
+                    "desc": "Permite enviar cartas del mazo al descarte para sinergias o daño directo."
+                },
+                {
+                    "kicker": "keyword",
+                    "name": "Empower",
+                    "desc": "Las cartas pueden obtener más poder o efectos adicionales al pagar su coste de Empower."
                 }
             ],
             "released": true
@@ -496,6 +529,11 @@
                     "kicker": "mechanic",
                     "name": "Tokens de Seraphine",
                     "desc": "Mecánica de Seraphine que utiliza tokens que se fortalecen al ser agotados."
+                },
+                {
+                    "kicker": "keyword",
+                    "name": "Recruit",
+                    "desc": "Mecánica relacionada con la creación de tokens de unidad."
                 }
             ],
             "released": false
