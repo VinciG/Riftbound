@@ -388,11 +388,11 @@
             "color": "#8B0000",
             "date": "Julio 2026",
             "cartas_reveladas": 166,
-            "total": 76,
-            "total_base": 76,
+            "total": 104,
+            "total_base": 104,
             "total_ovr": 0,
             "imgBase": "https://riftbound.gg/images/cards/",
-            "legend_count": 6,
+            "legend_count": 8,
             "leyendas": [
                 {
                     "name": "Akali",
@@ -407,7 +407,15 @@
                     "img": null
                 },
                 {
+                    "name": "Nasus",
+                    "img": null
+                },
+                {
                     "name": "Renekton",
+                    "img": null
+                },
+                {
+                    "name": "Shen",
                     "img": null
                 },
                 {

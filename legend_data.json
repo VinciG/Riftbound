@@ -97,10 +97,20 @@
             "title": "Soul's Reflection",
             "number": "151"
         },
+        "Nasus": {
+            "img": "https://static.dotgg.gg/riftbound/cards/VEN-192.webp",
+            "title": "Curator of the Sands",
+            "number": "192"
+        },
         "Renekton": {
             "img": "https://static.dotgg.gg/riftbound/cards/VEN-190.webp",
             "title": "Butcher of the Sands",
             "number": "190"
+        },
+        "Shen": {
+            "img": "https://static.dotgg.gg/riftbound/cards/VEN-193.webp",
+            "title": "Eye of Twilight",
+            "number": "193"
         },
         "Yordle": {
             "img": "https://static.dotgg.gg/riftbound/cards/VEN-197.webp",
