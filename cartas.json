@@ -388,11 +388,11 @@
             "color": "#8B0000",
             "date": "Julio 2026",
             "cartas_reveladas": 166,
-            "total": 104,
-            "total_base": 104,
+            "total": 132,
+            "total_base": 132,
             "total_ovr": 0,
             "imgBase": "https://riftbound.gg/images/cards/",
-            "legend_count": 8,
+            "legend_count": 9,
             "leyendas": [
                 {
                     "name": "Akali",
@@ -400,6 +400,10 @@
                 },
                 {
                     "name": "Ambessa",
+                    "img": null
+                },
+                {
+                    "name": "Jayce",
                     "img": null
                 },
                 {

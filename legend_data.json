@@ -83,19 +83,24 @@
     },
     "vendetta": {
         "Akali": {
-            "img": "https://static.dotgg.gg/riftbound/cards/VEN-139.webp",
+            "img": "https://static.dotgg.gg/riftbound/cards/VEN-189.webp",
             "title": "Rogue Assassin",
-            "number": "139"
+            "number": "189"
         },
         "Ambessa": {
-            "img": "https://static.dotgg.gg/riftbound/cards/VEN-153.webp",
+            "img": "https://static.dotgg.gg/riftbound/cards/VEN-196.webp",
             "title": "Matriarch of War",
-            "number": "153"
+            "number": "196"
+        },
+        "Jayce": {
+            "img": "https://static.dotgg.gg/riftbound/cards/VEN-149.webp",
+            "title": "Defender of Tomorrow",
+            "number": "149"
         },
         "Mel": {
-            "img": "https://static.dotgg.gg/riftbound/cards/VEN-151.webp",
+            "img": "https://static.dotgg.gg/riftbound/cards/VEN-195.webp",
             "title": "Soul's Reflection",
-            "number": "151"
+            "number": "195"
         },
         "Nasus": {
             "img": "https://static.dotgg.gg/riftbound/cards/VEN-192.webp",
