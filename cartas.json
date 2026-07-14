@@ -515,7 +515,7 @@
                 "Booster Packs (14 cards)",
                 "Showdown Decks: Evelynn vs. Seraphine",
                 "Pre-Rift Event Kit",
-                "Vault Bundle",
+                "Radiance Vault",
                 "Playmats",
                 "Art Sleeves"
             ],
@@ -535,7 +535,7 @@
                 {
                     "kicker": "mechanic",
                     "name": "Performance y Grandes Jugadas",
-                    "desc": "Mecánicas centradas en la performance y la ejecución de grandes jugadas."
+                    "desc": "Mecánicas centradas en la performance y la ejecución de grandes jugadas, encontrando soluciones ingeniosas e inventivas."
                 },
                 {
                     "kicker": "mechanic",
