@@ -388,8 +388,8 @@
             "color": "#8B0000",
             "date": "Julio 2026",
             "cartas_reveladas": 166,
-            "total": 197,
-            "total_base": 197,
+            "total": 213,
+            "total_base": 213,
             "total_ovr": 0,
             "imgBase": "https://riftbound.gg/images/cards/",
             "legend_count": 9,
@@ -444,7 +444,26 @@
                 "Zed",
                 "Shen"
             ],
-            "ovr_breakdown": [],
+            "ovr_breakdown": [
+                {
+                    "tipo": "Alt-Art",
+                    "cantidad": 0,
+                    "numeracion": "",
+                    "notas": "Según la API de DotGG, este set no contiene cartas OVR."
+                },
+                {
+                    "tipo": "OVR base",
+                    "cantidad": 0,
+                    "numeracion": "",
+                    "notas": "Según la API de DotGG, este set no contiene cartas OVR."
+                },
+                {
+                    "tipo": "OVR con firma",
+                    "cantidad": 0,
+                    "numeracion": "",
+                    "notas": "Según la API de DotGG, este set no contiene cartas OVR."
+                }
+            ],
             "mecanicas": [
                 {
                     "kicker": "mechanic",
