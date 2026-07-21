@@ -388,8 +388,8 @@
             "color": "#8B0000",
             "date": "Julio 2026",
             "cartas_reveladas": 166,
-            "total": 226,
-            "total_base": 226,
+            "total": 228,
+            "total_base": 228,
             "total_ovr": 0,
             "imgBase": "https://riftbound.gg/images/cards/",
             "legend_count": 9,
@@ -407,6 +407,10 @@
                     "img": null
                 },
                 {
+                    "name": "Kennen",
+                    "img": null
+                },
+                {
                     "name": "Mel",
                     "img": null
                 },
@@ -420,10 +424,6 @@
                 },
                 {
                     "name": "Shen",
-                    "img": null
-                },
-                {
-                    "name": "Yordle",
                     "img": null
                 },
                 {

@@ -97,6 +97,11 @@
             "title": "Defender of Tomorrow",
             "number": "194"
         },
+        "Kennen": {
+            "img": "https://static.dotgg.gg/riftbound/cards/VEN-197.webp",
+            "title": "Heart of the Tempest",
+            "number": "197"
+        },
         "Mel": {
             "img": "https://static.dotgg.gg/riftbound/cards/VEN-195.webp",
             "title": "Soul's Reflection",
@@ -116,11 +121,6 @@
             "img": "https://static.dotgg.gg/riftbound/cards/VEN-193.webp",
             "title": "Eye of Twilight",
             "number": "193"
-        },
-        "Yordle": {
-            "img": "https://static.dotgg.gg/riftbound/cards/VEN-197.webp",
-            "title": "Heart of the Tempest",
-            "number": "197"
         },
         "Zed": {
             "img": "https://static.dotgg.gg/riftbound/cards/VEN-191.webp",
