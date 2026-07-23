@@ -85,7 +85,8 @@
                 "Champion Deck: Lee Sin",
                 "Champion Deck: Viktor",
                 "Proving Grounds Starter Box",
-                "Arcane Box Set"
+                "Arcane Box Set",
+                "Worlds 2025 Bundle"
             ],
             "champion_decks": [
                 "Jinx",
@@ -196,7 +197,8 @@
                 "Pre-Rift Event Kit",
                 "Bulk Runes",
                 "Card Sleeves",
-                "Playmats"
+                "Playmats",
+                "Booster Display Case"
             ],
             "champion_decks": [
                 "Rumble",
@@ -488,7 +490,7 @@
                 {
                     "kicker": "keyword",
                     "name": "Flow",
-                    "desc": "Permite jugar cartas desde el descarte en lugar de la mano."
+                    "desc": "Permite jugar cartas desde el descarte en lugar de la mano, y luego las destierra."
                 },
                 {
                     "kicker": "keyword",
@@ -498,7 +500,7 @@
                 {
                     "kicker": "keyword",
                     "name": "Empower",
-                    "desc": "Las cartas pueden obtener más poder o efectos adicionales al pagar su coste de Empower."
+                    "desc": "Las cartas pueden obtener más poder o efectos adicionales al pagar su coste de Empower. El estado 'Empowered' dura indefinidamente hasta que la carta abandona el campo o es 'Disempowered'."
                 }
             ],
             "released": true
