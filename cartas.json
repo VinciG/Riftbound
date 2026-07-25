@@ -390,9 +390,9 @@
             "color": "#8B0000",
             "date": "Julio 2026",
             "cartas_reveladas": 228,
-            "total": 228,
-            "total_base": 228,
-            "total_ovr": 0,
+            "total": 236,
+            "total_base": 175,
+            "total_ovr": 61,
             "imgBase": "https://riftbound.gg/images/cards/",
             "legend_count": 9,
             "leyendas": [
@@ -449,21 +449,21 @@
             "ovr_breakdown": [
                 {
                     "tipo": "Alt-Art",
-                    "cantidad": 0,
+                    "cantidad": 24,
                     "numeracion": "",
-                    "notas": "Según la API de DotGG, este set no contiene cartas OVR. Sin embargo, fuentes externas como Riot Games Store y Skillshotz Gaming mencionan 'más de 50 Showcase cards' para Vendetta."
+                    "notas": ""
                 },
                 {
                     "tipo": "OVR base",
-                    "cantidad": 0,
+                    "cantidad": 37,
                     "numeracion": "",
-                    "notas": "Según la API de DotGG, este set no contiene cartas OVR. Sin embargo, fuentes externas como Riot Games Store y Skillshotz Gaming mencionan 'más de 50 Showcase cards' para Vendetta."
+                    "notas": ""
                 },
                 {
                     "tipo": "OVR con firma",
                     "cantidad": 0,
                     "numeracion": "",
-                    "notas": "Según la API de DotGG, este set no contiene cartas OVR. Sin embargo, fuentes externas como Riot Games Store y Skillshotz Gaming mencionan 'más de 50 Showcase cards' para Vendetta."
+                    "notas": ""
                 }
             ],
             "mecanicas": [
