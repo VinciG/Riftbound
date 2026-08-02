@@ -390,9 +390,9 @@
             "color": "#8B0000",
             "date": "Julio 2026",
             "cartas_reveladas": 236,
-            "total": 236,
-            "total_base": 175,
-            "total_ovr": 61,
+            "total": 243,
+            "total_base": 181,
+            "total_ovr": 62,
             "imgBase": "https://riftbound.gg/images/cards/",
             "legend_count": 9,
             "leyendas": [
@@ -455,7 +455,7 @@
                 },
                 {
                     "tipo": "OVR base",
-                    "cantidad": 37,
+                    "cantidad": 38,
                     "numeracion": "",
                     "notas": ""
                 },
@@ -570,6 +570,82 @@
                 }
             ],
             "released": false
+        },
+        "legacy": {
+            "id": "legacy",
+            "abbr": "LGC",
+            "set_number": 6,
+            "color": null,
+            "date": "Enero 2027",
+            "cartas_reveladas": 0,
+            "total": 0,
+            "total_base": 0,
+            "total_ovr": 0,
+            "imgBase": "https://riftbound.gg/images/cards/",
+            "legend_count": 4,
+            "leyendas": [
+                {
+                    "name": "Lux",
+                    "img": null
+                },
+                {
+                    "name": "Illaoi",
+                    "img": null
+                },
+                {
+                    "name": "Tryndamere",
+                    "img": null
+                },
+                {
+                    "name": "Heimerdinger",
+                    "img": null
+                }
+            ],
+            "productos": [],
+            "champion_decks": [],
+            "ovr_breakdown": [],
+            "mecanicas": [
+                {
+                    "kicker": "theme",
+                    "name": "Historia y Herencia",
+                    "desc": "Explora la historia y el legado del universo de Runeterra."
+                }
+            ],
+            "released": false
+        },
+        "reckoning": {
+            "id": "reckoning",
+            "abbr": "RCK",
+            "set_number": 7,
+            "color": null,
+            "date": "Abril 2027",
+            "cartas_reveladas": 0,
+            "total": 0,
+            "total_base": 0,
+            "total_ovr": 0,
+            "imgBase": "https://riftbound.gg/images/cards/",
+            "legend_count": 2,
+            "leyendas": [
+                {
+                    "name": "Aurelion Sol",
+                    "img": null
+                },
+                {
+                    "name": "Neeko",
+                    "img": null
+                }
+            ],
+            "productos": [],
+            "champion_decks": [],
+            "ovr_breakdown": [],
+            "mecanicas": [
+                {
+                    "kicker": "theme",
+                    "name": "Sin detalles",
+                    "desc": "Detalles de mecánicas aún no revelados."
+                }
+            ],
+            "released": false
         }
     },
     "pull_rates": {
@@ -582,7 +658,7 @@
         },
         "rarity_odds": {
             "Epic": "~1 en 4 sobres",
-            "Alt-Art": "~1 en 12 sobres",
+            "Alt-Art": "~1 en 144 sobres",
             "Overnumbered": "~1 en 72 sobres",
             "Signature": "~1 en 720 sobres",
             "Ultimate_Rare": "<0.1% de los sobres (solo Unleashed)"
@@ -594,35 +670,45 @@
                 "spiritforged": "~6 por caja",
                 "unleashed": "~6 por caja",
                 "vendetta": "~6 por caja",
-                "radiance": "~6 por caja"
+                "radiance": "~6 por caja",
+                "legacy": "~6 por caja",
+                "reckoning": "~6 por caja"
             },
             "Showcase": {
                 "origins": "~2 por caja",
                 "spiritforged": "~2 por caja",
                 "unleashed": "~2 por caja",
                 "vendetta": "~2 por caja",
-                "radiance": "~2 por caja"
+                "radiance": "~2 por caja",
+                "legacy": "~2 por caja",
+                "reckoning": "~2 por caja"
             },
             "Overnumbered": {
                 "origins": "~1 en 3 cajas",
                 "spiritforged": "~1 en 3 cajas",
                 "unleashed": "~1 en 3 cajas",
                 "vendetta": "~1 en 3 cajas",
-                "radiance": "~1 en 3 cajas"
+                "radiance": "~1 en 3 cajas",
+                "legacy": "~1 en 3 cajas",
+                "reckoning": "~1 en 3 cajas"
             },
             "Signature": {
                 "origins": "~1 en 30 cajas",
                 "spiritforged": "~1 en 30 cajas",
                 "unleashed": "~1 en 30 cajas",
                 "vendetta": "~1 en 30 cajas",
-                "radiance": "~1 en 30 cajas"
+                "radiance": "~1 en 30 cajas",
+                "legacy": "~1 en 30 cajas",
+                "reckoning": "~1 en 30 cajas"
             },
             "Ultimate_Rare": {
                 "origins": null,
                 "spiritforged": null,
                 "unleashed": "~1 en 42 cajas",
                 "vendetta": null,
-                "radiance": null
+                "radiance": null,
+                "legacy": null,
+                "reckoning": null
             }
         }
     }
