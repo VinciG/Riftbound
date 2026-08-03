@@ -575,13 +575,13 @@
             "id": "legacy",
             "abbr": "LGC",
             "set_number": 6,
-            "color": null,
+            "color": "#f97316",
             "date": "Enero 2027",
             "cartas_reveladas": 0,
             "total": 0,
             "total_base": 0,
             "total_ovr": 0,
-            "imgBase": "https://riftbound.gg/images/cards/",
+            "imgBase": null,
             "legend_count": 4,
             "leyendas": [
                 {
@@ -617,13 +617,13 @@
             "id": "reckoning",
             "abbr": "RCK",
             "set_number": 7,
-            "color": null,
+            "color": "#06b6d4",
             "date": "Abril 2027",
             "cartas_reveladas": 0,
             "total": 0,
             "total_base": 0,
             "total_ovr": 0,
-            "imgBase": "https://riftbound.gg/images/cards/",
+            "imgBase": null,
             "legend_count": 2,
             "leyendas": [
                 {
