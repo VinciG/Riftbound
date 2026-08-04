@@ -83,49 +83,49 @@
     },
     "vendetta": {
         "Akali": {
-            "img": "https://static.dotgg.gg/riftbound/cards/VEN-189.webp",
+            "img": "https://static.dotgg.gg/riftbound/cards/VEN-139.webp",
             "title": "Rogue Assassin",
-            "number": "189"
+            "number": "139"
         },
         "Ambessa": {
-            "img": "https://static.dotgg.gg/riftbound/cards/VEN-196.webp",
+            "img": "https://static.dotgg.gg/riftbound/cards/VEN-153.webp",
             "title": "Matriarch of War",
-            "number": "196"
+            "number": "153"
         },
         "Jayce": {
-            "img": "https://static.dotgg.gg/riftbound/cards/VEN-194.webp",
+            "img": "https://static.dotgg.gg/riftbound/cards/VEN-149.webp",
             "title": "Defender of Tomorrow",
-            "number": "194"
+            "number": "149"
         },
         "Kennen": {
-            "img": "https://static.dotgg.gg/riftbound/cards/VEN-197.webp",
+            "img": "https://static.dotgg.gg/riftbound/cards/VEN-155.webp",
             "title": "Heart of the Tempest",
-            "number": "197"
+            "number": "155"
         },
         "Mel": {
-            "img": "https://static.dotgg.gg/riftbound/cards/VEN-195.webp",
+            "img": "https://static.dotgg.gg/riftbound/cards/VEN-151.webp",
             "title": "Soul's Reflection",
-            "number": "195"
+            "number": "151"
         },
         "Nasus": {
-            "img": "https://static.dotgg.gg/riftbound/cards/VEN-192.webp",
+            "img": "https://static.dotgg.gg/riftbound/cards/VEN-145.webp",
             "title": "Curator of the Sands",
-            "number": "192"
+            "number": "145"
         },
         "Renekton": {
-            "img": "https://static.dotgg.gg/riftbound/cards/VEN-190.webp",
+            "img": "https://static.dotgg.gg/riftbound/cards/VEN-141.webp",
             "title": "Butcher of the Sands",
-            "number": "190"
+            "number": "141"
         },
         "Shen": {
-            "img": "https://static.dotgg.gg/riftbound/cards/VEN-193.webp",
+            "img": "https://static.dotgg.gg/riftbound/cards/VEN-147.webp",
             "title": "Eye of Twilight",
-            "number": "193"
+            "number": "147"
         },
         "Zed": {
-            "img": "https://static.dotgg.gg/riftbound/cards/VEN-191.webp",
+            "img": "https://static.dotgg.gg/riftbound/cards/VEN-143.webp",
             "title": "Master of Shadows",
-            "number": "191"
+            "number": "143"
         }
     },
     "spiritforged": {

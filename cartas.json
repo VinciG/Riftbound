@@ -534,9 +534,9 @@
             "productos": [
                 "Booster Display (24 packs)",
                 "Booster Packs (14 cards)",
-                "Showdown Decks: Evelynn vs. Seraphine",
-                "Pre-Rift Event Kit",
-                "Radiance Vault",
+                "Showdown Decks: Seraphine vs. Evelynn",
+                "Vault Bundle",
+                "Pre-Rift kits",
                 "Playmats",
                 "Art Sleeves"
             ],
@@ -556,7 +556,7 @@
                 {
                     "kicker": "mechanic",
                     "name": "Performance y Grandes Jugadas",
-                    "desc": "Mecánicas centradas en la performance y la ejecución de grandes jugadas, encontrando soluciones ingeniosas e inventivas."
+                    "desc": "Mecánicas centradas en la performance y la ejecución de grandes jugadas, encontrando soluciones ingeniosas e inventivas. El set se enfoca en jugar al máximo rendimiento bajo los focos más brillantes."
                 },
                 {
                     "kicker": "mechanic",
@@ -601,14 +601,57 @@
                     "img": null
                 }
             ],
-            "productos": [],
-            "champion_decks": [],
-            "ovr_breakdown": [],
+            "productos": [
+                "Booster Packs & Displays",
+                "Champion Decks: Tryndamere",
+                "Champion Decks: Ashe",
+                "Champion Decks: Lux",
+                "Champion Decks: Garen",
+                "Vault Bundle",
+                "Pre-Rift kits",
+                "Proving Grounds, 2nd Edition"
+            ],
+            "champion_decks": [
+                "Tryndamere",
+                "Ashe",
+                "Lux",
+                "Garen"
+            ],
+            "ovr_breakdown": [
+                {
+                    "tipo": "Alt-Art",
+                    "cantidad": 93,
+                    "numeracion": "",
+                    "notas": ""
+                },
+                {
+                    "tipo": "OVR base",
+                    "cantidad": 0,
+                    "numeracion": "",
+                    "notas": ""
+                },
+                {
+                    "tipo": "OVR con firma",
+                    "cantidad": 0,
+                    "numeracion": "",
+                    "notas": ""
+                }
+            ],
             "mecanicas": [
                 {
                     "kicker": "theme",
                     "name": "Historia y Herencia",
-                    "desc": "Explora la historia y el legado del universo de Runeterra."
+                    "desc": "Explora la historia y el legado del universo de Runeterra, con temas impulsados por regiones como Demacia, Noxus, Jonia, Piltover/Zaun, Freljord y Aguas Estancadas."
+                },
+                {
+                    "kicker": "design",
+                    "name": "Diseño enfocado en Draft",
+                    "desc": "La primera expansión diseñada específicamente para el formato Draft, con cambios en el contenido de los sobres (6 comunes en lugar de 7, un espacio para Leyendas y Campos de Batalla)."
+                },
+                {
+                    "kicker": "templating",
+                    "name": "Revisión de Plantillas de Cartas",
+                    "desc": "Introduce un icono de flecha para habilidades disparadas, resalta objetivos con fondo gris, y cambia 'jugar' por 'crear' para tokens y 'cuando entro' para efectos de entrada al campo."
                 }
             ],
             "released": false
@@ -635,14 +678,42 @@
                     "img": null
                 }
             ],
-            "productos": [],
-            "champion_decks": [],
-            "ovr_breakdown": [],
+            "productos": [
+                "Booster Packs & Displays",
+                "Champion Decks: Shyvana",
+                "Champion Decks: Vayne",
+                "Vault Bundle",
+                "Pre-Rift kits"
+            ],
+            "champion_decks": [
+                "Shyvana",
+                "Vayne"
+            ],
+            "ovr_breakdown": [
+                {
+                    "tipo": "Alt-Art",
+                    "cantidad": 67,
+                    "numeracion": "",
+                    "notas": ""
+                },
+                {
+                    "tipo": "OVR base",
+                    "cantidad": 0,
+                    "numeracion": "",
+                    "notas": ""
+                },
+                {
+                    "tipo": "OVR con firma",
+                    "cantidad": 0,
+                    "numeracion": "",
+                    "notas": ""
+                }
+            ],
             "mecanicas": [
                 {
                     "kicker": "theme",
-                    "name": "Sin detalles",
-                    "desc": "Detalles de mecánicas aún no revelados."
+                    "name": "Despertar a los Antiguos",
+                    "desc": "El set se centra en el tema 'Despertar a los Antiguos', introduciendo campeones y criaturas masivas de League of Legends."
                 }
             ],
             "released": false
