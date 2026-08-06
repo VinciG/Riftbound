@@ -548,12 +548,6 @@
                     "cantidad": 60,
                     "numeracion": "",
                     "notas": ""
-                },
-                {
-                    "tipo": "Ultimate Rare",
-                    "cantidad": 1,
-                    "numeracion": "",
-                    "notas": "Una carta Ultimate Rare será incluida en Radiance."
                 }
             ],
             "mecanicas": [
@@ -709,7 +703,7 @@
         },
         "rarity_odds": {
             "Epic": "~1 en 4 sobres",
-            "Alt-Art": "~1 en 144 sobres",
+            "Showcase": "~1 en 12 sobres",
             "Overnumbered": "~1 en 72 sobres",
             "Signature": "~1 en 720 sobres",
             "Ultimate_Rare": "<0.1% de los sobres (solo Unleashed)"
