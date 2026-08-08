@@ -691,6 +691,74 @@
                 }
             ],
             "released": false
+        },
+        "bandlecity": {
+            "id": "bandlecity",
+            "abbr": "BDC",
+            "set_number": 8,
+            "color": "#FDE047",
+            "date": "Q3 2027",
+            "cartas_reveladas": 0,
+            "total": 0,
+            "total_base": 0,
+            "total_ovr": 0,
+            "imgBase": "https://riftbound.gg/images/cards/",
+            "legend_count": 0,
+            "leyendas": [],
+            "productos": [
+                "Booster Packs & Displays"
+            ],
+            "champion_decks": [],
+            "ovr_breakdown": [
+                {
+                    "tipo": "Alt-Art",
+                    "cantidad": 0,
+                    "numeracion": "",
+                    "notas": ""
+                }
+            ],
+            "mecanicas": [
+                {
+                    "kicker": "theme",
+                    "name": "Bandle City",
+                    "desc": "El set se centra en el tema de Bandle City, hogar de los Yordles."
+                }
+            ],
+            "released": false
+        },
+        "shadowisles": {
+            "id": "shadowisles",
+            "abbr": "SHI",
+            "set_number": 9,
+            "color": "#4C1D95",
+            "date": "Q4 2027",
+            "cartas_reveladas": 0,
+            "total": 0,
+            "total_base": 0,
+            "total_ovr": 0,
+            "imgBase": "https://riftbound.gg/images/cards/",
+            "legend_count": 0,
+            "leyendas": [],
+            "productos": [
+                "Booster Packs & Displays"
+            ],
+            "champion_decks": [],
+            "ovr_breakdown": [
+                {
+                    "tipo": "Alt-Art",
+                    "cantidad": 0,
+                    "numeracion": "",
+                    "notas": ""
+                }
+            ],
+            "mecanicas": [
+                {
+                    "kicker": "theme",
+                    "name": "Shadow Isles",
+                    "desc": "El set se centra en el tema de las Islas de la Sombra."
+                }
+            ],
+            "released": false
         }
     },
     "pull_rates": {
@@ -724,7 +792,9 @@
                 "vendetta": "~6 por caja",
                 "radiance": "~6 por caja",
                 "legacy": "~6 por caja",
-                "reckoning": "~6 por caja"
+                "reckoning": "~6 por caja",
+                "bandlecity": "~6 por caja",
+                "shadowisles": "~6 por caja"
             },
             "Showcase": {
                 "origins": "~2 por caja",
@@ -733,7 +803,9 @@
                 "vendetta": "~2 por caja",
                 "radiance": "~2 por caja",
                 "legacy": "~2 por caja",
-                "reckoning": "~2 por caja"
+                "reckoning": "~2 por caja",
+                "bandlecity": "~2 por caja",
+                "shadowisles": "~2 por caja"
             },
             "Overnumbered": {
                 "origins": "~1 en 3 cajas",
@@ -742,7 +814,9 @@
                 "vendetta": "~1 en 3 cajas",
                 "radiance": "~1 en 3 cajas",
                 "legacy": "~1 en 3 cajas",
-                "reckoning": "~1 en 3 cajas"
+                "reckoning": "~1 en 3 cajas",
+                "bandlecity": "~1 en 3 cajas",
+                "shadowisles": "~1 en 3 cajas"
             },
             "Signature": {
                 "origins": "~1 en 30 cajas",
@@ -751,7 +825,9 @@
                 "vendetta": "~1 en 30 cajas",
                 "radiance": "~1 en 30 cajas",
                 "legacy": "~1 en 30 cajas",
-                "reckoning": "~1 en 30 cajas"
+                "reckoning": "~1 en 30 cajas",
+                "bandlecity": "~1 en 30 cajas",
+                "shadowisles": "~1 en 30 cajas"
             },
             "Ultimate_Rare": {
                 "origins": null,
@@ -760,7 +836,9 @@
                 "vendetta": null,
                 "radiance": null,
                 "legacy": null,
-                "reckoning": null
+                "reckoning": null,
+                "bandlecity": null,
+                "shadowisles": null
             }
         }
     }
