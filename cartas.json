@@ -618,7 +618,7 @@
             "ovr_breakdown": [
                 {
                     "tipo": "Alt-Art",
-                    "cantidad": 0,
+                    "cantidad": 93,
                     "numeracion": "",
                     "notas": ""
                 }
@@ -678,7 +678,7 @@
             "ovr_breakdown": [
                 {
                     "tipo": "Alt-Art",
-                    "cantidad": 0,
+                    "cantidad": 67,
                     "numeracion": "",
                     "notas": ""
                 }
@@ -759,6 +759,27 @@
                 }
             ],
             "released": false
+        },
+        "vendetta_(gen_con)": {
+            "id": "vendetta_(gen_con)",
+            "abbr": "VEN",
+            "set_number": 10,
+            "color": "#84cc16",
+            "date": "Julio 2026",
+            "cartas_reveladas": 0,
+            "total": 1,
+            "total_base": 1,
+            "total_ovr": 0,
+            "imgBase": null,
+            "legend_count": 0,
+            "leyendas": [],
+            "productos": [
+                "Vendetta Pre-Rift Kit"
+            ],
+            "champion_decks": [],
+            "ovr_breakdown": [],
+            "mecanicas": [],
+            "released": true
         }
     },
     "pull_rates": {
@@ -794,7 +815,8 @@
                 "legacy": "~6 por caja",
                 "reckoning": "~6 por caja",
                 "bandlecity": "~6 por caja",
-                "shadowisles": "~6 por caja"
+                "shadowisles": "~6 por caja",
+                "vendetta_(gen_con)": "~6 por caja"
             },
             "Showcase": {
                 "origins": "~2 por caja",
@@ -805,7 +827,8 @@
                 "legacy": "~2 por caja",
                 "reckoning": "~2 por caja",
                 "bandlecity": "~2 por caja",
-                "shadowisles": "~2 por caja"
+                "shadowisles": "~2 por caja",
+                "vendetta_(gen_con)": "~2 por caja"
             },
             "Overnumbered": {
                 "origins": "~1 en 3 cajas",
@@ -816,7 +839,8 @@
                 "legacy": "~1 en 3 cajas",
                 "reckoning": "~1 en 3 cajas",
                 "bandlecity": "~1 en 3 cajas",
-                "shadowisles": "~1 en 3 cajas"
+                "shadowisles": "~1 en 3 cajas",
+                "vendetta_(gen_con)": "~1 en 3 cajas"
             },
             "Signature": {
                 "origins": "~1 en 30 cajas",
@@ -827,7 +851,8 @@
                 "legacy": "~1 en 30 cajas",
                 "reckoning": "~1 en 30 cajas",
                 "bandlecity": "~1 en 30 cajas",
-                "shadowisles": "~1 en 30 cajas"
+                "shadowisles": "~1 en 30 cajas",
+                "vendetta_(gen_con)": "~1 en 30 cajas"
             },
             "Ultimate_Rare": {
                 "origins": null,
@@ -838,7 +863,8 @@
                 "legacy": null,
                 "reckoning": null,
                 "bandlecity": null,
-                "shadowisles": null
+                "shadowisles": null,
+                "vendetta_(gen_con)": null
             }
         }
     }
