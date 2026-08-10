@@ -618,7 +618,7 @@
             "ovr_breakdown": [
                 {
                     "tipo": "Alt-Art",
-                    "cantidad": 93,
+                    "cantidad": 0,
                     "numeracion": "",
                     "notas": ""
                 }
@@ -678,7 +678,7 @@
             "ovr_breakdown": [
                 {
                     "tipo": "Alt-Art",
-                    "cantidad": 67,
+                    "cantidad": 0,
                     "numeracion": "",
                     "notas": ""
                 }
@@ -778,7 +778,13 @@
             ],
             "champion_decks": [],
             "ovr_breakdown": [],
-            "mecanicas": [],
+            "mecanicas": [
+                {
+                    "kicker": "theme",
+                    "name": "No nuevas mecánicas",
+                    "desc": "Esta expansión promocional no introduce nuevas mecánicas; utiliza las de Vendetta."
+                }
+            ],
             "released": true
         }
     },
