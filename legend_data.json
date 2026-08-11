@@ -92,6 +92,11 @@
             "title": "Matriarch of War",
             "number": "153"
         },
+        "Dog": {
+            "img": "https://static.dotgg.gg/riftbound/cards/VEN-192-STAR.webp",
+            "title": "Curator of the Sands",
+            "number": "192"
+        },
         "Jayce": {
             "img": "https://static.dotgg.gg/riftbound/cards/VEN-149.webp",
             "title": "Defender of Tomorrow",
@@ -121,6 +126,11 @@
             "img": "https://static.dotgg.gg/riftbound/cards/VEN-147.webp",
             "title": "Eye of Twilight",
             "number": "147"
+        },
+        "Yordle": {
+            "img": "https://static.dotgg.gg/riftbound/cards/VEN-197-STAR.webp",
+            "title": "Heart of the Tempest",
+            "number": "197"
         },
         "Zed": {
             "img": "https://static.dotgg.gg/riftbound/cards/VEN-143.webp",

@@ -394,7 +394,7 @@
             "total_base": 181,
             "total_ovr": 62,
             "imgBase": "https://riftbound.gg/images/cards/",
-            "legend_count": 9,
+            "legend_count": 11,
             "leyendas": [
                 {
                     "name": "Akali",
@@ -402,6 +402,10 @@
                 },
                 {
                     "name": "Ambessa",
+                    "img": null
+                },
+                {
+                    "name": "Dog",
                     "img": null
                 },
                 {
@@ -426,6 +430,10 @@
                 },
                 {
                     "name": "Shen",
+                    "img": null
+                },
+                {
+                    "name": "Yordle",
                     "img": null
                 },
                 {
@@ -532,8 +540,7 @@
                 }
             ],
             "productos": [
-                "Booster Display (24 packs)",
-                "Booster Packs (14 cards)",
+                "Booster Packs & Displays",
                 "Showdown Decks: Seraphine vs. Evelynn",
                 "Vault Bundle",
                 "Pre-Rift kits"
@@ -548,6 +555,12 @@
                     "cantidad": 60,
                     "numeracion": "",
                     "notas": ""
+                },
+                {
+                    "tipo": "Ultimate Rare",
+                    "cantidad": 1,
+                    "numeracion": "Versión overnumbered única",
+                    "notas": "Una nueva carta Ultimate Rare será parte de Radiance."
                 }
             ],
             "mecanicas": [
@@ -613,11 +626,27 @@
                 "Tryndamere",
                 "Ashe",
                 "Lux",
-                "Garen"
+                "Garen",
+                "Heimerdinger",
+                "Karma",
+                "Vladimir",
+                "Illaoi"
             ],
             "ovr_breakdown": [
                 {
                     "tipo": "Alt-Art",
+                    "cantidad": 93,
+                    "numeracion": "",
+                    "notas": ""
+                },
+                {
+                    "tipo": "OVR base",
+                    "cantidad": 0,
+                    "numeracion": "",
+                    "notas": ""
+                },
+                {
+                    "tipo": "OVR con firma",
                     "cantidad": 0,
                     "numeracion": "",
                     "notas": ""
@@ -678,6 +707,18 @@
             "ovr_breakdown": [
                 {
                     "tipo": "Alt-Art",
+                    "cantidad": 67,
+                    "numeracion": "",
+                    "notas": ""
+                },
+                {
+                    "tipo": "OVR base",
+                    "cantidad": 0,
+                    "numeracion": "",
+                    "notas": ""
+                },
+                {
+                    "tipo": "OVR con firma",
                     "cantidad": 0,
                     "numeracion": "",
                     "notas": ""
@@ -865,7 +906,7 @@
                 "spiritforged": null,
                 "unleashed": "~1 en 42 cajas",
                 "vendetta": null,
-                "radiance": null,
+                "radiance": "~1 en 42 cajas",
                 "legacy": null,
                 "reckoning": null,
                 "bandlecity": null,
