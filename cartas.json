@@ -638,18 +638,6 @@
                     "cantidad": 93,
                     "numeracion": "",
                     "notas": ""
-                },
-                {
-                    "tipo": "OVR base",
-                    "cantidad": 0,
-                    "numeracion": "",
-                    "notas": ""
-                },
-                {
-                    "tipo": "OVR con firma",
-                    "cantidad": 0,
-                    "numeracion": "",
-                    "notas": ""
                 }
             ],
             "mecanicas": [
@@ -708,18 +696,6 @@
                 {
                     "tipo": "Alt-Art",
                     "cantidad": 67,
-                    "numeracion": "",
-                    "notas": ""
-                },
-                {
-                    "tipo": "OVR base",
-                    "cantidad": 0,
-                    "numeracion": "",
-                    "notas": ""
-                },
-                {
-                    "tipo": "OVR con firma",
-                    "cantidad": 0,
                     "numeracion": "",
                     "notas": ""
                 }
@@ -839,7 +815,7 @@
         },
         "rarity_odds": {
             "Epic": "~1 en 4 sobres",
-            "Showcase": "~1 en 12 sobres",
+            "Showcase": "~1 en 10 sobres",
             "Overnumbered": "~1 en 72 sobres",
             "Signature": "~1 en 720 sobres",
             "Ultimate_Rare": "<0.1% de los sobres (solo Unleashed)"
