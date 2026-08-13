@@ -261,5 +261,17 @@
             "title": "Piltover Enforcer",
             "number": "187"
         }
+    },
+    "secret_garden_set": {
+        "Ivern": {
+            "img": "https://static.dotgg.gg/riftbound/cards/SGN-002/003-P.webp",
+            "title": "Green Father",
+            "number": "002"
+        },
+        "Lillia": {
+            "img": "https://static.dotgg.gg/riftbound/cards/SGN - 001/003 - P.webp",
+            "title": "Bashful Bloom",
+            "number": ""
+        }
     }
 }

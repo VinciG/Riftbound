@@ -638,6 +638,12 @@
                     "cantidad": 93,
                     "numeracion": "",
                     "notas": ""
+                },
+                {
+                    "tipo": "Ultimate Rare",
+                    "cantidad": 0,
+                    "numeracion": "",
+                    "notas": ""
                 }
             ],
             "mecanicas": [
@@ -698,6 +704,12 @@
                     "cantidad": 67,
                     "numeracion": "",
                     "notas": ""
+                },
+                {
+                    "tipo": "Ultimate Rare",
+                    "cantidad": 0,
+                    "numeracion": "",
+                    "notas": ""
                 }
             ],
             "mecanicas": [
@@ -729,6 +741,12 @@
             "ovr_breakdown": [
                 {
                     "tipo": "Alt-Art",
+                    "cantidad": 0,
+                    "numeracion": "",
+                    "notas": ""
+                },
+                {
+                    "tipo": "Ultimate Rare",
                     "cantidad": 0,
                     "numeracion": "",
                     "notas": ""
@@ -766,6 +784,12 @@
                     "cantidad": 0,
                     "numeracion": "",
                     "notas": ""
+                },
+                {
+                    "tipo": "Ultimate Rare",
+                    "cantidad": 0,
+                    "numeracion": "",
+                    "notas": ""
                 }
             ],
             "mecanicas": [
@@ -794,12 +818,86 @@
                 "Vendetta Pre-Rift Kit"
             ],
             "champion_decks": [],
-            "ovr_breakdown": [],
+            "ovr_breakdown": [
+                {
+                    "tipo": "Alt-Art",
+                    "cantidad": 0,
+                    "numeracion": "",
+                    "notas": ""
+                },
+                {
+                    "tipo": "OVR base",
+                    "cantidad": 0,
+                    "numeracion": "",
+                    "notas": ""
+                },
+                {
+                    "tipo": "OVR con firma",
+                    "cantidad": 0,
+                    "numeracion": "",
+                    "notas": ""
+                }
+            ],
             "mecanicas": [
                 {
                     "kicker": "theme",
                     "name": "No nuevas mecánicas",
                     "desc": "Esta expansión promocional no introduce nuevas mecánicas; utiliza las de Vendetta."
+                }
+            ],
+            "released": true
+        },
+        "secret_garden_set": {
+            "id": "secret_garden_set",
+            "abbr": "SGN",
+            "set_number": 5,
+            "color": "#a78bfa",
+            "date": "Julio 2026",
+            "cartas_reveladas": 0,
+            "total": 3,
+            "total_base": 1,
+            "total_ovr": 2,
+            "imgBase": null,
+            "legend_count": 2,
+            "leyendas": [
+                {
+                    "name": "Ivern",
+                    "img": null
+                },
+                {
+                    "name": "Lillia",
+                    "img": null
+                }
+            ],
+            "productos": [
+                "Secret Garden Limited Gift Box"
+            ],
+            "champion_decks": [],
+            "ovr_breakdown": [
+                {
+                    "tipo": "Alt-Art",
+                    "cantidad": 0,
+                    "numeracion": "",
+                    "notas": ""
+                },
+                {
+                    "tipo": "OVR base",
+                    "cantidad": 2,
+                    "numeracion": "",
+                    "notas": ""
+                },
+                {
+                    "tipo": "OVR con firma",
+                    "cantidad": 0,
+                    "numeracion": "",
+                    "notas": ""
+                }
+            ],
+            "mecanicas": [
+                {
+                    "kicker": "theme",
+                    "name": "No nuevas mecánicas",
+                    "desc": "Esta expansión promocional se centra en cartas de arte alternativo de sets existentes y no introduce nuevas mecánicas."
                 }
             ],
             "released": true
@@ -839,7 +937,8 @@
                 "reckoning": "~6 por caja",
                 "bandlecity": "~6 por caja",
                 "shadowisles": "~6 por caja",
-                "vendetta_(gen_con)": "~6 por caja"
+                "vendetta_(gen_con)": "~6 por caja",
+                "secret_garden_set": "~6 por caja"
             },
             "Showcase": {
                 "origins": "~2 por caja",
@@ -851,7 +950,8 @@
                 "reckoning": "~2 por caja",
                 "bandlecity": "~2 por caja",
                 "shadowisles": "~2 por caja",
-                "vendetta_(gen_con)": "~2 por caja"
+                "vendetta_(gen_con)": "~2 por caja",
+                "secret_garden_set": "~2 por caja"
             },
             "Overnumbered": {
                 "origins": "~1 en 3 cajas",
@@ -863,7 +963,8 @@
                 "reckoning": "~1 en 3 cajas",
                 "bandlecity": "~1 en 3 cajas",
                 "shadowisles": "~1 en 3 cajas",
-                "vendetta_(gen_con)": "~1 en 3 cajas"
+                "vendetta_(gen_con)": "~1 en 3 cajas",
+                "secret_garden_set": "~1 en 3 cajas"
             },
             "Signature": {
                 "origins": "~1 en 30 cajas",
@@ -875,7 +976,8 @@
                 "reckoning": "~1 en 30 cajas",
                 "bandlecity": "~1 en 30 cajas",
                 "shadowisles": "~1 en 30 cajas",
-                "vendetta_(gen_con)": "~1 en 30 cajas"
+                "vendetta_(gen_con)": "~1 en 30 cajas",
+                "secret_garden_set": "~1 en 30 cajas"
             },
             "Ultimate_Rare": {
                 "origins": null,
@@ -887,7 +989,8 @@
                 "reckoning": null,
                 "bandlecity": null,
                 "shadowisles": null,
-                "vendetta_(gen_con)": null
+                "vendetta_(gen_con)": null,
+                "secret_garden_set": null
             }
         }
     }
