@@ -516,8 +516,8 @@
         "radiance": {
             "id": "radiance",
             "abbr": "RDC",
-            "set_number": 5,
             "color": "#FFD700",
+            "set_number": 5,
             "date": "Octubre 2026",
             "cartas_reveladas": 180,
             "total": 180,
@@ -543,7 +543,10 @@
                 "Booster Packs & Displays",
                 "Showdown Decks: Seraphine vs. Evelynn",
                 "Vault Bundle",
-                "Pre-Rift kits"
+                "Pre-Rift kits",
+                "Playmats",
+                "Art Sleeves",
+                "Collector's Binder"
             ],
             "champion_decks": [
                 "Evelynn",
@@ -620,28 +623,20 @@
                 "Champion Decks: Garen",
                 "Vault Bundle",
                 "Pre-Rift kits",
-                "Proving Grounds, 2nd Edition"
+                "Proving Grounds, 2nd Edition",
+                "Sanctum Boxes",
+                "Collector Binder"
             ],
             "champion_decks": [
                 "Tryndamere",
                 "Ashe",
                 "Lux",
-                "Garen",
-                "Heimerdinger",
-                "Karma",
-                "Vladimir",
-                "Illaoi"
+                "Garen"
             ],
             "ovr_breakdown": [
                 {
                     "tipo": "Alt-Art",
                     "cantidad": 93,
-                    "numeracion": "",
-                    "notas": ""
-                },
-                {
-                    "tipo": "Ultimate Rare",
-                    "cantidad": 0,
                     "numeracion": "",
                     "notas": ""
                 }
@@ -704,12 +699,6 @@
                     "cantidad": 67,
                     "numeracion": "",
                     "notas": ""
-                },
-                {
-                    "tipo": "Ultimate Rare",
-                    "cantidad": 0,
-                    "numeracion": "",
-                    "notas": ""
                 }
             ],
             "mecanicas": [
@@ -741,6 +730,18 @@
             "ovr_breakdown": [
                 {
                     "tipo": "Alt-Art",
+                    "cantidad": 0,
+                    "numeracion": "",
+                    "notas": ""
+                },
+                {
+                    "tipo": "OVR base",
+                    "cantidad": 0,
+                    "numeracion": "",
+                    "notas": ""
+                },
+                {
+                    "tipo": "OVR con firma",
                     "cantidad": 0,
                     "numeracion": "",
                     "notas": ""
@@ -781,6 +782,18 @@
             "ovr_breakdown": [
                 {
                     "tipo": "Alt-Art",
+                    "cantidad": 0,
+                    "numeracion": "",
+                    "notas": ""
+                },
+                {
+                    "tipo": "OVR base",
+                    "cantidad": 0,
+                    "numeracion": "",
+                    "notas": ""
+                },
+                {
+                    "tipo": "OVR con firma",
                     "cantidad": 0,
                     "numeracion": "",
                     "notas": ""
