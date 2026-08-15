@@ -663,7 +663,6 @@
         "reckoning": {
             "id": "reckoning",
             "abbr": "RCK",
-            "set_number": 7,
             "color": "#06b6d4",
             "date": "Abril 2027",
             "cartas_reveladas": 264,
@@ -824,7 +823,7 @@
             "total": 1,
             "total_base": 1,
             "total_ovr": 0,
-            "imgBase": null,
+            "imgBase": "",
             "legend_count": 0,
             "leyendas": [],
             "productos": [
@@ -870,7 +869,7 @@
             "total": 3,
             "total_base": 1,
             "total_ovr": 2,
-            "imgBase": null,
+            "imgBase": "",
             "legend_count": 2,
             "leyendas": [
                 {
