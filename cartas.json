@@ -86,7 +86,9 @@
                 "Champion Deck: Viktor",
                 "Proving Grounds Starter Box",
                 "Arcane Box Set",
-                "Worlds 2025 Bundle"
+                "Worlds 2025 Bundle",
+                "Art Sleeves",
+                "Playmats"
             ],
             "champion_decks": [
                 "Jinx",
@@ -823,7 +825,7 @@
             "total": 1,
             "total_base": 1,
             "total_ovr": 0,
-            "imgBase": "",
+            "imgBase": null,
             "legend_count": 0,
             "leyendas": [],
             "productos": [
@@ -869,7 +871,7 @@
             "total": 3,
             "total_base": 1,
             "total_ovr": 2,
-            "imgBase": "",
+            "imgBase": null,
             "legend_count": 2,
             "leyendas": [
                 {
