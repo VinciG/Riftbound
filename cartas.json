@@ -321,7 +321,7 @@
                 "Booster Display (24 packs)",
                 "Booster Packs (14 cards)",
                 "Champion Decks: Vi & Vex",
-                "The Vault!",
+                "Unleashed Vault",
                 "Playmats",
                 "Art Sleeves",
                 "Pre-Rift Event Kits"
@@ -638,7 +638,7 @@
             "ovr_breakdown": [
                 {
                     "tipo": "Alt-Art",
-                    "cantidad": 93,
+                    "cantidad": 0,
                     "numeracion": "",
                     "notas": ""
                 }
@@ -697,7 +697,7 @@
             "ovr_breakdown": [
                 {
                     "tipo": "Alt-Art",
-                    "cantidad": 67,
+                    "cantidad": 0,
                     "numeracion": "",
                     "notas": ""
                 }
@@ -927,7 +927,7 @@
         },
         "rarity_odds": {
             "Epic": "~1 en 4 sobres",
-            "Showcase": "~1 en 10 sobres",
+            "Showcase": "~1 en 12 sobres",
             "Overnumbered": "~1 en 72 sobres",
             "Signature": "~1 en 720 sobres",
             "Ultimate_Rare": "<0.1% de los sobres (solo Unleashed)"
