@@ -392,8 +392,8 @@
             "color": "#8B0000",
             "date": "Julio 2026",
             "cartas_reveladas": 243,
-            "total": 243,
-            "total_base": 181,
+            "total": 244,
+            "total_base": 182,
             "total_ovr": 62,
             "imgBase": "https://riftbound.gg/images/cards/",
             "legend_count": 11,
@@ -545,10 +545,7 @@
                 "Booster Packs & Displays",
                 "Showdown Decks: Seraphine vs. Evelynn",
                 "Vault Bundle",
-                "Pre-Rift kits",
-                "Playmats",
-                "Art Sleeves",
-                "Collector's Binder"
+                "Pre-Rift kits"
             ],
             "champion_decks": [
                 "Evelynn",
@@ -638,7 +635,7 @@
             "ovr_breakdown": [
                 {
                     "tipo": "Alt-Art",
-                    "cantidad": 0,
+                    "cantidad": 93,
                     "numeracion": "",
                     "notas": ""
                 }
@@ -825,7 +822,7 @@
             "total": 1,
             "total_base": 1,
             "total_ovr": 0,
-            "imgBase": null,
+            "imgBase": "",
             "legend_count": 0,
             "leyendas": [],
             "productos": [
@@ -859,7 +856,7 @@
                     "desc": "Esta expansión promocional no introduce nuevas mecánicas; utiliza las de Vendetta."
                 }
             ],
-            "released": true
+            "released": false
         },
         "secret_garden_set": {
             "id": "secret_garden_set",
@@ -871,7 +868,7 @@
             "total": 3,
             "total_base": 1,
             "total_ovr": 2,
-            "imgBase": null,
+            "imgBase": "",
             "legend_count": 2,
             "leyendas": [
                 {
@@ -930,7 +927,7 @@
             "Showcase": "~1 en 12 sobres",
             "Overnumbered": "~1 en 72 sobres",
             "Signature": "~1 en 720 sobres",
-            "Ultimate_Rare": "<0.1% de los sobres (solo Unleashed)"
+            "Ultimate_Rare": "<0.1% de los sobres (Unleashed y Radiance)"
         },
         "set_specific": {
             "legacy": {
