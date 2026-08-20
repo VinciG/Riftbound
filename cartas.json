@@ -649,12 +649,6 @@
                     "cantidad": 0,
                     "numeracion": "",
                     "notas": ""
-                },
-                {
-                    "tipo": "Ultimate Rare",
-                    "cantidad": 0,
-                    "numeracion": "",
-                    "notas": ""
                 }
             ],
             "mecanicas": [
@@ -731,12 +725,6 @@
                     "cantidad": 0,
                     "numeracion": "",
                     "notas": ""
-                },
-                {
-                    "tipo": "Ultimate Rare",
-                    "cantidad": 0,
-                    "numeracion": "",
-                    "notas": ""
                 }
             ],
             "mecanicas": [
@@ -785,12 +773,6 @@
                 },
                 {
                     "tipo": "OVR con firma",
-                    "cantidad": 0,
-                    "numeracion": "",
-                    "notas": ""
-                },
-                {
-                    "tipo": "Ultimate Rare",
                     "cantidad": 0,
                     "numeracion": "",
                     "notas": ""
@@ -845,12 +827,6 @@
                     "cantidad": 0,
                     "numeracion": "",
                     "notas": ""
-                },
-                {
-                    "tipo": "Ultimate Rare",
-                    "cantidad": 0,
-                    "numeracion": "",
-                    "notas": ""
                 }
             ],
             "mecanicas": [
@@ -877,7 +853,7 @@
             "total": 1,
             "total_base": 1,
             "total_ovr": 0,
-            "imgBase": "",
+            "imgBase": null,
             "legend_count": 0,
             "leyendas": [],
             "productos": [
@@ -923,7 +899,7 @@
             "total": 3,
             "total_base": 1,
             "total_ovr": 2,
-            "imgBase": "",
+            "imgBase": null,
             "legend_count": 2,
             "leyendas": [
                 {
