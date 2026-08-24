@@ -260,7 +260,7 @@
             "abbr": "UNL",
             "set_number": 3,
             "color": "#f97316",
-            "date": "Mayo 2026",
+            "date": "Junio 2026",
             "cartas_reveladas": 303,
             "total": 303,
             "total_base": 226,
@@ -589,6 +589,7 @@
         "legacy": {
             "id": "legacy",
             "abbr": "LGC",
+            "set_number": 6,
             "color": "#f97316",
             "date": "Enero 2027",
             "cartas_reveladas": 346,
@@ -636,7 +637,7 @@
             "ovr_breakdown": [
                 {
                     "tipo": "Alt-Art",
-                    "cantidad": 93,
+                    "cantidad": 0,
                     "numeracion": "",
                     "notas": "Incluye cartas Showcase."
                 }
@@ -700,7 +701,7 @@
             "ovr_breakdown": [
                 {
                     "tipo": "Alt-Art",
-                    "cantidad": 67,
+                    "cantidad": 0,
                     "numeracion": "",
                     "notas": "Incluye cartas Showcase."
                 }
@@ -826,12 +827,12 @@
             "abbr": "VEN",
             "set_number": 10,
             "color": "#84cc16",
-            "date": "Julio 2026",
+            "date": "Agosto 2026",
             "cartas_reveladas": 0,
             "total": 1,
             "total_base": 1,
             "total_ovr": 0,
-            "imgBase": "",
+            "imgBase": null,
             "legend_count": 0,
             "leyendas": [],
             "productos": [
@@ -872,12 +873,12 @@
             "abbr": "SGN",
             "set_number": null,
             "color": "#a78bfa",
-            "date": "Julio 2026",
+            "date": "Agosto 2026",
             "cartas_reveladas": 3,
             "total": 3,
             "total_base": 1,
             "total_ovr": 2,
-            "imgBase": "",
+            "imgBase": null,
             "legend_count": 2,
             "leyendas": [
                 {
