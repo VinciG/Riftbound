@@ -520,7 +520,7 @@
             "abbr": "RAD",
             "color": "#FFD700",
             "set_number": 5,
-            "date": "Octubre 2026",
+            "date": "Octubre 23, 2026",
             "cartas_reveladas": 180,
             "total": 180,
             "total_base": 120,
@@ -591,7 +591,7 @@
             "abbr": "LGC",
             "set_number": 6,
             "color": "#f97316",
-            "date": "Enero 2027",
+            "date": "Enero 29, 2027",
             "cartas_reveladas": 346,
             "total": 0,
             "total_base": 0,
@@ -629,17 +629,29 @@
                 "Collector Binder"
             ],
             "champion_decks": [
-                "Karma",
-                "Vladimir",
-                "Heimerdinger",
-                "Illaoi"
+                "Tryndamere",
+                "Ashe",
+                "Lux",
+                "Garen"
             ],
             "ovr_breakdown": [
                 {
                     "tipo": "Alt-Art",
-                    "cantidad": 0,
+                    "cantidad": 93,
                     "numeracion": "",
                     "notas": "Incluye cartas Showcase."
+                },
+                {
+                    "tipo": "OVR base",
+                    "cantidad": 0,
+                    "numeracion": "",
+                    "notas": ""
+                },
+                {
+                    "tipo": "OVR con firma",
+                    "cantidad": 0,
+                    "numeracion": "",
+                    "notas": ""
                 }
             ],
             "mecanicas": [
@@ -670,7 +682,8 @@
             "id": "reckoning",
             "abbr": "RCK",
             "color": "#06b6d4",
-            "date": "Abril 2027",
+            "set_number": 7,
+            "date": "Abril 30, 2027",
             "cartas_reveladas": 264,
             "total": 0,
             "total_base": 0,
@@ -701,9 +714,21 @@
             "ovr_breakdown": [
                 {
                     "tipo": "Alt-Art",
-                    "cantidad": 0,
+                    "cantidad": 67,
                     "numeracion": "",
                     "notas": "Incluye cartas Showcase."
+                },
+                {
+                    "tipo": "OVR base",
+                    "cantidad": 0,
+                    "numeracion": "",
+                    "notas": ""
+                },
+                {
+                    "tipo": "OVR con firma",
+                    "cantidad": 0,
+                    "numeracion": "",
+                    "notas": ""
                 }
             ],
             "mecanicas": [
@@ -832,7 +857,7 @@
             "total": 1,
             "total_base": 1,
             "total_ovr": 0,
-            "imgBase": null,
+            "imgBase": "",
             "legend_count": 0,
             "leyendas": [],
             "productos": [
@@ -878,7 +903,7 @@
             "total": 3,
             "total_base": 1,
             "total_ovr": 2,
-            "imgBase": null,
+            "imgBase": "",
             "legend_count": 2,
             "leyendas": [
                 {
