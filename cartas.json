@@ -260,7 +260,7 @@
             "abbr": "UNL",
             "set_number": 3,
             "color": "#f97316",
-            "date": "Junio 2026",
+            "date": "Mayo 2026",
             "cartas_reveladas": 303,
             "total": 303,
             "total_base": 226,
@@ -854,7 +854,7 @@
             "total": 1,
             "total_base": 1,
             "total_ovr": 0,
-            "imgBase": null,
+            "imgBase": "",
             "legend_count": 0,
             "leyendas": [],
             "productos": [
@@ -900,7 +900,7 @@
             "total": 3,
             "total_base": 1,
             "total_ovr": 2,
-            "imgBase": null,
+            "imgBase": "",
             "legend_count": 2,
             "leyendas": [
                 {
