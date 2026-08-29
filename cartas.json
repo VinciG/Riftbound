@@ -396,7 +396,7 @@
             "total_base": 182,
             "total_ovr": 62,
             "imgBase": "https://riftbound.gg/images/cards/",
-            "legend_count": 11,
+            "legend_count": 10,
             "leyendas": [
                 {
                     "name": "Akali",
@@ -432,10 +432,6 @@
                 },
                 {
                     "name": "Shen",
-                    "img": null
-                },
-                {
-                    "name": "Yordle",
                     "img": null
                 },
                 {
