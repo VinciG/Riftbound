@@ -742,8 +742,8 @@
         "bandlecity": {
             "id": "bandlecity",
             "abbr": "BDC",
-            "set_number": 8,
             "color": "#FDE047",
+            "set_number": 8,
             "date": "Q3 2027",
             "cartas_reveladas": 0,
             "total": 0,
