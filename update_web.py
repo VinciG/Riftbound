@@ -230,30 +230,67 @@ def get_price(card):
         return None
     return float(cm)
 
+def get_both_prices(card):
+    n = card.get("cmPrice")
+    f = card.get("cmFoilPrice")
+    def _pf(v):
+        if not v or v == 0 or v == "0" or v == "0.000000":
+            return None
+        try:
+            return float(v)
+        except Exception:
+            return None
+    nf = _pf(n)
+    ff = _pf(f)
+    if nf is None and ff is None:
+        return None
+    out = {}
+    if nf is not None:
+        out["n"] = f"€{nf:.2f}"
+    if ff is not None:
+        out["f"] = f"€{ff:.2f}"
+    if len(out) == 1 and "n" in out:
+        return out["n"]
+    if len(out) == 1 and "f" in out:
+        return out["f"]
+    return out
+
 def build_prices(rows, names):
     prices = {}
     legend_min = {}
+    legend_min_foil = {}
     for row in rows:
         card = dict(zip(names, row))
         set_name = card.get("set_name")
         set_id = SET_NAME_MAP.get(set_name)
         if not set_id: continue
-        cm_f = get_price(card)
-        if cm_f is None: continue
-        ps = f"€{cm_f:.2f}"
+        bp = get_both_prices(card)
+        if bp is None: continue
         if set_id not in prices: prices[set_id] = {}
-        prices[set_id][make_price_key(card.get("id",""), set_id)] = ps
+        prices[set_id][make_price_key(card.get("id",""), set_id)] = bp
         if _is_legend(card):
             tags = card.get("tags") or []
             for cn in legends_per_set.get(set_id, []):
                 if cn in tags:
+                    cm_f = get_price(card)
+                    if cm_f is None: continue
                     if set_id not in legend_min: legend_min[set_id] = {}
                     e = legend_min[set_id].get(cn)
                     if e is None or cm_f < e: legend_min[set_id][cn] = cm_f
+                    bf = get_both_prices(card)
+                    if isinstance(bf, dict):
+                        if set_id not in legend_min_foil: legend_min_foil[set_id] = {}
+                        cur = legend_min_foil[set_id].get(cn)
+                        if cur is None or (bf.get("f") and (not cur.get("f") or float(bf["f"].replace("€","")) < float(cur["f"].replace("€","")))):
+                            legend_min_foil[set_id][cn] = bf
     for sid, champs in legend_min.items():
         if sid not in prices: prices[sid] = {}
         for cn, mp in champs.items():
-            prices[sid][cn] = f"€{mp:.2f}"
+            bf = legend_min_foil.get(sid, {}).get(cn)
+            if isinstance(bf, dict) and "f" in bf:
+                prices[sid][cn] = bf
+            else:
+                prices[sid][cn] = f"€{mp:.2f}"
     return prices
 
 # Save preliminary prices (in case Gemini fails later)
@@ -644,25 +681,38 @@ else:
     # Regenerate cardmarket_prices.json with final suffix
     final_prices = {}
     legend_min = {}
+    legend_min_foil = {}
     for row in api_rows:
         card = dict(zip(api_names, row))
         sn = card.get("set_name")
         sid = SET_NAME_MAP_FINAL.get(sn)
         if not sid: continue
-        cm_f = get_price(card)
-        if cm_f is None: continue
+        bp = get_both_prices(card)
+        if bp is None: continue
         if sid not in final_prices: final_prices[sid] = {}
-        final_prices[sid][make_key(card.get("id",""), sid)] = f"€{cm_f:.2f}"
+        final_prices[sid][make_key(card.get("id",""), sid)] = bp
         if _is_legend(card):
             for cn in legends_per_set.get(sid, []):
                 if cn in (card.get("tags") or []):
+                    cm_f = get_price(card)
+                    if cm_f is None: continue
                     if sid not in legend_min: legend_min[sid] = {}
                     e = legend_min[sid].get(cn)
                     if e is None or cm_f < e: legend_min[sid][cn] = cm_f
+                    bf = get_both_prices(card)
+                    if isinstance(bf, dict):
+                        if sid not in legend_min_foil: legend_min_foil[sid] = {}
+                        cur = legend_min_foil[sid].get(cn)
+                        if cur is None or (bf.get("f") and (not cur.get("f") or float(bf["f"].replace("€","")) < float(cur["f"].replace("€","")))):
+                            legend_min_foil[sid][cn] = bf
     for sid, champs in legend_min.items():
         if sid not in final_prices: final_prices[sid] = {}
         for cn, mp in champs.items():
-            final_prices[sid][cn] = f"€{mp:.2f}"
+            bf = legend_min_foil.get(sid, {}).get(cn)
+            if isinstance(bf, dict) and "f" in bf:
+                final_prices[sid][cn] = bf
+            else:
+                final_prices[sid][cn] = f"€{mp:.2f}"
 
     total_final = sum(len(v) for v in final_prices.values())
     if total_final == 0 and os.path.exists(cardmarket_prices_file):

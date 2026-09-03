@@ -33,8 +33,16 @@ def load_json(path, from_git=False):
     with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
 
+def _price_str(v):
+    if v is None: return None
+    if isinstance(v, dict):
+        v = v.get("n") or v.get("f") or next(iter(v.values()), None)
+    return v
+
 def parse_price(s):
-    return float(s.replace("€", "")) if s else None
+    s = _price_str(s)
+    if not s: return None
+    return float(str(s).replace("€", "").split()[0]) if s else None
 
 def display_name(key, set_id):
     """Return human-readable card name from id_to_name map or fallback to key."""
@@ -45,12 +53,19 @@ def fmt_price_change(key, old_str, new_str, set_id):
     old_v = parse_price(old_str)
     new_v = parse_price(new_str)
     label = display_name(key, set_id)
+    def _fmt(v):
+        if isinstance(v, dict):
+            n=v.get("n"); f=v.get("f")
+            if n and f: return f"{n} / {f} foil"
+            return n or f or str(v)
+        return v
+    os_s, ns_s = _fmt(old_str), _fmt(new_str)
     if old_v is not None and new_v is not None:
         diff = new_v - old_v
         arrow = "🟢" if diff > 0 else "🔴"
         sign = "+" if diff > 0 else ""
-        return f"  {arrow} {label}: {old_str} → {new_str} ({sign}{diff:.2f})"
-    return f"  {label}: {old_str} → {new_str}"
+        return f"  {arrow} {label}: {os_s} → {ns_s} ({sign}{diff:.2f})"
+    return f"  {label}: {os_s} → {ns_s}"
 
 def compare_prices(old, new):
     lines = []

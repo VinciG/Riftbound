@@ -523,6 +523,9 @@ tbody tr:hover td { background:var(--surface2); }
 <script>
 let LEGEND_DATA = {};
 
+function fmtPrice(p){ if(!p) return ''; if(typeof p==='string') return p; if(typeof p==='object') return (p.n&&p.f)? `${p.n} <span style="opacity:.6">/ ${p.f} foil</span>` : (p.n||p.f||''); return String(p); }
+function priceVal(p){ if(!p) return 0; if(typeof p==='string') return parseFloat(p.replace('€',''))||0; if(typeof p==='object') return parseFloat((p.n||p.f||'').replace('€',''))||0; return 0; }
+
 // ===== DATA =====
 const SETS = {};
 
@@ -558,7 +561,7 @@ function renderSet(setId) {
     info.innerHTML = `<div class="lc-name">${leg.name}</div>
       <div class="lc-sub">${leg.title||leg.n}</div>
       <span class="lc-set" style="background:color-mix(in srgb,${set.color},transparent 80%);color:var(--text)">${set.abbr}</span>
-      ${cmPrice ? `<div class="lc-price">${cmPrice}</div>` : ''}`;
+      ${cmPrice ? `<div class="lc-price">${fmtPrice(cmPrice)}</div>` : ''}`;
 
     card.appendChild(imgDiv);
     card.appendChild(info);
@@ -610,7 +613,7 @@ function renderPremiumSet(setCode) {
     el.setAttribute('data-name', `${card.name} ${card.type} ${card.domain}`.toLowerCase());
     el.setAttribute('data-rarity', card.rarity);
     const cmPrice = CARDMARKET_PRICES[set.id]?.[card.id] || CARDMARKET_PRICES[set.id]?.[card.id.replace(/-\w+$/, '')] || CARDMARKET_PRICES[set.id]?.[card.name] || null;
-    el.setAttribute('data-price', cmPrice ? parseFloat(cmPrice.replace('€','')) : '');
+    el.setAttribute('data-price', priceVal(cmPrice));
     const imgDiv = document.createElement('div');
     imgDiv.className = 'lc-img';
     const img = document.createElement('img');
@@ -628,7 +631,7 @@ function renderPremiumSet(setCode) {
         <span class="lc-set" style="background:color-mix(in srgb,${set.color},transparent 80%);color:var(--text)">${set.abbr}</span>
         <span class="lc-set" style="background:var(--surface2);color:var(--muted)">${premiumLabel(card)}</span>
       </div>
-      ${cmPrice ? `<div class="lc-price">${cmPrice}</div>` : ''}`;
+      ${cmPrice ? `<div class="lc-price">${fmtPrice(cmPrice)}</div>` : ''}`;
 
     el.appendChild(imgDiv);
     el.appendChild(info);
@@ -742,7 +745,7 @@ function globalSearch() {
       info.innerHTML = `<div class="lc-name">${r.leg.name}</div>
         <div class="lc-sub">${r.set.abbr} · Leyenda</div>
         <span class="lc-set" style="background:color-mix(in srgb,${r.set.color},transparent 80%);color:var(--text)">${r.set.abbr}</span>
-        ${cmPrice ? `<div class="lc-price">${cmPrice}</div>` : ''}`;
+        ${cmPrice ? `<div class="lc-price">${fmtPrice(cmPrice)}</div>` : ''}`;
       el.onclick = ()=>openModal(r.leg, r.set);
     } else {
       const label = r.card.signature ? 'Signature' : r.card.ovr ? 'OVR' : r.card.alt ? 'Alt-Art' : r.card.rarity;
@@ -752,7 +755,7 @@ function globalSearch() {
           <span class="lc-set" style="background:color-mix(in srgb,${r.set.color},transparent 80%);color:var(--text)">${r.set.abbr}</span>
           <span class="lc-set" style="background:var(--surface2);color:var(--muted)">${label}</span>
         </div>
-        ${cmPrice ? `<div class="lc-price">${cmPrice}</div>` : ''}`;
+        ${cmPrice ? `<div class="lc-price">${fmtPrice(cmPrice)}</div>` : ''}`;
       el.onclick = ()=>openPremiumModal(r.card, r.set);
     }
 
@@ -819,7 +822,7 @@ function closeModal() {
 function showCardmarketPrice(name, price) {
   const priceEl = document.getElementById('price-value');
   if (price) {
-    priceEl.innerHTML = `<span class="pl-f">${price}</span> <span class="pl-l">Cardmarket</span>`;
+    priceEl.innerHTML = `<span class="pl-f">${fmtPrice(price)}</span> <span class="pl-l">Cardmarket</span>`;
     return;
   }
   priceEl.innerHTML = `<span class="pl-na">No disponible</span>`;
