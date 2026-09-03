@@ -38,6 +38,10 @@ jobs:
         run: |
           python update_web.py
 
+      - name: Validate no data loss
+        run: |
+          python -c "import json,sys; d=json.load(open('cartas.json')); bad=[k for k,v in d['sets'].items() if v.get('legend_count',0)==0 and len(v.get('leyendas',[]))==0 and v.get('total',0)>0 and k in ('origins','spiritforged','unleashed','vendetta')]; print(f'legend check: {bad}'); sys.exit(1) if bad else print('✅ cartas.json OK'); ld=json.load(open('legend_data.json')); assert sum(len(v) for v in ld.values())>0, 'legend_data.json empty'; print(f\"✅ legend_data.json OK ({sum(len(v) for v in ld.values())} leyendas)\")"
+
       - name: Send Telegram notification
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
@@ -59,3 +63,4 @@ jobs:
       - name: Push
         run: |
           git push
+        if: success()

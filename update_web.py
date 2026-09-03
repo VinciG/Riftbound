@@ -143,6 +143,12 @@ for dotgg_name in DOTGG_SET_NAMES:
     else:
         SET_NAME_MAP[dotgg_name] = sid
 
+def _is_legend(card):
+    t = card.get("type")
+    if isinstance(t, list):
+        return "Legend" in t
+    return t == "Legend"
+
 # Build legend name list per set
 legends_per_set = {}
 for s_name, s_data in datos_actuales.get("sets", {}).items():
@@ -174,7 +180,7 @@ def seed_from_dotgg(rows, names, base):
         aid = card.get("id", "")
         base_id = re.sub(r'(?i)(-p|-a|-star|-promo)$', '', aid)
         set_data[sid]["ids"].add(base_id)
-        if card.get("type") == "Legend":
+        if _is_legend(card):
             cn = re.split(r' - |, ', card.get("name", ""), maxsplit=1)[0].strip()
             if cn:
                 set_data[sid]["legends"].add(cn)
@@ -188,8 +194,11 @@ def seed_from_dotgg(rows, names, base):
                     s_val["total"] = uid_count
                     s_val["total_base"] = uid_count - d["ovr"]
                     s_val["total_ovr"] = d["ovr"]
-                    s_val["legend_count"] = len(d["legends"])
-                    s_val["leyendas"] = [{"name": n, "img": None} for n in sorted(d["legends"])]
+                    if len(d["legends"]) == 0 and s_val.get("legend_count", 0) > 0:
+                        print(f"⚠️ DotGG no devolvió leyendas para {sid} — se conserva valor previo ({s_val.get('legend_count')})")
+                    else:
+                        s_val["legend_count"] = len(d["legends"])
+                        s_val["leyendas"] = [{"name": n, "img": None} for n in sorted(d["legends"])]
                 break
 
 if api_rows:
@@ -234,7 +243,7 @@ def build_prices(rows, names):
         ps = f"€{cm_f:.2f}"
         if set_id not in prices: prices[set_id] = {}
         prices[set_id][make_price_key(card.get("id",""), set_id)] = ps
-        if card.get("type") == "Legend":
+        if _is_legend(card):
             tags = card.get("tags") or []
             for cn in legends_per_set.get(set_id, []):
                 if cn in tags:
@@ -644,7 +653,7 @@ else:
         if cm_f is None: continue
         if sid not in final_prices: final_prices[sid] = {}
         final_prices[sid][make_key(card.get("id",""), sid)] = f"€{cm_f:.2f}"
-        if card.get("type") == "Legend":
+        if _is_legend(card):
             for cn in legends_per_set.get(sid, []):
                 if cn in (card.get("tags") or []):
                     if sid not in legend_min: legend_min[sid] = {}
@@ -655,9 +664,18 @@ else:
         for cn, mp in champs.items():
             final_prices[sid][cn] = f"€{mp:.2f}"
 
+    total_final = sum(len(v) for v in final_prices.values())
+    if total_final == 0 and os.path.exists(cardmarket_prices_file):
+        try:
+            _prev_cp = json.load(open(cardmarket_prices_file, encoding="utf-8-sig"))
+            if sum(len(v) for v in _prev_cp.values()) > 0:
+                print("⚠️ precios finales vacíos — se conserva archivo previo")
+                final_prices = _prev_cp
+                total_final = sum(len(v) for v in final_prices.values())
+        except Exception:
+            pass
     with open(cardmarket_prices_file, "w", encoding="utf-8") as f:
         json.dump(final_prices, f, indent=4, ensure_ascii=False)
-    total_final = sum(len(v) for v in final_prices.values())
     print(f"✅ 'cardmarket_prices.json' re-escrito ({total_final} precios).")
 
     # Save ID-to-name map for Telegram notifications
@@ -684,7 +702,7 @@ else:
     legend_data_min = {}
     for row in api_rows:
         card = dict(zip(api_names, row))
-        if card.get("type") != "Legend": continue
+        if not _is_legend(card): continue
         sn = card.get("set_name", "")
         sid = SET_NAME_MAP_FINAL.get(sn)
         if not sid: continue
@@ -709,9 +727,19 @@ else:
             "title": title,
             "number": number
         }
+    _total_ld = sum(len(v) for v in legend_data_save.values())
+    if _total_ld == 0 and os.path.exists("legend_data.json"):
+        try:
+            _prev_ld = json.load(open("legend_data.json", encoding="utf-8"))
+            if sum(len(v) for v in _prev_ld.values()) > 0:
+                print("⚠️ legend_data vacío — se conserva archivo previo para evitar borrado")
+                legend_data_save = _prev_ld
+                _total_ld = sum(len(v) for v in legend_data_save.values())
+        except Exception:
+            pass
     with open("legend_data.json", "w", encoding="utf-8") as f:
         json.dump(legend_data_save, f, indent=4, ensure_ascii=False)
-    print(f"✅ 'legend_data.json' guardado ({sum(len(v) for v in legend_data_save.values())} leyendas).")
+    print(f"✅ 'legend_data.json' guardado ({_total_ld} leyendas).")
 
     # Generate epic-cards.js from DotGG data
     def build_epic_cards():
@@ -756,12 +784,14 @@ else:
             else:
                 domain = str(color_raw).title() if color_raw else ""
 
+            _t = card.get("type", "")
+            _t_str = _t[0] if isinstance(_t, list) and _t else (_t if isinstance(_t, str) else "")
             result[sc].append({
                 "name": nm,
                 "number": number,
                 "id": our_id,
                 "rarity": rarity,
-                "type": card.get("type", ""),
+                "type": _t_str,
                 "domain": domain,
                 "image": card.get("image", ""),
                 "alt": alt,
