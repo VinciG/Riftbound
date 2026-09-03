@@ -335,19 +335,7 @@
         "unl-056-226": "Yuumi - Magical Cat",
         "unl-056-p-226": "Yuumi - Magical Cat (Unleashed May 2026 Summoner Skirmish Participation Promo)",
         "unl-086-226": "Zilean - Time Mage",
-        "unl-086-p-226": "Zilean - Time Mage (Unleashed June 2026 Summoner Skirmish Participation Promo)",
-        "Diana": "Diana",
-        "Ivern": "Ivern",
-        "Jhin": "Jhin",
-        "Kha'Zix": "Kha'Zix",
-        "LeBlanc": "LeBlanc",
-        "Lillia": "Lillia",
-        "Master Yi": "Master Yi",
-        "Poppy": "Poppy",
-        "Pyke": "Pyke",
-        "Rengar": "Rengar",
-        "Vex": "Vex",
-        "Vi": "Vi"
+        "unl-086-p-226": "Zilean - Time Mage (Unleashed June 2026 Summoner Skirmish Participation Promo)"
     },
     "vendetta": {
         "ven-150-172": "Acceleration Gate",
@@ -616,16 +604,7 @@
         "ven-191*-172": "Zed - Master of Shadows",
         "ven-191-172": "Zed - Master of Shadows",
         "ven-112-172": "Zed - Without a Sound",
-        "ven-112a-172": "Zed - Without a Sound",
-        "Akali": "Akali",
-        "Ambessa": "Ambessa",
-        "Jayce": "Jayce",
-        "Kennen": "Kennen",
-        "Mel": "Mel",
-        "Nasus": "Nasus",
-        "Renekton": "Renekton",
-        "Shen": "Shen",
-        "Zed": "Zed"
+        "ven-112a-172": "Zed - Without a Sound"
     },
     "origins": {
         "ogn-179-314": "Acceptable Losses",
@@ -1091,23 +1070,7 @@
         "ogn-188-314": "Zaunite Bouncer",
         "ogn-262-314": "Zenith Blade",
         "ogs-005-314": "Zephyr Sage",
-        "ogn-077-314": "Zhonya's Hourglass",
-        "Ahri": "Ahri",
-        "Annie": "Annie",
-        "Darius": "Darius",
-        "Garen": "Garen",
-        "Jinx": "Jinx",
-        "Kai'Sa": "Kai'Sa",
-        "Lee Sin": "Lee Sin",
-        "Leona": "Leona",
-        "Lux": "Lux",
-        "Master Yi": "Master Yi",
-        "Miss Fortune": "Miss Fortune",
-        "Sett": "Sett",
-        "Teemo": "Teemo",
-        "Viktor": "Viktor",
-        "Volibear": "Volibear",
-        "Yasuo": "Yasuo"
+        "ogn-077-314": "Zhonya's Hourglass"
     },
     "spiritforged": {
         "sfd-001-222": "Against the Odds",
@@ -1450,18 +1413,6 @@
         "sfd-233*-222": "Yone - Blademaster",
         "sfd-116-p-222": "Yone - Blademaster (Pre-Rift Promo)",
         "sfd-100-222": "Yordle Explorer",
-        "sfd-160-222": "Zaun Punk",
-        "Azir": "Azir",
-        "Draven": "Draven",
-        "Ezreal": "Ezreal",
-        "Fiora": "Fiora",
-        "Irelia": "Irelia",
-        "Jax": "Jax",
-        "Lucian": "Lucian",
-        "Ornn": "Ornn",
-        "Rek'Sai": "Rek'Sai",
-        "Renata Glasc": "Renata Glasc",
-        "Rumble": "Rumble",
-        "Sivir": "Sivir"
+        "sfd-160-222": "Zaun Punk"
     }
 }
