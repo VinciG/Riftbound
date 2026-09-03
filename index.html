@@ -529,7 +529,7 @@ const SETS = {};
 // ===== RENDER LEGENDS =====
 function renderSet(setId) {
   const set = SETS[setId];
-  const grid = document.getElementById('grid-'+setId[0]);
+  const grid = document.getElementById('grid-'+setId);
   if(!grid) return;
   grid.innerHTML = '';
   set.legends.forEach((leg,i)=>{
