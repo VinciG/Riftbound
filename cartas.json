@@ -633,18 +633,6 @@
                     "tipo": "Alt-Art",
                     "cantidad": 93,
                     "numeracion": "",
-                    "notas": "Incluye cartas Showcase."
-                },
-                {
-                    "tipo": "OVR base",
-                    "cantidad": 0,
-                    "numeracion": "",
-                    "notas": ""
-                },
-                {
-                    "tipo": "OVR con firma",
-                    "cantidad": 0,
-                    "numeracion": "",
                     "notas": ""
                 }
             ],
@@ -709,18 +697,6 @@
                 {
                     "tipo": "Alt-Art",
                     "cantidad": 67,
-                    "numeracion": "",
-                    "notas": "Incluye cartas Showcase."
-                },
-                {
-                    "tipo": "OVR base",
-                    "cantidad": 0,
-                    "numeracion": "",
-                    "notas": ""
-                },
-                {
-                    "tipo": "OVR con firma",
-                    "cantidad": 0,
                     "numeracion": "",
                     "notas": ""
                 }
@@ -851,7 +827,7 @@
             "total": 1,
             "total_base": 1,
             "total_ovr": 0,
-            "imgBase": null,
+            "imgBase": "",
             "legend_count": 0,
             "leyendas": [],
             "productos": [
