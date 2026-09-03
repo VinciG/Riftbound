@@ -585,8 +585,8 @@
         "legacy": {
             "id": "legacy",
             "abbr": "LGC",
-            "set_number": 6,
             "color": "#f97316",
+            "set_number": 6,
             "date": "Enero 29, 2027",
             "cartas_reveladas": 346,
             "total": 0,
@@ -631,7 +631,7 @@
             "ovr_breakdown": [
                 {
                     "tipo": "Alt-Art",
-                    "cantidad": 0,
+                    "cantidad": 93,
                     "numeracion": "",
                     "notas": "Incluye cartas Showcase."
                 },
@@ -708,7 +708,7 @@
             "ovr_breakdown": [
                 {
                     "tipo": "Alt-Art",
-                    "cantidad": 0,
+                    "cantidad": 67,
                     "numeracion": "",
                     "notas": "Incluye cartas Showcase."
                 },
@@ -897,7 +897,7 @@
             "total": 5,
             "total_base": 3,
             "total_ovr": 2,
-            "imgBase": null,
+            "imgBase": "https://riftbound.gg/images/cards/",
             "legend_count": 2,
             "leyendas": [
                 {
