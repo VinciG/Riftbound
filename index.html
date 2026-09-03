@@ -917,6 +917,7 @@ async function buildPage() {
 
   for (const k of setIds) {
     const s = sets[k];
+    if (s.total === 0 && (s.cartas_reveladas || 0) === 0) continue;
     const om = document.createElement('div');
     om.className = 'mcard'; om.style.setProperty('--accent', s.color);
     const revealed = s.cartas_reveladas || s.total || 0;
