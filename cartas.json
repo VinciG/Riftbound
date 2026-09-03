@@ -522,7 +522,7 @@
             "total_base": 120,
             "total_ovr": 60,
             "imgBase": "https://riftbound.gg/images/cards/",
-            "legend_count": 9,
+            "legend_count": 3,
             "leyendas": [
                 {
                     "name": "Ekko",
@@ -589,9 +589,9 @@
             "set_number": 6,
             "date": "Enero 29, 2027",
             "cartas_reveladas": 346,
-            "total": 0,
-            "total_base": 0,
-            "total_ovr": 0,
+            "total": 346,
+            "total_base": 253,
+            "total_ovr": 93,
             "imgBase": "https://riftbound.gg/images/cards/",
             "legend_count": 4,
             "leyendas": [
@@ -679,9 +679,9 @@
             "set_number": 7,
             "date": "Abril 30, 2027",
             "cartas_reveladas": 264,
-            "total": 0,
-            "total_base": 0,
-            "total_ovr": 0,
+            "total": 264,
+            "total_base": 197,
+            "total_ovr": 67,
             "imgBase": "https://riftbound.gg/images/cards/",
             "legend_count": 2,
             "leyendas": [
