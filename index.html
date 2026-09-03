@@ -933,7 +933,7 @@ async function buildPage() {
   const tabIds = {}; // track tab IDs for click handler
   for (const k of setIds) {
     const s = sets[k];
-    const sfx = s.id[0];
+    const sfx = s.id;
     const sec = document.createElement('div');
     sec.className = 'section'; sec.id = 'sec-' + s.id;
 
@@ -1057,7 +1057,7 @@ async function buildPage() {
         imgBase: s.imgBase || null
       };
     }
-    PREMIUM_SET_PREFIX[s.abbr] = s.id[0];
+    PREMIUM_SET_PREFIX[s.abbr] = s.id;
   }
 }
 
