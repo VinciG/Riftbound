@@ -392,8 +392,8 @@
             "color": "#8B0000",
             "date": "Julio 31, 2026",
             "cartas_reveladas": 243,
-            "total": 244,
-            "total_base": 172,
+            "total": 246,
+            "total_base": 174,
             "total_ovr": 72,
             "imgBase": "https://riftbound.gg/images/cards/",
             "legend_count": 10,
@@ -827,7 +827,7 @@
             "total": 1,
             "total_base": 1,
             "total_ovr": 0,
-            "imgBase": "",
+            "imgBase": null,
             "legend_count": 0,
             "leyendas": [],
             "productos": [
@@ -951,7 +951,7 @@
                 "pack_contents_update": "A partir de Legacy, un espacio de carta Común en cada sobre es reemplazado por un espacio dedicado a una carta de Leyenda o Campo de Batalla (aproximadamente 50/50 de frecuencia). Esto significa que los sobres de Bandle City y todos los sets futuros contendrán 6 cartas Comunes en lugar de 7."
             },
             "shadowisles": {
-                "pack_contents_update": "A partir de Legacy, un espacio de carta Común en cada sobre es reemplazado por un espacio dedicado a una carta de Leyenda o Campo de Batalla (aproximadamente 50/50 de frecuencia). Esto significa que los sobres de Shadow Isles y todos los sets futuros contendrán 6 cartas Comunes en lugar de 7."
+                "pack_contents_update": "A partir de Legacy, un espacio de carta Común en cada sobre es reemplazado por un espacio dedicado a una carta de Leyenda o Campo de Batalla (aproximadamente 50/50 de frecuencia). Esto significa que los sobres de Shadow Isles y todos los sets futuros contendrán 6 cartas Comunes en 7."
             }
         },
         "per_box": {
