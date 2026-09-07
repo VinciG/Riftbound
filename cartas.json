@@ -827,7 +827,7 @@
             "total": 1,
             "total_base": 1,
             "total_ovr": 0,
-            "imgBase": "",
+            "imgBase": "https://riftbound.gg/images/cards/",
             "legend_count": 0,
             "leyendas": [],
             "productos": [
@@ -923,6 +923,57 @@
                 }
             ],
             "released": true
+        },
+        "t1_2025_worlds_champion_collection": {
+            "id": "t1_2025_worlds_champion_collection",
+            "abbr": "T",
+            "set_number": null,
+            "color": "#f97316",
+            "date": "Agosto 2026",
+            "cartas_reveladas": 10,
+            "total": 10,
+            "total_base": 0,
+            "total_ovr": 10,
+            "imgBase": "https://riftbound.gg/images/cards/",
+            "legend_count": 0,
+            "leyendas": [],
+            "productos": [
+                "T1 2025 Worlds Champion Signature Edition",
+                "T1 2025 Worlds Champion Player Bundle",
+                "Sleeves Pack (Player Bundle)",
+                "Deckbox (Player Bundle)",
+                "Binder (Player Bundle)",
+                "Metal Die (Player Bundle)"
+            ],
+            "champion_decks": [],
+            "ovr_breakdown": [
+                {
+                    "tipo": "Alt-Art",
+                    "cantidad": 0,
+                    "numeracion": "",
+                    "notas": ""
+                },
+                {
+                    "tipo": "OVR base",
+                    "cantidad": 10,
+                    "numeracion": "",
+                    "notas": ""
+                },
+                {
+                    "tipo": "OVR con firma",
+                    "cantidad": 0,
+                    "numeracion": "",
+                    "notas": ""
+                }
+            ],
+            "mecanicas": [
+                {
+                    "kicker": "theme",
+                    "name": "No nuevas mecánicas",
+                    "desc": "Esta colección conmemorativa no introduce nuevas mecánicas; se centra en arte exclusivo y coleccionables."
+                }
+            ],
+            "released": true
         }
     },
     "pull_rates": {
@@ -966,7 +1017,8 @@
                 "bandlecity": "~6 por caja",
                 "shadowisles": "~6 por caja",
                 "vendetta_(gen_con)": "~6 por caja",
-                "secret_garden_set": "~6 por caja"
+                "secret_garden_set": "~6 por caja",
+                "t1_2025_worlds_champion_collection": null
             },
             "Showcase": {
                 "origins": "~2 por caja",
@@ -979,7 +1031,8 @@
                 "bandlecity": "~2 por caja",
                 "shadowisles": "~2 por caja",
                 "vendetta_(gen_con)": "~2 por caja",
-                "secret_garden_set": "~2 por caja"
+                "secret_garden_set": "~2 por caja",
+                "t1_2025_worlds_champion_collection": null
             },
             "Overnumbered": {
                 "origins": "~1 en 3 cajas",
@@ -992,7 +1045,8 @@
                 "bandlecity": "~1 en 3 cajas",
                 "shadowisles": "~1 en 3 cajas",
                 "vendetta_(gen_con)": "~1 en 3 cajas",
-                "secret_garden_set": "~1 en 3 cajas"
+                "secret_garden_set": "~1 en 3 cajas",
+                "t1_2025_worlds_champion_collection": null
             },
             "Signature": {
                 "origins": "~1 en 30 cajas",
@@ -1002,10 +1056,11 @@
                 "radiance": "~1 en 30 cajas",
                 "legacy": "~1 en 30 cajas",
                 "reckoning": "~1 en 30 cajas",
-                "bandlecity": "~1 en 30 cajas",
+                "bandlecity": "~1 en 3 cajas",
                 "shadowisles": "~1 en 30 cajas",
                 "vendetta_(gen_con)": "~1 en 30 cajas",
-                "secret_garden_set": "~1 en 30 cajas"
+                "secret_garden_set": "~1 en 30 cajas",
+                "t1_2025_worlds_champion_collection": null
             },
             "Ultimate_Rare": {
                 "origins": null,
@@ -1018,7 +1073,8 @@
                 "bandlecity": null,
                 "shadowisles": null,
                 "vendetta_(gen_con)": null,
-                "secret_garden_set": null
+                "secret_garden_set": null,
+                "t1_2025_worlds_champion_collection": null
             }
         }
     }
