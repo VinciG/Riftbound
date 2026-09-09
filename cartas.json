@@ -5,7 +5,7 @@
             "abbr": "OGN",
             "set_number": 1,
             "color": "#3ecf8e",
-            "date": "Octubre 2025",
+            "date": "Octubre 31, 2025",
             "cartas_reveladas": 395,
             "total": 395,
             "total_base": 314,
@@ -134,7 +134,7 @@
             "abbr": "SFD",
             "set_number": 2,
             "color": "#a78bfa",
-            "date": "Febrero 2026",
+            "date": "Febrero 13, 2026",
             "cartas_reveladas": 302,
             "total": 302,
             "total_base": 222,
@@ -260,8 +260,8 @@
             "abbr": "UNL",
             "set_number": 3,
             "color": "#f97316",
-            "date": "Mayo 2026",
-            "cartas_reveladas": 303,
+            "date": "Mayo 8, 2026",
+            "cartas_reveladas": 301,
             "total": 301,
             "total_base": 224,
             "total_ovr": 77,
@@ -391,7 +391,7 @@
             "set_number": 4,
             "color": "#8B0000",
             "date": "Julio 31, 2026",
-            "cartas_reveladas": 243,
+            "cartas_reveladas": 246,
             "total": 246,
             "total_base": 174,
             "total_ovr": 72,
@@ -869,7 +869,7 @@
             "set_number": null,
             "color": "#a78bfa",
             "date": "Agosto 2026",
-            "cartas_reveladas": 3,
+            "cartas_reveladas": 5,
             "total": 5,
             "total_base": 3,
             "total_ovr": 2,
@@ -1002,7 +1002,7 @@
                 "pack_contents_update": "A partir de Legacy, un espacio de carta Común en cada sobre es reemplazado por un espacio dedicado a una carta de Leyenda o Campo de Batalla (aproximadamente 50/50 de frecuencia). Esto significa que los sobres de Bandle City y todos los sets futuros contendrán 6 cartas Comunes en lugar de 7."
             },
             "shadowisles": {
-                "pack_contents_update": "A partir de Legacy, un espacio de carta Común en cada sobre es reemplazado por un espacio dedicado a una carta de Leyenda o Campo de Batalla (aproximadamente 50/50 de frecuencia). Esto significa que los sobres de Shadow Isles y todos los sets futuros contendrán 6 cartas Comunes en 7."
+                "pack_contents_update": "A partir de Legacy, un espacio de carta Común en cada sobre es reemplazado por un espacio dedicado a una carta de Leyenda o Campo de Batalla (aproximadamente 50/50 de frecuencia). Esto significa que los sobres de Shadow Isles y todos los sets futuros contendrán 6 cartas Comunes en lugar de 7."
             }
         },
         "per_box": {
