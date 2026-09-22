@@ -586,7 +586,6 @@
             "id": "legacy",
             "abbr": "LGC",
             "color": "#f97316",
-            "set_number": 6,
             "date": "Enero 2027",
             "cartas_reveladas": 346,
             "total": 346,
@@ -662,7 +661,7 @@
         },
         "reckoning": {
             "id": "reckoning",
-            "abbr": "RCK",
+            "abbr": "REC",
             "color": "#06b6d4",
             "set_number": 7,
             "date": "Abril 2027",
