@@ -261,7 +261,7 @@
             "set_number": 3,
             "color": "#f97316",
             "date": "Mayo 2026",
-            "cartas_reveladas": 301,
+            "cartas_reveladas": 302,
             "total": 302,
             "total_base": 225,
             "total_ovr": 77,
@@ -393,8 +393,8 @@
             "date": "Julio 2026",
             "cartas_reveladas": 246,
             "total": 246,
-            "total_base": 174,
-            "total_ovr": 72,
+            "total_base": 168,
+            "total_ovr": 78,
             "imgBase": "https://riftbound.gg/images/cards/",
             "legend_count": 10,
             "leyendas": [
@@ -461,7 +461,7 @@
                 },
                 {
                     "tipo": "OVR base",
-                    "cantidad": 39,
+                    "cantidad": 45,
                     "numeracion": "",
                     "notas": ""
                 },
@@ -586,6 +586,7 @@
             "id": "legacy",
             "abbr": "LGC",
             "color": "#f97316",
+            "set_number": 6,
             "date": "Enero 2027",
             "cartas_reveladas": 346,
             "total": 346,
