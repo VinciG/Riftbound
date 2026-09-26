@@ -517,7 +517,7 @@
             "color": "#FFD700",
             "set_number": 5,
             "date": "Octubre 2026",
-            "cartas_reveladas": 180,
+            "cartas_reveladas": 0,
             "total": 180,
             "total_base": 120,
             "total_ovr": 60,
@@ -540,7 +540,7 @@
             "productos": [
                 "Booster Packs & Displays",
                 "Showdown Decks: Seraphine vs. Evelynn",
-                "Vault Bundle",
+                "The Radiance Vault",
                 "Pre-Rift kits",
                 "Art Sleeves",
                 "Playmats"
@@ -578,6 +578,21 @@
                     "kicker": "keyword",
                     "name": "Recruit",
                     "desc": "Mecánica relacionada con la creación de tokens de unidad."
+                },
+                {
+                    "kicker": "keyword",
+                    "name": "Deploy",
+                    "desc": "Juega este Equipo solo en un Campo de Batalla y otorgará beneficios mientras esté allí. Cuando un oponente controle ese Campo de Batalla, destruye este Equipo."
+                },
+                {
+                    "kicker": "keyword",
+                    "name": "Show Off",
+                    "desc": "Revela, o 'Show Off', una carta que califique de tu mano o en tu tablero para desbloquear un nuevo efecto de la carta jugada."
+                },
+                {
+                    "kicker": "keyword",
+                    "name": "Disarm",
+                    "desc": "Disarm reduce el Poder de una Unidad enemiga mientras atacas. Cada instancia de Disarm hará que su reducción de Poder sea más fuerte."
                 }
             ],
             "released": false
@@ -588,7 +603,7 @@
             "color": "#f97316",
             "set_number": 6,
             "date": "Enero 2027",
-            "cartas_reveladas": 346,
+            "cartas_reveladas": 0,
             "total": 346,
             "total_base": 253,
             "total_ovr": 93,
@@ -617,10 +632,11 @@
                 "4 Champion Decks: Tryndamere, Ashe, Lux, Garen",
                 "Vault Bundle",
                 "Pre-Rift kits",
-                "Proving Grounds, 2nd Edition",
+                "Proving Grounds, 2nd Edition (February 2027)",
                 "Sanctum Boxes",
                 "Collector Binder",
-                "Art Sleeves"
+                "Art Sleeves",
+                "Legacy Playmats"
             ],
             "champion_decks": [
                 "Tryndamere",
@@ -666,7 +682,7 @@
             "color": "#06b6d4",
             "set_number": 7,
             "date": "Abril 2027",
-            "cartas_reveladas": 264,
+            "cartas_reveladas": 0,
             "total": 264,
             "total_base": 197,
             "total_ovr": 67,
