@@ -396,7 +396,7 @@
             "total_base": 168,
             "total_ovr": 78,
             "imgBase": "https://riftbound.gg/images/cards/",
-            "legend_count": 10,
+            "legend_count": 9,
             "leyendas": [
                 {
                     "name": "Akali",
@@ -404,10 +404,6 @@
                 },
                 {
                     "name": "Ambessa",
-                    "img": null
-                },
-                {
-                    "name": "Dog",
                     "img": null
                 },
                 {
@@ -543,7 +539,8 @@
                 "The Radiance Vault",
                 "Pre-Rift kits",
                 "Art Sleeves",
-                "Playmats"
+                "Playmats",
+                "Collector Binder"
             ],
             "champion_decks": [
                 "Evelynn",
@@ -593,6 +590,21 @@
                     "kicker": "keyword",
                     "name": "Disarm",
                     "desc": "Disarm reduce el Poder de una Unidad enemiga mientras atacas. Cada instancia de Disarm hará que su reducción de Poder sea más fuerte."
+                },
+                {
+                    "kicker": "subtype",
+                    "name": "Equipment Units",
+                    "desc": "Unidades que también funcionan como equipo."
+                },
+                {
+                    "kicker": "token",
+                    "name": "Bomb tokens",
+                    "desc": "Fichas que, al ser destruidas, dañan unidades enemigas y activan otras Bombas en una reacción en cadena."
+                },
+                {
+                    "kicker": "unit_type",
+                    "name": "Neeko (Neutral Domain Champion)",
+                    "desc": "La primera unidad de campeón de dominio neutral en Riftbound."
                 }
             ],
             "released": false
