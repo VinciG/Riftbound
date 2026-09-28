@@ -1017,7 +1017,7 @@
             "Showcase": "~1 en 12 sobres",
             "Overnumbered": "~1 en 72 sobres",
             "Signature": "~1 en 720 sobres",
-            "Ultimate_Rare": "<0.1% de los sobres (Unleashed y Radiance)"
+            "Ultimate_Rare": "<0.1% de los sobres (Unleashed); menos de 0.025% de los sobres (aproximadamente 1 en 4000 sobres para Radiance)"
         },
         "set_specific": {
             "legacy": {
@@ -1095,7 +1095,7 @@
                 "spiritforged": null,
                 "unleashed": "~1 en 42 cajas",
                 "vendetta": null,
-                "radiance": "~1 en 42 cajas",
+                "radiance": "~1 en 167 cajas",
                 "legacy": null,
                 "reckoning": null,
                 "bandlecity": null,
