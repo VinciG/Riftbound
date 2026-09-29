@@ -513,10 +513,10 @@
             "color": "#FFD700",
             "set_number": 5,
             "date": "Octubre 2026",
-            "cartas_reveladas": 0,
-            "total": 180,
-            "total_base": 120,
-            "total_ovr": 60,
+            "cartas_reveladas": 180,
+            "total": 7,
+            "total_base": 7,
+            "total_ovr": 0,
             "imgBase": "https://riftbound.gg/images/cards/",
             "legend_count": 3,
             "leyendas": [
@@ -536,7 +536,7 @@
             "productos": [
                 "Booster Packs & Displays",
                 "Showdown Decks: Seraphine vs. Evelynn",
-                "The Radiance Vault",
+                "Vault Bundle",
                 "Pre-Rift kits",
                 "Art Sleeves",
                 "Playmats",
@@ -549,7 +549,19 @@
             "ovr_breakdown": [
                 {
                     "tipo": "Alt-Art",
-                    "cantidad": 60,
+                    "cantidad": 0,
+                    "numeracion": "",
+                    "notas": ""
+                },
+                {
+                    "tipo": "OVR base",
+                    "cantidad": 0,
+                    "numeracion": "",
+                    "notas": ""
+                },
+                {
+                    "tipo": "OVR con firma",
+                    "cantidad": 0,
                     "numeracion": "",
                     "notas": ""
                 },
@@ -557,24 +569,14 @@
                     "tipo": "Ultimate Rare",
                     "cantidad": 1,
                     "numeracion": "Versión overnumbered única",
-                    "notas": "Una nueva carta Ultimate Rare será parte de Radiance."
+                    "notas": "La segunda Ultimate Rare de Riftbound, significativamente más rara que Baron Nashor."
                 }
             ],
             "mecanicas": [
                 {
-                    "kicker": "mechanic",
+                    "kicker": "theme",
                     "name": "Performance y Grandes Jugadas",
                     "desc": "Mecánicas centradas en la performance y la ejecución de grandes jugadas, encontrando soluciones ingeniosas e inventivas. El set se enfoca en jugar al máximo rendimiento bajo los focos más brillantes."
-                },
-                {
-                    "kicker": "mechanic",
-                    "name": "Tokens de Seraphine",
-                    "desc": "Mecánica de Seraphine que utiliza tokens que se fortalecen al ser agotados."
-                },
-                {
-                    "kicker": "keyword",
-                    "name": "Recruit",
-                    "desc": "Mecánica relacionada con la creación de tokens de unidad."
                 },
                 {
                     "kicker": "keyword",
@@ -607,7 +609,7 @@
                     "desc": "La primera unidad de campeón de dominio neutral en Riftbound."
                 }
             ],
-            "released": false
+            "released": true
         },
         "legacy": {
             "id": "legacy",
@@ -615,7 +617,7 @@
             "color": "#f97316",
             "set_number": 6,
             "date": "Enero 2027",
-            "cartas_reveladas": 0,
+            "cartas_reveladas": 346,
             "total": 346,
             "total_base": 253,
             "total_ovr": 93,
@@ -641,10 +643,10 @@
             ],
             "productos": [
                 "Booster Packs & Displays",
-                "4 Champion Decks: Tryndamere, Ashe, Lux, Garen",
+                "Champion Decks: Tryndamere, Ashe, Lux, Garen",
                 "Vault Bundle",
                 "Pre-Rift kits",
-                "Proving Grounds, 2nd Edition (February 2027)",
+                "Proving Grounds, 2nd Edition (Febrero 2027)",
                 "Sanctum Boxes",
                 "Collector Binder",
                 "Art Sleeves",
@@ -694,7 +696,7 @@
             "color": "#06b6d4",
             "set_number": 7,
             "date": "Abril 2027",
-            "cartas_reveladas": 0,
+            "cartas_reveladas": 264,
             "total": 264,
             "total_base": 197,
             "total_ovr": 67,
