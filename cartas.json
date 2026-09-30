@@ -514,14 +514,26 @@
             "set_number": 5,
             "date": "Octubre 2026",
             "cartas_reveladas": 180,
-            "total": 7,
-            "total_base": 7,
-            "total_ovr": 0,
+            "total": 84,
+            "total_base": 67,
+            "total_ovr": 17,
             "imgBase": "https://riftbound.gg/images/cards/",
-            "legend_count": 3,
+            "legend_count": 6,
             "leyendas": [
                 {
                     "name": "Ekko",
+                    "img": null
+                },
+                {
+                    "name": "Jarvan IV",
+                    "img": null
+                },
+                {
+                    "name": "K'Sante",
+                    "img": null
+                },
+                {
+                    "name": "Orianna",
                     "img": null
                 },
                 {
@@ -529,7 +541,7 @@
                     "img": null
                 },
                 {
-                    "name": "Evelynn",
+                    "name": "Yordle",
                     "img": null
                 }
             ],
@@ -549,13 +561,13 @@
             "ovr_breakdown": [
                 {
                     "tipo": "Alt-Art",
-                    "cantidad": 0,
+                    "cantidad": 9,
                     "numeracion": "",
                     "notas": ""
                 },
                 {
                     "tipo": "OVR base",
-                    "cantidad": 0,
+                    "cantidad": 8,
                     "numeracion": "",
                     "notas": ""
                 },

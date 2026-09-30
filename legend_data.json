@@ -252,6 +252,38 @@
             "number": "187"
         }
     },
+    "radiance": {
+        "Ekko": {
+            "img": "https://static.dotgg.gg/riftbound/cards/RAD-139.webp",
+            "title": "Boy Who Shattered Time",
+            "number": "139"
+        },
+        "Jarvan IV": {
+            "img": "https://static.dotgg.gg/riftbound/cards/RAD-176.webp",
+            "title": "Exemplar of Demacia",
+            "number": "176"
+        },
+        "K'Sante": {
+            "img": "https://static.dotgg.gg/riftbound/cards/RAD-172.webp",
+            "title": "Pride of Nazumah",
+            "number": "172"
+        },
+        "Orianna": {
+            "img": "https://static.dotgg.gg/riftbound/cards/RAD-171.webp",
+            "title": "Lady of Clockwork",
+            "number": "171"
+        },
+        "Seraphine": {
+            "img": "https://static.dotgg.gg/riftbound/cards/RAD-174.webp",
+            "title": "Starry-Eyed Songstress",
+            "number": "174"
+        },
+        "Yordle": {
+            "img": "https://static.dotgg.gg/riftbound/cards/RAD-169.webp",
+            "title": "Hexplosives Expert",
+            "number": "169"
+        }
+    },
     "secret_garden_set": {
         "Ivern": {
             "img": "https://static.dotgg.gg/riftbound/cards/SGN-002/003-P.webp",
