@@ -4,6 +4,7 @@ import subprocess
 import urllib.request
 import urllib.error
 from datetime import datetime
+from html import escape
 
 ID_TO_NAME = {}
 if os.path.exists("id_to_name.json"):
@@ -108,6 +109,48 @@ def compare_prices(old, new):
             lines.extend(changes_detail)
     return "\n".join(lines)
 
+def compare_tcgplayer_prices(old_data, new_data):
+    old_sets = (old_data or {}).get("sets", {})
+    new_sets = (new_data or {}).get("sets", {})
+    old_total = sum(len(cards) for cards in old_sets.values())
+    new_total = sum(len(cards) for cards in new_sets.values())
+    lines = [f"💵 TCGplayer Market (USD): {new_total} cartas con precio ({'+' if new_total >= old_total else ''}{new_total - old_total} vs último feed)"]
+
+    if not old_data:
+        return "\n".join(lines)
+
+    for set_id in sorted(set(old_sets) | set(new_sets)):
+        old_set = old_sets.get(set_id, {})
+        new_set = new_sets.get(set_id, {})
+        old_keys, new_keys = set(old_set), set(new_set)
+        added, removed = new_keys - old_keys, old_keys - new_keys
+        changed = {key for key in old_keys & new_keys if old_set[key].get("market") != new_set[key].get("market")}
+        parts = []
+        if added: parts.append(f"+{len(added)} nuevas")
+        if removed: parts.append(f"-{len(removed)} eliminadas")
+        if changed: parts.append(f"~{len(changed)} cambiadas")
+        if not parts:
+            continue
+
+        lines.append(f"\n▫ {set_id}: {', '.join(parts)}")
+        for key in sorted(changed):
+            old_market = old_set[key].get("market", {})
+            new_market = new_set[key].get("market", {})
+            variants = []
+            for variant in sorted(set(old_market) | set(new_market)):
+                before, after = old_market.get(variant), new_market.get(variant)
+                before_text = f"${before:.2f}" if before is not None else "sin dato"
+                after_text = f"${after:.2f}" if after is not None else "sin dato"
+                variants.append(f"{variant}: {before_text} → {after_text}")
+            lines.append(f"  🔹 {escape(display_name(key, set_id))}: {'; '.join(variants)}")
+        for key in sorted(added):
+            market = new_set[key].get("market", {})
+            prices = " / ".join(f"{name} ${value:.2f}" for name, value in sorted(market.items()))
+            lines.append(f"  ➕ {escape(display_name(key, set_id))}: {prices} (nuevo precio)")
+        for key in sorted(removed):
+            lines.append(f"  ➖ {escape(display_name(key, set_id))} (sin precio en el feed)")
+    return "\n".join(lines)
+
 def compare_cartas(old, new):
     lines = []
     if old == new:
@@ -181,6 +224,8 @@ def main():
 
     old_prices = load_json("cardmarket_prices.json", from_git=True)
     new_prices = load_json("cardmarket_prices.json")
+    old_tcg_prices = load_json("tcgplayer_prices.json", from_git=True)
+    new_tcg_prices = load_json("tcgplayer_prices.json")
     old_cartas = load_json("cartas.json", from_git=True)
     new_cartas = load_json("cartas.json")
 
@@ -191,6 +236,9 @@ def main():
         parts.append(compare_prices(old_prices, new_prices))
     else:
         parts.append("📦 Precios: sin cambios")
+
+    if old_tcg_prices != new_tcg_prices:
+        parts.append(compare_tcgplayer_prices(old_tcg_prices, new_tcg_prices))
 
     cartas_diff = compare_cartas(old_cartas, new_cartas)
     if cartas_diff:

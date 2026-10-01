@@ -863,3 +863,10 @@ else:
     with open(json_file, "w", encoding="utf-8") as f:
         json.dump(datos_actuales, f, indent=4, ensure_ascii=False)
     print("✅ 'cartas.json' guardado con datos finales.")
+
+    # Refresh a second, clearly separated market-price source for the website.
+    try:
+        from tcgplayer_prices import update_tcgplayer_prices
+        update_tcgplayer_prices(api_rows, api_names, datos_actuales.get("sets", {}), SET_NAME_MAP_FINAL)
+    except Exception as e:
+        print(f"⚠️ TCGplayer price sync skipped; keeping previous data: {e}")
