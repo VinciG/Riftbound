@@ -396,7 +396,7 @@
             "total_base": 168,
             "total_ovr": 78,
             "imgBase": "https://riftbound.gg/images/cards/",
-            "legend_count": 10,
+            "legend_count": 9,
             "leyendas": [
                 {
                     "name": "Akali",
@@ -404,10 +404,6 @@
                 },
                 {
                     "name": "Ambessa",
-                    "img": null
-                },
-                {
-                    "name": "Dog",
                     "img": null
                 },
                 {
@@ -518,14 +514,26 @@
             "set_number": 5,
             "date": "Octubre 2026",
             "cartas_reveladas": 180,
-            "total": 180,
-            "total_base": 120,
-            "total_ovr": 60,
+            "total": 84,
+            "total_base": 67,
+            "total_ovr": 17,
             "imgBase": "https://riftbound.gg/images/cards/",
-            "legend_count": 3,
+            "legend_count": 6,
             "leyendas": [
                 {
                     "name": "Ekko",
+                    "img": null
+                },
+                {
+                    "name": "Jarvan IV",
+                    "img": null
+                },
+                {
+                    "name": "K'Sante",
+                    "img": null
+                },
+                {
+                    "name": "Orianna",
                     "img": null
                 },
                 {
@@ -533,7 +541,7 @@
                     "img": null
                 },
                 {
-                    "name": "Evelynn",
+                    "name": "Yordle",
                     "img": null
                 }
             ],
@@ -543,7 +551,8 @@
                 "Vault Bundle",
                 "Pre-Rift kits",
                 "Art Sleeves",
-                "Playmats"
+                "Playmats",
+                "Collector Binder"
             ],
             "champion_decks": [
                 "Evelynn",
@@ -552,7 +561,19 @@
             "ovr_breakdown": [
                 {
                     "tipo": "Alt-Art",
-                    "cantidad": 60,
+                    "cantidad": 9,
+                    "numeracion": "",
+                    "notas": ""
+                },
+                {
+                    "tipo": "OVR base",
+                    "cantidad": 8,
+                    "numeracion": "",
+                    "notas": ""
+                },
+                {
+                    "tipo": "OVR con firma",
+                    "cantidad": 0,
                     "numeracion": "",
                     "notas": ""
                 },
@@ -560,27 +581,47 @@
                     "tipo": "Ultimate Rare",
                     "cantidad": 1,
                     "numeracion": "Versión overnumbered única",
-                    "notas": "Una nueva carta Ultimate Rare será parte de Radiance."
+                    "notas": "La segunda Ultimate Rare de Riftbound, significativamente más rara que Baron Nashor."
                 }
             ],
             "mecanicas": [
                 {
-                    "kicker": "mechanic",
+                    "kicker": "theme",
                     "name": "Performance y Grandes Jugadas",
                     "desc": "Mecánicas centradas en la performance y la ejecución de grandes jugadas, encontrando soluciones ingeniosas e inventivas. El set se enfoca en jugar al máximo rendimiento bajo los focos más brillantes."
                 },
                 {
-                    "kicker": "mechanic",
-                    "name": "Tokens de Seraphine",
-                    "desc": "Mecánica de Seraphine que utiliza tokens que se fortalecen al ser agotados."
+                    "kicker": "keyword",
+                    "name": "Deploy",
+                    "desc": "Juega este Equipo solo en un Campo de Batalla y otorgará beneficios mientras esté allí. Cuando un oponente controle ese Campo de Batalla, destruye este Equipo."
                 },
                 {
                     "kicker": "keyword",
-                    "name": "Recruit",
-                    "desc": "Mecánica relacionada con la creación de tokens de unidad."
+                    "name": "Show Off",
+                    "desc": "Revela, o 'Show Off', una carta que califique de tu mano o en tu tablero para desbloquear un nuevo efecto de la carta jugada."
+                },
+                {
+                    "kicker": "keyword",
+                    "name": "Disarm",
+                    "desc": "Disarm reduce el Poder de una Unidad enemiga mientras atacas. Cada instancia de Disarm hará que su reducción de Poder sea más fuerte."
+                },
+                {
+                    "kicker": "subtype",
+                    "name": "Equipment Units",
+                    "desc": "Unidades que también funcionan como equipo."
+                },
+                {
+                    "kicker": "token",
+                    "name": "Bomb tokens",
+                    "desc": "Fichas que, al ser destruidas, dañan unidades enemigas y activan otras Bombas en una reacción en cadena."
+                },
+                {
+                    "kicker": "unit_type",
+                    "name": "Neeko (Neutral Domain Champion)",
+                    "desc": "La primera unidad de campeón de dominio neutral en Riftbound."
                 }
             ],
-            "released": false
+            "released": true
         },
         "legacy": {
             "id": "legacy",
@@ -614,13 +655,14 @@
             ],
             "productos": [
                 "Booster Packs & Displays",
-                "4 Champion Decks: Tryndamere, Ashe, Lux, Garen",
+                "Champion Decks: Tryndamere, Ashe, Lux, Garen",
                 "Vault Bundle",
                 "Pre-Rift kits",
-                "Proving Grounds, 2nd Edition",
+                "Proving Grounds, 2nd Edition (Febrero 2027)",
                 "Sanctum Boxes",
                 "Collector Binder",
-                "Art Sleeves"
+                "Art Sleeves",
+                "Legacy Playmats"
             ],
             "champion_decks": [
                 "Tryndamere",
@@ -989,7 +1031,7 @@
             "Showcase": "~1 en 12 sobres",
             "Overnumbered": "~1 en 72 sobres",
             "Signature": "~1 en 720 sobres",
-            "Ultimate_Rare": "<0.1% de los sobres (Unleashed y Radiance)"
+            "Ultimate_Rare": "<0.1% de los sobres (Unleashed); menos de 0.025% de los sobres (aproximadamente 1 en 4000 sobres para Radiance)"
         },
         "set_specific": {
             "legacy": {
@@ -1067,7 +1109,7 @@
                 "spiritforged": null,
                 "unleashed": "~1 en 42 cajas",
                 "vendetta": null,
-                "radiance": "~1 en 42 cajas",
+                "radiance": "~1 en 167 cajas",
                 "legacy": null,
                 "reckoning": null,
                 "bandlecity": null,
