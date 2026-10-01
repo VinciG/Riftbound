@@ -29,9 +29,6 @@ try:
 except (ValueError, Exception):
     print("⚠️ Gemini no configurado (sin API key) — se usará solo DotGG.")
 
-# Leer precios actuales de cardmarket_prices.json (si existe)
-cardmarket_prices_file = "cardmarket_prices.json"
-
 # ==========================================
 # Obtener todos los datos desde DotGG API
 # ==========================================
@@ -125,13 +122,9 @@ for i, (s_name, s_data) in enumerate(datos_actuales.get("sets", {}).items()):
 
 # Build maps from datos_actuales (after discovery)
 SET_NAME_MAP = {}
-EPIC_SUFFIX = {}
 for s_name, s_data in datos_actuales.get("sets", {}).items():
     sid = s_data.get("id")
     SET_NAME_MAP[s_name] = sid
-    tb = s_data.get("total_base", 0)
-    if tb:
-        EPIC_SUFFIX[sid] = str(tb)
 
 # Also map DotGG original set names to internal ids
 # Also map DotGG original set names to internal ids
@@ -208,109 +201,8 @@ if api_rows:
     total_seeded = sum(s.get("total",0) for s in datos_actuales.get("sets",{}).values())
     print(f"✅ 'cartas.json' seedeado desde DotGG ({total_seeded} cartas totales).")
 
-# ==========================================
-# Build prices from DotGG data
-# ==========================================
-def make_price_key(api_id, set_id):
-    k = api_id.lower()
-    if k.endswith("-star"):
-        k = k[:-5] + "*"
-    suffix = EPIC_SUFFIX.get(set_id)
-    if suffix:
-        k = f"{k}-{suffix}"
-    return k
-
-def get_price(card):
-    """Return the correct Cardmarket price: normal if available, foil otherwise."""
-    has_normal = card.get("hasNormal", "0")
-    cm = card.get("cmPrice")
-    if has_normal != "1":
-        cm = card.get("cmFoilPrice") or cm
-    if not cm or cm == 0 or cm == "0" or cm == "0.000000":
-        return None
-    return float(cm)
-
-def get_both_prices(card):
-    n = card.get("cmPrice")
-    f = card.get("cmFoilPrice")
-    def _pf(v):
-        if not v or v == 0 or v == "0" or v == "0.000000":
-            return None
-        try:
-            return float(v)
-        except Exception:
-            return None
-    nf = _pf(n)
-    ff = _pf(f)
-    if nf is None and ff is None:
-        return None
-    out = {}
-    if nf is not None:
-        out["n"] = f"€{nf:.2f}"
-    if ff is not None:
-        out["f"] = f"€{ff:.2f}"
-    if len(out) == 1 and "n" in out:
-        return out["n"]
-    if len(out) == 1 and "f" in out:
-        return out["f"]
-    return out
-
-def build_prices(rows, names):
-    prices = {}
-    legend_min = {}
-    legend_min_foil = {}
-    for row in rows:
-        card = dict(zip(names, row))
-        set_name = card.get("set_name")
-        set_id = SET_NAME_MAP.get(set_name)
-        if not set_id: continue
-        bp = get_both_prices(card)
-        if bp is None: continue
-        if set_id not in prices: prices[set_id] = {}
-        prices[set_id][make_price_key(card.get("id",""), set_id)] = bp
-        if _is_legend(card):
-            tags = card.get("tags") or []
-            for cn in legends_per_set.get(set_id, []):
-                if cn in tags:
-                    cm_f = get_price(card)
-                    if cm_f is None: continue
-                    if set_id not in legend_min: legend_min[set_id] = {}
-                    e = legend_min[set_id].get(cn)
-                    if e is None or cm_f < e: legend_min[set_id][cn] = cm_f
-                    bf = get_both_prices(card)
-                    if isinstance(bf, dict):
-                        if set_id not in legend_min_foil: legend_min_foil[set_id] = {}
-                        cur = legend_min_foil[set_id].get(cn)
-                        if cur is None or (bf.get("f") and (not cur.get("f") or float(bf["f"].replace("€","")) < float(cur["f"].replace("€","")))):
-                            legend_min_foil[set_id][cn] = bf
-    for sid, champs in legend_min.items():
-        if sid not in prices: prices[sid] = {}
-        for cn, mp in champs.items():
-            bf = legend_min_foil.get(sid, {}).get(cn)
-            if isinstance(bf, dict) and "f" in bf:
-                prices[sid][cn] = bf
-            else:
-                prices[sid][cn] = f"€{mp:.2f}"
-    return prices
-
-# Save preliminary prices (in case Gemini fails later)
-cardmarket_prices_file = "cardmarket_prices.json"
-current_prices = {}
-if os.path.exists(cardmarket_prices_file):
-    with open(cardmarket_prices_file, "r", encoding="utf-8-sig") as f:
-        current_prices = json.load(f)
-prelim_prices = build_prices(api_rows, api_names) if api_rows else {}
-for sid, sp in prelim_prices.items():
-    if sid not in current_prices: current_prices[sid] = {}
-    for k, v in sp.items():
-        current_prices[sid][k] = v
-with open(cardmarket_prices_file, "w", encoding="utf-8") as f:
-    json.dump(current_prices, f, indent=4, ensure_ascii=False)
-total_prelim = sum(len(v) for v in prelim_prices.values())
-print(f"✅ 'cardmarket_prices.json' guardado ({total_prelim} precios).")
-
 # Ensure auxiliary files exist (git add safety)
-for fname in ("id_to_name.json", "legend_data.json"):
+for fname in ("legend_data.json",):
     if not os.path.exists(fname):
         with open(fname, "w", encoding="utf-8") as f:
             json.dump({}, f)
@@ -566,7 +458,7 @@ else:
 if not api_rows:
     print("⚠️ Sin datos DotGG — se mantienen archivos anteriores.")
     # Ensure files exist for git add
-    for fname in ("id_to_name.json", "legend_data.json"):
+    for fname in ("legend_data.json",):
         if not os.path.exists(fname):
             with open(fname, "w", encoding="utf-8") as f:
                 json.dump({}, f)
@@ -650,14 +542,6 @@ else:
     for s_name, s_data in datos_actuales.get("sets", {}).items():
         s_data["released"] = s_data.get("id") in dotgg_sids
 
-    # Re-read total_base from (potentially updated) cartas.json for EPIC_SUFFIX
-    EPIC_SUFFIX_FINAL = {}
-    for s_name, s_data in datos_actuales.get("sets", {}).items():
-        sid = s_data.get("id")
-        tb = s_data.get("total_base", 0)
-        if tb:
-            EPIC_SUFFIX_FINAL[sid] = str(tb)
-
     # Rebuild SET_NAME_MAP from final data
     SET_NAME_MAP_FINAL = {}
     for s_name, s_data in datos_actuales.get("sets", {}).items():
@@ -669,87 +553,21 @@ else:
         else:
             SET_NAME_MAP_FINAL[dotgg_name] = sid
 
-    def make_key(api_id, set_id):
-        k = api_id.lower()
-        if k.endswith("-star"):
-            k = k[:-5] + "*"
-        suffix = EPIC_SUFFIX_FINAL.get(set_id)
-        if suffix:
-            k = f"{k}-{suffix}"
-        return k
+    EPIC_ID_SUFFIX = {
+        s_data.get("id"): str(s_data.get("total_base"))
+        for s_data in datos_actuales.get("sets", {}).values()
+        if s_data.get("id") and s_data.get("total_base")
+    }
 
-    # Regenerate cardmarket_prices.json with final suffix
-    final_prices = {}
-    legend_min = {}
-    legend_min_foil = {}
-    for row in api_rows:
-        card = dict(zip(api_names, row))
-        sn = card.get("set_name")
-        sid = SET_NAME_MAP_FINAL.get(sn)
-        if not sid: continue
-        bp = get_both_prices(card)
-        if bp is None: continue
-        if sid not in final_prices: final_prices[sid] = {}
-        final_prices[sid][make_key(card.get("id",""), sid)] = bp
-        if _is_legend(card):
-            for cn in legends_per_set.get(sid, []):
-                if cn in (card.get("tags") or []):
-                    cm_f = get_price(card)
-                    if cm_f is None: continue
-                    if sid not in legend_min: legend_min[sid] = {}
-                    e = legend_min[sid].get(cn)
-                    if e is None or cm_f < e: legend_min[sid][cn] = cm_f
-                    bf = get_both_prices(card)
-                    if isinstance(bf, dict):
-                        if sid not in legend_min_foil: legend_min_foil[sid] = {}
-                        cur = legend_min_foil[sid].get(cn)
-                        if cur is None or (bf.get("f") and (not cur.get("f") or float(bf["f"].replace("€","")) < float(cur["f"].replace("€","")))):
-                            legend_min_foil[sid][cn] = bf
-    for sid, champs in legend_min.items():
-        if sid not in final_prices: final_prices[sid] = {}
-        for cn, mp in champs.items():
-            bf = legend_min_foil.get(sid, {}).get(cn)
-            if isinstance(bf, dict) and "f" in bf:
-                final_prices[sid][cn] = bf
-            else:
-                final_prices[sid][cn] = f"€{mp:.2f}"
-
-    total_final = sum(len(v) for v in final_prices.values())
-    if total_final == 0 and os.path.exists(cardmarket_prices_file):
-        try:
-            _prev_cp = json.load(open(cardmarket_prices_file, encoding="utf-8-sig"))
-            if sum(len(v) for v in _prev_cp.values()) > 0:
-                print("⚠️ precios finales vacíos — se conserva archivo previo")
-                final_prices = _prev_cp
-                total_final = sum(len(v) for v in final_prices.values())
-        except Exception:
-            pass
-    with open(cardmarket_prices_file, "w", encoding="utf-8") as f:
-        json.dump(final_prices, f, indent=4, ensure_ascii=False)
-    print(f"✅ 'cardmarket_prices.json' re-escrito ({total_final} precios).")
-
-    # Save ID-to-name map for Telegram notifications
-    id_name_map_save = {}
-    for row in api_rows:
-        card = dict(zip(api_names, row))
-        sn = card.get("set_name", "")
-        sid = SET_NAME_MAP_FINAL.get(sn)
-        if not sid: continue
-        if get_price(card) is None: continue
-        k = make_key(card.get("id",""), sid)
-        if sid not in id_name_map_save: id_name_map_save[sid] = {}
-        id_name_map_save[sid][k] = card.get("name", k)
-    # Add legend champion-name keys (self-mapping)
-    for sid, champs in legend_min.items():
-        if sid not in id_name_map_save: id_name_map_save[sid] = {}
-        for cn in champs:
-            id_name_map_save[sid][cn] = cn
-    with open("id_to_name.json", "w", encoding="utf-8") as f:
-        json.dump(id_name_map_save, f, indent=4, ensure_ascii=False)
+    def make_epic_key(api_id, set_id):
+        key = str(api_id or "").lower()
+        if key.endswith("-star"):
+            key = key[:-5] + "*"
+        suffix = EPIC_ID_SUFFIX.get(set_id)
+        return f"{key}-{suffix}" if suffix else key
 
     # Save legend data (images, titles, numbers) for each set's champions
     legend_data_save = {}
-    legend_data_min = {}
     for row in api_rows:
         card = dict(zip(api_names, row))
         if not _is_legend(card): continue
@@ -760,13 +578,8 @@ else:
         champ = re.split(r' - |, ', full_name, maxsplit=1)[0].strip()
         if not champ: continue
         if sid not in legend_data_save: legend_data_save[sid] = {}
-        if sid not in legend_data_min: legend_data_min[sid] = {}
-        cm_f = get_price(card)
-        prev = legend_data_min[sid].get(champ)
-        if champ in legend_data_save[sid] and prev is not None and (cm_f is None or cm_f >= prev):
+        if champ in legend_data_save[sid]:
             continue
-        if cm_f is not None:
-            legend_data_min[sid][champ] = cm_f
         api_id = card.get("id", "")
         num_m = re.search(r"-(\d+)", api_id)
         number = num_m.group(1) if num_m else ""
@@ -816,7 +629,7 @@ else:
 
             nm = card.get("name", "")
             aid = card.get("id", "")
-            our_id = make_key(aid, SET_NAME_MAP_FINAL.get(sn, ""))
+            our_id = make_epic_key(aid, SET_NAME_MAP_FINAL.get(sn, ""))
             nm_lower = nm.lower()
             aid_lower = aid.lower()
             num_m = re.search(r"-(\d+)", aid)
@@ -864,7 +677,7 @@ else:
         json.dump(datos_actuales, f, indent=4, ensure_ascii=False)
     print("✅ 'cartas.json' guardado con datos finales.")
 
-    # Refresh a second, clearly separated market-price source for the website.
+    # Refresh the TCGplayer market-price cache for the website.
     try:
         from tcgplayer_prices import update_tcgplayer_prices
         update_tcgplayer_prices(api_rows, api_names, datos_actuales.get("sets", {}), SET_NAME_MAP_FINAL)

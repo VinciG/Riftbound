@@ -6,11 +6,6 @@ import urllib.error
 from datetime import datetime
 from html import escape
 
-ID_TO_NAME = {}
-if os.path.exists("id_to_name.json"):
-    with open("id_to_name.json", "r", encoding="utf-8") as f:
-        ID_TO_NAME = json.load(f)
-
 TELEGRAM_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "")
 TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID", "")
 
@@ -33,81 +28,6 @@ def load_json(path, from_git=False):
         return None
     with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
-
-def _price_str(v):
-    if v is None: return None
-    if isinstance(v, dict):
-        v = v.get("n") or v.get("f") or next(iter(v.values()), None)
-    return v
-
-def parse_price(s):
-    s = _price_str(s)
-    if not s: return None
-    return float(str(s).replace("€", "").split()[0]) if s else None
-
-def display_name(key, set_id):
-    """Return human-readable card name from id_to_name map or fallback to key."""
-    nm = ID_TO_NAME.get(set_id, {}).get(key)
-    return nm if nm else key
-
-def fmt_price_change(key, old_str, new_str, set_id):
-    old_v = parse_price(old_str)
-    new_v = parse_price(new_str)
-    label = display_name(key, set_id)
-    def _fmt(v):
-        if isinstance(v, dict):
-            n=v.get("n"); f=v.get("f")
-            if n and f: return f"{n} / {f} foil"
-            return n or f or str(v)
-        return v
-    os_s, ns_s = _fmt(old_str), _fmt(new_str)
-    if old_v is not None and new_v is not None:
-        diff = new_v - old_v
-        arrow = "🟢" if diff > 0 else "🔴"
-        sign = "+" if diff > 0 else ""
-        return f"  {arrow} {label}: {os_s} → {ns_s} ({sign}{diff:.2f})"
-    return f"  {label}: {os_s} → {ns_s}"
-
-def compare_prices(old, new):
-    lines = []
-    total_old = sum(len(v) for v in old.values()) if old else 0
-    total_new = sum(len(v) for v in new.values()) if new else 0
-    diff_total = total_new - total_old
-    lines.append(f"📦 Precios: {total_new} cartas con precio ({'+' if diff_total >= 0 else ''}{diff_total} vs ayer)")
-
-    if old and new:
-        for set_id in sorted(set(list(old.keys()) + list(new.keys()))):
-            old_set = old.get(set_id, {})
-            new_set = new.get(set_id, {})
-            old_keys = set(old_set.keys())
-            new_keys = set(new_set.keys())
-            added = new_keys - old_keys
-            removed = old_keys - new_keys
-            changed = {k for k in old_keys & new_keys if old_set[k] != new_set[k]}
-
-            parts = []
-            if added:
-                parts.append(f"+{len(added)} nuevas")
-            if removed:
-                parts.append(f"-{len(removed)} eliminadas")
-            if changed:
-                parts.append(f"~{len(changed)} cambiadas")
-            if not parts:
-                continue
-
-            changes_detail = []
-            for k in sorted(changed):
-                changes_detail.append(fmt_price_change(k, old_set[k], new_set[k], set_id))
-            for k in sorted(added):
-                changes_detail.append(f"  ➕ {display_name(k, set_id)}: {new_set[k]} (nueva)")
-            for k in sorted(removed):
-                changes_detail.append(f"  ➖ {display_name(k, set_id)}: {old_set[k]} (eliminada)")
-
-            # No chunk limit — show all changes
-
-            lines.append(f"\n▫ {set_id}: {', '.join(parts)}")
-            lines.extend(changes_detail)
-    return "\n".join(lines)
 
 def compare_tcgplayer_prices(old_data, new_data):
     old_sets = (old_data or {}).get("sets", {})
@@ -136,19 +56,20 @@ def compare_tcgplayer_prices(old_data, new_data):
         for key in sorted(changed):
             old_market = old_set[key].get("market", {})
             new_market = new_set[key].get("market", {})
+            card_name = escape(new_set[key].get("name") or key)
             variants = []
             for variant in sorted(set(old_market) | set(new_market)):
                 before, after = old_market.get(variant), new_market.get(variant)
                 before_text = f"${before:.2f}" if before is not None else "sin dato"
                 after_text = f"${after:.2f}" if after is not None else "sin dato"
-                variants.append(f"{variant}: {before_text} → {after_text}")
-            lines.append(f"  🔹 {escape(display_name(key, set_id))}: {'; '.join(variants)}")
+                variants.append(f"{escape(variant)}: {before_text} → {after_text}")
+            lines.append(f"  🔹 {card_name}: {'; '.join(variants)}")
         for key in sorted(added):
             market = new_set[key].get("market", {})
             prices = " / ".join(f"{name} ${value:.2f}" for name, value in sorted(market.items()))
-            lines.append(f"  ➕ {escape(display_name(key, set_id))}: {prices} (nuevo precio)")
+            lines.append(f"  ➕ {escape(new_set[key].get('name') or key)}: {prices} (nuevo precio)")
         for key in sorted(removed):
-            lines.append(f"  ➖ {escape(display_name(key, set_id))} (sin precio en el feed)")
+            lines.append(f"  ➖ {escape(old_set[key].get('name') or key)} (sin precio en el feed)")
     return "\n".join(lines)
 
 def compare_cartas(old, new):
@@ -222,8 +143,6 @@ def main():
     if not TELEGRAM_TOKEN or not TELEGRAM_CHAT_ID:
         print("ℹ️ Telegram no configurado. Solo se mostrará el resumen en consola.")
 
-    old_prices = load_json("cardmarket_prices.json", from_git=True)
-    new_prices = load_json("cardmarket_prices.json")
     old_tcg_prices = load_json("tcgplayer_prices.json", from_git=True)
     new_tcg_prices = load_json("tcgplayer_prices.json")
     old_cartas = load_json("cartas.json", from_git=True)
@@ -232,13 +151,10 @@ def main():
     parts = []
     parts.append(f"<b>🔄 Riftbound — Actualización {datetime.utcnow().strftime('%d %b %Y %H:%M UTC')}</b>\n")
 
-    if old_prices != new_prices:
-        parts.append(compare_prices(old_prices, new_prices))
-    else:
-        parts.append("📦 Precios: sin cambios")
-
     if old_tcg_prices != new_tcg_prices:
         parts.append(compare_tcgplayer_prices(old_tcg_prices, new_tcg_prices))
+    else:
+        parts.append("💵 TCGplayer Market: sin cambios")
 
     cartas_diff = compare_cartas(old_cartas, new_cartas)
     if cartas_diff:

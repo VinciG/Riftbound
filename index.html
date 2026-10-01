@@ -144,7 +144,6 @@ body {
 .legend-card .lc-price-stack { display:flex; flex-direction:column; gap:1px; margin-top:3px; }
 .legend-card .lc-price-stack .lc-price { margin-top:0; }
 .legend-card .price-source { color:var(--muted); font-size:.52rem; font-weight:400; }
-.legend-card .cm-price { color:var(--blue); }
 .empty-state {
   background:var(--surface); border:1px solid var(--border); border-radius:8px;
   padding:1rem; color:var(--muted); font-size:.78rem; line-height:1.45;
@@ -530,9 +529,6 @@ tbody tr:hover td { background:var(--surface2); }
 <script>
 let LEGEND_DATA = {};
 
-function fmtPrice(p){ if(!p) return ''; if(typeof p==='string') return p; if(typeof p==='object') return (p.n&&p.f)? `${p.n} <span style="opacity:.6">/ ${p.f} foil</span>` : (p.n||p.f||''); return String(p); }
-function priceVal(p){ if(!p) return 0; if(typeof p==='string') return parseFloat(p.replace('€',''))||0; if(typeof p==='object') return parseFloat((p.n||p.f||'').replace('€',''))||0; return 0; }
-
 // ===== DATA =====
 const SETS = {};
 
@@ -562,15 +558,14 @@ function renderSet(setId) {
       imgDiv.innerHTML = '<div class="placeholder">?</div>';
     }
 
-    const cmPrice = CARDMARKET_PRICES[setId]?.[leg.name] || null;
     const tcgPrice = getTcgPlayerPrice(setId, leg.name, leg.n);
     const info = document.createElement('div');
     info.className = 'lc-info';
     info.innerHTML = `<div class="lc-name">${leg.name}</div>
       <div class="lc-sub">${leg.title||leg.n}</div>
       <span class="lc-set" style="background:color-mix(in srgb,${set.color},transparent 80%);color:var(--text)">${set.abbr}</span>
-      ${renderPriceMarkup(tcgPrice, cmPrice)}`;
-    card.setAttribute('data-price', String(tcgPriceVal(tcgPrice) || priceVal(cmPrice)));
+      ${renderPriceMarkup(tcgPrice)}`;
+    card.setAttribute('data-price', String(tcgPriceVal(tcgPrice)));
 
     card.appendChild(imgDiv);
     card.appendChild(info);
@@ -621,9 +616,8 @@ function renderPremiumSet(setCode) {
     el.className = 'legend-card';
     el.setAttribute('data-name', `${card.name} ${card.type} ${card.domain}`.toLowerCase());
     el.setAttribute('data-rarity', card.rarity);
-    const cmPrice = CARDMARKET_PRICES[set.id]?.[card.id] || CARDMARKET_PRICES[set.id]?.[card.id.replace(/-\w+$/, '')] || CARDMARKET_PRICES[set.id]?.[card.name] || null;
     const tcgPrice = getTcgPlayerPrice(set.id, card.id) || getTcgPlayerPrice(set.id, card.id.replace(/-\w+$/, '')) || getTcgPlayerPrice(set.id, card.name);
-    el.setAttribute('data-price', tcgPriceVal(tcgPrice) || priceVal(cmPrice));
+    el.setAttribute('data-price', tcgPriceVal(tcgPrice));
     const imgDiv = document.createElement('div');
     imgDiv.className = 'lc-img';
     const img = document.createElement('img');
@@ -641,7 +635,7 @@ function renderPremiumSet(setCode) {
         <span class="lc-set" style="background:color-mix(in srgb,${set.color},transparent 80%);color:var(--text)">${set.abbr}</span>
         <span class="lc-set" style="background:var(--surface2);color:var(--muted)">${premiumLabel(card)}</span>
       </div>
-      ${renderPriceMarkup(tcgPrice, cmPrice)}`;
+      ${renderPriceMarkup(tcgPrice)}`;
 
     el.appendChild(imgDiv);
     el.appendChild(info);
@@ -745,9 +739,6 @@ function globalSearch() {
       imgDiv.appendChild(img);
     }
 
-    const cmPrice = r.type === 'legend'
-      ? (CARDMARKET_PRICES[r.set.id]?.[r.leg.name] || null)
-      : (CARDMARKET_PRICES[r.set.id]?.[r.card.id] || CARDMARKET_PRICES[r.set.id]?.[r.card.name] || null);
     const tcgPrice = r.type === 'legend'
       ? getTcgPlayerPrice(r.set.id, r.leg.name, r.leg.n)
       : (getTcgPlayerPrice(r.set.id, r.card.id) || getTcgPlayerPrice(r.set.id, r.card.name));
@@ -758,7 +749,7 @@ function globalSearch() {
       info.innerHTML = `<div class="lc-name">${r.leg.name}</div>
         <div class="lc-sub">${r.set.abbr} · Leyenda</div>
         <span class="lc-set" style="background:color-mix(in srgb,${r.set.color},transparent 80%);color:var(--text)">${r.set.abbr}</span>
-        ${renderPriceMarkup(tcgPrice, cmPrice)}`;
+        ${renderPriceMarkup(tcgPrice)}`;
       el.onclick = ()=>openModal(r.leg, r.set);
     } else {
       const label = r.card.signature ? 'Signature' : r.card.ovr ? 'OVR' : r.card.alt ? 'Alt-Art' : r.card.rarity;
@@ -768,7 +759,7 @@ function globalSearch() {
           <span class="lc-set" style="background:color-mix(in srgb,${r.set.color},transparent 80%);color:var(--text)">${r.set.abbr}</span>
           <span class="lc-set" style="background:var(--surface2);color:var(--muted)">${label}</span>
         </div>
-        ${renderPriceMarkup(tcgPrice, cmPrice)}`;
+        ${renderPriceMarkup(tcgPrice)}`;
       el.onclick = ()=>openPremiumModal(r.card, r.set);
     }
 
@@ -779,7 +770,6 @@ function globalSearch() {
 }
 
 // ===== MARKET PRICES =====
-let CARDMARKET_PRICES = {};
 let TCGPLAYER_PRICE_DATA = { sets: {} };
 
 function getTcgPlayerPrice(setId, key, number) {
@@ -813,14 +803,11 @@ function priceUpdatedLabel() {
   return Number.isNaN(date.getTime()) ? '' : date.toLocaleDateString('es-ES');
 }
 
-function renderPriceMarkup(tcgPrice, cmPrice) {
+function renderPriceMarkup(tcgPrice) {
   const lines = [];
   if (tcgPrice && tcgPrice.market && Object.keys(tcgPrice.market).length) {
     const values = Object.entries(tcgPrice.market).map(entry => formatUsd(entry[1]) + ' ' + entry[0]).join(' · ');
     lines.push('<div class="lc-price">' + values + ' <span class="price-source">TCGplayer Market · USD</span></div>');
-  }
-  if (cmPrice) {
-    lines.push('<div class="lc-price cm-price">' + fmtPrice(cmPrice) + ' <span class="price-source">Cardmarket vía DotGG · EUR</span></div>');
   }
   return lines.length ? '<div class="lc-price-stack">' + lines.join('') + '</div>' : '';
 }
@@ -847,8 +834,7 @@ function openModal(leg, set) {
   }
 
   document.getElementById('modal').classList.add('active');
-  const cmPrice = CARDMARKET_PRICES[set.id]?.[leg.name] || null;
-  showMarketPrices(leg.name, getTcgPlayerPrice(set.id, leg.name, leg.n), cmPrice, set);
+  showMarketPrices(leg.name, getTcgPlayerPrice(set.id, leg.name, leg.n), set);
 }
 
 function openPremiumModal(card, set) {
@@ -867,9 +853,8 @@ function openPremiumModal(card, set) {
   imgDiv.appendChild(img);
 
   document.getElementById('modal').classList.add('active');
-  const cmPrice = CARDMARKET_PRICES[set.id]?.[card.id] || CARDMARKET_PRICES[set.id]?.[card.id.replace(/-\w+$/, '')] || CARDMARKET_PRICES[set.id]?.[card.name] || null;
   const tcgPrice = getTcgPlayerPrice(set.id, card.id) || getTcgPlayerPrice(set.id, card.id.replace(/-\w+$/, '')) || getTcgPlayerPrice(set.id, card.name);
-  showMarketPrices(card.name, tcgPrice, cmPrice, set);
+  showMarketPrices(card.name, tcgPrice, set);
 }
 
 function closeModal() {
@@ -877,7 +862,7 @@ function closeModal() {
 }
 
 // ===== PRICE DISPLAY =====
-function showMarketPrices(name, tcgPrice, cmPrice, set) {
+function showMarketPrices(name, tcgPrice, set) {
   const priceEl = document.getElementById('price-value');
   const lines = [];
   if (tcgPrice && tcgPrice.market && Object.keys(tcgPrice.market).length) {
@@ -891,16 +876,13 @@ function showMarketPrices(name, tcgPrice, cmPrice, set) {
       ? `<a class="price-source-link" href="${url}" target="_blank" rel="noopener noreferrer">TCGplayer Market · USD ↗</a>`
       : '<span class="price-source-link">TCGplayer Market · USD</span>';
     lines.push(`<span class="price-row"><span class="pl-f">${values}</span><br>${source}</span>`);
-  }
-  if (cmPrice) {
-    lines.push(`<span class="price-row"><span class="pl-f">${fmtPrice(cmPrice)}</span> <span class="pl-l">Cardmarket vía DotGG · EUR</span></span>`);
+  } else {
+    lines.push('<span class="price-row"><span class="pl-na">Precio TCGplayer no disponible</span></span>');
   }
   const query = encodeURIComponent(`${name} Riftbound ${set?.name || ''}`.trim());
   const links = [
-    `<a class="price-source-link" href="https://www.cardmarket.com/en/Riftbound/Products?searchString=${encodeURIComponent(name)}" target="_blank" rel="noopener noreferrer">Buscar ofertas en Cardmarket ↗</a>`,
     `<a class="price-source-link" href="https://tcgindex.io/riftbound/price-guide" target="_blank" rel="noopener noreferrer">Ver TCGIndex ↗</a>`,
-    `<a class="price-source-link" href="https://www.pricecharting.com/search-products?q=${query}&amp;type=prices" target="_blank" rel="noopener noreferrer">Consultar PriceCharting ↗</a>`,
-    `<a class="price-source-link" href="https://cardsynced.com/games/riftbound" target="_blank" rel="noopener noreferrer">Ver CardSynced ↗</a>`
+    `<a class="price-source-link" href="https://www.pricecharting.com/search-products?q=${query}&amp;type=prices" target="_blank" rel="noopener noreferrer">Consultar PriceCharting ↗</a>`
   ];
   lines.push(`<span class="price-row">${links.join(' · ')}</span>`);
   const updated = priceUpdatedLabel();
@@ -916,12 +898,6 @@ async function buildPage() {
     if (resp.ok) db = await resp.json();
   } catch(e) { console.warn('cartas.json not loaded, using default'); }
   window._db = db;
-
-  // Load Cardmarket prices
-  try {
-    const cmResp = await fetch('cardmarket_prices.json?' + Date.now());
-    if (cmResp.ok) CARDMARKET_PRICES = await cmResp.json();
-  } catch(e) { console.warn('cardmarket_prices.json not loaded'); }
 
   try {
     const tcgResp = await fetch('tcgplayer_prices.json?' + Date.now());
