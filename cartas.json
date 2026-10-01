@@ -228,7 +228,7 @@
             ],
             "mecanicas": [
                 {
-                    "kicker": "tipo",
+                    "kicker": "subtype",
                     "name": "Equipment",
                     "desc": "Subtipo de carta que se puede adjuntar a unidades para hacerlas más fuertes y permanece en juego incluso si la unidad es destruida."
                 },
@@ -515,8 +515,8 @@
             "date": "Octubre 2026",
             "cartas_reveladas": 180,
             "total": 84,
-            "total_base": 67,
-            "total_ovr": 17,
+            "total_base": 61,
+            "total_ovr": 23,
             "imgBase": "https://riftbound.gg/images/cards/",
             "legend_count": 6,
             "leyendas": [
@@ -541,7 +541,7 @@
                     "img": null
                 },
                 {
-                    "name": "Yordle",
+                    "name": "Ziggs",
                     "img": null
                 }
             ],
@@ -561,13 +561,13 @@
             "ovr_breakdown": [
                 {
                     "tipo": "Alt-Art",
-                    "cantidad": 9,
+                    "cantidad": 10,
                     "numeracion": "",
                     "notas": ""
                 },
                 {
                     "tipo": "OVR base",
-                    "cantidad": 8,
+                    "cantidad": 13,
                     "numeracion": "",
                     "notas": ""
                 },
