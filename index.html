@@ -881,7 +881,6 @@ function showMarketPrices(name, tcgPrice, set) {
   }
   const query = encodeURIComponent(`${name} Riftbound ${set?.name || ''}`.trim());
   const links = [
-    `<a class="price-source-link" href="https://tcgindex.io/riftbound/price-guide" target="_blank" rel="noopener noreferrer">Ver TCGIndex ↗</a>`,
     `<a class="price-source-link" href="https://www.pricecharting.com/search-products?q=${query}&amp;type=prices" target="_blank" rel="noopener noreferrer">Consultar PriceCharting ↗</a>`
   ];
   lines.push(`<span class="price-row">${links.join(' · ')}</span>`);
