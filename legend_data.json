@@ -258,6 +258,11 @@
             "title": "Boy Who Shattered Time",
             "number": "139"
         },
+        "Evelynn": {
+            "img": "https://static.dotgg.gg/riftbound/cards/RAD-153.webp",
+            "title": "Agony's Embrace",
+            "number": "153"
+        },
         "Jarvan IV": {
             "img": "https://static.dotgg.gg/riftbound/cards/RAD-155.webp",
             "title": "Exemplar of Demacia",
@@ -267,6 +272,11 @@
             "img": "https://static.dotgg.gg/riftbound/cards/RAD-147.webp",
             "title": "Pride of Nazumah",
             "number": "147"
+        },
+        "Mordekaiser": {
+            "img": "https://static.dotgg.gg/riftbound/cards/RAD-143.webp",
+            "title": "Iron Revenant",
+            "number": "143"
         },
         "Orianna": {
             "img": "https://static.dotgg.gg/riftbound/cards/RAD-145.webp",
