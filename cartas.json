@@ -514,9 +514,9 @@
             "set_number": 5,
             "date": "Octubre 2026",
             "cartas_reveladas": 180,
-            "total": 136,
-            "total_base": 99,
-            "total_ovr": 37,
+            "total": 142,
+            "total_base": 102,
+            "total_ovr": 40,
             "imgBase": "https://riftbound.gg/images/cards/",
             "legend_count": 8,
             "leyendas": [
@@ -558,9 +558,9 @@
                 "Showdown Decks: Seraphine vs. Evelynn",
                 "Vault Bundle",
                 "Pre-Rift kits",
+                "Collector Binder",
                 "Art Sleeves",
-                "Playmats",
-                "Collector Binder"
+                "Playmats"
             ],
             "champion_decks": [
                 "Evelynn",
@@ -569,13 +569,13 @@
             "ovr_breakdown": [
                 {
                     "tipo": "Alt-Art",
-                    "cantidad": 14,
+                    "cantidad": 16,
                     "numeracion": "",
                     "notas": ""
                 },
                 {
                     "tipo": "OVR base",
-                    "cantidad": 18,
+                    "cantidad": 19,
                     "numeracion": "",
                     "notas": ""
                 },
