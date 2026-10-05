@@ -470,26 +470,6 @@
             ],
             "mecanicas": [
                 {
-                    "kicker": "mechanic",
-                    "name": "Nuevas Combinaciones de Runas",
-                    "desc": "Introduce nuevas combinaciones de runas: Furia y Calma (rojo + verde), Mente y Cuerpo (azul + naranja), y Caos y Orden (morado + amarillo)."
-                },
-                {
-                    "kicker": "mechanic",
-                    "name": "Cartas de Rivalidad",
-                    "desc": "Cartas Overnumbered que forman escenas cohesivas al colocarse junto a su contraparte rival."
-                },
-                {
-                    "kicker": "subtype",
-                    "name": "Unit-Gear",
-                    "desc": "Cartas que funcionan como unidades y como equipo."
-                },
-                {
-                    "kicker": "spell_type",
-                    "name": "Decrees",
-                    "desc": "Ciclo de hechizos construidos alrededor de rivalidades de Dominio."
-                },
-                {
                     "kicker": "keyword",
                     "name": "Flow",
                     "desc": "Permite jugar cartas desde el descarte en lugar de la mano, y luego las destierra."
@@ -503,6 +483,16 @@
                     "kicker": "keyword",
                     "name": "Empower",
                     "desc": "Las cartas pueden obtener más poder o efectos adicionales al pagar su coste de Empower. El estado 'Empowered' dura indefinidamente hasta que la carta abandona el campo o es 'Disempowered'."
+                },
+                {
+                    "kicker": "subtype",
+                    "name": "Unit-Gear",
+                    "desc": "Cartas que funcionan como unidades y como equipo."
+                },
+                {
+                    "kicker": "spell_type",
+                    "name": "Decrees",
+                    "desc": "Ciclo de hechizos construidos alrededor de rivalidades de Dominio."
                 }
             ],
             "released": true
@@ -631,7 +621,7 @@
             "abbr": "LGC",
             "color": "#f97316",
             "date": "Enero 2027",
-            "cartas_reveladas": 0,
+            "cartas_reveladas": 346,
             "total": 346,
             "total_base": 253,
             "total_ovr": 93,
@@ -709,7 +699,7 @@
             "abbr": "REC",
             "color": "#06b6d4",
             "date": "Abril 2027",
-            "cartas_reveladas": 0,
+            "cartas_reveladas": 264,
             "total": 264,
             "total_base": 197,
             "total_ovr": 67,
