@@ -472,12 +472,12 @@
                 {
                     "kicker": "keyword",
                     "name": "Flow",
-                    "desc": "Permite jugar cartas desde el descarte en lugar de la mano, y luego las destierra."
+                    "desc": "Permite jugar cartas desde el descarte en lugar de la mano, y luego las destierra. Inspirado en campeones de League que usan Energía."
                 },
                 {
                     "kicker": "keyword",
                     "name": "Burn",
-                    "desc": "Permite enviar cartas del mazo al descarte para sinergias o daño directo."
+                    "desc": "Permite enviar cartas del mazo al descarte para sinergias o daño directo. Puede alimentar cartas con Flow."
                 },
                 {
                     "kicker": "keyword",
@@ -493,6 +493,21 @@
                     "kicker": "spell_type",
                     "name": "Decrees",
                     "desc": "Ciclo de hechizos construidos alrededor de rivalidades de Dominio."
+                },
+                {
+                    "kicker": "token",
+                    "name": "Tentacle Token",
+                    "desc": "Nueva ficha introducida en el set."
+                },
+                {
+                    "kicker": "token",
+                    "name": "Shadow Clone Token",
+                    "desc": "Nueva ficha asociada con Zed."
+                },
+                {
+                    "kicker": "token",
+                    "name": "Empowered Token",
+                    "desc": "Ficha asociada con la mecánica Empower."
                 }
             ],
             "released": true
@@ -503,10 +518,10 @@
             "color": "#FFD700",
             "set_number": 5,
             "date": "Octubre 2026",
-            "cartas_reveladas": 180,
-            "total": 142,
-            "total_base": 102,
-            "total_ovr": 40,
+            "cartas_reveladas": 162,
+            "total": 162,
+            "total_base": 119,
+            "total_ovr": 43,
             "imgBase": "https://riftbound.gg/images/cards/",
             "legend_count": 8,
             "leyendas": [
@@ -559,13 +574,13 @@
             "ovr_breakdown": [
                 {
                     "tipo": "Alt-Art",
-                    "cantidad": 16,
+                    "cantidad": 18,
                     "numeracion": "",
                     "notas": ""
                 },
                 {
                     "tipo": "OVR base",
-                    "cantidad": 19,
+                    "cantidad": 20,
                     "numeracion": "",
                     "notas": ""
                 },
