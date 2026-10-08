@@ -519,9 +519,9 @@
             "set_number": 5,
             "date": "Octubre 2026",
             "cartas_reveladas": 162,
-            "total": 169,
-            "total_base": 126,
-            "total_ovr": 43,
+            "total": 186,
+            "total_base": 140,
+            "total_ovr": 46,
             "imgBase": "https://riftbound.gg/images/cards/",
             "legend_count": 8,
             "leyendas": [
@@ -574,7 +574,7 @@
             "ovr_breakdown": [
                 {
                     "tipo": "Alt-Art",
-                    "cantidad": 18,
+                    "cantidad": 21,
                     "numeracion": "",
                     "notas": ""
                 },
