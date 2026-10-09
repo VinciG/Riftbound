@@ -192,9 +192,9 @@
     },
     "unleashed": {
         "Diana": {
-            "img": "https://static.dotgg.gg/riftbound/cards/UNL-197.webp",
+            "img": "https://static.dotgg.gg/riftbound/cards/UNL-234.webp",
             "title": "Scorn of the Moon",
-            "number": "197"
+            "number": "234"
         },
         "Ivern": {
             "img": "https://static.dotgg.gg/riftbound/cards/UNL-195.webp",
@@ -217,9 +217,9 @@
             "number": "199"
         },
         "Lillia": {
-            "img": "https://static.dotgg.gg/riftbound/cards/UNL-189.webp",
+            "img": "https://static.dotgg.gg/riftbound/cards/UNL-230.webp",
             "title": "Bashful Bloom",
-            "number": "189"
+            "number": "230"
         },
         "Master Yi": {
             "img": "https://static.dotgg.gg/riftbound/cards/UNL-191.webp",
@@ -232,9 +232,9 @@
             "number": "203"
         },
         "Pyke": {
-            "img": "https://static.dotgg.gg/riftbound/cards/UNL-185.webp",
+            "img": "https://static.dotgg.gg/riftbound/cards/UNL-228.webp",
             "title": "Bloodharbor Ripper",
-            "number": "185"
+            "number": "228"
         },
         "Rengar": {
             "img": "https://static.dotgg.gg/riftbound/cards/UNL-183.webp",
