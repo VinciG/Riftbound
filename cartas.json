@@ -519,11 +519,11 @@
             "set_number": 5,
             "date": "Octubre 2026",
             "cartas_reveladas": 180,
-            "total": 199,
-            "total_base": 151,
-            "total_ovr": 48,
+            "total": 209,
+            "total_base": 159,
+            "total_ovr": 50,
             "imgBase": "https://riftbound.gg/images/cards/",
-            "legend_count": 8,
+            "legend_count": 9,
             "leyendas": [
                 {
                     "name": "Ekko",
@@ -547,6 +547,10 @@
                 },
                 {
                     "name": "Orianna",
+                    "img": null
+                },
+                {
+                    "name": "Riven",
                     "img": null
                 },
                 {
@@ -574,13 +578,13 @@
             "ovr_breakdown": [
                 {
                     "tipo": "Alt-Art",
-                    "cantidad": 23,
+                    "cantidad": 24,
                     "numeracion": "",
                     "notas": ""
                 },
                 {
                     "tipo": "OVR base",
-                    "cantidad": 20,
+                    "cantidad": 21,
                     "numeracion": "",
                     "notas": ""
                 },
