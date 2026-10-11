@@ -519,9 +519,9 @@
             "set_number": 5,
             "date": "Octubre 2026",
             "cartas_reveladas": 180,
-            "total": 209,
-            "total_base": 159,
-            "total_ovr": 50,
+            "total": 215,
+            "total_base": 164,
+            "total_ovr": 51,
             "imgBase": "https://riftbound.gg/images/cards/",
             "legend_count": 9,
             "leyendas": [
@@ -584,7 +584,7 @@
                 },
                 {
                     "tipo": "OVR base",
-                    "cantidad": 21,
+                    "cantidad": 22,
                     "numeracion": "",
                     "notas": ""
                 },
@@ -883,7 +883,8 @@
             "legend_count": 0,
             "leyendas": [],
             "productos": [
-                "Vendetta Pre-Rift Kit"
+                "Vendetta Pre-Rift Kit",
+                "Promo Card: Riven, Shattered"
             ],
             "champion_decks": [],
             "ovr_breakdown": [
