@@ -519,9 +519,9 @@
             "set_number": 5,
             "date": "Octubre 2026",
             "cartas_reveladas": 180,
-            "total": 223,
+            "total": 230,
             "total_base": 172,
-            "total_ovr": 51,
+            "total_ovr": 58,
             "imgBase": "https://riftbound.gg/images/cards/",
             "legend_count": 9,
             "leyendas": [
@@ -584,7 +584,7 @@
                 },
                 {
                     "tipo": "OVR base",
-                    "cantidad": 22,
+                    "cantidad": 29,
                     "numeracion": "",
                     "notas": ""
                 },
