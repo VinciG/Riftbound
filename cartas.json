@@ -520,8 +520,8 @@
             "date": "Octubre 2026",
             "cartas_reveladas": 236,
             "total": 236,
-            "total_base": 178,
-            "total_ovr": 58,
+            "total_base": 174,
+            "total_ovr": 62,
             "imgBase": "https://riftbound.gg/images/cards/",
             "legend_count": 9,
             "leyendas": [
@@ -590,7 +590,7 @@
                 },
                 {
                     "tipo": "OVR con firma",
-                    "cantidad": 5,
+                    "cantidad": 9,
                     "numeracion": "",
                     "notas": ""
                 },
@@ -923,7 +923,7 @@
             "abbr": "SGN",
             "set_number": null,
             "color": "#a78bfa",
-            "date": "Agosto 2026",
+            "date": "Septiembre 2026",
             "cartas_reveladas": 8,
             "total": 8,
             "total_base": 6,
@@ -984,7 +984,7 @@
             "abbr": "T",
             "set_number": null,
             "color": "#f97316",
-            "date": "Agosto 2026",
+            "date": "Septiembre 2026",
             "cartas_reveladas": 10,
             "total": 10,
             "total_base": 0,
