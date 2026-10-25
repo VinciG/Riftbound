@@ -705,6 +705,11 @@
                     "kicker": "templating",
                     "name": "Revisión de Plantillas de Cartas",
                     "desc": "Introduce un icono de flecha para habilidades disparadas, resalta objetivos con fondo gris, y cambia 'jugar' por 'crear' para tokens y 'cuando entro' para efectos de entrada al campo."
+                },
+                {
+                    "kicker": "mechanic",
+                    "name": "Cambio en el Contenido del Sobre",
+                    "desc": "A partir de Legacy, un espacio de carta Común en cada sobre es reemplazado por un espacio dedicado a una carta de Leyenda o Campo de Batalla (aproximadamente 50/50 de frecuencia). Esto significa que los sobres de Legacy y todos los sets futuros contendrán 6 cartas Comunes en lugar de 7."
                 }
             ],
             "released": false
@@ -754,6 +759,11 @@
                     "kicker": "theme",
                     "name": "Despertar a los Antiguos",
                     "desc": "El set se centra en el tema 'Despertar a los Antiguos', introduciendo campeones y criaturas masivas de League of Legends."
+                },
+                {
+                    "kicker": "mechanic",
+                    "name": "Cambio en el Contenido del Sobre",
+                    "desc": "A partir de Legacy, un espacio de carta Común en cada sobre es reemplazado por un espacio dedicado a una carta de Leyenda o Campo de Batalla (aproximadamente 50/50 de frecuencia). Esto significa que los sobres de Reckoning y todos los sets futuros contendrán 6 cartas Comunes en lugar de 7."
                 }
             ],
             "released": false
@@ -800,6 +810,11 @@
                     "kicker": "theme",
                     "name": "Bandle City",
                     "desc": "El set se centra en el tema de Bandle City, hogar de los Yordles, con un enfoque en la magia y la travesura."
+                },
+                {
+                    "kicker": "mechanic",
+                    "name": "Cambio en el Contenido del Sobre",
+                    "desc": "A partir de Legacy, un espacio de carta Común en cada sobre es reemplazado por un espacio dedicado a una carta de Leyenda o Campo de Batalla (aproximadamente 50/50 de frecuencia). Esto significa que los sobres de Bandle City y todos los sets futuros contendrán 6 cartas Comunes en lugar de 7."
                 }
             ],
             "released": false
@@ -846,6 +861,11 @@
                     "kicker": "theme",
                     "name": "Shadow Isles",
                     "desc": "El set se centra en el tema de las Islas de la Sombra, con un estilo misterioso y espectral."
+                },
+                {
+                    "kicker": "mechanic",
+                    "name": "Cambio en el Contenido del Sobre",
+                    "desc": "A partir de Legacy, un espacio de carta Común en cada sobre es reemplazado por un espacio dedicado a una carta de Leyenda o Campo de Batalla (aproximadamente 50/50 de frecuencia). Esto significa que los sobres de Shadow Isles y todos los sets futuros contendrán 6 cartas Comunes en lugar de 7."
                 }
             ],
             "released": false
