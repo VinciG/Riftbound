@@ -718,6 +718,7 @@
             "id": "reckoning",
             "abbr": "REC",
             "color": "#06b6d4",
+            "set_number": 7,
             "date": "Abril 2027",
             "cartas_reveladas": 0,
             "total": 264,
@@ -1032,11 +1033,13 @@
     },
     "pull_rates": {
         "general_booster_pack_contents": {
-            "Common": "7 cartas",
+            "Common": "6 cartas",
             "Uncommon": "3 cartas",
-            "Rare o superior (foil)": "2 cartas",
+            "Legend o Campo de Batalla": "1 carta",
             "Foil (cualquier rareza)": "1 carta",
-            "Ficha o Runa": "1 carta"
+            "Rare o superior": "2 cartas",
+            "Runa o Ficha": "2 cartas",
+            "Insert": "1 carta"
         },
         "rarity_odds": {
             "Epic": "~1 en 4 sobres",
