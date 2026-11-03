@@ -393,8 +393,8 @@
             "date": "Julio 2026",
             "cartas_reveladas": 266,
             "total": 266,
-            "total_base": 188,
-            "total_ovr": 78,
+            "total_base": 187,
+            "total_ovr": 79,
             "imgBase": "https://riftbound.gg/images/cards/",
             "legend_count": 9,
             "leyendas": [
@@ -457,7 +457,7 @@
                 },
                 {
                     "tipo": "OVR base",
-                    "cantidad": 45,
+                    "cantidad": 46,
                     "numeracion": "",
                     "notas": ""
                 },
