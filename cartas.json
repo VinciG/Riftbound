@@ -640,7 +640,7 @@
             "abbr": "LGC",
             "color": "#f97316",
             "set_number": 6,
-            "date": "Enero 2027",
+            "date": "Enero 29, 2027",
             "cartas_reveladas": 0,
             "total": 346,
             "total_base": 253,
@@ -670,7 +670,7 @@
                 "Champion Decks: Tryndamere, Ashe, Lux, Garen",
                 "Vault Bundle",
                 "Pre-Rift kits",
-                "Proving Grounds, 2nd Edition (Febrero 2027)",
+                "Proving Grounds, 2nd Edition (Febrero 19, 2027)",
                 "Sanctum Boxes",
                 "Collector Binder",
                 "Art Sleeves",
@@ -694,7 +694,7 @@
                 {
                     "kicker": "theme",
                     "name": "Historia y Herencia",
-                    "desc": "Explora la historia y el legado del universo de Runeterra, con temas impulsados por regiones como Demacia, Noxus, Jonia, Piltover/Zaun, Freljord y Aguas Estancadas."
+                    "desc": "Explora la historia y el legado del universo de Runeterra, con temas impulsados por regiones como Demacia (Garen, Lux), Noxus (Vladimir), Jonia (Karma), Piltover/Zaun (Heimerdinger), Freljord (Ashe, Tryndamere) y Aguas Estancadas (Illaoi)."
                 },
                 {
                     "kicker": "design",
@@ -710,6 +710,11 @@
                     "kicker": "mechanic",
                     "name": "Cambio en el Contenido del Sobre",
                     "desc": "A partir de Legacy, un espacio de carta Común en cada sobre es reemplazado por un espacio dedicado a una carta de Leyenda o Campo de Batalla (aproximadamente 50/50 de frecuencia). Esto significa que los sobres de Legacy y todos los sets futuros contendrán 6 cartas Comunes en lugar de 7."
+                },
+                {
+                    "kicker": "theme",
+                    "name": "Crossover con League Classic",
+                    "desc": "Introduce elementos y personajes del universo clásico de League of Legends."
                 }
             ],
             "released": false
@@ -719,7 +724,7 @@
             "abbr": "REC",
             "color": "#06b6d4",
             "set_number": 7,
-            "date": "Abril 2027",
+            "date": "Abril 30, 2027",
             "cartas_reveladas": 0,
             "total": 264,
             "total_base": 197,
