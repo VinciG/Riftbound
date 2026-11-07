@@ -262,9 +262,9 @@
             "color": "#f97316",
             "date": "Mayo 2026",
             "cartas_reveladas": 314,
-            "total": 314,
+            "total": 320,
             "total_base": 237,
-            "total_ovr": 77,
+            "total_ovr": 83,
             "imgBase": "https://riftbound.gg/images/cards/",
             "legend_count": 12,
             "leyendas": [
@@ -339,7 +339,7 @@
                 },
                 {
                     "tipo": "OVR base",
-                    "cantidad": 29,
+                    "cantidad": 35,
                     "numeracion": "",
                     "notas": ""
                 },
