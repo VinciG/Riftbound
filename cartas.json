@@ -7,9 +7,9 @@
             "color": "#3ecf8e",
             "date": "Octubre 2025",
             "cartas_reveladas": 432,
-            "total": 432,
+            "total": 450,
             "total_base": 351,
-            "total_ovr": 81,
+            "total_ovr": 99,
             "imgBase": "https://riftbound.gg/images/cards/",
             "legend_count": 16,
             "leyendas": [
@@ -104,7 +104,7 @@
                 },
                 {
                     "tipo": "OVR base",
-                    "cantidad": 30,
+                    "cantidad": 48,
                     "numeracion": "",
                     "notas": ""
                 },
@@ -136,9 +136,9 @@
             "color": "#a78bfa",
             "date": "Febrero 2026",
             "cartas_reveladas": 326,
-            "total": 326,
+            "total": 338,
             "total_base": 246,
-            "total_ovr": 80,
+            "total_ovr": 92,
             "imgBase": "https://riftbound.gg/images/cards/",
             "legend_count": 12,
             "leyendas": [
@@ -215,7 +215,7 @@
                 },
                 {
                     "tipo": "OVR base",
-                    "cantidad": 38,
+                    "cantidad": 50,
                     "numeracion": "",
                     "notas": ""
                 },
@@ -262,9 +262,9 @@
             "color": "#f97316",
             "date": "Mayo 2026",
             "cartas_reveladas": 314,
-            "total": 320,
+            "total": 332,
             "total_base": 237,
-            "total_ovr": 83,
+            "total_ovr": 95,
             "imgBase": "https://riftbound.gg/images/cards/",
             "legend_count": 12,
             "leyendas": [
@@ -339,7 +339,7 @@
                 },
                 {
                     "tipo": "OVR base",
-                    "cantidad": 35,
+                    "cantidad": 47,
                     "numeracion": "",
                     "notas": ""
                 },
@@ -392,9 +392,9 @@
             "color": "#8B0000",
             "date": "Julio 2026",
             "cartas_reveladas": 266,
-            "total": 266,
+            "total": 276,
             "total_base": 187,
-            "total_ovr": 79,
+            "total_ovr": 89,
             "imgBase": "https://riftbound.gg/images/cards/",
             "legend_count": 9,
             "leyendas": [
@@ -457,7 +457,7 @@
                 },
                 {
                     "tipo": "OVR base",
-                    "cantidad": 46,
+                    "cantidad": 56,
                     "numeracion": "",
                     "notas": ""
                 },
@@ -519,9 +519,9 @@
             "set_number": 5,
             "date": "Octubre 2026",
             "cartas_reveladas": 238,
-            "total": 239,
-            "total_base": 171,
-            "total_ovr": 68,
+            "total": 259,
+            "total_base": 180,
+            "total_ovr": 79,
             "imgBase": "https://riftbound.gg/images/cards/",
             "legend_count": 9,
             "leyendas": [
@@ -584,7 +584,7 @@
                 },
                 {
                     "tipo": "OVR base",
-                    "cantidad": 29,
+                    "cantidad": 40,
                     "numeracion": "",
                     "notas": ""
                 },
