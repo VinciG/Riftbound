@@ -7,9 +7,9 @@
             "color": "#3ecf8e",
             "date": "Octubre 2025",
             "cartas_reveladas": 432,
-            "total": 455,
+            "total": 453,
             "total_base": 352,
-            "total_ovr": 103,
+            "total_ovr": 101,
             "imgBase": "https://riftbound.gg/images/cards/",
             "legend_count": 16,
             "leyendas": [
@@ -104,7 +104,7 @@
                 },
                 {
                     "tipo": "OVR base",
-                    "cantidad": 52,
+                    "cantidad": 50,
                     "numeracion": "",
                     "notas": ""
                 },
@@ -392,9 +392,9 @@
             "color": "#8B0000",
             "date": "Julio 2026",
             "cartas_reveladas": 266,
-            "total": 283,
+            "total": 282,
             "total_base": 192,
-            "total_ovr": 91,
+            "total_ovr": 90,
             "imgBase": "https://riftbound.gg/images/cards/",
             "legend_count": 9,
             "leyendas": [
@@ -457,7 +457,7 @@
                 },
                 {
                     "tipo": "OVR base",
-                    "cantidad": 58,
+                    "cantidad": 57,
                     "numeracion": "",
                     "notas": ""
                 },
@@ -519,9 +519,9 @@
             "set_number": 5,
             "date": "Octubre 2026",
             "cartas_reveladas": 238,
-            "total": 271,
+            "total": 269,
             "total_base": 180,
-            "total_ovr": 91,
+            "total_ovr": 89,
             "imgBase": "https://riftbound.gg/images/cards/",
             "legend_count": 9,
             "leyendas": [
@@ -584,7 +584,7 @@
                 },
                 {
                     "tipo": "OVR base",
-                    "cantidad": 51,
+                    "cantidad": 49,
                     "numeracion": "",
                     "notas": ""
                 },
@@ -1033,6 +1033,61 @@
                     "desc": "Esta colección conmemorativa no introduce nuevas mecánicas; se centra en arte exclusivo y coleccionables."
                 }
             ],
+            "released": true
+        },
+        "k/da_couture_collection": {
+            "id": "k/da_couture_collection",
+            "abbr": "KDA",
+            "set_number": 2,
+            "color": "#3ecf8e",
+            "date": "",
+            "cartas_reveladas": 0,
+            "total": 5,
+            "total_base": 0,
+            "total_ovr": 5,
+            "imgBase": "",
+            "legend_count": 4,
+            "leyendas": [
+                {
+                    "name": "Ahri",
+                    "img": null
+                },
+                {
+                    "name": "Akali",
+                    "img": null
+                },
+                {
+                    "name": "Evelynn",
+                    "img": null
+                },
+                {
+                    "name": "Kai'Sa",
+                    "img": null
+                }
+            ],
+            "productos": [],
+            "champion_decks": [],
+            "ovr_breakdown": [
+                {
+                    "tipo": "Alt-Art",
+                    "cantidad": 0,
+                    "numeracion": "",
+                    "notas": ""
+                },
+                {
+                    "tipo": "OVR base",
+                    "cantidad": 5,
+                    "numeracion": "",
+                    "notas": ""
+                },
+                {
+                    "tipo": "OVR con firma",
+                    "cantidad": 0,
+                    "numeracion": "",
+                    "notas": ""
+                }
+            ],
+            "mecanicas": [],
             "released": true
         }
     },

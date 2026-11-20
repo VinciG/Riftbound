@@ -81,6 +81,28 @@
             "number": "259"
         }
     },
+    "k/da_couture_collection": {
+        "Ahri": {
+            "img": "https://static.dotgg.gg/riftbound/cards/KDA-001-P.webp",
+            "title": "Nine-Tailed Fox (K/DA Couture Collection)",
+            "number": "001"
+        },
+        "Akali": {
+            "img": "https://static.dotgg.gg/riftbound/cards/KDA-004-P.webp",
+            "title": "Rogue Assassin (K/DA Couture Collection)",
+            "number": "004"
+        },
+        "Evelynn": {
+            "img": "https://static.dotgg.gg/riftbound/cards/KDA-002-P.webp",
+            "title": "Agony's Embrace (K/DA Couture Collection)",
+            "number": "002"
+        },
+        "Kai'Sa": {
+            "img": "https://static.dotgg.gg/riftbound/cards/KDA-003-P.webp",
+            "title": "Daughter of the Void (K/DA Couture Collection)",
+            "number": "003"
+        }
+    },
     "vendetta": {
         "Akali": {
             "img": "https://static.dotgg.gg/riftbound/cards/VEN-139.webp",
